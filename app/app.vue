@@ -21,6 +21,10 @@ useHead({
       name: 'description',
       content: 'Vue Fes Japan歴代スピーカーまとめページ',
     },
+    {
+      name: 'og:image',
+      content: '/og-image.png',
+    },
   ],
 });
 </script>
