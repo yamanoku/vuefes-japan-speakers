@@ -666,7 +666,7 @@ export default defineEventHandler((): SpeakerInfo[] => {
       name: "大橋 一真",
       year: "2024",
       title: "Trusted Types APIとVue.js",
-      url: "https://vuefes.jp/2024/sessions/kazumaohashi",
+      url: "https://vuefes.jp/2024/sessions/kazuma-ohashi",
     },
     {
       name: "ツノ",
