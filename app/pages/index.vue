@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: speakers } = await useFetch('/api/speakers')
+const { data: speakers } = await useFetch("/api/speakers");
 </script>
 
 <template>
@@ -15,9 +15,17 @@ const { data: speakers } = await useFetch('/api/speakers')
       </thead>
       <tbody>
         <tr v-for="speaker in speakers" :key="speaker.name">
-          <td><nuxt-link :to="speaker.year">{{ speaker.year }}</nuxt-link></td>
-          <td><nuxt-link :to="'/speakers/' + speaker.name">{{ speaker.name }}</nuxt-link></td>
-          <td><a :href="speaker.url">{{ speaker.title || 'TBD' }}</a></td>
+          <td>
+            <nuxt-link :to="speaker.year">{{ speaker.year }}</nuxt-link>
+          </td>
+          <td>
+            <nuxt-link :to="'/speakers/' + speaker.name">{{
+              speaker.name
+            }}</nuxt-link>
+          </td>
+          <td>
+            <a :href="speaker.url">{{ speaker.title || "TBD" }}</a>
+          </td>
         </tr>
       </tbody>
     </table>
