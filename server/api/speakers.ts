@@ -216,7 +216,7 @@ export default defineEventHandler((): SpeakerInfo[] => {
       url: "https://vuefes.jp/2022/sponsor-sessions/yesod",
     },
     {
-      name: "福井 潤之（フクイ ヒロユキ）",
+      name: "福井 潤之 (フクイ ヒロユキ)",
       year: "2022",
       title: "Vue.jsのUIを強化するグレープシティのJavaScriptライブラリ",
       url: "https://vuefes.jp/2022/sponsor-sessions/grapecity",
