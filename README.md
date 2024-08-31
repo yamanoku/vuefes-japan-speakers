@@ -35,3 +35,7 @@ pnpm build
 ```bash
 npx nuxthub deploy
 ```
+
+## License
+
+[CC BY-SA 4.0](./LICENSE)
