@@ -11,7 +11,7 @@ useHead({
 
 useSeoMeta({
   robots: () => {
-    if (filterYearSpeaker === undefined || filterYearSpeaker?.length === 0) {
+    if (filterYearSpeaker === undefined || filterYearSpeaker.length === 0) {
       return 'noindex';
     }
     return 'index';

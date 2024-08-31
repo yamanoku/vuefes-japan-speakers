@@ -10,7 +10,7 @@ useHead({
 
 useSeoMeta({
   robots: () => {
-    if (filterNameSpeaker === undefined || filterNameSpeaker?.length === 0) {
+    if (filterNameSpeaker === undefined || filterNameSpeaker.length === 0) {
       return 'noindex';
     }
     return 'index';
