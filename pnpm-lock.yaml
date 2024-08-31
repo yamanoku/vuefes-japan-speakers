@@ -23,6 +23,9 @@ importers:
       vue-router:
         specifier: ^4.4.3
         version: 4.4.3(vue@3.4.38(typescript@5.4.5))
+      yama-normalize:
+        specifier: 1.12.0
+        version: 1.12.0
     devDependencies:
       '@nuxt/eslint-config':
         specifier: ^0.5.2
@@ -4642,6 +4645,9 @@ packages:
 
   yallist@4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
+
+  yama-normalize@1.12.0:
+    resolution: {integrity: sha512-7rqmF0jUejvM72DsbjT84PHmMibWqwOGUQYP0nlitcufv8VoqxGG9DBPM7tPWe+ItREZLMsoaphx7FoWUR2cTQ==}
 
   yaml@2.5.0:
     resolution: {integrity: sha512-2wWLbGbYDiSqqIKoPjar3MPgB94ErzCtrNE1FdqGuaO0pi2JGjmE8aW8TDZwzU7vuxcGRdL/4gPQwQ7hD5AMSw==}
@@ -9798,6 +9804,8 @@ snapshots:
   yallist@3.1.1: {}
 
   yallist@4.0.0: {}
+
+  yama-normalize@1.12.0: {}
 
   yaml@2.5.0: {}
 
