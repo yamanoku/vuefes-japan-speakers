@@ -1,5 +1,5 @@
 <script>
-import "yama-normalize";
+import 'yama-normalize';
 </script>
 
 <template>
