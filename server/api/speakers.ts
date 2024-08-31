@@ -1,9 +1,4 @@
-type SpeakerInfo = {
-  name: string;
-  year: string;
-  title?: string;
-  url: string;
-};
+import type { SpeakerInfo } from '~~/types';
 
 export default defineEventHandler((): SpeakerInfo[] => {
   return [
