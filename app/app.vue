@@ -24,7 +24,7 @@ useHead({
     {
       name: 'og:image',
       content: '/og-image.png',
-    }
+    },
   ],
 });
 
