@@ -16,16 +16,18 @@ defineProps<{
       </tr>
     </thead>
     <tbody>
-      <tr v-for="speaker in speakers" :key="speaker.name">
+      <tr v-for="speaker in speakers" :key="speaker.year">
         <td>
           <nuxt-link :to="`/${speaker.year}`">
             {{ speaker.year }}
           </nuxt-link>
         </td>
         <td>
-          <nuxt-link :to="`/speakers/${speaker.name}`">{{
-            speaker.name
-          }}</nuxt-link>
+          <div v-for="name in speaker.name" :key="name">
+            <nuxt-link :to="`/speakers/${name}`">
+              {{ name }}
+            </nuxt-link>
+          </div>
         </td>
         <td>
           <a :href="speaker.url">{{ speaker.title || "TBD" }}</a>
