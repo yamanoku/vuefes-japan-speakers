@@ -60,6 +60,12 @@ useSeoMeta({
             <a href="https://github.com/yamanoku/vuefes-japan-speakers">yamanoku/vuefes-japan-speakers</a>
           </dd>
         </div>
+        <div>
+          <dt><b>Article</b></dt>
+          <dd>
+            <a href="https://zenn.dev/yamanoku/articles/vuefes-japan-speakers">Vue Fes Japanの歴代スピーカー一覧を見られるページを作った</a>
+          </dd>
+        </div>
       </dl>
     </footer>
   </div>
