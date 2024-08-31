@@ -42,7 +42,7 @@ useSeoMeta({
               </nuxt-link>
             </td>
             <td>
-              <nuxt-link :to="'/speakers/' + speaker.name">{{
+              <nuxt-link :to="`/speakers/${speaker.name}`">{{
                 speaker.name
               }}</nuxt-link>
             </td>
