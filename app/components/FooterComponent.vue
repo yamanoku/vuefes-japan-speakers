@@ -4,9 +4,7 @@
       <div>
         <dt><b>Reference Code</b></dt>
         <dd>
-          <a href="https://github.com/ima1zumi/RubyKaigi-speakers"
-            >ima1zumi/RubyKaigi-speakers</a
-          >
+          <a href="https://github.com/ima1zumi/RubyKaigi-speakers">ima1zumi/RubyKaigi-speakers</a>
         </dd>
       </div>
       <div>
@@ -18,17 +16,13 @@
       <div>
         <dt><b>Source Code</b></dt>
         <dd>
-          <a href="https://github.com/yamanoku/vuefes-japan-speakers"
-            >yamanoku/vuefes-japan-speakers</a
-          >
+          <a href="https://github.com/yamanoku/vuefes-japan-speakers">yamanoku/vuefes-japan-speakers</a>
         </dd>
       </div>
       <div>
         <dt><b>Article</b></dt>
         <dd>
-          <a href="https://zenn.dev/yamanoku/articles/vuefes-japan-speakers"
-            >Vue Fes Japanの歴代スピーカー一覧を見られるページを作った</a
-          >
+          <a href="https://zenn.dev/yamanoku/articles/vuefes-japan-speakers">Vue Fes Japanの歴代スピーカー一覧を見られるページを作った</a>
         </dd>
       </div>
     </dl>

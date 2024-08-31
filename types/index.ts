@@ -1,5 +1,5 @@
 export type SpeakerInfo = {
-  name: string;
+  name: string[];
   year: string;
   title?: string;
   url: string;
