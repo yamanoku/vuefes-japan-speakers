@@ -24,7 +24,7 @@ useHead({
     {
       name: 'og:image',
       content: '/og-image.png',
-    },
+    }
   ],
 });
 
@@ -37,47 +37,35 @@ useSeoMeta({
   <div>
     <NuxtRouteAnnouncer />
     <NuxtLoadingIndicator />
-    <div class="wrapper">
-      <main>
-        <NuxtPage />
-      </main>
-      <footer class="footer">
-        <dl>
-          <div>
-            <dt><b>Reference Code</b></dt>
-            <dd>
-              <a href="https://github.com/ima1zumi/RubyKaigi-speakers">ima1zumi/RubyKaigi-speakers</a>
-            </dd>
-          </div>
-          <div>
-            <dt><b>Reference Source</b></dt>
-            <dd>
-              <a href="https://github.com/vuejs-jp">Vue.js Japan User Group</a>
-            </dd>
-          </div>
-          <div>
-            <dt><b>Source Code</b></dt>
-            <dd>
-              <a href="https://github.com/yamanoku/vuefes-japan-speakers">yamanoku/vuefes-japan-speakers</a>
-            </dd>
-          </div>
-        </dl>
-      </footer>
-    </div>
+    <main>
+      <NuxtPage />
+    </main>
+    <footer class="footer">
+      <dl>
+        <div>
+          <dt><b>Reference Code</b></dt>
+          <dd>
+            <a href="https://github.com/ima1zumi/RubyKaigi-speakers">ima1zumi/RubyKaigi-speakers</a>
+          </dd>
+        </div>
+        <div>
+          <dt><b>Reference Source</b></dt>
+          <dd>
+            <a href="https://github.com/vuejs-jp">Vue.js Japan User Group</a>
+          </dd>
+        </div>
+        <div>
+          <dt><b>Source Code</b></dt>
+          <dd>
+            <a href="https://github.com/yamanoku/vuefes-japan-speakers">yamanoku/vuefes-japan-speakers</a>
+          </dd>
+        </div>
+      </dl>
+    </footer>
   </div>
 </template>
 
 <style scoped>
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100svh;
-  main {
-    flex: 1;
-    width: 100%;
-  }
-}
-
 .footer {
   dl {
     display: flex;
