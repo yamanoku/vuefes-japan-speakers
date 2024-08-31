@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import SpeakerTable from '~/components/SpeakerTable.vue';
+import { useFetchSpeaker } from '~/composables/speaker';
 
 const route = useRoute();
-const { data: speakers } = await useFetch('/api/speakers');
-const filterSpeaker = speakers.value?.filter(
-  (speaker: { year: string }) => speaker.year === route.params.year,
-);
+const { filterYearSpeaker } = await useFetchSpeaker(route.params.year);
 
 useHead({
   title: route.params.year as string,
@@ -13,7 +11,7 @@ useHead({
 
 useSeoMeta({
   robots: () => {
-    if (filterSpeaker === undefined || filterSpeaker?.length === 0) {
+    if (filterYearSpeaker === undefined || filterYearSpeaker?.length === 0) {
       return 'noindex';
     }
     return 'index';
@@ -24,11 +22,11 @@ useSeoMeta({
 <template>
   <div>
     <h1>{{ $route.params.year }}</h1>
-    <template v-if="filterSpeaker !== undefined && filterSpeaker.length > 0">
+    <template v-if="filterYearSpeaker !== undefined && filterYearSpeaker.length > 0">
       <nuxt-link to="/">
         TOP
       </nuxt-link>
-      <SpeakerTable :speakers="filterSpeaker" />
+      <SpeakerTable :speakers="filterYearSpeaker" />
     </template>
     <template v-else>
       <p>Page not found</p>
