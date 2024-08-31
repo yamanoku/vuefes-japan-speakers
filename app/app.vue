@@ -1,5 +1,28 @@
-<script>
+<script setup lang="ts">
 import 'yama-normalize';
+
+useHead({
+  htmlAttrs: {
+    lang: 'ja',
+  },
+  link: [
+    {
+      rel: 'icon',
+      href: '/favicon.ico',
+    },
+  ],
+  titleTemplate: (titleChunk) => {
+    return titleChunk
+      ? `${titleChunk} - Vue Fes Japan Speakers`
+      : 'Vue Fes Japan Speakers';
+  },
+  meta: [
+    {
+      name: 'description',
+      content: 'Vue Fes Japan歴代スピーカーまとめページ',
+    },
+  ],
+});
 </script>
 
 <template>

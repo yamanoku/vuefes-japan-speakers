@@ -6,7 +6,7 @@ const n = speakers.value?.filter(
 );
 
 useHead({
-  title: `${route.params.name} - Vue Fes Japan Speakers`,
+  title: route.params.name as string,
 });
 
 useSeoMeta({

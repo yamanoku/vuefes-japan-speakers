@@ -6,7 +6,7 @@ const s = speakers.value?.filter(
 );
 
 useHead({
-  title: `${route.params.year} - Vue Fes Japan Speakers`,
+  title: route.params.year as string,
 });
 
 useSeoMeta({
