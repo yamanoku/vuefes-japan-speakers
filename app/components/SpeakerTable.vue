@@ -2,14 +2,14 @@
 import type { SpeakerInfo } from '~~/types';
 
 const columns = [{
-  key: 'name',
-  label: '発表者',
-}, {
   key: 'year',
   label: '発表年',
 }, {
+  key: 'name',
+  label: '発表者',
+}, {
   key: 'title',
-  label: 'セッション名',
+  label: '発表セッション名',
 }];
 
 defineProps<{
