@@ -16,8 +16,7 @@
     "@nuxthub/core": "^0.7.4",
     "nuxt": "^3.13.0",
     "vue": "^3.4.38",
-    "vue-router": "^4.4.3",
-    "yama-normalize": "1.12.0"
+    "vue-router": "^4.4.3"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.5.2",
