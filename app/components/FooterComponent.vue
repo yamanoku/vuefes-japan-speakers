@@ -1,7 +1,7 @@
 <template>
   <footer class="w-4/5 ms-auto me-auto py-6">
-    <dl>
-      <div class="flex flex-wrap gap-2">
+    <dl class="flex flex-col gap-2">
+      <div class="flex flex-wrap gap-x-2">
         <dt class="flex items-center gap-1">
           <UIcon name="i-heroicons-solid-academic-cap" />
           Reference Code
@@ -10,7 +10,7 @@
           <a class="underline hover:no-underline text-gray-500 dark:text-gray-400" href="https://github.com/ima1zumi/RubyKaigi-speakers" target="_blank">ima1zumi/RubyKaigi-speakers</a>
         </dd>
       </div>
-      <div class="flex flex-wrap gap-2">
+      <div class="flex flex-wrap gap-x-2">
         <dt class="flex items-center gap-1">
           <UIcon name="i-heroicons-solid-academic-cap" />
           Reference Source
@@ -19,7 +19,7 @@
           <a class="underline hover:no-underline text-gray-500 dark:text-gray-400" href="https://github.com/vuejs-jp" target="_blank">Vue.js Japan User Group</a>
         </dd>
       </div>
-      <div class="flex flex-wrap gap-2">
+      <div class="flex flex-wrap gap-x-2">
         <dt class="flex items-center gap-1">
           <UIcon name="i-heroicons-solid-tag" />
           Source Code
@@ -28,7 +28,7 @@
           <a class="underline hover:no-underline text-gray-500 dark:text-gray-400" href="https://github.com/yamanoku/vuefes-japan-speakers" target="_blank">yamanoku/vuefes-japan-speakers</a>
         </dd>
       </div>
-      <div class="flex flex-wrap gap-2">
+      <div class="flex flex-wrap gap-x-2">
         <dt class="flex items-center gap-1">
           <UIcon name="i-heroicons-solid-book-open" />
           Article
