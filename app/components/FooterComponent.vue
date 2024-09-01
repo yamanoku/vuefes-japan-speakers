@@ -30,7 +30,7 @@
       </div>
       <div class="flex flex-wrap gap-2">
         <dt class="flex items-center gap-1">
-          <UIcon name="i-heroicons-solid-book-open w-5 h-5" />
+          <UIcon name="i-heroicons-solid-book-open" />
           Article
         </dt>
         <dd>
