@@ -21,15 +21,17 @@ defineProps<{
   <div class="border border-gray-200 dark:border-gray-700 rounded-md not-prose bg-white dark:bg-gray-900 overflow-hidden">
     <UTable :columns="columns" :rows="speakers">
       <template #name-data="{ row }">
-        <UButton
-          v-for="name in row.name"
-          :key="name"
-          color="white"
-          variant="solid"
-          :to="`/speakers/${name}`"
-        >
-          {{ name }}
-        </UButton>
+        <div class="flex gap-x-2">
+          <UButton
+            v-for="name in row.name"
+            :key="name"
+            color="white"
+            variant="solid"
+            :to="`/speakers/${name}`"
+          >
+            {{ name }}
+          </UButton>
+        </div>
       </template>
       <template #year-data="{ row }">
         <UButton color="white" variant="solid" :to="`/${row.year}`">
