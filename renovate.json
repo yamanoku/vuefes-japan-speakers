@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "labels": ["dependencies"],
+  "dependencyDashboard": false,
+  "automerge": true,
+  "major": {
+    "automerge": false
+  },
+  "schedule": ["after 10pm and before 6am on every weekday"],
+  "assignees": [
+    "yamanoku"
+  ]
+}
