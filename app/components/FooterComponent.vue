@@ -1,28 +1,28 @@
 <template>
-  <footer class="footer">
+  <footer class="w-4/5 ms-auto me-auto py-6">
     <dl>
-      <div>
+      <div class="flex flex-wrap gap-2.5">
         <dt><b>Reference Code</b></dt>
         <dd>
-          <a href="https://github.com/ima1zumi/RubyKaigi-speakers">ima1zumi/RubyKaigi-speakers</a>
+          <a class="underline hover:no-underline text-gray-500 dark:text-gray-400" href="https://github.com/ima1zumi/RubyKaigi-speakers" target="_blank">ima1zumi/RubyKaigi-speakers</a>
         </dd>
       </div>
-      <div>
+      <div class="flex flex-wrap gap-2.5">
         <dt><b>Reference Source</b></dt>
         <dd>
-          <a href="https://github.com/vuejs-jp">Vue.js Japan User Group</a>
+          <a class="underline hover:no-underline text-gray-500 dark:text-gray-400" href="https://github.com/vuejs-jp" target="_blank">Vue.js Japan User Group</a>
         </dd>
       </div>
-      <div>
+      <div class="flex flex-wrap gap-2.5">
         <dt><b>Source Code</b></dt>
         <dd>
-          <a href="https://github.com/yamanoku/vuefes-japan-speakers">yamanoku/vuefes-japan-speakers</a>
+          <a class="underline hover:no-underline text-gray-500 dark:text-gray-400" href="https://github.com/yamanoku/vuefes-japan-speakers" target="_blank">yamanoku/vuefes-japan-speakers</a>
         </dd>
       </div>
-      <div>
+      <div class="flex flex-wrap gap-2.5">
         <dt><b>Article</b></dt>
         <dd>
-          <a href="https://zenn.dev/yamanoku/articles/vuefes-japan-speakers">Vue Fes Japanの歴代スピーカー一覧を見られるページを作った</a>
+          <a class="underline hover:no-underline text-gray-500 dark:text-gray-400" href="https://zenn.dev/yamanoku/articles/vuefes-japan-speakers" target="_blank">Vue Fes Japanの歴代スピーカー一覧を見られるページを作った</a>
         </dd>
       </div>
     </dl>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import 'yama-normalize';
 import FooterComponent from '~/components/FooterComponent.vue';
 
 useHead({
@@ -38,7 +37,7 @@ useSeoMeta({
   <div>
     <NuxtRouteAnnouncer />
     <NuxtLoadingIndicator />
-    <main>
+    <main class="w-4/5 ms-auto me-auto pt-6">
       <NuxtPage />
     </main>
     <FooterComponent />
