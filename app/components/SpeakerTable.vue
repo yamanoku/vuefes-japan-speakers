@@ -39,7 +39,10 @@ defineProps<{
         </UButton>
       </template>
       <template #title-data="{ row }">
-        <a :href="row.url" class="underline hover:no-underline">{{ row.title ? row.title : 'TBD' }}</a>
+        <a :href="row.url" class="underline hover:no-underline" target="_blank">
+          {{ row.title ? row.title : 'TBD' }}
+          <UIcon name="i-heroicons-solid-arrow-top-right-on-square" class="ms-1 align-[-0.15rem]" />
+        </a>
       </template>
       <template #empty-state>
         <div class="p-6 flex justify-center content-center">
