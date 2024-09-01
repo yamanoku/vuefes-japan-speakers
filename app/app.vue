@@ -37,7 +37,7 @@ useSeoMeta({
   <div>
     <NuxtRouteAnnouncer />
     <NuxtLoadingIndicator />
-    <main class="w-4/5 ms-auto me-auto pt-6">
+    <main class="pt-6 px-6">
       <NuxtPage />
     </main>
     <FooterComponent />

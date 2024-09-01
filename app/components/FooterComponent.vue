@@ -1,5 +1,5 @@
 <template>
-  <footer class="w-4/5 ms-auto me-auto py-6">
+  <footer class="p-6">
     <dl class="flex flex-col gap-2">
       <div class="flex flex-wrap gap-x-2">
         <dt class="flex items-center gap-1">
