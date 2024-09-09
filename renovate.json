@@ -3,6 +3,7 @@
     "config:base"
   ],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "rangeStrategy": "bump",
   "labels": ["dependencies"],
   "dependencyDashboard": false,
   "automerge": true,
