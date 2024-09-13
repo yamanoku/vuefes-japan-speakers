@@ -721,6 +721,7 @@ export default defineEventHandler((): SpeakerInfo[] => {
     {
       name: ["Kevin Deng"],
       year: "2024",
+      title: "Vue Vapor: Reinvention",
       url: "https://vuefes.jp/2024/sessions/kevin",
     },
     {
