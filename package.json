@@ -16,7 +16,7 @@
     "@nuxt/ui": "2.18.5",
     "@nuxthub/core": "^0.7.19",
     "nuxt": "^3.13.2",
-    "vue": "^3.5.6",
+    "vue": "^3.5.7",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
