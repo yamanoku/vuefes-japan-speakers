@@ -601,6 +601,48 @@ export default defineEventHandler((): SpeakerInfo[] => {
       url: "https://vuefes.jp/2024/sessions/yyx990803",
     },
     {
+      name: ["辻 佳佑"],
+      year: "2024",
+      title: "VueとViteで作るUIコンポーネントライブラリ ~デザインシステムとプロダクトの理想的な分離を目指して~",
+      url: "https://vuefes.jp/2024/sessions/keisuke-tsuji",
+    },
+    {
+      name: ["永井 優斗 (Yuto NAGAI)"],
+      year: "2024",
+      title: "IT未経験者をVue.jsで開発できるITコンサルタントに育てあげる秘訣 - フューチャーの新人研修の取り組み",
+      url: "https://vuefes.jp/2024/sessions/yuto-nagai",
+    },
+    {
+      name: ["中上 裕基"],
+      year: "2024",
+      title: "AIとともに歩んだライブラリアップデートの道のり",
+      url: "https://vuefes.jp/2024/sessions/yuki-nakagami",
+    },
+    {
+      name: ["Yuhei FUJITA"],
+      year: "2024",
+      title: "フロントエンドエンジニアのいない組織でVue.jsを導入するまで",
+      url: "https://vuefes.jp/2024/sessions/yuhei-fujita",
+    },
+    {
+      name: ["若原 緑"],
+      year: "2024",
+      title: "Piniaの現状と今後",
+      url: "https://vuefes.jp/2024/sessions/midori-wakahara",
+    },
+    {
+      name: ["星野 将輝"],
+      year: "2024",
+      title: "Nuxtベースの「WXT」で開発用のChrome拡張を作成する",
+      url: "https://vuefes.jp/2024/sessions/masaki-hoshino",
+    },
+    {
+      name: ["渡邉 龍之介"],
+      year: "2024",
+      title: "Vueでサクッと作って試す：STUDIOでのプロトタイピング開発",
+      url: "https://vuefes.jp/2024/sessions/heaven-osk",
+    },
+    {
       name: ["Boshen Chen"],
       year: "2024",
       title: "Oxc - The JavaScript Oxidation Compiler",
