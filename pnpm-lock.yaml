@@ -18,8 +18,8 @@ importers:
         specifier: 2.18.6
         version: 2.18.6(magicast@0.3.5)(rollup@4.21.2)(vite@5.4.5(@types/node@22.5.4)(terser@5.31.6))(vue@3.5.11(typescript@5.4.5))(webpack-sources@3.2.3)
       '@nuxthub/core':
-        specifier: ^0.7.24
-        version: 0.7.24(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.21.2)(vite@5.4.5(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)
+        specifier: ^0.7.26
+        version: 0.7.26(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.21.2)(vite@5.4.5(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)
       nuxt:
         specifier: ^3.13.2
         version: 3.13.2(@parcel/watcher@2.4.1)(@types/node@22.5.4)(encoding@0.1.13)(eslint@9.12.0(jiti@1.21.6))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.21.2)(terser@5.31.6)(typescript@5.4.5)(vite@5.4.5(@types/node@22.5.4)(terser@5.31.6))(vue-tsc@2.1.6(typescript@5.4.5))(webpack-sources@3.2.3)
@@ -1100,8 +1100,8 @@ packages:
     peerDependencies:
       vue: ^3.3.4
 
-  '@nuxthub/core@0.7.24':
-    resolution: {integrity: sha512-ChDevUWPhhjiyf4WbZI/ynDLJZT9yyWOcXHEQa8IcOmBk6F81D10QQUrR7HFtP+WhEgZyo1EulhVs6bnL5uYQg==}
+  '@nuxthub/core@0.7.26':
+    resolution: {integrity: sha512-xOfI+txczteKk66cxf9Rb5AL/PttcS47FCotzXVCZflS4xgnJfZb42FurKYagozpu1MbM6V95nXhO/esg3xUbA==}
 
   '@nuxtjs/color-mode@3.5.1':
     resolution: {integrity: sha512-GRHF3WUwX6fXIiRVlngNq1nVDwrVuP6dWX1DRmox3QolzX0eH1oJEcFr/lAm1nkT71JVGb8mszho9w+yHJbePw==}
@@ -2086,6 +2086,9 @@ packages:
 
   confbox@0.1.7:
     resolution: {integrity: sha512-uJcB/FKZtBMCJpK8MQji6bJHgu1tixKPxRLeGkNzBoOZzpnZUJm0jm2/sBDWcuBx1dYgxV4JU+g5hmNxCyAmdA==}
+
+  confbox@0.1.8:
+    resolution: {integrity: sha512-RMtmw0iFkeR4YV+fUOSucriAQNb9g8zFR52MWCtl+cCZOFRNL6zeB395vPzFhEjjn4fMxXudmELnl/KF/WrK6w==}
 
   consola@3.2.3:
     resolution: {integrity: sha512-I5qxpzLv+sJhTVEoLYNcTW+bThDCPsit0vLNKShZx6rLtpilNpmmeTPaeqJb9ZE9dV3DGaeby6Vuhrw38WjeyQ==}
@@ -6013,7 +6016,7 @@ snapshots:
       estree-walker: 3.0.3
       externality: 1.0.2
       get-port-please: 3.1.2
-      h3: 1.12.0
+      h3: 1.13.0
       knitwork: 1.1.0
       magic-string: 0.30.11
       mlly: 1.7.1
@@ -6057,14 +6060,14 @@ snapshots:
       - vue-tsc
       - webpack-sources
 
-  '@nuxthub/core@0.7.24(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.21.2)(vite@5.4.5(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)':
+  '@nuxthub/core@0.7.26(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.21.2)(vite@5.4.5(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)':
     dependencies:
       '@cloudflare/workers-types': 4.20241004.0
       '@nuxt/devtools-kit': 1.5.2(magicast@0.3.5)(rollup@4.21.2)(vite@5.4.5(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)
       '@nuxt/kit': 3.13.2(magicast@0.3.5)(rollup@4.21.2)(webpack-sources@3.2.3)
       '@uploadthing/mime-types': 0.3.0
       citty: 0.1.6
-      confbox: 0.1.7
+      confbox: 0.1.8
       defu: 6.1.4
       destr: 2.0.3
       h3: 1.13.0
@@ -6117,7 +6120,7 @@ snapshots:
       autoprefixer: 10.4.20(postcss@8.4.47)
       consola: 3.2.3
       defu: 6.1.4
-      h3: 1.12.0
+      h3: 1.13.0
       pathe: 1.1.2
       postcss: 8.4.47
       postcss-nesting: 12.1.5(postcss@8.4.47)
@@ -7187,6 +7190,8 @@ snapshots:
   concat-map@0.0.1: {}
 
   confbox@0.1.7: {}
+
+  confbox@0.1.8: {}
 
   consola@3.2.3: {}
 
@@ -8653,7 +8658,7 @@ snapshots:
       fs-extra: 11.2.0
       globby: 14.0.2
       gzip-size: 7.0.0
-      h3: 1.12.0
+      h3: 1.13.0
       hookable: 5.5.3
       httpxy: 0.1.5
       ioredis: 5.4.1
@@ -9067,7 +9072,7 @@ snapshots:
 
   pkg-types@1.2.0:
     dependencies:
-      confbox: 0.1.7
+      confbox: 0.1.8
       mlly: 1.7.1
       pathe: 1.1.2
 
