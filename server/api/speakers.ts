@@ -664,6 +664,7 @@ export default defineEventHandler((): SpeakerInfo[] => {
     {
       name: ["Pooya Parsa"],
       year: "2024",
+      title: "UnJS: The Missing Tools for the Modern Web",
       url: "https://vuefes.jp/2024/sessions/pi0",
     },
     {
