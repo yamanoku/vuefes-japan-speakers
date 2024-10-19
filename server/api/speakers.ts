@@ -792,5 +792,11 @@ export default defineEventHandler((): SpeakerInfo[] => {
         "Nuxt UI Pro、NuxtHub、Nuxt Scripts、Nuxtエコシステムをふんだんに利用して開発するコーポレートサイト",
       url: "https://vuefes.jp/2024/sessions/gangan_nikki",
     },
+    {
+      name: ["成瀬 允宣"],
+      year: "2024",
+      title: "／←このスケジュール表に立ち向かうフロントエンド開発戦略",
+      url: "https://vuefes.jp/2024/sessions/nrslib",
+    },
   ];
 });
