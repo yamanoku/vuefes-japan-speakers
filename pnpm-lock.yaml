@@ -18,8 +18,8 @@ importers:
         specifier: 2.20.0
         version: 2.20.0(change-case@5.4.4)(magicast@0.3.5)(rollup@4.24.4)(typescript@5.4.5)(vite@5.4.11(@types/node@22.5.4)(terser@5.31.6))(vue@3.5.13(typescript@5.4.5))(webpack-sources@3.2.3)
       '@nuxthub/core':
-        specifier: ^0.8.7
-        version: 0.8.7(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.11(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)
+        specifier: ^0.8.8
+        version: 0.8.8(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.11(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)
       nuxt:
         specifier: ^3.14.1592
         version: 3.14.1592(@parcel/watcher@2.4.1)(@types/node@22.5.4)(encoding@0.1.13)(eslint@9.16.0(jiti@2.4.0))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.24.4)(terser@5.31.6)(typescript@5.4.5)(vite@5.4.11(@types/node@22.5.4)(terser@5.31.6))(vue-tsc@2.1.10(typescript@5.4.5))(webpack-sources@3.2.3)
@@ -41,7 +41,7 @@ importers:
         version: 2.1.10(typescript@5.4.5)
       wrangler:
         specifier: ^3.95.0
-        version: 3.95.0
+        version: 3.95.0(@cloudflare/workers-types@4.20241205.0)
 
 packages:
 
@@ -291,8 +291,8 @@ packages:
     resolution: {integrity: sha512-A+lQ8xp7992qSeMmuQ0ssL6CPmm+ZmAv6Ddikan0n1jjpMAic+97l7xtVIsswSn9iLMFPYQ9uNN/8Fl0AgARIQ==}
     engines: {node: '>=16.7.0'}
 
-  '@cloudflare/workers-types@4.20241112.0':
-    resolution: {integrity: sha512-Q4p9bAWZrX14bSCKY9to19xl0KMU7nsO5sJ2cTVspHoypsjPUMeQCsjHjmsO2C4Myo8/LPeDvmqFmkyNAPPYZw==}
+  '@cloudflare/workers-types@4.20241205.0':
+    resolution: {integrity: sha512-pj1VKRHT/ScQbHOIMFODZaNAlJHQHdBSZXNIdr9ebJzwBff9Qz8VdqhbhggV7f+aUEh8WSbrsPIo4a+WtgjUvw==}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -944,6 +944,11 @@ packages:
     peerDependencies:
       vite: '*'
 
+  '@nuxt/devtools-kit@1.6.3':
+    resolution: {integrity: sha512-rcWpsGUnaDyGtmA667A4FDrVWdjuAturHV+Lkt3Xmedu5G4wC4sOzoA0+/Yco3/kWZ6fLVUTKwI2mvfzaQIugA==}
+    peerDependencies:
+      vite: '*'
+
   '@nuxt/devtools-wizard@1.6.0':
     resolution: {integrity: sha512-n+mzz5NwnKZim0tq1oBi+x1nNXb21fp7QeBl7bYKyDT1eJ0XCxFkVTr/kB/ddkkLYZ+o8TykpeNPa74cN+xAyQ==}
     hasBin: true
@@ -983,16 +988,8 @@ packages:
   '@nuxt/icon@1.9.1':
     resolution: {integrity: sha512-kxhNAFRhjZuANy4vkPhRu2EG8MHLitBc3l/MY4vrUHzuaBRb8fyYZvOuMkligovLn0fsfhivWS2WG3yawCzBEA==}
 
-  '@nuxt/kit@3.14.159':
-    resolution: {integrity: sha512-ZqxsCI1NKV/gjfEUUZjMcr82sg0MKYZOuyB6bu9QY5Zr7NGpfIZY/z5Z822AKTmFxKGChnuz9M0UaS4ze6p42g==}
-    engines: {node: ^14.18.0 || >=16.10.0}
-
   '@nuxt/kit@3.14.1592':
     resolution: {integrity: sha512-r9r8bISBBisvfcNgNL3dSIQHSBe0v5YkX5zwNblIC2T0CIEgxEVoM5rq9O5wqgb5OEydsHTtT2hL57vdv6VT2w==}
-    engines: {node: ^14.18.0 || >=16.10.0}
-
-  '@nuxt/schema@3.14.159':
-    resolution: {integrity: sha512-ggXA3F2f9udQoEy5WwrY6bTMvpDaErUYRLSEzdMqqCqjOQ5manfFgfuScGj3ooZiXLIX2TGLVTzcll4nnpDlnQ==}
     engines: {node: ^14.18.0 || >=16.10.0}
 
   '@nuxt/schema@3.14.1592':
@@ -1012,8 +1009,8 @@ packages:
     peerDependencies:
       vue: ^3.3.4
 
-  '@nuxthub/core@0.8.7':
-    resolution: {integrity: sha512-XPP+H/pdr3ubWY/V+EkAdqnBeNAP97Q0TtOXFebksP9yZ1LfMCXX/vjxdh747SWxMQVzY8HyandllJ3+6BNrkg==}
+  '@nuxthub/core@0.8.8':
+    resolution: {integrity: sha512-r4iiEMROyBN1er1OOQx4Y41NGkkGdZkDKswZJI1Ao1qMYsyQ0I8tkre0Uc4HkfuDHjcRaW67sk7tZ/C/BKRBVA==}
 
   '@nuxtjs/color-mode@3.5.2':
     resolution: {integrity: sha512-cC6RfgZh3guHBMLLjrBB2Uti5eUoGM9KyauOaYS9ETmxNWBMTvpgjvSiSJp1OFljIXPIqVTJ3xtJpSNZiO3ZaA==}
@@ -4741,6 +4738,9 @@ packages:
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
+  zod@3.24.1:
+    resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
+
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
@@ -5051,7 +5051,7 @@ snapshots:
       mime: 3.0.0
       zod: 3.23.8
 
-  '@cloudflare/workers-types@4.20241112.0': {}
+  '@cloudflare/workers-types@4.20241205.0': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -5531,7 +5531,7 @@ snapshots:
   '@nuxt/devtools-kit@1.6.0(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.11(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)':
     dependencies:
       '@nuxt/kit': 3.14.1592(magicast@0.3.5)(rollup@4.24.4)(webpack-sources@3.2.3)
-      '@nuxt/schema': 3.14.159(magicast@0.3.5)(rollup@4.24.4)(webpack-sources@3.2.3)
+      '@nuxt/schema': 3.14.1592(magicast@0.3.5)(rollup@4.24.4)(webpack-sources@3.2.3)
       execa: 7.2.0
       vite: 5.4.11(@types/node@22.5.4)(terser@5.31.6)
     transitivePeerDependencies:
@@ -5541,6 +5541,18 @@ snapshots:
       - webpack-sources
 
   '@nuxt/devtools-kit@1.6.1(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.11(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)':
+    dependencies:
+      '@nuxt/kit': 3.14.1592(magicast@0.3.5)(rollup@4.24.4)(webpack-sources@3.2.3)
+      '@nuxt/schema': 3.14.1592(magicast@0.3.5)(rollup@4.24.4)(webpack-sources@3.2.3)
+      execa: 7.2.0
+      vite: 5.4.11(@types/node@22.5.4)(terser@5.31.6)
+    transitivePeerDependencies:
+      - magicast
+      - rollup
+      - supports-color
+      - webpack-sources
+
+  '@nuxt/devtools-kit@1.6.3(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.11(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)':
     dependencies:
       '@nuxt/kit': 3.14.1592(magicast@0.3.5)(rollup@4.24.4)(webpack-sources@3.2.3)
       '@nuxt/schema': 3.14.1592(magicast@0.3.5)(rollup@4.24.4)(webpack-sources@3.2.3)
@@ -5701,34 +5713,6 @@ snapshots:
       - vue
       - webpack-sources
 
-  '@nuxt/kit@3.14.159(magicast@0.3.5)(rollup@4.24.4)(webpack-sources@3.2.3)':
-    dependencies:
-      '@nuxt/schema': 3.14.159(magicast@0.3.5)(rollup@4.24.4)(webpack-sources@3.2.3)
-      c12: 2.0.1(magicast@0.3.5)
-      consola: 3.2.3
-      defu: 6.1.4
-      destr: 2.0.3
-      globby: 14.0.2
-      hash-sum: 2.0.0
-      ignore: 6.0.2
-      jiti: 2.4.0
-      klona: 2.0.6
-      knitwork: 1.1.0
-      mlly: 1.7.3
-      pathe: 1.1.2
-      pkg-types: 1.2.1
-      scule: 1.3.0
-      semver: 7.6.3
-      ufo: 1.5.4
-      unctx: 2.3.1
-      unimport: 3.13.2(rollup@4.24.4)(webpack-sources@3.2.3)
-      untyped: 1.5.1
-    transitivePeerDependencies:
-      - magicast
-      - rollup
-      - supports-color
-      - webpack-sources
-
   '@nuxt/kit@3.14.1592(magicast@0.3.5)(rollup@4.24.4)(webpack-sources@3.2.3)':
     dependencies:
       '@nuxt/schema': 3.14.1592(magicast@0.3.5)(rollup@4.24.4)(webpack-sources@3.2.3)
@@ -5750,27 +5734,6 @@ snapshots:
       ufo: 1.5.4
       unctx: 2.3.1
       unimport: 3.13.3(rollup@4.24.4)
-      untyped: 1.5.1
-    transitivePeerDependencies:
-      - magicast
-      - rollup
-      - supports-color
-      - webpack-sources
-
-  '@nuxt/schema@3.14.159(magicast@0.3.5)(rollup@4.24.4)(webpack-sources@3.2.3)':
-    dependencies:
-      c12: 2.0.1(magicast@0.3.5)
-      compatx: 0.1.8
-      consola: 3.2.3
-      defu: 6.1.4
-      hookable: 5.5.3
-      pathe: 1.1.2
-      pkg-types: 1.2.1
-      scule: 1.3.0
-      std-env: 3.8.0
-      ufo: 1.5.4
-      uncrypto: 0.1.3
-      unimport: 3.13.2(rollup@4.24.4)(webpack-sources@3.2.3)
       untyped: 1.5.1
     transitivePeerDependencies:
       - magicast
@@ -5930,11 +5893,11 @@ snapshots:
       - vue-tsc
       - webpack-sources
 
-  '@nuxthub/core@0.8.7(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.11(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)':
+  '@nuxthub/core@0.8.8(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.11(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)':
     dependencies:
-      '@cloudflare/workers-types': 4.20241112.0
-      '@nuxt/devtools-kit': 1.6.0(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.11(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)
-      '@nuxt/kit': 3.14.159(magicast@0.3.5)(rollup@4.24.4)(webpack-sources@3.2.3)
+      '@cloudflare/workers-types': 4.20241205.0
+      '@nuxt/devtools-kit': 1.6.3(magicast@0.3.5)(rollup@4.24.4)(vite@5.4.11(@types/node@22.5.4)(terser@5.31.6))(webpack-sources@3.2.3)
+      '@nuxt/kit': 3.14.1592(magicast@0.3.5)(rollup@4.24.4)(webpack-sources@3.2.3)
       '@uploadthing/mime-types': 0.3.2
       citty: 0.1.6
       confbox: 0.1.8
@@ -5950,7 +5913,7 @@ snapshots:
       ufo: 1.5.4
       uncrypto: 0.1.3
       unstorage: 1.13.1(ioredis@5.4.1)
-      zod: 3.23.8
+      zod: 3.24.1
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -10025,7 +9988,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20241205.0
       '@cloudflare/workerd-windows-64': 1.20241205.0
 
-  wrangler@3.95.0:
+  wrangler@3.95.0(@cloudflare/workers-types@4.20241205.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
       '@cloudflare/workers-shared': 0.11.0
@@ -10046,6 +10009,7 @@ snapshots:
       workerd: 1.20241205.0
       xxhash-wasm: 1.0.2
     optionalDependencies:
+      '@cloudflare/workers-types': 4.20241205.0
       fsevents: 2.3.3
     transitivePeerDependencies:
       - bufferutil
@@ -10115,3 +10079,5 @@ snapshots:
       readable-stream: 4.5.2
 
   zod@3.23.8: {}
+
+  zod@3.24.1: {}
