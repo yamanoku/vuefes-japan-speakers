@@ -20,7 +20,7 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^0.7.2",
+    "@nuxt/eslint-config": "^0.7.3",
     "eslint": "^9.16.0",
     "vue-tsc": "^2.1.10",
     "wrangler": "^3.95.0"
