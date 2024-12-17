@@ -11,7 +11,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@iconify-json/heroicons-solid": "1.2.0",
+    "@iconify-json/heroicons-solid": "1.2.1",
     "@nuxt/eslint": "^0.7.3",
     "@nuxt/ui": "2.20.0",
     "@nuxthub/core": "^0.8.8",
