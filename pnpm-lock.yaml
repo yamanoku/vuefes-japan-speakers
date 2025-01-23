@@ -40,8 +40,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(typescript@5.4.5)
       wrangler:
-        specifier: ^3.103.1
-        version: 3.103.1(@cloudflare/workers-types@4.20250121.0)
+        specifier: ^3.105.0
+        version: 3.105.0(@cloudflare/workers-types@4.20250121.0)
 
 packages:
 
@@ -4293,11 +4293,11 @@ packages:
     resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
     engines: {node: '>=14.0'}
 
-  unenv-nightly@2.0.0-20250109-100802-88ad671:
-    resolution: {integrity: sha512-Uij6gODNNNNsNBoDlnaMvZI99I6YlVJLRfYH8AOLMlbFrW7k2w872v9VLuIdch2vF8QBeSC4EftIh5sG4ibzdA==}
-
   unenv@1.10.0:
     resolution: {integrity: sha512-wY5bskBQFL9n3Eca5XnhH6KbUo/tfvkwm9OpcdCvLaeA7piBNbavbOKJySEwQ1V0RH6HvNlSAFRTpvTqgKRQXQ==}
+
+  unenv@2.0.0-rc.0:
+    resolution: {integrity: sha512-H0kl2w8jFL/FAk0xvjVing4bS3jd//mbg1QChDnn58l9Sc5RtduaKmLAL8n+eBw5jJo8ZjYV7CrEGage5LAOZQ==}
 
   unhead@1.11.18:
     resolution: {integrity: sha512-TWgGUoZMpYe2yJwY6jZ0/9kpQT18ygr2h5lI6cUXdfD9UzDc0ytM9jGaleSYkj9guJWXkk7izYBnzJvxl8mRvQ==}
@@ -4654,10 +4654,9 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@3.103.1:
-    resolution: {integrity: sha512-IuPXxRY5IZ081m6TeL1UY4X1lUH873MbndT4Tn9A5qN5ePzxTvyOM3pUil76bV+2rXk/TiZyt9fYykrKQ4g6Xg==}
+  wrangler@3.105.0:
+    resolution: {integrity: sha512-NX10iuUXtgiVRG9YJ7dwwEUuhQ38hu4stcxMWq4dbKCnfcOj7fLFh+HwaWudqOr1jDCPrnSOQVkgfAfG3ZH9Lw==}
     engines: {node: '>=16.17.0'}
-    deprecated: Downgrade to 3.99.0
     hasBin: true
     peerDependencies:
       '@cloudflare/workers-types': ^4.20241230.0
@@ -9624,14 +9623,6 @@ snapshots:
     dependencies:
       '@fastify/busboy': 2.1.1
 
-  unenv-nightly@2.0.0-20250109-100802-88ad671:
-    dependencies:
-      defu: 6.1.4
-      mlly: 1.7.4
-      ohash: 1.1.4
-      pathe: 1.1.2
-      ufo: 1.5.4
-
   unenv@1.10.0:
     dependencies:
       consola: 3.4.0
@@ -9639,6 +9630,14 @@ snapshots:
       mime: 3.0.0
       node-fetch-native: 1.6.4
       pathe: 1.1.2
+
+  unenv@2.0.0-rc.0:
+    dependencies:
+      defu: 6.1.4
+      mlly: 1.7.4
+      ohash: 1.1.4
+      pathe: 1.1.2
+      ufo: 1.5.4
 
   unhead@1.11.18:
     dependencies:
@@ -9992,7 +9991,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20241230.0
       '@cloudflare/workerd-windows-64': 1.20241230.0
 
-  wrangler@3.103.1(@cloudflare/workers-types@4.20250121.0):
+  wrangler@3.105.0(@cloudflare/workers-types@4.20250121.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
       '@esbuild-plugins/node-globals-polyfill': 0.2.3(esbuild@0.17.19)
@@ -10001,7 +10000,7 @@ snapshots:
       esbuild: 0.17.19
       miniflare: 3.20241230.2
       path-to-regexp: 6.3.0
-      unenv: unenv-nightly@2.0.0-20250109-100802-88ad671
+      unenv: 2.0.0-rc.0
       workerd: 1.20241230.0
     optionalDependencies:
       '@cloudflare/workers-types': 4.20250121.0
