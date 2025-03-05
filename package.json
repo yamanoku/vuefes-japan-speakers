@@ -23,7 +23,7 @@
     "@nuxt/eslint-config": "^1.1.0",
     "eslint": "^9.21.0",
     "vue-tsc": "^2.2.8",
-    "wrangler": "^3.111.0"
+    "wrangler": "^3.112.0"
   },
   "packageManager": "pnpm@10.5.2"
 }
