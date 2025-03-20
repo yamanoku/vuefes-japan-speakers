@@ -34,12 +34,12 @@ useSeoMeta({
 </script>
 
 <template>
-  <div>
+  <UApp>
     <NuxtRouteAnnouncer />
     <NuxtLoadingIndicator />
     <main class="pt-6 px-6">
       <NuxtPage />
     </main>
     <FooterComponent />
-  </div>
+  </UApp>
 </template>
