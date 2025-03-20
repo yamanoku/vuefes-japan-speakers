@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { SpeakerInfo } from '~~/types';
 import type { TableColumn } from '@nuxt/ui';
+import type { SpeakerInfo } from '~~/types';
 
 const columns: TableColumn<SpeakerInfo>[] = [
   {
@@ -12,7 +12,7 @@ const columns: TableColumn<SpeakerInfo>[] = [
   }, {
     accessorKey: 'title',
     header: '発表セッション名',
-  }
+  },
 ];
 
 defineProps<{

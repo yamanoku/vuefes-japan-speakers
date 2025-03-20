@@ -7,6 +7,8 @@ export default defineNuxtConfig({
 
   // https://devtools.nuxt.com
   devtools: { enabled: true },
+
+  css: ['~/assets/css/main.css'],
   // https://nuxt.com/docs/getting-started/upgrade#testing-nuxt-4
   future: { compatibilityVersion: 4 },
   compatibilityDate: '2024-07-30',
@@ -23,6 +25,4 @@ export default defineNuxtConfig({
       },
     },
   },
-
-  css: ['~/assets/css/main.css'],
 });
