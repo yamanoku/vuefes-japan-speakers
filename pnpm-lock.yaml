@@ -24,8 +24,8 @@ importers:
         specifier: ^3.16.1
         version: 3.16.1(@parcel/watcher@2.4.1)(@types/node@22.5.4)(db0@0.3.1)(encoding@0.1.13)(eslint@9.23.0(jiti@2.4.2))(ioredis@5.6.0)(lightningcss@1.29.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.36.0)(terser@5.31.6)(typescript@5.4.5)(vite@6.2.2(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))(vue-tsc@2.2.8(typescript@5.4.5))(yaml@2.7.0)
       tailwindcss:
-        specifier: 4.0.15
-        version: 4.0.15
+        specifier: 4.0.16
+        version: 4.0.16
       vue:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.4.5)
@@ -4397,6 +4397,9 @@ packages:
   tailwindcss@4.0.15:
     resolution: {integrity: sha512-6ZMg+hHdMJpjpeCCFasX7K+U615U9D+7k5/cDK/iRwl6GptF24+I/AbKgOnXhVKePzrEyIXutLv36n4cRsq3Sg==}
 
+  tailwindcss@4.0.16:
+    resolution: {integrity: sha512-i/SbG7ThTIcLshcFJL+je7hCv9dPis4Xl4XNeel6iZNX42pp/BZ+la+SbZIPoYE+PN8zhKbnHblpQ/lhOWwIeQ==}
+
   tapable@2.2.1:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
     engines: {node: '>=6'}
@@ -6162,8 +6165,8 @@ snapshots:
       pathe: 2.0.3
       reka-ui: 2.1.0(typescript@5.4.5)(vue@3.5.13(typescript@5.4.5))
       scule: 1.3.0
-      tailwind-variants: 1.0.0(tailwindcss@4.0.15)
-      tailwindcss: 4.0.15
+      tailwind-variants: 1.0.0(tailwindcss@4.0.16)
+      tailwindcss: 4.0.16
       tinyglobby: 0.2.12
       typescript: 5.4.5
       unplugin: 2.2.1
@@ -9823,12 +9826,14 @@ snapshots:
 
   tailwind-merge@3.0.2: {}
 
-  tailwind-variants@1.0.0(tailwindcss@4.0.15):
+  tailwind-variants@1.0.0(tailwindcss@4.0.16):
     dependencies:
       tailwind-merge: 3.0.2
-      tailwindcss: 4.0.15
+      tailwindcss: 4.0.16
 
   tailwindcss@4.0.15: {}
+
+  tailwindcss@4.0.16: {}
 
   tapable@2.2.1: {}
 
