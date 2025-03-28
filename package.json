@@ -13,7 +13,7 @@
   "dependencies": {
     "@iconify-json/heroicons-solid": "1.2.1",
     "@nuxt/eslint": "^1.2.0",
-    "@nuxt/ui": "3.0.1",
+    "@nuxt/ui": "3.0.2",
     "@nuxthub/core": "^0.8.21",
     "nuxt": "^3.16.1",
     "tailwindcss": "4.0.17",
