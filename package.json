@@ -14,7 +14,7 @@
     "@iconify-json/heroicons-solid": "1.2.1",
     "@nuxt/eslint": "^1.2.0",
     "@nuxt/ui": "3.0.2",
-    "@nuxthub/core": "^0.8.21",
+    "@nuxthub/core": "^0.8.22",
     "nuxt": "^3.16.1",
     "tailwindcss": "4.0.17",
     "vue": "^3.5.13",
