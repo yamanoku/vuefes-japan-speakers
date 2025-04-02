@@ -18,8 +18,8 @@ importers:
         specifier: 3.0.2
         version: 3.0.2(@babel/parser@7.26.10)(change-case@5.4.4)(db0@0.3.1)(embla-carousel@8.5.2)(encoding@0.1.13)(ioredis@5.6.0)(magicast@0.3.5)(typescript@5.4.5)(vite@6.2.2(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))(zod@3.24.2)
       '@nuxthub/core':
-        specifier: ^0.8.22
-        version: 0.8.22(db0@0.3.1)(ioredis@5.6.0)(magicast@0.3.5)(vite@6.2.2(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))
+        specifier: ^0.8.23
+        version: 0.8.23(db0@0.3.1)(ioredis@5.6.0)(magicast@0.3.5)(vite@6.2.2(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))
       nuxt:
         specifier: ^3.16.1
         version: 3.16.1(@parcel/watcher@2.4.1)(@types/node@22.5.4)(db0@0.3.1)(encoding@0.1.13)(eslint@9.23.0(jiti@2.4.2))(ioredis@5.6.0)(lightningcss@1.29.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.36.0)(terser@5.31.6)(typescript@5.4.5)(vite@6.2.2(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))(vue-tsc@2.2.8(typescript@5.4.5))(yaml@2.7.0)
@@ -996,8 +996,8 @@ packages:
     peerDependencies:
       vue: ^3.3.4
 
-  '@nuxthub/core@0.8.22':
-    resolution: {integrity: sha512-VSiHRKk4djskFTFXYYSJM0in3GSNQI7pgIxO6vUEa5kA7qPa4G+QTAkIjSksZmst1Pk0rnQe7+BFIU6QXlYLiQ==}
+  '@nuxthub/core@0.8.23':
+    resolution: {integrity: sha512-iVgydstTjtn7hk5MGb48+zAQmlEIBe4kP8P/gaVMWMPuhjmtbc+Dj01GOHAJCj7EdBBMXYAumdb2IxXxxFtUwQ==}
 
   '@nuxtjs/color-mode@3.5.2':
     resolution: {integrity: sha512-cC6RfgZh3guHBMLLjrBB2Uti5eUoGM9KyauOaYS9ETmxNWBMTvpgjvSiSJp1OFljIXPIqVTJ3xtJpSNZiO3ZaA==}
@@ -6110,7 +6110,7 @@ snapshots:
       - vue-tsc
       - yaml
 
-  '@nuxthub/core@0.8.22(db0@0.3.1)(ioredis@5.6.0)(magicast@0.3.5)(vite@6.2.2(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))':
+  '@nuxthub/core@0.8.23(db0@0.3.1)(ioredis@5.6.0)(magicast@0.3.5)(vite@6.2.2(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))':
     dependencies:
       '@cloudflare/workers-types': 4.20250327.0
       '@nuxt/devtools-kit': 2.3.2(magicast@0.3.5)(vite@6.2.2(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))
