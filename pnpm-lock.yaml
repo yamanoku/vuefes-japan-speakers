@@ -16,7 +16,7 @@ importers:
         version: 1.3.0(@vue/compiler-sfc@3.5.13)(eslint@9.25.1(jiti@2.4.2))(magicast@0.3.5)(typescript@5.4.5)(vite@6.2.4(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))
       '@nuxt/ui':
         specifier: 3.1.0
-        version: 3.1.0(@babel/parser@7.26.10)(change-case@5.4.4)(db0@0.3.1)(embla-carousel@8.6.0)(encoding@0.1.13)(ioredis@5.6.0)(magicast@0.3.5)(typescript@5.4.5)(vite@6.2.4(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.4.5)))(vue@3.5.13(typescript@5.4.5))(zod@3.24.2)
+        version: 3.1.0(@babel/parser@7.26.10)(change-case@5.4.4)(db0@0.3.1)(embla-carousel@8.6.0)(encoding@0.1.13)(ioredis@5.6.0)(magicast@0.3.5)(typescript@5.4.5)(vite@6.2.4(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))(vue-router@4.5.1(vue@3.5.13(typescript@5.4.5)))(vue@3.5.13(typescript@5.4.5))(zod@3.24.2)
       '@nuxthub/core':
         specifier: ^0.8.25
         version: 0.8.25(db0@0.3.1)(ioredis@5.6.0)(magicast@0.3.5)(vite@6.2.4(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))
@@ -30,8 +30,8 @@ importers:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.4.5)
       vue-router:
-        specifier: ^4.5.0
-        version: 4.5.0(vue@3.5.13(typescript@5.4.5))
+        specifier: ^4.5.1
+        version: 4.5.1(vue@3.5.13(typescript@5.4.5))
     devDependencies:
       '@nuxt/eslint-config':
         specifier: ^1.3.0
@@ -4407,8 +4407,8 @@ packages:
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
 
-  vue-router@4.5.0:
-    resolution: {integrity: sha512-HDuk+PuH5monfNuY+ct49mNmkCRK4xJAV9Ts4z9UFc4rzdDnxQLyCMGGc8pKhZhHTVzfanpNwB/lwqevcBwI4w==}
+  vue-router@4.5.1:
+    resolution: {integrity: sha512-ogAF3P97NPm8fJsE4by9dwSYtDwXIY1nFY9T6DyQnGHd1E2Da94w9JIolpe42LJGIl0DwOHBi8TcRPlPGwbTtw==}
     peerDependencies:
       vue: ^3.2.0
 
@@ -5534,7 +5534,7 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  '@nuxt/ui@3.1.0(@babel/parser@7.26.10)(change-case@5.4.4)(db0@0.3.1)(embla-carousel@8.6.0)(encoding@0.1.13)(ioredis@5.6.0)(magicast@0.3.5)(typescript@5.4.5)(vite@6.2.4(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))(vue-router@4.5.0(vue@3.5.13(typescript@5.4.5)))(vue@3.5.13(typescript@5.4.5))(zod@3.24.2)':
+  '@nuxt/ui@3.1.0(@babel/parser@7.26.10)(change-case@5.4.4)(db0@0.3.1)(embla-carousel@8.6.0)(encoding@0.1.13)(ioredis@5.6.0)(magicast@0.3.5)(typescript@5.4.5)(vite@6.2.4(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))(vue-router@4.5.1(vue@3.5.13(typescript@5.4.5)))(vue@3.5.13(typescript@5.4.5))(zod@3.24.2)':
     dependencies:
       '@iconify/vue': 4.3.0(vue@3.5.13(typescript@5.4.5))
       '@internationalized/date': 3.8.0
@@ -5579,7 +5579,7 @@ snapshots:
       unplugin-vue-components: 28.5.0(@babel/parser@7.26.10)(@nuxt/kit@3.16.2(magicast@0.3.5))(vue@3.5.13(typescript@5.4.5))
       vaul-vue: 0.4.1(reka-ui@2.2.0(typescript@5.4.5)(vue@3.5.13(typescript@5.4.5)))(vue@3.5.13(typescript@5.4.5))
     optionalDependencies:
-      vue-router: 4.5.0(vue@3.5.13(typescript@5.4.5))
+      vue-router: 4.5.1(vue@3.5.13(typescript@5.4.5))
       zod: 3.24.2
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -8230,13 +8230,13 @@ snapshots:
       unctx: 2.4.1
       unimport: 4.1.3
       unplugin: 2.2.2
-      unplugin-vue-router: 0.12.0(vue-router@4.5.0(vue@3.5.13(typescript@5.4.5)))(vue@3.5.13(typescript@5.4.5))
+      unplugin-vue-router: 0.12.0(vue-router@4.5.1(vue@3.5.13(typescript@5.4.5)))(vue@3.5.13(typescript@5.4.5))
       unstorage: 1.15.0(db0@0.3.1)(ioredis@5.6.0)
       untyped: 2.0.0
       vue: 3.5.13(typescript@5.4.5)
       vue-bundle-renderer: 2.1.1
       vue-devtools-stub: 0.1.0
-      vue-router: 4.5.0(vue@3.5.13(typescript@5.4.5))
+      vue-router: 4.5.1(vue@3.5.13(typescript@5.4.5))
     optionalDependencies:
       '@parcel/watcher': 2.4.1
       '@types/node': 22.5.4
@@ -9250,7 +9250,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  unplugin-vue-router@0.12.0(vue-router@4.5.0(vue@3.5.13(typescript@5.4.5)))(vue@3.5.13(typescript@5.4.5)):
+  unplugin-vue-router@0.12.0(vue-router@4.5.1(vue@3.5.13(typescript@5.4.5)))(vue@3.5.13(typescript@5.4.5)):
     dependencies:
       '@babel/types': 7.26.10
       '@vue-macros/common': 1.16.1(vue@3.5.13(typescript@5.4.5))
@@ -9268,7 +9268,7 @@ snapshots:
       unplugin-utils: 0.2.4
       yaml: 2.7.0
     optionalDependencies:
-      vue-router: 4.5.0(vue@3.5.13(typescript@5.4.5))
+      vue-router: 4.5.1(vue@3.5.13(typescript@5.4.5))
     transitivePeerDependencies:
       - vue
 
@@ -9488,7 +9488,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vue-router@4.5.0(vue@3.5.13(typescript@5.4.5)):
+  vue-router@4.5.1(vue@3.5.13(typescript@5.4.5)):
     dependencies:
       '@vue/devtools-api': 6.6.4
       vue: 3.5.13(typescript@5.4.5)
