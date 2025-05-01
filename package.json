@@ -16,7 +16,7 @@
     "@nuxt/ui": "3.1.0",
     "@nuxthub/core": "^0.8.25",
     "nuxt": "^3.17.1",
-    "tailwindcss": "4.1.4",
+    "tailwindcss": "4.1.5",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"
   },
