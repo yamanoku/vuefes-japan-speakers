@@ -18,8 +18,8 @@ importers:
         specifier: 3.1.1
         version: 3.1.1(@babel/parser@7.26.10)(@netlify/blobs@8.2.0)(change-case@5.4.4)(db0@0.3.2)(embla-carousel@8.6.0)(encoding@0.1.13)(ioredis@5.6.1)(jwt-decode@4.0.0)(magicast@0.3.5)(typescript@5.4.5)(vite@6.3.5(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))(vue-router@4.5.1(vue@3.5.13(typescript@5.4.5)))(vue@3.5.13(typescript@5.4.5))(zod@3.24.2)
       '@nuxthub/core':
-        specifier: ^0.8.25
-        version: 0.8.25(@netlify/blobs@8.2.0)(db0@0.3.2)(ioredis@5.6.1)(magicast@0.3.5)(vite@6.3.5(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))
+        specifier: ^0.8.26
+        version: 0.8.26(@netlify/blobs@8.2.0)(db0@0.3.2)(ioredis@5.6.1)(magicast@0.3.5)(vite@6.3.5(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))
       nuxt:
         specifier: ^3.17.2
         version: 3.17.2(@netlify/blobs@8.2.0)(@parcel/watcher@2.4.1)(@types/node@22.5.4)(db0@0.3.2)(encoding@0.1.13)(eslint@9.26.0(jiti@2.4.2))(ioredis@5.6.1)(lightningcss@1.29.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.40.1)(terser@5.31.6)(typescript@5.4.5)(vite@6.3.5(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))(vue-tsc@2.2.10(typescript@5.4.5))(yaml@2.7.0)
@@ -44,7 +44,7 @@ importers:
         version: 2.2.10(typescript@5.4.5)
       wrangler:
         specifier: ^4.14.0
-        version: 4.14.0
+        version: 4.14.0(@cloudflare/workers-types@4.20250506.0)
 
 packages:
 
@@ -251,8 +251,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@cloudflare/workers-types@4.20250409.0':
-    resolution: {integrity: sha512-yPxxwE5nr168huEfLNOB6904OsvIWcq0tWT23NMD6jT5SIp2ds3oOGANw7wz39r5y3jZYC2h1OnGwnZXJDDCOg==}
+  '@cloudflare/workers-types@4.20250506.0':
+    resolution: {integrity: sha512-H6ny+U4sfi3m3c0hmvbjhPZaAhoPtJhohgOzqULURrXNIR7cR7ivfd+n+BwIp7MGmfgY/DCo3yIaRYlMASEcdQ==}
 
   '@colors/colors@1.6.0':
     resolution: {integrity: sha512-Ir+AOibqzrIsL6ajt3Rz3LskB7OiMVHqltZmspbW/TJuTVuyOMirVqAkjfY6JISiLHgyNqicAC8AyHHGzNd/dA==}
@@ -1128,10 +1128,6 @@ packages:
     resolution: {integrity: sha512-Perby8hJGUeCWad5oTVXb/Ibvp18ZCUC5PxHHu+acMDmVfnxSo48yqk7qNd09VkTF3LEzoEjNZpmW2ZWN0ry7A==}
     engines: {node: '>=18.12.0'}
 
-  '@nuxt/kit@3.16.2':
-    resolution: {integrity: sha512-K1SAUo2vweTfudKZzjKsZ5YJoxPLTspR5qz5+G61xtZreLpsdpDYfBseqsIAl5VFLJuszeRpWQ01jP9LfQ6Ksw==}
-    engines: {node: '>=18.12.0'}
-
   '@nuxt/kit@3.17.1':
     resolution: {integrity: sha512-VG3NlK51jzNNZ9+VIVMwN2YgDddkCkdZRJv0KMs63Z81UQo1FfEwzapqUiV23SWkyyfNSD/1XGarYPOl30J39g==}
     engines: {node: '>=18.12.0'}
@@ -1191,8 +1187,8 @@ packages:
     peerDependencies:
       vue: ^3.3.4
 
-  '@nuxthub/core@0.8.25':
-    resolution: {integrity: sha512-cR46Y9/sevODxZhtDrfBqJ+Uyti0owDUDZWwFxqSExyLcjdQKyOXXc0+B3Y5kfi6VUrt5xVeJnHdBlMBZO1RIg==}
+  '@nuxthub/core@0.8.26':
+    resolution: {integrity: sha512-RVyizT0y1ek8rnrkyhxke7elmqtTDJ3sWSuJniis6hEaQiFYtVWYC/naVP0DBOvMs9bKgSLhtRQ76GMzh8Cp2A==}
 
   '@nuxtjs/color-mode@3.5.2':
     resolution: {integrity: sha512-cC6RfgZh3guHBMLLjrBB2Uti5eUoGM9KyauOaYS9ETmxNWBMTvpgjvSiSJp1OFljIXPIqVTJ3xtJpSNZiO3ZaA==}
@@ -3378,9 +3374,6 @@ packages:
   h3@1.15.1:
     resolution: {integrity: sha512-+ORaOBttdUm1E2Uu/obAyCguiI7MbBvsLTndc3gyK3zU+SYLoZXlyCP9Xgy0gikkGufFLTZXCXD6+4BsufnmHA==}
 
-  h3@1.15.2:
-    resolution: {integrity: sha512-28QobU1/digpHI/kA9ttYnYtIS3QOtuvx3EY4IpFR+8Bh2C2ugY/ovSg/1LeqATXlznvZnwewWyP2S9lZPiMVA==}
-
   h3@1.15.3:
     resolution: {integrity: sha512-z6GknHqyX0h9aQaTx22VZDf6QyZn+0Nh+Ym8O/u0SGSkyF5cuTJYKlc8MkzW3Nzf9LE1ivcpmYC3FUGpywhuUQ==}
 
@@ -5248,65 +5241,6 @@ packages:
   unrs-resolver@1.3.3:
     resolution: {integrity: sha512-PFLAGQzYlyjniXdbmQ3dnGMZJXX5yrl2YS4DLRfR3BhgUsE1zpRIrccp9XMOGRfIHpdFvCn/nr5N1KMVda4x3A==}
 
-  unstorage@1.15.0:
-    resolution: {integrity: sha512-m40eHdGY/gA6xAPqo8eaxqXgBuzQTlAKfmB1iF7oCKXE1HfwHwzDJBywK+qQGn52dta+bPlZluPF7++yR3p/bg==}
-    peerDependencies:
-      '@azure/app-configuration': ^1.8.0
-      '@azure/cosmos': ^4.2.0
-      '@azure/data-tables': ^13.3.0
-      '@azure/identity': ^4.6.0
-      '@azure/keyvault-secrets': ^4.9.0
-      '@azure/storage-blob': ^12.26.0
-      '@capacitor/preferences': ^6.0.3
-      '@deno/kv': '>=0.9.0'
-      '@netlify/blobs': ^6.5.0 || ^7.0.0 || ^8.1.0
-      '@planetscale/database': ^1.19.0
-      '@upstash/redis': ^1.34.3
-      '@vercel/blob': '>=0.27.1'
-      '@vercel/kv': ^1.0.1
-      aws4fetch: ^1.0.20
-      db0: '>=0.2.1'
-      idb-keyval: ^6.2.1
-      ioredis: ^5.4.2
-      uploadthing: ^7.4.4
-    peerDependenciesMeta:
-      '@azure/app-configuration':
-        optional: true
-      '@azure/cosmos':
-        optional: true
-      '@azure/data-tables':
-        optional: true
-      '@azure/identity':
-        optional: true
-      '@azure/keyvault-secrets':
-        optional: true
-      '@azure/storage-blob':
-        optional: true
-      '@capacitor/preferences':
-        optional: true
-      '@deno/kv':
-        optional: true
-      '@netlify/blobs':
-        optional: true
-      '@planetscale/database':
-        optional: true
-      '@upstash/redis':
-        optional: true
-      '@vercel/blob':
-        optional: true
-      '@vercel/kv':
-        optional: true
-      aws4fetch:
-        optional: true
-      db0:
-        optional: true
-      idb-keyval:
-        optional: true
-      ioredis:
-        optional: true
-      uploadthing:
-        optional: true
-
   unstorage@1.16.0:
     resolution: {integrity: sha512-WQ37/H5A7LcRPWfYOrDa1Ys02xAbpPJq6q5GkO88FBXVSQzHd7+BjEwfRqyaSWCv9MbsJy058GWjjPjcJ16GGA==}
     peerDependencies:
@@ -5738,6 +5672,9 @@ packages:
   zod@3.24.2:
     resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
 
+  zod@3.24.4:
+    resolution: {integrity: sha512-OdqJE9UDRPwWsrHjLN2F8bPxvwJBK22EHLWtanu0LSYr5YqzsaaW3RMgmjwr8Rypg5k+meEJdSPXJZXE/yqOMg==}
+
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
@@ -5988,7 +5925,7 @@ snapshots:
   '@cloudflare/workerd-windows-64@1.20250428.0':
     optional: true
 
-  '@cloudflare/workers-types@4.20250409.0': {}
+  '@cloudflare/workers-types@4.20250506.0': {}
 
   '@colors/colors@1.6.0': {}
 
@@ -6725,8 +6662,8 @@ snapshots:
 
   '@nuxt/devtools-kit@2.4.0(magicast@0.3.5)(vite@6.3.5(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))':
     dependencies:
-      '@nuxt/kit': 3.17.1(magicast@0.3.5)
-      '@nuxt/schema': 3.17.1
+      '@nuxt/kit': 3.17.2(magicast@0.3.5)
+      '@nuxt/schema': 3.17.2
       execa: 8.0.1
       vite: 6.3.5(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0)
     transitivePeerDependencies:
@@ -6935,33 +6872,6 @@ snapshots:
       semver: 7.7.1
       std-env: 3.8.1
       ufo: 1.5.4
-      unctx: 2.4.1
-      unimport: 4.1.3
-      untyped: 2.0.0
-    transitivePeerDependencies:
-      - magicast
-
-  '@nuxt/kit@3.16.2(magicast@0.3.5)':
-    dependencies:
-      c12: 3.0.2(magicast@0.3.5)
-      consola: 3.4.2
-      defu: 6.1.4
-      destr: 2.0.5
-      errx: 0.1.0
-      exsolve: 1.0.4
-      globby: 14.1.0
-      ignore: 7.0.4
-      jiti: 2.4.2
-      klona: 2.0.6
-      knitwork: 1.2.0
-      mlly: 1.7.4
-      ohash: 2.0.11
-      pathe: 2.0.3
-      pkg-types: 2.1.0
-      scule: 1.3.0
-      semver: 7.7.1
-      std-env: 3.9.0
-      ufo: 1.6.1
       unctx: 2.4.1
       unimport: 4.1.3
       untyped: 2.0.0
@@ -7209,17 +7119,17 @@ snapshots:
       - vue-tsc
       - yaml
 
-  '@nuxthub/core@0.8.25(@netlify/blobs@8.2.0)(db0@0.3.2)(ioredis@5.6.1)(magicast@0.3.5)(vite@6.3.5(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))':
+  '@nuxthub/core@0.8.26(@netlify/blobs@8.2.0)(db0@0.3.2)(ioredis@5.6.1)(magicast@0.3.5)(vite@6.3.5(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))':
     dependencies:
-      '@cloudflare/workers-types': 4.20250409.0
-      '@nuxt/devtools-kit': 2.3.2(magicast@0.3.5)(vite@6.3.5(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))
-      '@nuxt/kit': 3.16.2(magicast@0.3.5)
+      '@cloudflare/workers-types': 4.20250506.0
+      '@nuxt/devtools-kit': 2.4.0(magicast@0.3.5)(vite@6.3.5(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.31.6)(yaml@2.7.0))
+      '@nuxt/kit': 3.17.2(magicast@0.3.5)
       '@uploadthing/mime-types': 0.3.4
       citty: 0.1.6
       confbox: 0.2.2
       defu: 6.1.4
       destr: 2.0.5
-      h3: 1.15.1
+      h3: 1.15.3
       mime: 4.0.7
       nitro-cloudflare-dev: 0.2.2
       ofetch: 1.4.1
@@ -7228,8 +7138,8 @@ snapshots:
       std-env: 3.9.0
       ufo: 1.6.1
       uncrypto: 0.1.3
-      unstorage: 1.15.0(@netlify/blobs@8.2.0)(db0@0.3.2)(ioredis@5.6.1)
-      zod: 3.24.2
+      unstorage: 1.16.0(@netlify/blobs@8.2.0)(db0@0.3.2)(ioredis@5.6.1)
+      zod: 3.24.4
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -9603,18 +9513,6 @@ snapshots:
       ufo: 1.6.1
       uncrypto: 0.1.3
 
-  h3@1.15.2:
-    dependencies:
-      cookie-es: 1.2.2
-      crossws: 0.3.4
-      defu: 6.1.4
-      destr: 2.0.5
-      iron-webcrypto: 1.2.1
-      node-mock-http: 1.0.0
-      radix3: 1.1.2
-      ufo: 1.6.1
-      uncrypto: 0.1.3
-
   h3@1.15.3:
     dependencies:
       cookie-es: 1.2.2
@@ -11720,21 +11618,6 @@ snapshots:
       '@unrs/resolver-binding-win32-ia32-msvc': 1.3.3
       '@unrs/resolver-binding-win32-x64-msvc': 1.3.3
 
-  unstorage@1.15.0(@netlify/blobs@8.2.0)(db0@0.3.2)(ioredis@5.6.1):
-    dependencies:
-      anymatch: 3.1.3
-      chokidar: 4.0.3
-      destr: 2.0.5
-      h3: 1.15.2
-      lru-cache: 10.4.3
-      node-fetch-native: 1.6.6
-      ofetch: 1.4.1
-      ufo: 1.6.1
-    optionalDependencies:
-      '@netlify/blobs': 8.2.0
-      db0: 0.3.2
-      ioredis: 5.6.1
-
   unstorage@1.16.0(@netlify/blobs@8.2.0)(db0@0.3.2)(ioredis@5.6.1):
     dependencies:
       anymatch: 3.1.3
@@ -12007,7 +11890,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20250428.0
       '@cloudflare/workerd-windows-64': 1.20250428.0
 
-  wrangler@4.14.0:
+  wrangler@4.14.0(@cloudflare/workers-types@4.20250506.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.4.0
       '@cloudflare/unenv-preset': 2.3.1(unenv@2.0.0-rc.15)(workerd@1.20250428.0)
@@ -12018,6 +11901,7 @@ snapshots:
       unenv: 2.0.0-rc.15
       workerd: 1.20250428.0
     optionalDependencies:
+      '@cloudflare/workers-types': 4.20250506.0
       fsevents: 2.3.3
       sharp: 0.33.5
     transitivePeerDependencies:
@@ -12111,3 +11995,5 @@ snapshots:
   zod@3.22.3: {}
 
   zod@3.24.2: {}
+
+  zod@3.24.4: {}
