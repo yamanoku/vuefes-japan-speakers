@@ -24,8 +24,8 @@ importers:
         specifier: ^3.17.3
         version: 3.17.3(@netlify/blobs@8.2.0)(@parcel/watcher@2.4.1)(@types/node@22.5.4)(db0@0.3.2)(encoding@0.1.13)(eslint@9.26.0(jiti@2.4.2))(ioredis@5.6.1)(lightningcss@1.30.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.40.1)(terser@5.31.6)(typescript@5.4.5)(vite@6.3.5(@types/node@22.5.4)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.31.6)(yaml@2.7.0))(vue-tsc@2.2.10(typescript@5.4.5))(yaml@2.7.0)
       tailwindcss:
-        specifier: 4.1.6
-        version: 4.1.6
+        specifier: 4.1.7
+        version: 4.1.7
       vue:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.4.5)
@@ -4832,9 +4832,6 @@ packages:
     peerDependencies:
       tailwindcss: '*'
 
-  tailwindcss@4.1.6:
-    resolution: {integrity: sha512-j0cGLTreM6u4OWzBeLBpycK0WIh8w7kSwcUsQZoGLHZ7xDTdM69lN64AgoIEEwFi0tnhs4wSykUa5YWxAzgFYg==}
-
   tailwindcss@4.1.7:
     resolution: {integrity: sha512-kr1o/ErIdNhTz8uzAYL7TpaUuzKIE6QPQ4qmSdxnoX/lo+5wmUHQA6h3L5yIqEImSRnAAURDirLu/BgiXGPAhg==}
 
@@ -6716,8 +6713,8 @@ snapshots:
       pathe: 2.0.3
       reka-ui: 2.2.1(typescript@5.4.5)(vue@3.5.13(typescript@5.4.5))
       scule: 1.3.0
-      tailwind-variants: 1.0.0(tailwindcss@4.1.6)
-      tailwindcss: 4.1.6
+      tailwind-variants: 1.0.0(tailwindcss@4.1.7)
+      tailwindcss: 4.1.7
       tinyglobby: 0.2.13
       typescript: 5.4.5
       unplugin: 2.3.4
@@ -10966,12 +10963,10 @@ snapshots:
 
   tailwind-merge@3.0.2: {}
 
-  tailwind-variants@1.0.0(tailwindcss@4.1.6):
+  tailwind-variants@1.0.0(tailwindcss@4.1.7):
     dependencies:
       tailwind-merge: 3.0.2
-      tailwindcss: 4.1.6
-
-  tailwindcss@4.1.6: {}
+      tailwindcss: 4.1.7
 
   tailwindcss@4.1.7: {}
 
