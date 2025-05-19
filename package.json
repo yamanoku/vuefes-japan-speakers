@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^1.4.0",
-    "eslint": "^9.26.0",
+    "eslint": "^9.27.0",
     "vue-tsc": "^2.2.10",
     "wrangler": "^4.14.4"
   },
