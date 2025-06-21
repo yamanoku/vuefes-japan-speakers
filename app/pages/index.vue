@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import SpeakerTable from '~/components/SpeakerTable.vue';
-import { useFetchSpeaker } from '~/composables/speaker';
+import { useFetchAllSpeakers } from '~/composables/speaker';
 
-const { allSpeakers } = await useFetchSpeaker();
+// Fetch all speakers with year information
+const allSpeakers = await useFetchAllSpeakers();
 </script>
 
 <template>
@@ -16,7 +17,7 @@ const { allSpeakers } = await useFetchSpeaker();
       </p>
     </div>
     <div class="pt-6">
-      <SpeakerTable :speakers="allSpeakers" />
+      <SpeakerTable :speakers="allSpeakers || []" show-year />
     </div>
   </div>
 </template>
