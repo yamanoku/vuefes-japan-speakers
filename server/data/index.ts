@@ -8,8 +8,8 @@ import { speakers2024 } from './speakers-2024';
 // Export individual year data
 export { speakers2018, speakers2019, speakers2022, speakers2023, speakers2024 };
 
-// Export speakers organized by year
-export const speakersByYear: Record<AcceptedYear, SpeakerInfo[]> = {
+// Speakers organized by year
+const speakersByYear: Record<AcceptedYear, SpeakerInfo[]> = {
   '2018': speakers2018,
   '2019': speakers2019,
   '2022': speakers2022,
