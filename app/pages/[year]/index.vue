@@ -11,7 +11,7 @@ useHead({
 
 useSeoMeta({
   robots: () => {
-    if (filterYearSpeaker === undefined || filterYearSpeaker.length === 0) {
+    if (!filterYearSpeaker?.value || filterYearSpeaker.value.length === 0) {
       return 'noindex';
     }
     return 'index';
@@ -30,7 +30,7 @@ useSeoMeta({
       </nuxt-link>
     </div>
     <div class="pt-6">
-      <SpeakerTable :speakers="filterYearSpeaker" />
+      <SpeakerTable :speakers="filterYearSpeaker" :year="route.params.year as string" />
     </div>
   </div>
 </template>

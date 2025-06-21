@@ -2,22 +2,37 @@
 import type { TableColumn } from '@nuxt/ui';
 import type { SpeakerInfo } from '~~/types';
 
-const columns: TableColumn<SpeakerInfo>[] = [
-  {
-    accessorKey: 'year',
-    header: '年度',
-  }, {
-    accessorKey: 'name',
-    header: '発表者',
-  }, {
-    accessorKey: 'title',
-    header: '発表セッション名',
-  },
-];
+type SpeakerWithYear = SpeakerInfo & { year: string };
 
-defineProps<{
-  speakers?: SpeakerInfo[];
+const props = defineProps<{
+  speakers?: SpeakerWithYear[];
+  year?: string;
+  showYear?: boolean;
 }>();
+
+const columns = computed<TableColumn<SpeakerWithYear>[]>(() => {
+  const baseColumns: TableColumn<SpeakerWithYear>[] = [
+    {
+      accessorKey: 'name',
+      header: '発表者',
+    }, {
+      accessorKey: 'title',
+      header: '発表セッション名',
+    },
+  ];
+
+  if (props.showYear) {
+    return [
+      {
+        accessorKey: 'year',
+        header: '年度',
+      },
+      ...baseColumns,
+    ];
+  }
+
+  return baseColumns;
+});
 </script>
 
 <template>
@@ -37,8 +52,8 @@ defineProps<{
         </div>
       </template>
       <template #year-cell="{ row }">
-        <UButton color="neutral" variant="outline" :to="`/${row.original.year}`">
-          {{ row.original.year }}
+        <UButton color="neutral" variant="outline" :to="`/${row.original.year || year}`">
+          {{ row.original.year || year }}
         </UButton>
       </template>
       <template #title-cell="{ row }">

@@ -1,6 +1,7 @@
 export type SpeakerInfo = {
   name: string[];
-  year: string;
   title?: string;
   url: string;
 };
+
+export type AcceptedYear = '2018' | '2019' | '2022' | '2023' | '2024';
