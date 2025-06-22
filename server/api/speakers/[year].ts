@@ -1,6 +1,7 @@
 import type { SpeakerInfo } from '~~/types';
 import { getSpeakersByYear } from '~~/server/data';
 import { isValidYear, getAvailableYears } from '~/utils/years';
+import { defineEventHandler, getRouterParam, createError } from 'h3';
 
 export default defineEventHandler((event): SpeakerInfo[] => {
   const year = getRouterParam(event, 'year');
