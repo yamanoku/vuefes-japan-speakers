@@ -17,7 +17,7 @@ const allSpeakers = await useFetchAllSpeakers();
       </p>
     </div>
     <div class="pt-6">
-      <SpeakerTable :speakers="allSpeakers || []" show-year />
+      <SpeakerTable :speakers="allSpeakers || []" />
     </div>
   </div>
 </template>

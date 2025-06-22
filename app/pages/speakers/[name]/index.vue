@@ -31,7 +31,7 @@ useSeoMeta({
         </nuxt-link>
       </div>
       <div class="pt-6">
-        <SpeakerTable :speakers="filterNameSpeaker" show-year />
+        <SpeakerTable :speakers="filterNameSpeaker" />
       </div>
     </template>
     <template v-else>
