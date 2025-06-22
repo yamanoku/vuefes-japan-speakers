@@ -6,7 +6,7 @@ const route = useRoute();
 const { filterYearSpeaker } = await useFetchSpeaker(route.params.year as string);
 
 useHead({
-  title: route.params.year as string,
+  title: `Vue Fes Japan ${route.params.year as string}`,
 });
 
 useSeoMeta({
@@ -22,7 +22,7 @@ useSeoMeta({
 <template>
   <div>
     <h1 class="font-semibold text-3xl text-gray-900 dark:text-white leading-tight">
-      {{ $route.params.year }}
+      Vue Fes Japan {{ $route.params.year }}
     </h1>
     <div class="pt-6">
       <nuxt-link to="/" class="text-gray-500 dark:text-gray-400 text-xl underline hover:no-underline">
