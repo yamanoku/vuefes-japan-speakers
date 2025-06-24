@@ -94,7 +94,7 @@ describe('speakers/[name]/index.vue', () => {
 
     // Check if component is rendered
     const html = wrapper.html();
-    expect(html).toContain('John Doe');
+    expect(html).toContain('John Doe 発表一覧');
     expect(html).toContain('TOPページに戻る');
 
     // Check SpeakerTable component
@@ -118,7 +118,7 @@ describe('speakers/[name]/index.vue', () => {
 
     // Check rendered content
     const html = wrapper.html();
-    expect(html).toContain('John Doe');
+    expect(html).toContain('John Doe 発表一覧');
     expect(html).toContain('Page not found');
     expect(html).toContain('TOP');
 
@@ -220,7 +220,7 @@ describe('speakers/[name]/index.vue', () => {
 
       // useHeadに渡された引数を確認
       expect(useHeadMock).toHaveBeenCalledWith({
-        title: 'John Doe',
+        title: 'John Doe 発表一覧',
       });
     });
   });
@@ -251,10 +251,10 @@ describe('speakers/[name]/index.vue', () => {
       });
 
       const html = wrapper.html();
-      expect(html).toContain('山田太郎');
+      expect(html).toContain('山田太郎 発表一覧');
       expect(useFetchSpeaker).toHaveBeenCalled();
       expect(useHeadMock).toHaveBeenCalledWith({
-        title: '山田太郎',
+        title: '山田太郎 発表一覧',
       });
     });
 

@@ -6,7 +6,7 @@ const route = useRoute();
 const { filterNameSpeaker } = await useFetchSpeaker(route.params.name as string);
 
 useHead({
-  title: route.params.name as string,
+  title: `${route.params.name as string} 発表一覧`,
 });
 
 useSeoMeta({
@@ -22,7 +22,7 @@ useSeoMeta({
 <template>
   <div>
     <h1 class="font-semibold text-3xl text-gray-900 dark:text-white leading-tight">
-      {{ $route.params.name }}
+      {{ $route.params.name }} 発表一覧
     </h1>
     <template v-if="filterNameSpeaker && filterNameSpeaker.length > 0">
       <div class="pt-6">

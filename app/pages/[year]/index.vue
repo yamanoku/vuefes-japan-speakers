@@ -21,9 +21,21 @@ useSeoMeta({
 
 <template>
   <div>
-    <h1 class="font-semibold text-3xl text-gray-900 dark:text-white leading-tight">
-      Vue Fes Japan {{ $route.params.year }}
-    </h1>
+    <hgroup>
+      <h1 class="font-semibold text-3xl text-gray-900 dark:text-white leading-tight">
+        Vue Fes Japan {{ $route.params.year }}
+      </h1>
+      <p class="pt-6">
+        <a
+          :href="`https://vuefes.jp/${$route.params.year}/`"
+          target="_blank"
+          class="text-gray-500 dark:text-gray-400 text-xl underline hover:no-underline"
+        >
+          Vue Fes Japan {{ $route.params.year }}公式サイト
+          <UIcon name="i-heroicons-solid-arrow-top-right-on-square" class="ms-1 align-[-0.15rem]" />
+        </a>
+      </p>
+    </hgroup>
     <div class="pt-6">
       <nuxt-link to="/" class="text-gray-500 dark:text-gray-400 text-xl underline hover:no-underline">
         TOPページに戻る
