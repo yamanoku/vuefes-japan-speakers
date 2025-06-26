@@ -37,9 +37,11 @@ useSeoMeta({
   <UApp>
     <NuxtRouteAnnouncer />
     <NuxtLoadingIndicator />
-    <main class="pt-6 px-6">
-      <NuxtPage />
-    </main>
-    <FooterComponent />
+    <UContainer>
+      <main class="pt-6 px-6">
+        <NuxtPage />
+      </main>
+      <FooterComponent />
+    </UContainer>
   </UApp>
 </template>

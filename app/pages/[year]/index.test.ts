@@ -103,7 +103,8 @@ describe('[year]/index.vue', () => {
 
     // Check if component is rendered
     const html = wrapper.html();
-    expect(html).toContain('2024');
+    expect(html).toContain('Vue Fes Japan 2024');
+    expect(html).toContain('公式サイト');
     expect(html).toContain('TOPページに戻る');
 
     // Check SpeakerTable component
@@ -128,7 +129,8 @@ describe('[year]/index.vue', () => {
 
     // Check rendered content
     const html = wrapper.html();
-    expect(html).toContain('2024');
+    expect(html).toContain('Vue Fes Japan 2024');
+    expect(html).toContain('公式サイト');
     expect(html).toContain('TOPページに戻る');
 
     // Check that SpeakerTable exists but shows 0 speakers
