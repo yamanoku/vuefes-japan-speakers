@@ -1,6 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { computed } from 'vue';
-import type { SpeakerInfo, AcceptedYear } from '~~/types';
+import type { SpeakerInfo } from '~~/types';
+
+// Import the mocked functions
+import { isValidYear, getAvailableYears } from '~/utils/years';
 
 // Mock dependencies
 vi.mock('~/utils/years', () => ({
@@ -16,22 +19,19 @@ vi.stubGlobal('useFetch', mockUseFetch);
 vi.stubGlobal('$fetch', mockFetch);
 vi.stubGlobal('computed', computed);
 
-// Import the mocked functions
-import { isValidYear, getAvailableYears } from '~/utils/years';
-
 // We'll need to test the functions differently due to module resolution
 const useFetchSpeaker = async (params?: string) => {
   const handler = params && isValidYear(params)
     ? async (year: string) => {
-      const { data } = await (globalThis as any).useFetch<SpeakerInfo[]>(`/api/speakers/${year}`);
+      const { data } = await (globalThis as unknown as { useFetch: typeof useFetch }).useFetch<SpeakerInfo[]>(`/api/speakers/${year}`);
       return { filterYearSpeaker: data, filterNameSpeaker: undefined };
     }
     : async (name?: string) => {
       const years = getAvailableYears();
       const promises = years.map(year =>
-        (globalThis as any).$fetch<SpeakerInfo[]>(`/api/speakers/${year}`).then(speakers =>
-          speakers.map(speaker => ({ ...speaker, year }))
-        )
+        (globalThis as unknown as { $fetch: typeof $fetch }).$fetch<SpeakerInfo[]>(`/api/speakers/${year}`).then(speakers =>
+          speakers.map(speaker => ({ ...speaker, year })),
+        ),
       );
       const speakersByYear = await Promise.all(promises);
       const allSpeakers = speakersByYear.flat();
@@ -40,9 +40,9 @@ const useFetchSpeaker = async (params?: string) => {
         if (!name) return [];
         const searchTerm = name.toLowerCase();
         const results = allSpeakers.filter(speaker =>
-          speaker.name.some(speakerName => 
-            speakerName.toLowerCase().includes(searchTerm)
-          )
+          speaker.name.some(speakerName =>
+            speakerName.toLowerCase().includes(searchTerm),
+          ),
         );
         return results;
       });
@@ -56,8 +56,8 @@ const useFetchAllSpeakers = async () => {
   const years = getAvailableYears();
   const promises = years.map(year =>
     $fetch<SpeakerInfo[]>(`/api/speakers/${year}`).then(speakers =>
-      speakers.map(speaker => ({ ...speaker, year }))
-    )
+      speakers.map(speaker => ({ ...speaker, year })),
+    ),
   );
   const speakersByYear = await Promise.all(promises);
   return speakersByYear.flat();
@@ -371,18 +371,18 @@ describe('speaker composables', () => {
       vi.mocked(getAvailableYears).mockReturnValue(years);
 
       const mockResponses = {
-        '2020': [{ name: ['Speaker 2020'], title: 'Talk 2020', url: 'https://2020.com' }],
-        '2021': [{ name: ['Speaker 2021'], title: 'Talk 2021', url: 'https://2021.com' }],
-        '2022': [{ name: ['Speaker 2022'], title: 'Talk 2022', url: 'https://2022.com' }],
-        '2023': [{ name: ['Speaker 2023'], title: 'Talk 2023', url: 'https://2023.com' }],
-        '2024': [{ name: ['Speaker 2024'], title: 'Talk 2024', url: 'https://2024.com' }],
+        2020: [{ name: ['Speaker 2020'], title: 'Talk 2020', url: 'https://2020.com' }],
+        2021: [{ name: ['Speaker 2021'], title: 'Talk 2021', url: 'https://2021.com' }],
+        2022: [{ name: ['Speaker 2022'], title: 'Talk 2022', url: 'https://2022.com' }],
+        2023: [{ name: ['Speaker 2023'], title: 'Talk 2023', url: 'https://2023.com' }],
+        2024: [{ name: ['Speaker 2024'], title: 'Talk 2024', url: 'https://2024.com' }],
       };
 
-      let callOrder: string[] = [];
+      const callOrder: string[] = [];
       mockFetch.mockImplementation((url: string) => {
         const year = url.split('/').pop();
         callOrder.push(year);
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           setTimeout(() => {
             resolve(mockResponses[year] || []);
           }, Math.random() * 100);
@@ -392,7 +392,7 @@ describe('speaker composables', () => {
       const result = await useFetchAllSpeakers();
 
       expect(mockFetch).toHaveBeenCalledTimes(5);
-      years.forEach(year => {
+      years.forEach((year) => {
         expect(mockFetch).toHaveBeenCalledWith(`/api/speakers/${year}`);
       });
 
@@ -404,13 +404,13 @@ describe('speaker composables', () => {
     it('同時コールで正しい年の割り当てを維持する', async () => {
       vi.mocked(getAvailableYears).mockReturnValue(['2023', '2024']);
 
-      const delays = { '2023': 100, '2024': 50 };
+      const delays = { 2023: 100, 2024: 50 };
       mockFetch.mockImplementation((url: string) => {
         const year = url.split('/').pop();
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           setTimeout(() => {
             resolve([
-              { name: [`Speaker ${year}`], title: `Talk ${year}`, url: `https://${year}.com` }
+              { name: [`Speaker ${year}`], title: `Talk ${year}`, url: `https://${year}.com` },
             ]);
           }, delays[year] || 0);
         });
@@ -439,7 +439,7 @@ describe('speaker composables', () => {
           return Promise.reject(new Error('API Error for 2023'));
         }
         return Promise.resolve([
-          { name: ['Speaker'], title: 'Talk', url: 'https://example.com' }
+          { name: ['Speaker'], title: 'Talk', url: 'https://example.com' },
         ]);
       });
 
@@ -482,7 +482,7 @@ describe('speaker composables', () => {
 
     it('SpeakerWithYear型にyearプロパティが含まれることを確認する', async () => {
       const mockSpeakers = [
-        { name: ['Test Speaker'], title: 'Test Talk', url: 'https://test.com' }
+        { name: ['Test Speaker'], title: 'Test Talk', url: 'https://test.com' },
       ];
 
       vi.mocked(getAvailableYears).mockReturnValue(['2024']);

@@ -23,6 +23,7 @@ export default defineNuxtConfig({
         quotes: 'single',
         semi: true,
       },
+      typescript: true,
     },
   },
 });

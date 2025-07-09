@@ -10,11 +10,11 @@ export { speakers2018, speakers2019, speakers2022, speakers2023, speakers2024 };
 
 // Speakers organized by year
 const speakersByYear: Record<AcceptedYear, SpeakerInfo[]> = {
-  '2018': speakers2018,
-  '2019': speakers2019,
-  '2022': speakers2022,
-  '2023': speakers2023,
-  '2024': speakers2024,
+  2018: speakers2018,
+  2019: speakers2019,
+  2022: speakers2022,
+  2023: speakers2023,
+  2024: speakers2024,
 };
 
 // Helper function to get speakers by year

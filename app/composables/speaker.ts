@@ -13,8 +13,8 @@ const fetchAllSpeakersWithYears = async () => {
   const years = getAvailableYears();
   const promises = years.map(year =>
     $fetch<SpeakerInfo[]>(`/api/speakers/${year}`).then(speakers =>
-      speakers.map(speaker => ({ ...speaker, year }))
-    )
+      speakers.map(speaker => ({ ...speaker, year })),
+    ),
   );
 
   const speakersByYear = await Promise.all(promises);
@@ -28,9 +28,9 @@ const fetchNameSpeakers = async (name?: string) => {
     if (!name) return [];
     const searchTerm = name.toLowerCase();
     const results = allSpeakers.filter(speaker =>
-      speaker.name.some(speakerName => 
-        speakerName.toLowerCase().includes(searchTerm)
-      )
+      speaker.name.some(speakerName =>
+        speakerName.toLowerCase().includes(searchTerm),
+      ),
     );
     return results;
   });
