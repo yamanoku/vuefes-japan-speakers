@@ -51,7 +51,8 @@ describe('isValidYear', () => {
         // TypeScript should now treat testYear as AcceptedYear
         const acceptedYear: AcceptedYear = testYear;
         expect(acceptedYear).toBe('2024');
-      } else {
+      }
+      else {
         expect.fail('Should have been a valid year');
       }
     });
@@ -65,7 +66,8 @@ describe('isValidYear', () => {
 
       if (isValidYear(testYear)) {
         expect(processYear(testYear)).toBe('Processing year 2024');
-      } else {
+      }
+      else {
         expect.fail('Should have been a valid year');
       }
     });

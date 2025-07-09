@@ -1,13 +1,16 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { defineEventHandler, getRouterParam, createError } from 'h3';
+import { getRouterParam, createError } from 'h3';
 import type { SpeakerInfo } from '~~/types';
 import handler from './[year]';
 
+import { getSpeakersByYear } from '~~/server/data';
+import { isValidYear, getAvailableYears } from '~/utils/years';
+
 // Mock dependencies
 vi.mock('h3', () => ({
-  defineEventHandler: (fn: any) => fn,
+  defineEventHandler: (fn: unknown) => fn,
   getRouterParam: vi.fn(),
-  createError: vi.fn((options) => new Error(options.statusMessage)),
+  createError: vi.fn(options => new Error(options.statusMessage)),
 }));
 
 vi.mock('~~/server/data', () => ({
@@ -19,11 +22,8 @@ vi.mock('~/utils/years', () => ({
   getAvailableYears: vi.fn(),
 }));
 
-import { getSpeakersByYear } from '~~/server/data';
-import { isValidYear, getAvailableYears } from '~/utils/years';
-
 describe('/api/speakers/[year]', () => {
-  const mockEvent = {} as any;
+  const mockEvent = {} as unknown;
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -89,7 +89,7 @@ describe('/api/speakers/[year]', () => {
     it('すべての有効な年を正しく処理する', () => {
       const years = ['2018', '2019', '2022', '2023', '2024'];
 
-      years.forEach(year => {
+      years.forEach((year) => {
         vi.mocked(getRouterParam).mockReturnValue(year);
         vi.mocked(isValidYear).mockReturnValue(true);
         vi.mocked(getSpeakersByYear).mockReturnValue([]);
@@ -109,7 +109,7 @@ describe('/api/speakers/[year]', () => {
       vi.mocked(isValidYear).mockReturnValue(false);
 
       expect(() => handler(mockEvent)).toThrow();
-      
+
       expect(createError).toHaveBeenCalledWith({
         statusCode: 400,
         statusMessage: 'Invalid year parameter. Accepted years are: 2018, 2019, 2022, 2023, 2024',
@@ -122,7 +122,7 @@ describe('/api/speakers/[year]', () => {
       vi.mocked(isValidYear).mockReturnValue(false);
 
       expect(() => handler(mockEvent)).toThrow();
-      
+
       expect(createError).toHaveBeenCalledWith({
         statusCode: 400,
         statusMessage: 'Invalid year parameter. Accepted years are: 2018, 2019, 2022, 2023, 2024',
@@ -134,7 +134,7 @@ describe('/api/speakers/[year]', () => {
       vi.mocked(isValidYear).mockReturnValue(false);
 
       expect(() => handler(mockEvent)).toThrow();
-      
+
       expect(createError).toHaveBeenCalledWith({
         statusCode: 400,
         statusMessage: 'Invalid year parameter. Accepted years are: 2018, 2019, 2022, 2023, 2024',
@@ -145,7 +145,7 @@ describe('/api/speakers/[year]', () => {
       vi.mocked(getRouterParam).mockReturnValue(null);
 
       expect(() => handler(mockEvent)).toThrow();
-      
+
       expect(createError).toHaveBeenCalledWith({
         statusCode: 400,
         statusMessage: 'Invalid year parameter. Accepted years are: 2018, 2019, 2022, 2023, 2024',
@@ -157,7 +157,7 @@ describe('/api/speakers/[year]', () => {
       vi.mocked(getRouterParam).mockReturnValue(undefined);
 
       expect(() => handler(mockEvent)).toThrow();
-      
+
       expect(createError).toHaveBeenCalledWith({
         statusCode: 400,
         statusMessage: 'Invalid year parameter. Accepted years are: 2018, 2019, 2022, 2023, 2024',
@@ -251,7 +251,7 @@ describe('/api/speakers/[year]', () => {
 
       const result = handler(mockEvent);
 
-      result.forEach(speaker => {
+      result.forEach((speaker) => {
         expect(speaker).toHaveProperty('name');
         expect(speaker).toHaveProperty('url');
         expect(Array.isArray(speaker.name)).toBe(true);
