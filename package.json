@@ -23,7 +23,7 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^1.7.1",
+    "@nuxt/eslint-config": "^1.8.0",
     "@nuxt/test-utils": "3.19.2",
     "@vue/test-utils": "2.4.6",
     "eslint": "^9.32.0",
