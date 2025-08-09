@@ -4,9 +4,7 @@ import { speakers2019 } from './speakers-2019';
 import { speakers2022 } from './speakers-2022';
 import { speakers2023 } from './speakers-2023';
 import { speakers2024 } from './speakers-2024';
-
-// Export individual year data
-export { speakers2018, speakers2019, speakers2022, speakers2023, speakers2024 };
+import { speakers2025 } from './speakers-2025';
 
 // Speakers organized by year
 const speakersByYear: Record<AcceptedYear, SpeakerInfo[]> = {
@@ -15,14 +13,10 @@ const speakersByYear: Record<AcceptedYear, SpeakerInfo[]> = {
   2022: speakers2022,
   2023: speakers2023,
   2024: speakers2024,
+  2025: speakers2025,
 };
 
 // Helper function to get speakers by year
 export const getSpeakersByYear = (year: AcceptedYear): SpeakerInfo[] => {
   return speakersByYear[year] || [];
-};
-
-// Helper function to get all available years
-export const getAvailableYears = (): AcceptedYear[] => {
-  return ['2018', '2019', '2022', '2023', '2024'];
 };

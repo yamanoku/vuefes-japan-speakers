@@ -1,7 +1,7 @@
 import type { AcceptedYear } from '~~/types';
 
 export const getAvailableYears = (): AcceptedYear[] => {
-  return ['2018', '2019', '2022', '2023', '2024'];
+  return ['2018', '2019', '2022', '2023', '2024', '2025'];
 };
 
 export const isValidYear = (year: string): year is AcceptedYear => {

@@ -4,4 +4,4 @@ export type SpeakerInfo = {
   url: string;
 };
 
-export type AcceptedYear = '2018' | '2019' | '2022' | '2023' | '2024';
+export type AcceptedYear = '2018' | '2019' | '2022' | '2023' | '2024' | '2025';
