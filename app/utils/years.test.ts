@@ -23,6 +23,10 @@ describe('isValidYear', () => {
     it('2024の場合trueを返す', () => {
       expect(isValidYear('2024')).toBe(true);
     });
+
+    it('2025の場合trueを返す', () => {
+      expect(isValidYear('2025')).toBe(true);
+    });
   });
 
   describe('無効な年', () => {
@@ -34,12 +38,8 @@ describe('isValidYear', () => {
       expect(isValidYear('2021')).toBe(false);
     });
 
-    it('未来の年2025の場合falseを返す', () => {
-      expect(isValidYear('2025')).toBe(false);
-    });
-
-    it('過去の年2017の場合falseを返す', () => {
-      expect(isValidYear('2017')).toBe(false);
+    it('未来の年2100の場合falseを返す', () => {
+      expect(isValidYear('2100')).toBe(false);
     });
   });
 

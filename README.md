@@ -11,6 +11,7 @@
 - [RubyKaigiの2006年から2024年までの登壇者一覧を見れるWebページを作った - Eggshell](https://imaizumimr.hatenablog.com/entry/2024/08/20/204241)
   - [ima1zumi/RubyKaigi-speakers](https://github.com/ima1zumi/RubyKaigi-speakers)
 - [Vue.js Japan User Group](https://github.com/vuejs-jp)
+  - [Vue Fes Japan 2025](https://vuefes.jp/2025/)
   - [Vue Fes Japan 2024](https://vuefes.jp/2024/)
   - [Vue Fes Japan 2023](https://vuefes.jp/2023/)
   - [Vue Fes Japan Online 2022](https://vuefes.jp/2022/)
