@@ -38,7 +38,10 @@ const fetchNameSpeakers = async (name?: string) => {
 };
 
 export const useFetchSpeaker = async (params?: string) => {
-  const handler = params && isValidYear(params)
+  if (!params) {
+    return fetchNameSpeakers('');
+  }
+  const handler = isValidYear(params)
     ? fetchYearSpeakers
     : fetchNameSpeakers;
   return handler(params);

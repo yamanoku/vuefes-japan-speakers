@@ -1,9 +1,20 @@
 <script setup lang="ts">
+import type { AcceptedYear, SpeakerInfo } from '~~/types';
 import SpeakerTable from '~/components/SpeakerTable.vue';
 import { useFetchSpeaker } from '~/composables/speaker';
 
+type SpeakerWithYear = SpeakerInfo & { year: AcceptedYear };
+
 const route = useRoute();
 const { filterYearSpeaker } = await useFetchSpeaker(route.params.year as string);
+
+const speakersWithYear = computed<SpeakerWithYear[] | undefined>(() => {
+  if (!filterYearSpeaker?.value) return undefined;
+  return filterYearSpeaker.value.map(speaker => ({
+    ...speaker,
+    year: route.params.year as AcceptedYear,
+  }));
+});
 
 useHead({
   title: `Vue Fes Japan ${route.params.year as string}`,
@@ -42,7 +53,7 @@ useSeoMeta({
       </nuxt-link>
     </div>
     <div class="pt-6">
-      <SpeakerTable :speakers="filterYearSpeaker" :year="route.params.year as string" />
+      <SpeakerTable :speakers="speakersWithYear" :year="route.params.year as string" />
     </div>
   </div>
 </template>

@@ -1,10 +1,13 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { ref } from 'vue';
+import { computed } from 'vue';
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
+import type { AcceptedYear, SpeakerInfo } from '~~/types';
 import SpeakerNamePage from './index.vue';
 
 // Import mocked functions
 import { useFetchSpeaker } from '~/composables/speaker';
+
+type SpeakerWithYear = SpeakerInfo & { year: AcceptedYear };
 
 // Create hoisted mocks
 const { useSeoMetaMock, useHeadMock, useRouteMock } = vi.hoisted(() => {
@@ -43,15 +46,15 @@ const globalStubs = {
 };
 
 describe('speakers/[name]/index.vue', () => {
-  const mockSpeakers = [
+  const mockSpeakers: SpeakerWithYear[] = [
     {
-      year: '2024',
+      year: '2024' as AcceptedYear,
       name: ['John Doe'],
       title: 'Vue.js Advanced',
       url: 'https://example.com/talk1',
     },
     {
-      year: '2023',
+      year: '2023' as AcceptedYear,
       name: ['John Doe'],
       title: 'Nuxt 3 Deep Dive',
       url: 'https://example.com/talk2',
@@ -76,14 +79,14 @@ describe('speakers/[name]/index.vue', () => {
     // Set default mock implementation
     vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
       filterYearSpeaker: undefined,
-      filterNameSpeaker: ref([]),
+      filterNameSpeaker: computed(() => []),
     }));
   });
 
   it('スピーカー名とトークを含むページをレンダリングする', async () => {
     vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
       filterYearSpeaker: undefined,
-      filterNameSpeaker: ref(mockSpeakers),
+      filterNameSpeaker: computed(() => mockSpeakers),
     }));
 
     const wrapper = await mountSuspended(SpeakerNamePage, {
@@ -107,7 +110,7 @@ describe('speakers/[name]/index.vue', () => {
   it('スピーカーが存在しない場合、"Page not found"をレンダリングする', async () => {
     vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
       filterYearSpeaker: undefined,
-      filterNameSpeaker: ref([]),
+      filterNameSpeaker: computed(() => []),
     }));
 
     const wrapper = await mountSuspended(SpeakerNamePage, {
@@ -133,7 +136,7 @@ describe('speakers/[name]/index.vue', () => {
     // the actual parameter might not be accessible
     vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
       filterYearSpeaker: undefined,
-      filterNameSpeaker: ref(mockSpeakers),
+      filterNameSpeaker: computed(() => mockSpeakers),
     }));
 
     await mountSuspended(SpeakerNamePage, {
@@ -150,7 +153,7 @@ describe('speakers/[name]/index.vue', () => {
     it('スピーカーが存在する場合、robotsをindexに設定する', async () => {
       vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
         filterYearSpeaker: undefined,
-        filterNameSpeaker: ref(mockSpeakers),
+        filterNameSpeaker: computed(() => mockSpeakers),
       }));
 
       // mountSuspended を使用してNuxtコンテキストでコンポーネントをマウント
@@ -164,7 +167,7 @@ describe('speakers/[name]/index.vue', () => {
       expect(useSeoMetaMock).toHaveBeenCalled();
 
       // useSeoMetaに渡された引数を取得
-      const seoMetaArg = useSeoMetaMock.mock.calls[0][0];
+      const seoMetaArg = useSeoMetaMock.mock.calls[0]?.[0];
 
       // robotsプロパティが関数の場合は実行して値を取得
       const robotsValue = typeof seoMetaArg.robots === 'function'
@@ -178,7 +181,7 @@ describe('speakers/[name]/index.vue', () => {
     it('スピーカーが存在しない場合、robotsをnoindexに設定する', async () => {
       vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
         filterYearSpeaker: undefined,
-        filterNameSpeaker: ref([]),
+        filterNameSpeaker: computed(() => []),
       }));
 
       // mountSuspended を使用してNuxtコンテキストでコンポーネントをマウント
@@ -192,7 +195,7 @@ describe('speakers/[name]/index.vue', () => {
       expect(useSeoMetaMock).toHaveBeenCalled();
 
       // useSeoMetaに渡された引数を取得
-      const seoMetaArg = useSeoMetaMock.mock.calls[0][0];
+      const seoMetaArg = useSeoMetaMock.mock.calls[0]?.[0];
 
       // robotsプロパティが関数の場合は実行して値を取得
       const robotsValue = typeof seoMetaArg.robots === 'function'
@@ -206,7 +209,7 @@ describe('speakers/[name]/index.vue', () => {
     it('useHeadでタイトルが設定される', async () => {
       vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
         filterYearSpeaker: undefined,
-        filterNameSpeaker: ref(mockSpeakers),
+        filterNameSpeaker: computed(() => mockSpeakers),
       }));
 
       await mountSuspended(SpeakerNamePage, {
@@ -230,9 +233,9 @@ describe('speakers/[name]/index.vue', () => {
       const routeJapanese = { params: { name: '山田太郎' } };
       useRouteMock.mockReturnValue(routeJapanese);
 
-      const speakersJapanese = [
+      const speakersJapanese: SpeakerWithYear[] = [
         {
-          year: '2024',
+          year: '2024' as AcceptedYear,
           name: ['山田太郎'],
           title: 'Vue.jsの基礎',
           url: 'https://example.com/jp1',
@@ -241,7 +244,7 @@ describe('speakers/[name]/index.vue', () => {
 
       vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
         filterYearSpeaker: undefined,
-        filterNameSpeaker: ref(speakersJapanese),
+        filterNameSpeaker: computed(() => speakersJapanese),
       }));
 
       const wrapper = await mountSuspended(SpeakerNamePage, {
@@ -264,7 +267,7 @@ describe('speakers/[name]/index.vue', () => {
 
       vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
         filterYearSpeaker: undefined,
-        filterNameSpeaker: ref([]),
+        filterNameSpeaker: computed(() => []),
       }));
 
       const wrapper = await mountSuspended(SpeakerNamePage, {
