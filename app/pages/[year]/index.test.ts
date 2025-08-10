@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ref } from 'vue';
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
+import type { SpeakerInfo } from '~~/types';
 import YearPage from './index.vue';
 
 // Import mocked functions
@@ -174,7 +175,7 @@ describe('[year]/index.vue', () => {
       expect(useSeoMetaMock).toHaveBeenCalled();
 
       // useSeoMetaに渡された引数を取得
-      const seoMetaArg = useSeoMetaMock.mock.calls[0][0];
+      const seoMetaArg = useSeoMetaMock.mock.calls[0]?.[0];
       expect(seoMetaArg).toHaveProperty('robots');
 
       // robots関数を実行して値を確認
@@ -200,7 +201,7 @@ describe('[year]/index.vue', () => {
       expect(useSeoMetaMock).toHaveBeenCalled();
 
       // useSeoMetaに渡された引数を取得
-      const seoMetaArg = useSeoMetaMock.mock.calls[0][0];
+      const seoMetaArg = useSeoMetaMock.mock.calls[0]?.[0];
       expect(seoMetaArg).toHaveProperty('robots');
 
       // robots関数を実行して値を確認
@@ -212,7 +213,7 @@ describe('[year]/index.vue', () => {
 
     it('filterYearSpeakerがnullの場合、robotsをnoindexに設定する', async () => {
       vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
-        filterYearSpeaker: ref(null),
+        filterYearSpeaker: ref<SpeakerInfo[] | undefined>(undefined),
         filterNameSpeaker: undefined,
       }));
 
@@ -226,7 +227,7 @@ describe('[year]/index.vue', () => {
       expect(useSeoMetaMock).toHaveBeenCalled();
 
       expect(useSeoMetaMock).toHaveBeenCalled();
-      const seoMetaArg = useSeoMetaMock.mock.calls[0][0];
+      const seoMetaArg = useSeoMetaMock.mock.calls[0]?.[0];
       const robotsValue = typeof seoMetaArg.robots === 'function'
         ? seoMetaArg.robots()
         : seoMetaArg.robots;
@@ -249,7 +250,7 @@ describe('[year]/index.vue', () => {
       expect(useSeoMetaMock).toHaveBeenCalled();
 
       expect(useSeoMetaMock).toHaveBeenCalled();
-      const seoMetaArg = useSeoMetaMock.mock.calls[0][0];
+      const seoMetaArg = useSeoMetaMock.mock.calls[0]?.[0];
       const robotsValue = typeof seoMetaArg.robots === 'function'
         ? seoMetaArg.robots()
         : seoMetaArg.robots;

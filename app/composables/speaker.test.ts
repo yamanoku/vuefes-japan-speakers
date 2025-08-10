@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { computed } from 'vue';
-import type { SpeakerInfo } from '~~/types';
+import type { SpeakerInfo, AcceptedYear } from '~~/types';
 
 // Import the mocked functions
 import { isValidYear, getAvailableYears } from '~/utils/years';
@@ -21,12 +21,16 @@ vi.stubGlobal('computed', computed);
 
 // We'll need to test the functions differently due to module resolution
 const useFetchSpeaker = async (params?: string) => {
-  const handler = params && isValidYear(params)
+  if (!params) {
+    const filterNameSpeaker = computed(() => []);
+    return { filterYearSpeaker: undefined, filterNameSpeaker };
+  }
+  const handler = isValidYear(params)
     ? async (year: string) => {
       const { data } = await (globalThis as unknown as { useFetch: typeof useFetch }).useFetch<SpeakerInfo[]>(`/api/speakers/${year}`);
       return { filterYearSpeaker: data, filterNameSpeaker: undefined };
     }
-    : async (name?: string) => {
+    : async (name: string) => {
       const years = getAvailableYears();
       const promises = years.map(year =>
         (globalThis as unknown as { $fetch: typeof $fetch }).$fetch<SpeakerInfo[]>(`/api/speakers/${year}`).then(speakers =>
@@ -339,7 +343,7 @@ describe('speaker composables', () => {
       const result = await useFetchSpeaker('bob');
 
       expect(result.filterNameSpeaker?.value).toHaveLength(1);
-      expect(result.filterNameSpeaker?.value?.[0].name).toEqual([
+      expect(result.filterNameSpeaker?.value?.[0]?.name).toEqual([
         'Alice Johnson',
         'Bob Smith',
         'Charlie Brown',
@@ -361,18 +365,16 @@ describe('speaker composables', () => {
       const result = await useFetchSpeaker('Speaker');
 
       expect(result.filterNameSpeaker?.value).toHaveLength(1);
-      expect(result.filterNameSpeaker?.value?.[0].title).toBeUndefined();
+      expect(result.filterNameSpeaker?.value?.[0]?.title).toBeUndefined();
     });
   });
 
   describe('同時APIコール', () => {
     it('fetchAllSpeakersWithYearsで同時リクエストを適切に処理する', async () => {
-      const years = ['2020', '2021', '2022', '2023', '2024'];
+      const years: AcceptedYear[] = ['2022', '2023', '2024'];
       vi.mocked(getAvailableYears).mockReturnValue(years);
 
-      const mockResponses = {
-        2020: [{ name: ['Speaker 2020'], title: 'Talk 2020', url: 'https://2020.com' }],
-        2021: [{ name: ['Speaker 2021'], title: 'Talk 2021', url: 'https://2021.com' }],
+      const mockResponses: Record<string, SpeakerInfo[]> = {
         2022: [{ name: ['Speaker 2022'], title: 'Talk 2022', url: 'https://2022.com' }],
         2023: [{ name: ['Speaker 2023'], title: 'Talk 2023', url: 'https://2023.com' }],
         2024: [{ name: ['Speaker 2024'], title: 'Talk 2024', url: 'https://2024.com' }],
@@ -381,6 +383,7 @@ describe('speaker composables', () => {
       const callOrder: string[] = [];
       mockFetch.mockImplementation((url: string) => {
         const year = url.split('/').pop();
+        if (!year) return Promise.resolve([]);
         callOrder.push(year);
         return new Promise((resolve) => {
           setTimeout(() => {
@@ -391,22 +394,23 @@ describe('speaker composables', () => {
 
       const result = await useFetchAllSpeakers();
 
-      expect(mockFetch).toHaveBeenCalledTimes(5);
+      expect(mockFetch).toHaveBeenCalledTimes(3);
       years.forEach((year) => {
         expect(mockFetch).toHaveBeenCalledWith(`/api/speakers/${year}`);
       });
 
-      expect(result).toHaveLength(5);
-      expect(callOrder).toHaveLength(5);
+      expect(result).toHaveLength(3);
+      expect(callOrder).toHaveLength(3);
       expect(callOrder.sort()).toEqual(years.sort());
     });
 
     it('同時コールで正しい年の割り当てを維持する', async () => {
       vi.mocked(getAvailableYears).mockReturnValue(['2023', '2024']);
 
-      const delays = { 2023: 100, 2024: 50 };
+      const delays: Record<string, number> = { 2023: 100, 2024: 50 };
       mockFetch.mockImplementation((url: string) => {
         const year = url.split('/').pop();
+        if (!year) return Promise.resolve([]);
         return new Promise((resolve) => {
           setTimeout(() => {
             resolve([
@@ -490,8 +494,9 @@ describe('speaker composables', () => {
 
       const result = await useFetchAllSpeakers();
 
+      expect(result.length).toBeGreaterThan(0);
       expect(result[0]).toHaveProperty('year');
-      expect(typeof result[0].year).toBe('string');
+      expect(typeof result[0]?.year).toBe('string');
     });
   });
 });
