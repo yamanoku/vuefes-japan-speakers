@@ -394,13 +394,13 @@ describe('speaker composables', () => {
 
       const result = await useFetchAllSpeakers();
 
-      expect(mockFetch).toHaveBeenCalledTimes(5);
+      expect(mockFetch).toHaveBeenCalledTimes(3);
       years.forEach((year) => {
         expect(mockFetch).toHaveBeenCalledWith(`/api/speakers/${year}`);
       });
 
-      expect(result).toHaveLength(5);
-      expect(callOrder).toHaveLength(5);
+      expect(result).toHaveLength(3);
+      expect(callOrder).toHaveLength(3);
       expect(callOrder.sort()).toEqual(years.sort());
     });
 
