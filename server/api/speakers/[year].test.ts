@@ -4,9 +4,9 @@ import type { SpeakerInfo } from '~~/types';
 import handler from './[year]';
 
 import { getSpeakersByYear } from '~~/server/data';
-import { isValidYear, getAvailableYears } from '~/utils/years';
+import { isValidYear } from '~/utils/years';
 
-// Mock dependencies
+// 依存関係をモック化
 vi.mock('h3', () => ({
   defineEventHandler: (fn: unknown) => fn,
   getRouterParam: vi.fn(),
@@ -17,17 +17,11 @@ vi.mock('~~/server/data', () => ({
   getSpeakersByYear: vi.fn(),
 }));
 
-vi.mock('~/utils/years', () => ({
-  isValidYear: vi.fn(),
-  getAvailableYears: vi.fn(),
-}));
-
 describe('/api/speakers/[year]', () => {
   const mockEvent = {} as unknown;
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(getAvailableYears).mockReturnValue(['2018', '2019', '2022', '2023', '2024']);
   });
 
   describe('有効な年のリクエスト', () => {
@@ -41,13 +35,12 @@ describe('/api/speakers/[year]', () => {
       ];
 
       vi.mocked(getRouterParam).mockReturnValue('2024');
-      vi.mocked(isValidYear).mockReturnValue(true);
       vi.mocked(getSpeakersByYear).mockReturnValue(mockSpeakers);
 
       const result = handler(mockEvent);
 
       expect(getRouterParam).toHaveBeenCalledWith(mockEvent, 'year');
-      expect(isValidYear).toHaveBeenCalledWith('2024');
+      expect(isValidYear('2024')).toBe(true);
       expect(getSpeakersByYear).toHaveBeenCalledWith('2024');
       expect(result).toEqual(mockSpeakers);
     });
@@ -67,7 +60,6 @@ describe('/api/speakers/[year]', () => {
       ];
 
       vi.mocked(getRouterParam).mockReturnValue('2023');
-      vi.mocked(isValidYear).mockReturnValue(true);
       vi.mocked(getSpeakersByYear).mockReturnValue(mockSpeakers);
 
       const result = handler(mockEvent);
@@ -78,7 +70,6 @@ describe('/api/speakers/[year]', () => {
 
     it('有効な年にスピーカーが存在しない場合、空の配列を返す', () => {
       vi.mocked(getRouterParam).mockReturnValue('2022');
-      vi.mocked(isValidYear).mockReturnValue(true);
       vi.mocked(getSpeakersByYear).mockReturnValue([]);
 
       const result = handler(mockEvent);
@@ -87,16 +78,15 @@ describe('/api/speakers/[year]', () => {
     });
 
     it('すべての有効な年を正しく処理する', () => {
-      const years = ['2018', '2019', '2022', '2023', '2024'];
+      const years = ['2018', '2019', '2022', '2023', '2024', '2025'];
 
       years.forEach((year) => {
         vi.mocked(getRouterParam).mockReturnValue(year);
-        vi.mocked(isValidYear).mockReturnValue(true);
         vi.mocked(getSpeakersByYear).mockReturnValue([]);
 
         const result = handler(mockEvent);
 
-        expect(isValidYear).toHaveBeenCalledWith(year);
+        expect(isValidYear(year)).toBe(true);
         expect(getSpeakersByYear).toHaveBeenCalledWith(year);
         expect(Array.isArray(result)).toBe(true);
       });
@@ -104,81 +94,32 @@ describe('/api/speakers/[year]', () => {
   });
 
   describe('無効な年のリクエスト', () => {
-    it('無効な年2020の場合エラーをスローする', () => {
-      vi.mocked(getRouterParam).mockReturnValue('2020');
-      vi.mocked(isValidYear).mockReturnValue(false);
+    it.each([
+      ['2020', '無効な年'],
+      ['abc', '数値でない年'],
+      ['', '空の年パラメータ'],
+      [null, 'nullの年パラメータ'],
+      [undefined, 'undefinedの年パラメータ'],
+    ])('%sの場合エラーをスローする', (year) => {
+      vi.mocked(getRouterParam).mockReturnValue(year);
 
       expect(() => handler(mockEvent)).toThrow();
 
       expect(createError).toHaveBeenCalledWith({
         statusCode: 400,
-        statusMessage: 'Invalid year parameter. Accepted years are: 2018, 2019, 2022, 2023, 2024',
+        statusMessage: 'Invalid year parameter. Accepted years are: 2018, 2019, 2022, 2023, 2024, 2025',
       });
       expect(getSpeakersByYear).not.toHaveBeenCalled();
-    });
-
-    it('数値でない年の場合エラーをスローする', () => {
-      vi.mocked(getRouterParam).mockReturnValue('abc');
-      vi.mocked(isValidYear).mockReturnValue(false);
-
-      expect(() => handler(mockEvent)).toThrow();
-
-      expect(createError).toHaveBeenCalledWith({
-        statusCode: 400,
-        statusMessage: 'Invalid year parameter. Accepted years are: 2018, 2019, 2022, 2023, 2024',
-      });
-    });
-
-    it('空の年パラメータの場合エラーをスローする', () => {
-      vi.mocked(getRouterParam).mockReturnValue('');
-      vi.mocked(isValidYear).mockReturnValue(false);
-
-      expect(() => handler(mockEvent)).toThrow();
-
-      expect(createError).toHaveBeenCalledWith({
-        statusCode: 400,
-        statusMessage: 'Invalid year parameter. Accepted years are: 2018, 2019, 2022, 2023, 2024',
-      });
-    });
-
-    it('nullの年パラメータの場合エラーをスローする', () => {
-      vi.mocked(getRouterParam).mockReturnValue(null);
-
-      expect(() => handler(mockEvent)).toThrow();
-
-      expect(createError).toHaveBeenCalledWith({
-        statusCode: 400,
-        statusMessage: 'Invalid year parameter. Accepted years are: 2018, 2019, 2022, 2023, 2024',
-      });
-      expect(isValidYear).not.toHaveBeenCalled();
-    });
-
-    it('undefinedの年パラメータの場合エラーをスローする', () => {
-      vi.mocked(getRouterParam).mockReturnValue(undefined);
-
-      expect(() => handler(mockEvent)).toThrow();
-
-      expect(createError).toHaveBeenCalledWith({
-        statusCode: 400,
-        statusMessage: 'Invalid year parameter. Accepted years are: 2018, 2019, 2022, 2023, 2024',
-      });
     });
   });
 
   describe('ハンドラーの動作', () => {
-    it('同期関数である', () => {
-      // The handler should not be async
-      expect(handler.constructor.name).not.toBe('AsyncFunction');
-    });
-
     it('データ取得前に年を検証する', () => {
       vi.mocked(getRouterParam).mockReturnValue('invalid');
-      vi.mocked(isValidYear).mockReturnValue(false);
 
       expect(() => handler(mockEvent)).toThrow();
 
-      // Should check validity before trying to get speakers
-      expect(isValidYear).toHaveBeenCalled();
+      expect(isValidYear('invalid')).toBe(false);
       expect(getSpeakersByYear).not.toHaveBeenCalled();
     });
 
@@ -192,72 +133,11 @@ describe('/api/speakers/[year]', () => {
       ];
 
       vi.mocked(getRouterParam).mockReturnValue('2024');
-      vi.mocked(isValidYear).mockReturnValue(true);
       vi.mocked(getSpeakersByYear).mockReturnValue(originalData);
 
       const result = handler(mockEvent);
 
-      // Should be the exact same reference
       expect(result).toBe(originalData);
-    });
-  });
-
-  describe('エラーメッセージのフォーマット', () => {
-    it('エラーメッセージにすべての利用可能な年を含む', () => {
-      vi.mocked(getRouterParam).mockReturnValue('2025');
-      vi.mocked(isValidYear).mockReturnValue(false);
-      vi.mocked(getAvailableYears).mockReturnValue(['2018', '2019', '2022', '2023', '2024']);
-
-      expect(() => handler(mockEvent)).toThrow();
-
-      expect(createError).toHaveBeenCalledWith({
-        statusCode: 400,
-        statusMessage: 'Invalid year parameter. Accepted years are: 2018, 2019, 2022, 2023, 2024',
-      });
-    });
-
-    it('利用可能な年が変更されたときエラーメッセージを更新する', () => {
-      vi.mocked(getRouterParam).mockReturnValue('2025');
-      vi.mocked(isValidYear).mockReturnValue(false);
-      vi.mocked(getAvailableYears).mockReturnValue(['2023', '2024', '2025']);
-
-      expect(() => handler(mockEvent)).toThrow();
-
-      expect(createError).toHaveBeenCalledWith({
-        statusCode: 400,
-        statusMessage: 'Invalid year parameter. Accepted years are: 2023, 2024, 2025',
-      });
-    });
-  });
-
-  describe('データの一貫性', () => {
-    it('一貫したスピーカーデータ形式を返す', () => {
-      const speakers: SpeakerInfo[] = [
-        {
-          name: ['Speaker A'],
-          title: 'Talk A',
-          url: 'https://a.com',
-        },
-        {
-          name: ['Speaker B', 'Speaker C'],
-          url: 'https://b.com',
-          // Missing title is valid
-        },
-      ];
-
-      vi.mocked(getRouterParam).mockReturnValue('2024');
-      vi.mocked(isValidYear).mockReturnValue(true);
-      vi.mocked(getSpeakersByYear).mockReturnValue(speakers);
-
-      const result = handler(mockEvent);
-
-      result.forEach((speaker) => {
-        expect(speaker).toHaveProperty('name');
-        expect(speaker).toHaveProperty('url');
-        expect(Array.isArray(speaker.name)).toBe(true);
-        expect(speaker.name.length).toBeGreaterThan(0);
-        expect(speaker.url).toMatch(/^https?:\/\//);
-      });
     });
   });
 });

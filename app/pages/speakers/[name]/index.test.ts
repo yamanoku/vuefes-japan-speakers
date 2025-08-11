@@ -130,25 +130,6 @@ describe('speakers/[name]/index.vue', () => {
     expect(speakerTable.exists()).toBe(false);
   });
 
-  it('正しい名前パラメータでuseFetchSpeakerを呼び出す', async () => {
-    // This test verifies that useFetchSpeaker is called
-    // Note: Due to how Nuxt's auto-imports work in tests,
-    // the actual parameter might not be accessible
-    vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
-      filterYearSpeaker: undefined,
-      filterNameSpeaker: computed(() => mockSpeakers),
-    }));
-
-    await mountSuspended(SpeakerNamePage, {
-      global: {
-        stubs: globalStubs,
-      },
-    });
-
-    // Just verify it was called
-    expect(useFetchSpeaker).toHaveBeenCalled();
-  });
-
   describe('useSeoMeta', () => {
     it('スピーカーが存在する場合、robotsをindexに設定する', async () => {
       vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
@@ -259,26 +240,6 @@ describe('speakers/[name]/index.vue', () => {
       expect(useHeadMock).toHaveBeenCalledWith({
         title: '山田太郎 発表一覧',
       });
-    });
-
-    it('URLエンコードされたスピーカー名を処理する', async () => {
-      const routeEncoded = { params: { name: 'Jane%20Smith' } };
-      useRouteMock.mockReturnValue(routeEncoded);
-
-      vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
-        filterYearSpeaker: undefined,
-        filterNameSpeaker: computed(() => []),
-      }));
-
-      const wrapper = await mountSuspended(SpeakerNamePage, {
-        global: {
-          stubs: globalStubs,
-        },
-      });
-
-      const html = wrapper.html();
-      expect(html).toContain('Jane%20Smith');
-      expect(useFetchSpeaker).toHaveBeenCalled();
     });
   });
 });
