@@ -4,42 +4,25 @@ import type { AcceptedYear } from '~~/types';
 
 describe('isValidYear', () => {
   describe('有効な年', () => {
-    it('2018の場合trueを返す', () => {
-      expect(isValidYear('2018')).toBe(true);
-    });
-
-    it('2019の場合trueを返す', () => {
-      expect(isValidYear('2019')).toBe(true);
-    });
-
-    it('2022の場合trueを返す', () => {
-      expect(isValidYear('2022')).toBe(true);
-    });
-
-    it('2023の場合trueを返す', () => {
-      expect(isValidYear('2023')).toBe(true);
-    });
-
-    it('2024の場合trueを返す', () => {
-      expect(isValidYear('2024')).toBe(true);
-    });
-
-    it('2025の場合trueを返す', () => {
-      expect(isValidYear('2025')).toBe(true);
+    it.each([
+      ['2018'],
+      ['2019'],
+      ['2022'],
+      ['2023'],
+      ['2024'],
+      ['2025'],
+    ])('%sの場合trueを返す', (year) => {
+      expect(isValidYear(year)).toBe(true);
     });
   });
 
   describe('無効な年', () => {
-    it('2020の場合falseを返す', () => {
-      expect(isValidYear('2020')).toBe(false);
-    });
-
-    it('2021の場合falseを返す', () => {
-      expect(isValidYear('2021')).toBe(false);
-    });
-
-    it('未来の年2100の場合falseを返す', () => {
-      expect(isValidYear('2100')).toBe(false);
+    it.each([
+      ['2020'],
+      ['2021'],
+      ['2100'],
+    ])('%sの場合falseを返す', (year) => {
+      expect(isValidYear(year)).toBe(false);
     });
   });
 
