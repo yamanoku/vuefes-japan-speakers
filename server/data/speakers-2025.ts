@@ -3,37 +3,30 @@ import type { SpeakerInfo } from '~~/types';
 export const speakers2025: SpeakerInfo[] = [
   {
     name: ['Evan You'],
-    title: 'TBD',
     url: 'https://vuefes.jp/2025/speaker/yyx990803',
   },
   {
     name: ['Daniel Roe'],
-    title: 'TBD',
     url: 'https://vuefes.jp/2025/speaker/danielroe',
   },
   {
     name: ['Johnson Chu'],
-    title: 'TBD',
     url: 'https://vuefes.jp/2025/speaker/johnsoncodehk',
   },
   {
     name: ['Guillaume Chau'],
-    title: 'TBD',
     url: 'https://vuefes.jp/2025/speaker/akryum',
   },
   {
     name: ['橋本 麦'],
-    title: 'TBD',
     url: 'https://vuefes.jp/2025/speaker/baku89',
   },
   {
     name: ['小川 浩志'],
-    title: 'TBD',
     url: 'https://vuefes.jp/2025/speaker/hi-ogawa',
   },
   {
     name: ['杉浦 有右嗣'],
-    title: 'TBD',
     url: 'https://vuefes.jp/2025/speaker/leaysgur',
   },
   {
