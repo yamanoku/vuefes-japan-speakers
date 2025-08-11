@@ -1,7 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ref } from 'vue';
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
-import type { SpeakerInfo } from '~~/types';
 import YearPage from './index.vue';
 
 // Import mocked functions
