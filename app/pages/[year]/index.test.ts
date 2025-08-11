@@ -159,9 +159,9 @@ describe('[year]/index.vue', () => {
 
   describe('SEOメタタグ', () => {
     it.each([
-      [mockSpeakers, 'index', 'スピーカーが存在する場合'],
-      [[], 'noindex', 'スピーカーが存在しない場合'],
-      [undefined, 'noindex', 'filterYearSpeakerがundefinedの場合'],
+      [mockSpeakers, 'index'], // スピーカーが存在する場合
+      [[], 'noindex'], // スピーカーが存在しない場合
+      [undefined, 'noindex'], // filterYearSpeakerがundefinedの場合
     ])('robotsを%sに設定する (%s)', async (speakers, expectedRobots) => {
       vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
         filterYearSpeaker: ref(speakers),
