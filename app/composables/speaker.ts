@@ -51,3 +51,12 @@ export const useFetchAllSpeakers = async () => {
   const allSpeakers = await fetchAllSpeakersWithYears();
   return allSpeakers;
 };
+
+export const useFilteredSpeakers = (allSpeakers: Ref<SpeakerWithYear[]>, selectedYear: Ref<AcceptedYear | 'all'>) => {
+  return computed(() => {
+    if (selectedYear.value === 'all') {
+      return allSpeakers.value;
+    }
+    return allSpeakers.value.filter(speaker => speaker.year === selectedYear.value);
+  });
+};

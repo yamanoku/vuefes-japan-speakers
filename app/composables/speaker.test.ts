@@ -1,9 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import type { SpeakerInfo } from '~~/types';
 
 // 実際の実装をインポート
 import { isValidYear, getAvailableYears } from '~/utils/years';
+import { useFilteredSpeakers } from './speaker';
 
 // getAvailableYearsのみモック化
 vi.mock('~/utils/years', async () => {
@@ -303,6 +304,96 @@ describe('speaker composables', () => {
 
       expect(result).toHaveLength(3);
       expect(result.map(s => s.year)).toEqual(['2023', '2024', '2024']);
+    });
+  });
+
+  describe('useFilteredSpeakers', () => {
+    const mockSpeakers = [
+      { name: ['Speaker 2023'], title: 'Vue 2 to 3 Migration', url: 'https://example.com/2023', year: '2023' },
+      { name: ['Speaker 2024-1'], title: 'Composition API', url: 'https://example.com/2024-1', year: '2024' },
+      { name: ['Speaker 2024-2'], title: 'Vue 3 Performance', url: 'https://example.com/2024-2', year: '2024' },
+      { name: ['Speaker 2025'], title: 'Future of Vue', url: 'https://example.com/2025', year: '2025' },
+    ];
+
+    it('selectedYearが"all"の場合、全てのスピーカーを返す', () => {
+      const allSpeakers = ref(mockSpeakers);
+      const selectedYear = ref<'all' | typeof mockSpeakers[0]['year']>('all');
+
+      const filteredSpeakers = useFilteredSpeakers(allSpeakers, selectedYear);
+
+      expect(filteredSpeakers.value).toEqual(mockSpeakers);
+      expect(filteredSpeakers.value).toHaveLength(4);
+    });
+
+    it('特定の年が選択された場合、その年のスピーカーのみを返す', () => {
+      const allSpeakers = ref(mockSpeakers);
+      const selectedYear = ref<'all' | typeof mockSpeakers[0]['year']>('2024');
+
+      const filteredSpeakers = useFilteredSpeakers(allSpeakers, selectedYear);
+
+      expect(filteredSpeakers.value).toHaveLength(2);
+      expect(filteredSpeakers.value.every(speaker => speaker.year === '2024')).toBe(true);
+      expect(filteredSpeakers.value.map(s => s.name[0])).toEqual(['Speaker 2024-1', 'Speaker 2024-2']);
+    });
+
+    it('存在しない年が選択された場合、空の配列を返す', () => {
+      const allSpeakers = ref(mockSpeakers);
+      const selectedYear = ref<'all' | typeof mockSpeakers[0]['year']>('2020' as const);
+
+      const filteredSpeakers = useFilteredSpeakers(allSpeakers, selectedYear);
+
+      expect(filteredSpeakers.value).toEqual([]);
+      expect(filteredSpeakers.value).toHaveLength(0);
+    });
+
+    it('allSpeakersが空の場合、空の配列を返す', () => {
+      const allSpeakers = ref([]);
+      const selectedYear = ref<'all' | typeof mockSpeakers[0]['year']>('2024');
+
+      const filteredSpeakers = useFilteredSpeakers(allSpeakers, selectedYear);
+
+      expect(filteredSpeakers.value).toEqual([]);
+      expect(filteredSpeakers.value).toHaveLength(0);
+    });
+
+    it('selectedYearがリアクティブに変更された場合、結果も更新される', () => {
+      const allSpeakers = ref(mockSpeakers);
+      const selectedYear = ref<'all' | typeof mockSpeakers[0]['year']>('all');
+
+      const filteredSpeakers = useFilteredSpeakers(allSpeakers, selectedYear);
+
+      // 初期状態：全てのスピーカー
+      expect(filteredSpeakers.value).toHaveLength(4);
+
+      // 2024年を選択
+      selectedYear.value = '2024';
+      expect(filteredSpeakers.value).toHaveLength(2);
+      expect(filteredSpeakers.value.every(speaker => speaker.year === '2024')).toBe(true);
+
+      // 2023年を選択
+      selectedYear.value = '2023';
+      expect(filteredSpeakers.value).toHaveLength(1);
+      expect(filteredSpeakers.value[0].year).toBe('2023');
+
+      // 再び"all"を選択
+      selectedYear.value = 'all';
+      expect(filteredSpeakers.value).toHaveLength(4);
+    });
+
+    it('allSpeakersがリアクティブに変更された場合、結果も更新される', () => {
+      const allSpeakers = ref([mockSpeakers[0], mockSpeakers[1]]);
+      const selectedYear = ref<'all' | typeof mockSpeakers[0]['year']>('2024');
+
+      const filteredSpeakers = useFilteredSpeakers(allSpeakers, selectedYear);
+
+      // 初期状態：2024年のスピーカーは1人
+      expect(filteredSpeakers.value).toHaveLength(1);
+      expect(filteredSpeakers.value[0].name[0]).toBe('Speaker 2024-1');
+
+      // 2024年のスピーカーを追加
+      allSpeakers.value = [...allSpeakers.value, mockSpeakers[2]];
+      expect(filteredSpeakers.value).toHaveLength(2);
+      expect(filteredSpeakers.value.map(s => s.name[0])).toEqual(['Speaker 2024-1', 'Speaker 2024-2']);
     });
   });
 
