@@ -2,11 +2,23 @@
 import type { AcceptedYear, SpeakerInfo } from '~~/types';
 import SpeakerTable from '~/components/SpeakerTable.vue';
 import { useFetchSpeaker } from '~/composables/speaker';
+import { isValidYear } from '~/utils/years';
 
 type SpeakerWithYear = SpeakerInfo & { year: AcceptedYear };
 
 const route = useRoute();
 const { filterYearSpeaker } = await useFetchSpeaker(route.params.year as string);
+
+const isAcceptedYear = (): boolean => {
+  return isValidYear(route.params.year as string);
+};
+
+if (!isAcceptedYear()) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Page Not Found',
+  });
+}
 
 const speakersWithYear = computed<SpeakerWithYear[] | undefined>(() => {
   if (!filterYearSpeaker?.value) return undefined;
@@ -18,15 +30,6 @@ const speakersWithYear = computed<SpeakerWithYear[] | undefined>(() => {
 
 useHead({
   title: `Vue Fes Japan ${route.params.year as string}`,
-});
-
-useSeoMeta({
-  robots: () => {
-    if (!filterYearSpeaker?.value || filterYearSpeaker.value.length === 0) {
-      return 'noindex';
-    }
-    return 'index';
-  },
 });
 </script>
 
