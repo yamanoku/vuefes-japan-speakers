@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import SpeakerTable from '~/components/SpeakerTable.vue';
-import YearSelector from '~/components/YearSelector.vue';
 import { useFetchAllSpeakers, useFilteredSpeakers } from '~/composables/speaker';
 import type { AcceptedYear } from '~~/types';
 
@@ -25,10 +24,12 @@ const filteredSpeakers = useFilteredSpeakers(ref(allSpeakers), selectedYear);
       </p>
     </div>
     <div class="pt-6">
-      <YearSelector v-model="selectedYear" />
-    </div>
-    <div class="pt-6">
-      <SpeakerTable :speakers="filteredSpeakers || []" />
+      <SpeakerTable
+        :speakers="filteredSpeakers || []"
+        :show-year-selector="true"
+        :selected-year="selectedYear"
+        @update:selected-year="selectedYear = $event"
+      />
     </div>
   </div>
 </template>
