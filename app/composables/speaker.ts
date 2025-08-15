@@ -29,7 +29,7 @@ const fetchNameSpeakers = async (name?: string) => {
     const searchTerm = name.toLowerCase();
     const results = allSpeakers.filter(speaker =>
       speaker.name.some(speakerName =>
-        speakerName.toLowerCase().includes(searchTerm),
+        speakerName.toLowerCase() === searchTerm,
       ),
     );
     return results;

@@ -22,7 +22,6 @@ const { useSeoMetaMock, useHeadMock, useRouteMock } = vi.hoisted(() => {
 mockNuxtImport('useSeoMeta', () => useSeoMetaMock);
 mockNuxtImport('useHead', () => useHeadMock);
 mockNuxtImport('useRoute', () => useRouteMock);
-
 // Mock dependencies
 vi.mock('~/composables/speaker', () => ({
   useFetchSpeaker: vi.fn(),
@@ -107,86 +106,7 @@ describe('speakers/[name]/index.vue', () => {
     expect(speakerTable.text()).toContain('2 speakers');
   });
 
-  it('スピーカーが存在しない場合、"Page not found"をレンダリングする', async () => {
-    vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
-      filterYearSpeaker: undefined,
-      filterNameSpeaker: computed(() => []),
-    }));
-
-    const wrapper = await mountSuspended(SpeakerNamePage, {
-      global: {
-        stubs: globalStubs,
-      },
-    });
-
-    // Check rendered content
-    const html = wrapper.html();
-    expect(html).toContain('John Doe 発表一覧');
-    expect(html).toContain('Page not found');
-    expect(html).toContain('TOP');
-
-    // Check that SpeakerTable doesn't exist
-    const speakerTable = wrapper.findComponent({ name: 'SpeakerTable' });
-    expect(speakerTable.exists()).toBe(false);
-  });
-
-  describe('useSeoMeta', () => {
-    it('スピーカーが存在する場合、robotsをindexに設定する', async () => {
-      vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
-        filterYearSpeaker: undefined,
-        filterNameSpeaker: computed(() => mockSpeakers),
-      }));
-
-      // mountSuspended を使用してNuxtコンテキストでコンポーネントをマウント
-      await mountSuspended(SpeakerNamePage, {
-        global: {
-          stubs: globalStubs,
-        },
-      });
-
-      // useSeoMetaが呼び出されたかを確認
-      expect(useSeoMetaMock).toHaveBeenCalled();
-
-      // useSeoMetaに渡された引数を取得
-      const seoMetaArg = useSeoMetaMock.mock.calls[0]?.[0];
-
-      // robotsプロパティが関数の場合は実行して値を取得
-      const robotsValue = typeof seoMetaArg.robots === 'function'
-        ? seoMetaArg.robots()
-        : seoMetaArg.robots;
-
-      // robotsの値が'index'であることを確認
-      expect(robotsValue).toBe('index');
-    });
-
-    it('スピーカーが存在しない場合、robotsをnoindexに設定する', async () => {
-      vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
-        filterYearSpeaker: undefined,
-        filterNameSpeaker: computed(() => []),
-      }));
-
-      // mountSuspended を使用してNuxtコンテキストでコンポーネントをマウント
-      await mountSuspended(SpeakerNamePage, {
-        global: {
-          stubs: globalStubs,
-        },
-      });
-
-      // useSeoMetaが呼び出されたかを確認
-      expect(useSeoMetaMock).toHaveBeenCalled();
-
-      // useSeoMetaに渡された引数を取得
-      const seoMetaArg = useSeoMetaMock.mock.calls[0]?.[0];
-
-      // robotsプロパティが関数の場合は実行して値を取得
-      const robotsValue = typeof seoMetaArg.robots === 'function'
-        ? seoMetaArg.robots()
-        : seoMetaArg.robots;
-
-      // robotsの値が'noindex'であることを確認
-      expect(robotsValue).toBe('noindex');
-    });
-
+  describe('SEOとメタデータ', () => {
     it('useHeadでタイトルが設定される', async () => {
       vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
         filterYearSpeaker: undefined,

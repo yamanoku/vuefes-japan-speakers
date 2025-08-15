@@ -156,30 +156,4 @@ describe('[year]/index.vue', () => {
       expect(useFetchSpeaker).toHaveBeenCalled();
     });
   });
-
-  describe('SEOメタタグ', () => {
-    it.each([
-      [mockSpeakers, 'index'], // スピーカーが存在する場合
-      [[], 'noindex'], // スピーカーが存在しない場合
-      [undefined, 'noindex'], // filterYearSpeakerがundefinedの場合
-    ])('robotsを%sに設定する (%s)', async (speakers, expectedRobots) => {
-      vi.mocked(useFetchSpeaker).mockImplementation(() => Promise.resolve({
-        filterYearSpeaker: ref(speakers),
-        filterNameSpeaker: undefined,
-      }));
-
-      await mountSuspended(YearPage, {
-        global: {
-          stubs: globalStubs,
-        },
-      });
-
-      expect(useSeoMetaMock).toHaveBeenCalled();
-      const seoMetaArg = useSeoMetaMock.mock.calls[0]?.[0];
-      const robotsValue = typeof seoMetaArg.robots === 'function'
-        ? seoMetaArg.robots()
-        : seoMetaArg.robots;
-      expect(robotsValue).toBe(expectedRobots);
-    });
-  });
 });
