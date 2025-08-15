@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import SpeakerTable from '~/components/SpeakerTable.vue';
-import { useFetchAllSpeakers } from '~/composables/speaker';
+import { useFetchAllSpeakers, useFilteredSpeakers } from '~/composables/speaker';
+import type { AcceptedYear } from '~~/types';
 
 // Fetch all speakers with year information
 const allSpeakers = await useFetchAllSpeakers();
+
+// State for selected year
+const selectedYear = ref<AcceptedYear | 'all'>('all');
+
+// Filtered speakers based on selected year
+const filteredSpeakers = useFilteredSpeakers(ref(allSpeakers), selectedYear);
 </script>
 
 <template>
@@ -17,7 +24,12 @@ const allSpeakers = await useFetchAllSpeakers();
       </p>
     </div>
     <div class="pt-6">
-      <SpeakerTable :speakers="allSpeakers || []" />
+      <SpeakerTable
+        :speakers="filteredSpeakers || []"
+        :show-year-selector="true"
+        :selected-year="selectedYear"
+        @update:selected-year="selectedYear = $event"
+      />
     </div>
   </div>
 </template>

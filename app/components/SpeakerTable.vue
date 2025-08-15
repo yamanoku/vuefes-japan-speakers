@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue';
 import type { TableColumn } from '@nuxt/ui';
-import type { SpeakerInfo } from '~~/types';
+import type { SpeakerInfo, AcceptedYear } from '~~/types';
+import YearSelector from '~/components/YearSelector.vue';
 
 const UButton = resolveComponent('UButton');
 const UTooltip = resolveComponent('UTooltip');
@@ -10,6 +11,12 @@ type SpeakerWithYear = SpeakerInfo & { year: string };
 defineProps<{
   speakers?: SpeakerWithYear[];
   year?: string;
+  showYearSelector?: boolean;
+  selectedYear?: AcceptedYear | 'all';
+}>();
+
+const emit = defineEmits<{
+  'update:selectedYear': [value: AcceptedYear | 'all'];
 }>();
 
 const expanded = ref<Record<string, boolean>>({});
@@ -49,51 +56,65 @@ const columns = computed<TableColumn<SpeakerWithYear>[]>(() => {
     {
       accessorKey: 'name',
       header: '発表者',
+      meta: {
+        class: {
+          td: 'w-full',
+        },
+      },
     },
   ];
 });
+
+const handleYearChange = (value: AcceptedYear | 'all') => {
+  emit('update:selectedYear', value);
+};
 </script>
 
 <template>
-  <div class="border border-gray-200 dark:border-gray-700 rounded-md not-prose bg-white dark:bg-gray-900 overflow-hidden">
-    <UTable
-      v-model:expanded="expanded"
-      :columns="columns"
-      :data="speakers"
-      :ui="{ tr: 'data-[expanded=true]:bg-elevated/50' }"
-      class="flex-1"
-    >
-      <template #name-cell="{ row }">
-        <div class="flex gap-x-2">
-          <UButton
-            v-for="name in row.original.name"
-            :key="name"
-            color="neutral"
-            variant="outline"
-            :to="`/speakers/${name}`"
-          >
-            {{ name }}
+  <div>
+    <div class="border border-accented rounded-md not-prose bg-white dark:bg-gray-900 overflow-hidden">
+      <div v-if="showYearSelector" class="border-b border-accented px-4 py-3">
+        <YearSelector :model-value="selectedYear" @update:model-value="handleYearChange" />
+      </div>
+      <UTable
+        v-model:expanded="expanded"
+        :columns="columns"
+        :data="speakers"
+        :ui="{ tr: 'data-[expanded=true]:bg-elevated/50' }"
+        class="flex-1"
+      >
+        <template #name-cell="{ row }">
+          <div class="flex gap-x-2">
+            <UButton
+              v-for="name in row.original.name"
+              :key="name"
+              color="neutral"
+              variant="outline"
+              :to="`/speakers/${name}`"
+            >
+              {{ name }}
+            </UButton>
+          </div>
+        </template>
+        <template #year-cell="{ row }">
+          <UButton color="neutral" variant="outline" :to="`/${row.original.year || year}`">
+            {{ row.original.year || year }}
           </UButton>
-        </div>
-      </template>
-      <template #year-cell="{ row }">
-        <UButton color="neutral" variant="outline" :to="`/${row.original.year || year}`">
-          {{ row.original.year || year }}
-        </UButton>
-      </template>
-      <template #expanded="{ row }">
-        <div class="flex items-start gap-2">
-          <a :href="row.original.url" class="text-sm underline hover:no-underline" target="_blank">
-            {{ row.original.title ? row.original.title : 'TBD' }}
-            <UIcon name="i-heroicons-solid-arrow-top-right-on-square" class="ms-1 align-[-0.15rem]" />
-          </a>
-        </div>
-      </template>
-      <template #empty>
-        <div class="p-6 flex justify-center content-center">
-          <p>Page Not Found</p>
-        </div>
-      </template>
-    </UTable>
+        </template>
+        <template #expanded="{ row }">
+          <div class="flex items-start gap-2">
+            <a :href="row.original.url" class="text-sm underline hover:no-underline" target="_blank">
+              {{ row.original.title ? row.original.title : 'TBD' }}
+              <UIcon name="i-heroicons-solid-arrow-top-right-on-square" class="ms-1 align-[-0.15rem]" />
+            </a>
+          </div>
+        </template>
+        <template #empty>
+          <div class="p-6 flex justify-center content-center">
+            <p>Page Not Found</p>
+          </div>
+        </template>
+      </UTable>
+    </div>
   </div>
 </template>
