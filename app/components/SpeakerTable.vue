@@ -83,7 +83,7 @@ const handleSpeakerChange = (value: string | 'all') => {
   <div>
     <div class="border border-accented rounded-md not-prose bg-white dark:bg-gray-900 overflow-hidden">
       <div v-if="showYearSelector || showSpeakerSelector" class="border-b border-accented px-4 py-3">
-        <div class="flex gap-4">
+        <div class="flex flex-wrap gap-4">
           <YearSelector
             v-if="showYearSelector"
             :model-value="selectedYear"
