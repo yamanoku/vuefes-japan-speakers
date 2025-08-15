@@ -3,6 +3,7 @@ import { h, resolveComponent } from 'vue';
 import type { TableColumn } from '@nuxt/ui';
 import type { SpeakerInfo, AcceptedYear } from '~~/types';
 import YearSelector from '~/components/YearSelector.vue';
+import SpeakerSelector from '~/components/SpeakerSelector.vue';
 
 const UButton = resolveComponent('UButton');
 const UTooltip = resolveComponent('UTooltip');
@@ -13,10 +14,14 @@ defineProps<{
   year?: string;
   showYearSelector?: boolean;
   selectedYear?: AcceptedYear | 'all';
+  showSpeakerSelector?: boolean;
+  selectedSpeaker?: string | 'all';
+  availableSpeakers?: string[];
 }>();
 
 const emit = defineEmits<{
   'update:selectedYear': [value: AcceptedYear | 'all'];
+  'update:selectedSpeaker': [value: string | 'all'];
 }>();
 
 const expanded = ref<Record<string, boolean>>({});
@@ -68,13 +73,29 @@ const columns = computed<TableColumn<SpeakerWithYear>[]>(() => {
 const handleYearChange = (value: AcceptedYear | 'all') => {
   emit('update:selectedYear', value);
 };
+
+const handleSpeakerChange = (value: string | 'all') => {
+  emit('update:selectedSpeaker', value);
+};
 </script>
 
 <template>
   <div>
     <div class="border border-accented rounded-md not-prose bg-white dark:bg-gray-900 overflow-hidden">
-      <div v-if="showYearSelector" class="border-b border-accented px-4 py-3">
-        <YearSelector :model-value="selectedYear" @update:model-value="handleYearChange" />
+      <div v-if="showYearSelector || showSpeakerSelector" class="border-b border-accented px-4 py-3">
+        <div class="flex gap-4">
+          <YearSelector
+            v-if="showYearSelector"
+            :model-value="selectedYear"
+            @update:model-value="handleYearChange"
+          />
+          <SpeakerSelector
+            v-if="showSpeakerSelector"
+            :model-value="selectedSpeaker"
+            :speakers="availableSpeakers"
+            @update:model-value="handleSpeakerChange"
+          />
+        </div>
       </div>
       <UTable
         v-model:expanded="expanded"

@@ -1,16 +1,42 @@
 <script setup lang="ts">
 import SpeakerTable from '~/components/SpeakerTable.vue';
-import { useFetchAllSpeakers, useFilteredSpeakers } from '~/composables/speaker';
+import { useFetchAllSpeakers } from '~/composables/speaker';
 import type { AcceptedYear } from '~~/types';
 
 // Fetch all speakers with year information
 const allSpeakers = await useFetchAllSpeakers();
 
-// State for selected year
+// State for selected year and speaker
 const selectedYear = ref<AcceptedYear | 'all'>('all');
+const selectedSpeaker = ref<string | 'all'>('all');
 
-// Filtered speakers based on selected year
-const filteredSpeakers = useFilteredSpeakers(ref(allSpeakers), selectedYear);
+// Get unique speaker names from all speakers
+const availableSpeakers = computed(() => {
+  const speakerNames = new Set<string>();
+  allSpeakers.forEach((speaker) => {
+    speaker.name.forEach(name => speakerNames.add(name));
+  });
+  return Array.from(speakerNames).sort();
+});
+
+// Filtered speakers based on selected year and speaker
+const filteredSpeakers = computed(() => {
+  let filtered = [...allSpeakers];
+
+  // Filter by year
+  if (selectedYear.value !== 'all') {
+    filtered = filtered.filter(speaker => speaker.year === selectedYear.value);
+  }
+
+  // Filter by speaker
+  if (selectedSpeaker.value !== 'all') {
+    filtered = filtered.filter(speaker =>
+      speaker.name.includes(selectedSpeaker.value),
+    );
+  }
+
+  return filtered;
+});
 </script>
 
 <template>
@@ -28,7 +54,11 @@ const filteredSpeakers = useFilteredSpeakers(ref(allSpeakers), selectedYear);
         :speakers="filteredSpeakers || []"
         :show-year-selector="true"
         :selected-year="selectedYear"
+        :show-speaker-selector="true"
+        :selected-speaker="selectedSpeaker"
+        :available-speakers="availableSpeakers"
         @update:selected-year="selectedYear = $event"
+        @update:selected-speaker="selectedSpeaker = $event"
       />
     </div>
   </div>
