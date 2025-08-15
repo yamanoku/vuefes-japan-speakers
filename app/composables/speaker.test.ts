@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { computed, ref } from 'vue';
-import type { SpeakerInfo } from '~~/types';
+import type { SpeakerInfo, AcceptedYear } from '~~/types';
 
 // 実際の実装をインポート
 import { isValidYear, getAvailableYears } from '~/utils/years';
@@ -308,7 +308,7 @@ describe('speaker composables', () => {
   });
 
   describe('useFilteredSpeakers', () => {
-    const mockSpeakers = [
+    const mockSpeakers: Array<SpeakerInfo & { year: AcceptedYear }> = [
       { name: ['Speaker 2023'], title: 'Vue 2 to 3 Migration', url: 'https://example.com/2023', year: '2023' },
       { name: ['Speaker 2024-1'], title: 'Composition API', url: 'https://example.com/2024-1', year: '2024' },
       { name: ['Speaker 2024-2'], title: 'Vue 3 Performance', url: 'https://example.com/2024-2', year: '2024' },
@@ -317,7 +317,7 @@ describe('speaker composables', () => {
 
     it('selectedYearが"all"の場合、全てのスピーカーを返す', () => {
       const allSpeakers = ref(mockSpeakers);
-      const selectedYear = ref<'all' | typeof mockSpeakers[0]['year']>('all');
+      const selectedYear = ref<AcceptedYear | 'all'>('all');
 
       const filteredSpeakers = useFilteredSpeakers(allSpeakers, selectedYear);
 
@@ -327,7 +327,7 @@ describe('speaker composables', () => {
 
     it('特定の年が選択された場合、その年のスピーカーのみを返す', () => {
       const allSpeakers = ref(mockSpeakers);
-      const selectedYear = ref<'all' | typeof mockSpeakers[0]['year']>('2024');
+      const selectedYear = ref<AcceptedYear | 'all'>('2024');
 
       const filteredSpeakers = useFilteredSpeakers(allSpeakers, selectedYear);
 
@@ -338,7 +338,7 @@ describe('speaker composables', () => {
 
     it('存在しない年が選択された場合、空の配列を返す', () => {
       const allSpeakers = ref(mockSpeakers);
-      const selectedYear = ref<'all' | typeof mockSpeakers[0]['year']>('2020' as const);
+      const selectedYear = ref<AcceptedYear | 'all'>('2020' as AcceptedYear);
 
       const filteredSpeakers = useFilteredSpeakers(allSpeakers, selectedYear);
 
@@ -348,7 +348,7 @@ describe('speaker composables', () => {
 
     it('allSpeakersが空の場合、空の配列を返す', () => {
       const allSpeakers = ref([]);
-      const selectedYear = ref<'all' | typeof mockSpeakers[0]['year']>('2024');
+      const selectedYear = ref<AcceptedYear | 'all'>('2024');
 
       const filteredSpeakers = useFilteredSpeakers(allSpeakers, selectedYear);
 
@@ -358,7 +358,7 @@ describe('speaker composables', () => {
 
     it('selectedYearがリアクティブに変更された場合、結果も更新される', () => {
       const allSpeakers = ref(mockSpeakers);
-      const selectedYear = ref<'all' | typeof mockSpeakers[0]['year']>('all');
+      const selectedYear = ref<AcceptedYear | 'all'>('all');
 
       const filteredSpeakers = useFilteredSpeakers(allSpeakers, selectedYear);
 
@@ -373,7 +373,7 @@ describe('speaker composables', () => {
       // 2023年を選択
       selectedYear.value = '2023';
       expect(filteredSpeakers.value).toHaveLength(1);
-      expect(filteredSpeakers.value[0].year).toBe('2023');
+      expect(filteredSpeakers.value[0]?.year).toBe('2023');
 
       // 再び"all"を選択
       selectedYear.value = 'all';
@@ -381,17 +381,17 @@ describe('speaker composables', () => {
     });
 
     it('allSpeakersがリアクティブに変更された場合、結果も更新される', () => {
-      const allSpeakers = ref([mockSpeakers[0], mockSpeakers[1]]);
-      const selectedYear = ref<'all' | typeof mockSpeakers[0]['year']>('2024');
+      const allSpeakers = ref([mockSpeakers[0]!, mockSpeakers[1]!]);
+      const selectedYear = ref<AcceptedYear | 'all'>('2024');
 
       const filteredSpeakers = useFilteredSpeakers(allSpeakers, selectedYear);
 
       // 初期状態：2024年のスピーカーは1人
       expect(filteredSpeakers.value).toHaveLength(1);
-      expect(filteredSpeakers.value[0].name[0]).toBe('Speaker 2024-1');
+      expect(filteredSpeakers.value[0]?.name[0]).toBe('Speaker 2024-1');
 
       // 2024年のスピーカーを追加
-      allSpeakers.value = [...allSpeakers.value, mockSpeakers[2]];
+      allSpeakers.value = [...allSpeakers.value, mockSpeakers[2]!];
       expect(filteredSpeakers.value).toHaveLength(2);
       expect(filteredSpeakers.value.map(s => s.name[0])).toEqual(['Speaker 2024-1', 'Speaker 2024-2']);
     });
