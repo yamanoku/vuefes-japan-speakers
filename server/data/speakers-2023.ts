@@ -22,7 +22,7 @@ export const speakers2023: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2023/sponsor-sessions/link-and-motivation-group',
   },
   {
-    name: ['藤村 大介', 'wattanx (ワッタン)'],
+    name: ['藤村 大介', 'wattanx'],
     title: '「Youはなぜコントリビュータに？」論より動くもの.fm 出張版',
     url: 'https://vuefes.jp/2023/sponsor-sessions/stores',
   },
@@ -102,7 +102,7 @@ export const speakers2023: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2023/sessions/antfu',
   },
   {
-    name: ['wattanx (ワッタン)'],
+    name: ['wattanx'],
     title: 'Demystifying Nuxt Bridge 〜 あなたがまだ見ぬ可能性とその活用法 〜',
     url: 'https://vuefes.jp/2023/sessions/wattanx',
   },

@@ -147,7 +147,7 @@ export const speakers2024: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2024/sessions/hal',
   },
   {
-    name: ['wattanx (ワッタン)'],
+    name: ['wattanx'],
     title: 'Deep dive into Nuxt Server Components',
     url: 'https://vuefes.jp/2024/sessions/wattanx',
   },
