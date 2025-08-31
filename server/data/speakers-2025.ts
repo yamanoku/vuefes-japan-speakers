@@ -60,6 +60,11 @@ export const speakers2025: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2025/speaker/hiranuma',
   },
   {
+    name: ['wattanx (ワッタン)'],
+    title: 'Demystifying Nuxt Test Utils',
+    url: 'https://vuefes.jp/2025/speaker/wattanx',
+  },
+  {
     name: ['sayn0'],
     title: 'AI駆動で進める依存ライブラリ更新 ─ Vue プロジェクトの品質向上と開発スピード改善の実践録',
     url: 'https://vuefes.jp/2025/speaker/sayn0',
