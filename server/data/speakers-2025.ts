@@ -60,7 +60,7 @@ export const speakers2025: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2025/speaker/hiranuma',
   },
   {
-    name: ['wattanx (ワッタン)'],
+    name: ['wattanx'],
     title: 'Demystifying Nuxt Test Utils',
     url: 'https://vuefes.jp/2025/speaker/wattanx',
   },
