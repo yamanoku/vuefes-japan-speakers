@@ -3,10 +3,12 @@ import type { SpeakerInfo } from '~~/types';
 export const speakers2025: SpeakerInfo[] = [
   {
     name: ['Evan You'],
+    title: 'キーノート',
     url: 'https://vuefes.jp/2025/speaker/yyx990803',
   },
   {
     name: ['Daniel Roe'],
+    title: 'フレームワークを超えて：次の10年のウェブを築く',
     url: 'https://vuefes.jp/2025/speaker/danielroe',
   },
   {
@@ -15,18 +17,22 @@ export const speakers2025: SpeakerInfo[] = [
   },
   {
     name: ['Guillaume Chau'],
+    title: 'rstoreとローカルファーストなストア構築の課題',
     url: 'https://vuefes.jp/2025/speaker/akryum',
   },
   {
     name: ['橋本 麦'],
+    title: 'Vue.jsでつくる実験映像',
     url: 'https://vuefes.jp/2025/speaker/baku89',
   },
   {
     name: ['小川 浩志'],
+    title: 'Inside Vitest: テストフレームワークアーキテクチャの詳細解説',
     url: 'https://vuefes.jp/2025/speaker/hi-ogawa',
   },
   {
     name: ['杉浦 有右嗣'],
+    title: 'OXCというOSSへの貢献と、その振り返り',
     url: 'https://vuefes.jp/2025/speaker/leaysgur',
   },
   {
