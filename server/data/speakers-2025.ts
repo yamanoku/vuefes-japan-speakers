@@ -85,7 +85,7 @@ export const speakers2025: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2025/speaker/ssssota',
   },
   {
-    name: ['波場 直輝'],
+    name: ['羽馬 直樹'],
     title: 'Nuxt4のSingleton Data Fetching Layerで何が変わるのか',
     url: 'https://vuefes.jp/2025/speaker/NaokiHaba',
   },
