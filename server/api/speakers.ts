@@ -1,8 +1,7 @@
-import type { SpeakerInfo } from '~~/types';
-import { useFetchAllSpeakers } from '~/composables/speaker';
+import type { SpeakerWithYear } from '~~/types';
+import { getAllSpeakersWithYear } from '~~/server/data';
 
-export default defineEventHandler(async (): Promise<SpeakerInfo[]> => {
-  // Fetch all speakers with year information
-  const allSpeakers = await useFetchAllSpeakers();
-  return allSpeakers;
+export default defineEventHandler((): SpeakerWithYear[] => {
+  // Return all speakers across all years (no HTTP calls)
+  return getAllSpeakersWithYear();
 });

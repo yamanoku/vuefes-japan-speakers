@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { AcceptedYear } from '~~/types';
+import { YEARS } from '~~/types';
 
 type YearSelectorProps = {
   modelValue?: AcceptedYear | 'all';
@@ -15,14 +16,9 @@ const props = withDefaults(defineProps<YearSelectorProps>(), {
 
 const emits = defineEmits<YearSelectorEmits>();
 
-const items = ref([
-  { label: '全ての年度', value: 'all' },
-  { label: '2018年', value: '2018' },
-  { label: '2019年', value: '2019' },
-  { label: '2022年', value: '2022' },
-  { label: '2023年', value: '2023' },
-  { label: '2024年', value: '2024' },
-  { label: '2025年', value: '2025' },
+const items = computed(() => [
+  { label: '全ての年度', value: 'all' as const },
+  ...YEARS.map(y => ({ label: `${y}年`, value: y })),
 ]);
 
 const selectedYear = computed({

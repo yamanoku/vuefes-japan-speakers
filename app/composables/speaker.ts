@@ -1,7 +1,7 @@
-import type { SpeakerInfo, AcceptedYear } from '~~/types';
-import { isValidYear, getAvailableYears } from '~/utils/years';
+import type { SpeakerInfo, AcceptedYear, SpeakerWithYear } from '~~/types';
+import { isValidYear } from '~/utils/years';
 
-type SpeakerWithYear = SpeakerInfo & { year: AcceptedYear };
+const normalize = (s: string) => s.toLowerCase().trim();
 
 const fetchYearSpeakers = async (year: string) => {
   const { data } = await useFetch<SpeakerInfo[]>(`/api/speakers/${year}`);
@@ -9,16 +9,9 @@ const fetchYearSpeakers = async (year: string) => {
 };
 
 const fetchAllSpeakersWithYears = async () => {
-  // Fetch speakers from all years in parallel
-  const years = getAvailableYears();
-  const promises = years.map(year =>
-    $fetch<SpeakerInfo[]>(`/api/speakers/${year}`).then(speakers =>
-      speakers.map(speaker => ({ ...speaker, year })),
-    ),
-  );
-
-  const speakersByYear = await Promise.all(promises);
-  return speakersByYear.flat() as SpeakerWithYear[];
+  // Single call to aggregated API
+  const all = await $fetch<SpeakerWithYear[]>(`/api/speakers`);
+  return all;
 };
 
 const fetchNameSpeakers = async (name?: string) => {
@@ -26,11 +19,9 @@ const fetchNameSpeakers = async (name?: string) => {
 
   const filterNameSpeaker = computed(() => {
     if (!name) return [];
-    const searchTerm = name.toLowerCase();
+    const searchTerm = normalize(name);
     const results = allSpeakers.filter(speaker =>
-      speaker.name.some(speakerName =>
-        speakerName.toLowerCase() === searchTerm,
-      ),
+      speaker.name.some(speakerName => normalize(speakerName) === searchTerm),
     );
     return results;
   });

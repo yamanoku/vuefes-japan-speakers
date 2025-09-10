@@ -1,9 +1,9 @@
+import { YEARS } from '~~/types';
 import type { AcceptedYear } from '~~/types';
 
-export const getAvailableYears = (): AcceptedYear[] => {
-  return ['2018', '2019', '2022', '2023', '2024', '2025'];
-};
+export const getAvailableYears = (): readonly AcceptedYear[] => YEARS;
 
 export const isValidYear = (year: string): year is AcceptedYear => {
-  return getAvailableYears().includes(year as AcceptedYear);
+  // Cast YEARS to readonly string[] for includes check
+  return (YEARS as readonly string[]).includes(year);
 };

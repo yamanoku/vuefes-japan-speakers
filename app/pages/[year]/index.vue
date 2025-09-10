@@ -6,19 +6,12 @@ import { isValidYear } from '~/utils/years';
 
 type SpeakerWithYear = SpeakerInfo & { year: AcceptedYear };
 
+definePageMeta({
+  validate: route => isValidYear(route.params.year as string),
+});
+
 const route = useRoute();
 const { filterYearSpeaker } = await useFetchSpeaker(route.params.year as string);
-
-const isAcceptedYear = (): boolean => {
-  return isValidYear(route.params.year as string);
-};
-
-if (!isAcceptedYear()) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Page Not Found',
-  });
-}
 
 const speakersWithYear = computed<SpeakerWithYear[] | undefined>(() => {
   if (!filterYearSpeaker?.value) return undefined;
