@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue';
 import type { TableColumn } from '@nuxt/ui';
-import type { SpeakerInfo, AcceptedYear } from '~~/types';
+import type { SpeakerWithYear, AcceptedYear } from '~~/types';
 import YearSelector from '~/components/YearSelector.vue';
 import SpeakerSelector from '~/components/SpeakerSelector.vue';
 
 const UButton = resolveComponent('UButton');
 const UTooltip = resolveComponent('UTooltip');
-type SpeakerWithYear = SpeakerInfo & { year: string };
-
 defineProps<{
   speakers?: SpeakerWithYear[];
   year?: string;
@@ -111,7 +109,7 @@ const handleSpeakerChange = (value: string | 'all') => {
               :key="name"
               color="neutral"
               variant="outline"
-              :to="`/speakers/${name}`"
+              :to="`/speakers/${encodeURIComponent(name)}`"
             >
               {{ name }}
             </UButton>

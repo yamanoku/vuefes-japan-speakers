@@ -1,6 +1,7 @@
 import type { SpeakerInfo } from '~~/types';
+import { YEARS } from '~~/types';
 import { getSpeakersByYear } from '~~/server/data';
-import { isValidYear, getAvailableYears } from '~/utils/years';
+import { isValidYear } from '~/utils/years';
 import { defineEventHandler, getRouterParam, createError } from 'h3';
 
 export default defineEventHandler((event): SpeakerInfo[] => {
@@ -10,7 +11,7 @@ export default defineEventHandler((event): SpeakerInfo[] => {
   if (!year || !isValidYear(year)) {
     throw createError({
       statusCode: 400,
-      statusMessage: `Invalid year parameter. Accepted years are: ${getAvailableYears().join(', ')}`,
+      statusMessage: `Invalid year parameter. Accepted years are: ${YEARS.join(', ')}`,
     });
   }
 
