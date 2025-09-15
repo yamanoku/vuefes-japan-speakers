@@ -30,7 +30,7 @@
     "eslint": "^9.35.0",
     "happy-dom": "18.0.1",
     "vitest": "3.2.4",
-    "vue-tsc": "^3.0.6",
+    "vue-tsc": "^3.0.7",
     "wrangler": "^4.35.0"
   },
   "packageManager": "pnpm@10.15.1"
