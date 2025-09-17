@@ -31,7 +31,7 @@
     "happy-dom": "18.0.1",
     "vitest": "3.2.4",
     "vue-tsc": "^3.0.7",
-    "wrangler": "^4.37.0"
+    "wrangler": "^4.37.1"
   },
   "packageManager": "pnpm@10.16.1"
 }
