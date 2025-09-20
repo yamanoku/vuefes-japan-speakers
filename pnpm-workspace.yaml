@@ -1,0 +1,27 @@
+catalogs:
+  vue:
+    vue: 3.5.21
+    vue-router: 4.5.1
+  nuxt:
+    "@nuxt/ui": 3.3.4
+    nuxt: 4.1.2
+  css:
+    tailwindcss: 4.1.13
+  icon:
+    "@iconify-json/lucide": 1.2.68
+    "@iconify-json/heroicons-solid": 1.2.1
+  typescript:
+    vue-tsc: 3.0.7
+  test:
+    "@nuxt/eslint": 1.9.0
+    "@nuxt/eslint-config": 1.9.0
+    "@nuxt/test-utils": 3.19.2
+    "@vue/test-utils": 2.4.6
+    eslint: 9.35.0
+    happy-dom: 18.0.1
+    vitest: 3.2.4
+  cloudflare:
+    "@nuxthub/core": 0.9.0
+    wrangler: 4.38.0
+
+
