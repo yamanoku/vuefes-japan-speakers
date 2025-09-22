@@ -76,7 +76,7 @@ export const speakers2025: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2025/speaker/sayn0',
   },
   {
-    name: ['与語 優一'],
+    name: ['Yuichi Yogo'],
     title: 'JavaScript を活用した実用的オーディオアプリケーションの構築',
     url: 'https://vuefes.jp/2025/speaker/yuichkun',
   },
@@ -91,7 +91,7 @@ export const speakers2025: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2025/speaker/ssssota',
   },
   {
-    name: ['羽馬 直樹'],
+    name: ['Naoki Haba'],
     title: 'Nuxt4のSingleton Data Fetching Layerで何が変わるのか',
     url: 'https://vuefes.jp/2025/speaker/NaokiHaba',
   },
@@ -101,7 +101,7 @@ export const speakers2025: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2025/speaker/2nofa11',
   },
   {
-    name: ['りんちょく'],
+    name: ['Rinchoku'],
     title: '知覚とデザイン short version',
     url: 'https://vuefes.jp/2025/speaker/rinchoku',
   },
