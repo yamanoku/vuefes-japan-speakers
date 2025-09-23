@@ -11,6 +11,12 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   compatibilityDate: '2024-07-30',
 
+  nitro: {
+    experimental: {
+      openAPI: true,
+    },
+  },
+
   // https://hub.nuxt.com/docs/getting-started/installation#options
   hub: {},
 
