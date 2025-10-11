@@ -13,6 +13,7 @@ export const speakers2025: SpeakerInfo[] = [
   },
   {
     name: ['Johnson Chu'],
+    title: '5 年間における Vue 言語ツールの進化',
     url: 'https://vuefes.jp/2025/speaker/johnsoncodehk',
   },
   {
@@ -124,5 +125,50 @@ export const speakers2025: SpeakerInfo[] = [
     name: ['Kaede Kato'],
     title: 'chocoZAPサービス予約システムをNuxtで内製化した話',
     url: 'https://vuefes.jp/2025/speaker/kaede-kato',
+  },
+  {
+    name: ['Nobuaki Kambe'],
+    title: 'webpack 依存からの脱却！快適フロントエンド開発を Viteで実現する',
+    url: 'https://vuefes.jp/2025/sponsors/bengo4#nobuaki-kambe',
+  },
+  {
+    name: ['中上 裕基'],
+    title: 'VueはAIに弱い？そんなの都市伝説です',
+    url: 'https://vuefes.jp/2025/sponsors/lmi#nakagam3',
+  },
+  {
+    name: ['Aose Yuu'],
+    title: 'alien-signalsと自作OSSで実現するフレームワーク非依存なロジック共通化の探求',
+    url: 'https://vuefes.jp/2025/sponsors/yappli#aose-yuu',
+  },
+  {
+    name: ['矢光 隆太郎'],
+    title: 'Storybook 駆動開発で実現する持続可能な Vue コンポーネント設計',
+    url: 'https://vuefes.jp/2025/sponsors/uniquevision#ryutaro-yako',
+  },
+  {
+    name: ['佐野 友亮'],
+    title: 'LINE公式アカウントの技術スタックと開発の裏側',
+    url: 'https://vuefes.jp/2025/sponsors/lycorp#yusuke-sano',
+  },
+  {
+    name: ['片山拓海'],
+    title: 'プレイドのユニークな技術とインターンのリアル',
+    url: 'https://vuefes.jp/2025/sponsors/plaid#takumi-katayama',
+  },
+  {
+    name: ['齊藤広野'],
+    title: 'Vue.jsを8年間使ってきた会社が今考えていること',
+    url: 'https://vuefes.jp/2025/sponsors/studio#koya-saito',
+  },
+  {
+    name: ['Jabelic'],
+    title: 'Vue.js コミュニティとサイバーエージェント',
+    url: 'https://vuefes.jp/2025/sponsors/cyberagent#jabelic',
+  },
+  {
+    name: ['did0es'],
+    title: 'ViteとTypeScriptのProject Referencesで大規模モノレポのUIカタログのリリースサイクルを高速化する',
+    url: 'https://vuefes.jp/2025/sponsors/cyberagent#did0es',
   },
 ];
