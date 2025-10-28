@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { getRouterParam, createError } from 'h3';
+import { getRouterParam, createError, type H3Event, type EventHandlerRequest } from 'h3';
 import type { SpeakerInfo } from '~~/types';
 import handler from './[year]';
 
@@ -18,7 +18,7 @@ vi.mock('~~/server/data', () => ({
 }));
 
 describe('/api/speakers/[year]', () => {
-  const mockEvent = {} as unknown;
+  const mockEvent = {} as unknown as H3Event<EventHandlerRequest>;
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -95,11 +95,10 @@ describe('/api/speakers/[year]', () => {
 
   describe('無効な年のリクエスト', () => {
     it.each([
-      ['2020', '無効な年'],
-      ['abc', '数値でない年'],
-      ['', '空の年パラメータ'],
-      [null, 'nullの年パラメータ'],
-      [undefined, 'undefinedの年パラメータ'],
+      '2020', // 無効な年
+      'abc', // 数値でない年
+      '', // 空のパラメータ
+      undefined,
     ])('%sの場合エラーをスローする', (year) => {
       vi.mocked(getRouterParam).mockReturnValue(year);
 
