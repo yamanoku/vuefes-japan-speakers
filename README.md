@@ -4,6 +4,9 @@
 
 ![Vue Fes Japan Speakersのサイトスクリーンショット](./public/og-image.png)
 
+> [!WARNING]
+> このサイトはVue Fes Japan非公式の[@yamanoku](https://github.com/yamanoku)の個人プロジェクトのため、Vue Fes Japan公式サイトに関する内容については公式へ直接問い合わせください。
+
 ## 参考
 
 このサイトを作るにあたり、以下を参考にしました。
