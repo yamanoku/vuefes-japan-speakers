@@ -15,11 +15,13 @@
   },
   "dependencies": {
     "@iconify-json/heroicons-solid": "catalog:icon",
+    "@modelcontextprotocol/sdk": "1.22.0",
     "@nuxt/ui": "catalog:nuxt",
     "nuxt": "catalog:nuxt",
     "tailwindcss": "catalog:css",
     "vue": "catalog:vue",
-    "vue-router": "catalog:vue"
+    "vue-router": "catalog:vue",
+    "zod": "4.1.12"
   },
   "devDependencies": {
     "@iconify-json/lucide": "catalog:icon",
