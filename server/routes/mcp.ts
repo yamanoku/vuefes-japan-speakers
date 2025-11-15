@@ -8,11 +8,6 @@ import {
 } from '@modelcontextprotocol/sdk/types.js';
 
 export default defineEventHandler(async (event) => {
-  // If GET request, redirect to documentation
-  if (event.method === 'GET') {
-    return sendRedirect(event, 'https://github.com/yamanoku/vuefes-japan-speakers', 301);
-  }
-
   // Create MCP server instance
   const server = new Server(
     {
