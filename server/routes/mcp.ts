@@ -27,13 +27,13 @@ export default defineEventHandler(async (event) => {
     return {
       resources: [
         {
-          uri: 'speakers://all',
+          uri: 'resource://vuefes-japan-speakers-all',
           name: 'All Speakers',
           description: 'Complete list of all Vue Fes Japan speakers across all years',
           mimeType: 'application/json',
         },
         {
-          uri: 'speakers://statistics',
+          uri: 'resource://vuefes-japan-speakers-statistics',
           name: 'Speaker Statistics',
           description: 'Statistical information about Vue Fes Japan speakers',
           mimeType: 'application/json',
@@ -46,7 +46,7 @@ export default defineEventHandler(async (event) => {
   server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
     const uri = request.params.uri;
 
-    if (uri === 'speakers://all') {
+    if (uri === 'resource://vuefes-japan-speakers-all') {
       const speakers = await $fetch('/api/mcp/list-all-speakers');
       return {
         contents: [
@@ -59,7 +59,7 @@ export default defineEventHandler(async (event) => {
       };
     }
 
-    if (uri === 'speakers://statistics') {
+    if (uri === 'resource://vuefes-japan-speakers-statistics') {
       const statistics = await $fetch('/api/mcp/get-statistics');
       return {
         contents: [
