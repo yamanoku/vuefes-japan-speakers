@@ -8,7 +8,7 @@ catalogs:
     '@iconify-json/heroicons-solid': 1.2.1
     '@iconify-json/lucide': 1.2.74
   nuxt:
-    '@nuxt/ui': 4.1.0
+    '@nuxt/ui': 4.2.1
     nuxt: 4.2.1
   test:
     '@nuxt/eslint': 1.10.0
