@@ -45,6 +45,59 @@ pnpm build
 npx nuxthub deploy
 ```
 
+## MCP Server
+
+このプロジェクトは、AIアシスタント向けの**MCP (Model Context Protocol) サーバー**を提供しています。
+
+### 利用可能なリソース
+
+- `speakers://all` - 全年度のスピーカー一覧
+- `speakers://statistics` - スピーカーの統計情報
+
+### 利用可能なツール
+
+- `list_speakers` - 全スピーカーの一覧取得
+- `get_speakers_by_year` - 年度別スピーカー取得（2018, 2019, 2022, 2023, 2024, 2025）
+- `search_speakers` - スピーカー名での検索
+- `get_statistics` - 統計情報の取得（総登壇者数、リピート登壇者など）
+- `get_years` - 開催年度一覧
+
+### セットアップ方法
+
+#### Claude Code
+
+```bash
+claude mcp add --transport http vuefes-speakers https://your-domain.com/mcp
+```
+
+#### Cursor
+
+`.cursor/mcp.json` に以下を追加：
+
+```json
+{
+  "mcpServers": {
+    "vuefes-speakers": {
+      "type": "http",
+      "url": "https://your-domain.com/mcp"
+    }
+  }
+}
+```
+
+#### VS Code
+
+`.vscode/mcp.json` に同様の設定を追加してください。
+
+### 使用例
+
+AIアシスタントに以下のような質問ができます：
+
+- "Vue Fes Japan 2024のスピーカーを教えて"
+- "複数回登壇しているスピーカーは誰？"
+- "Evan Youが登壇した年度を教えて"
+- "Vue Fes Japanの統計情報を見せて"
+
 ## License
 
 [CC BY-SA 4.0](./LICENSE)
