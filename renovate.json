@@ -4,7 +4,9 @@
     "helpers:pinGitHubActionDigests"
   ],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "rangeStrategy": "update-lockfile",
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "labels": ["dependencies"],
   "dependencyDashboard": false,
   "automerge": true,
