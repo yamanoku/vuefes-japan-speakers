@@ -1,6 +1,6 @@
 catalogs:
   cloudflare:
-    '@nuxthub/core': 0.9.1
+    '@nuxthub/core': 0.10.0
     wrangler: 4.52.1
   css:
     tailwindcss: 4.1.17
