@@ -5,8 +5,14 @@
   ],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "rangeStrategy": "bump",
-  "lockFileMaintenance": {
-    "enabled": true
+  "postUpgradeTasks": {
+    "commands": ["pnpm install --lockfile-only"],
+    "executionMode": "branch",
+    "fileFilters": [
+      "pnpm-workspace.yaml",
+      "package.json",
+      "pnpm-lock.yaml"
+    ]
   },
   "labels": ["dependencies"],
   "dependencyDashboard": false,
