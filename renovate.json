@@ -5,6 +5,7 @@
   ],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "rangeStrategy": "bump",
+  "allowedCommands": ["pnpm install --lockfile-only"],
   "postUpgradeTasks": {
     "commands": ["pnpm install --lockfile-only"],
     "executionMode": "branch",
