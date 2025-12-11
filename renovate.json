@@ -1,7 +1,8 @@
 {
   "extends": [
     "config:base",
-    "helpers:pinGitHubActionDigests"
+    "helpers:pinGitHubActionDigests",
+    "group:monorepos"
   ],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "rangeStrategy": "bump",
