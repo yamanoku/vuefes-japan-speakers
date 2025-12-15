@@ -3,7 +3,7 @@ catalogs:
     '@nuxthub/core': 0.9.1
     wrangler: 4.52.1
   css:
-    tailwindcss: 4.1.17
+    tailwindcss: 4.1.18
   icon:
     '@iconify-json/heroicons-solid': 1.2.1
     '@iconify-json/lucide': 1.2.77
