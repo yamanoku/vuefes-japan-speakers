@@ -1,4 +1,4 @@
-name: Renovate lockfile
+name: Renovate PR update lockfile
 
 on:
   pull_request:
