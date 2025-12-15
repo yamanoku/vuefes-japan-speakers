@@ -1,0 +1,59 @@
+name: Renovate lockfile
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+    paths:
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: renovate-lockfile-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  update-lockfile:
+    # セキュリティ: 外部ForkからのPRでは push できない/すべきでないので弾く
+    # Renovate のPRだけ対象にする（user.login とブランチ名の両方を条件に）
+    if: >
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      (github.event.pull_request.user.login == 'renovate[bot]' || github.actor == 'renovate[bot]') &&
+      startsWith(github.event.pull_request.head.ref, 'renovate/')
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [24.x]
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: Install pnpm
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: pnpm install (update lockfile)
+        run: pnpm install --no-frozen-lockfile
+      - name: Commit updated lockfile
+        uses: EndBug/add-and-commit@a94899bca583c204427a224a7af87c02f9b325d5 # v9.1.4
+        with:
+          add: 'pnpm-lock.yaml'
+          message: 'chore: update pnpm-lock.yaml'
+          default_author: github_actions
+
