@@ -7,8 +7,8 @@ settings:
 catalogs:
   cloudflare:
     '@nuxthub/core':
-      specifier: 0.10.2
-      version: 0.10.2
+      specifier: 0.10.3
+      version: 0.10.3
     wrangler:
       specifier: 4.55.0
       version: 4.55.0
@@ -101,7 +101,7 @@ importers:
         version: 3.20.1(@vue/test-utils@2.4.6)(happy-dom@20.0.11)(magicast@0.5.1)(typescript@5.9.3)(vitest@4.0.16(@types/node@20.19.25)(happy-dom@20.0.11)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(yaml@2.8.2))
       '@nuxthub/core':
         specifier: catalog:cloudflare
-        version: 0.10.2(db0@0.3.4)(ioredis@5.8.2)(magicast@0.5.1)(typescript@5.9.3)(vue-tsc@3.1.5(typescript@5.9.3))
+        version: 0.10.3(db0@0.3.4)(ioredis@5.8.2)(magicast@0.5.1)(typescript@5.9.3)(vue-tsc@3.1.5(typescript@5.9.3))
       '@vue/test-utils':
         specifier: catalog:test
         version: 2.4.6
@@ -1279,8 +1279,8 @@ packages:
       rolldown:
         optional: true
 
-  '@nuxthub/core@0.10.2':
-    resolution: {integrity: sha512-gtm206biD9bRVoFpeDQBlTE88FLH5Xr3LkTsxBTkyywCzSQpE4DCpRnquTy6oPHcykg0oT59Xu643QWMp+XQ2g==}
+  '@nuxthub/core@0.10.3':
+    resolution: {integrity: sha512-G0oA1KRItX9u+pT6h0qXKAnP1YpcBJODYg93Tilti9Ym7dZsdY67OAgDBtD9DaBg6+ryLlxGv/sOJiA/0me3MQ==}
     hasBin: true
 
   '@nuxtjs/color-mode@3.5.2':
@@ -3808,6 +3808,9 @@ packages:
 
   hookable@5.5.3:
     resolution: {integrity: sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==}
+
+  hookable@6.0.0-rc.1:
+    resolution: {integrity: sha512-HTdlk761/7uL1OuzvMicnj5F5pGq+iITNCYuKVXakQGn95zyYl5b8u/t407RrU34Jv0vYMiqtkFXEJKHYSFViQ==}
 
   html-entities@2.6.0:
     resolution: {integrity: sha512-kig+rMn/QOVRvr7c86gQ8lWXq+Hkv6CbAH1hLu+RG338StTpE8Z0b44SDVaqVu7HGKf27frdmUYEs9hTUX/cLQ==}
@@ -7374,7 +7377,7 @@ snapshots:
       - vue-tsc
       - yaml
 
-  '@nuxthub/core@0.10.2(db0@0.3.4)(ioredis@5.8.2)(magicast@0.5.1)(typescript@5.9.3)(vue-tsc@3.1.5(typescript@5.9.3))':
+  '@nuxthub/core@0.10.3(db0@0.3.4)(ioredis@5.8.2)(magicast@0.5.1)(typescript@5.9.3)(vue-tsc@3.1.5(typescript@5.9.3))':
     dependencies:
       '@cloudflare/workers-types': 4.20251217.0
       '@nuxt/kit': 4.2.2(magicast@0.5.1)
@@ -7387,6 +7390,7 @@ snapshots:
       execa: 9.6.1
       get-port-please: 3.2.0
       h3: 1.15.4
+      hookable: 6.0.0-rc.1
       mime: 4.1.0
       nypm: 0.6.2
       ofetch: 1.5.1
@@ -9884,6 +9888,8 @@ snapshots:
   hey-listen@1.0.8: {}
 
   hookable@5.5.3: {}
+
+  hookable@6.0.0-rc.1: {}
 
   html-entities@2.6.0: {}
 
