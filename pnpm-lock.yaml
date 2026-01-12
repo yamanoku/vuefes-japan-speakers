@@ -24,6 +24,9 @@ catalogs:
       specifier: 1.2.84
       version: 1.2.84
   nuxt:
+    '@nuxt/a11y':
+      specifier: 1.0.0-alpha.1
+      version: 1.0.0-alpha.1
     '@nuxt/ui':
       specifier: 4.3.0
       version: 4.3.0
@@ -91,7 +94,7 @@ importers:
         specifier: catalog:icon
         version: 1.2.84
       '@nuxt/a11y':
-        specifier: 1.0.0-alpha.1
+        specifier: catalog:nuxt
         version: 1.0.0-alpha.1(magicast@0.5.1)(vite@7.2.7(@types/node@20.19.25)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(yaml@2.8.2))
       '@nuxt/eslint':
         specifier: catalog:test
