@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@iconify-json/lucide": "catalog:icon",
+    "@nuxt/a11y": "1.0.0-alpha.1",
     "@nuxt/eslint": "catalog:test",
     "@nuxt/eslint-config": "catalog:test",
     "@nuxt/test-utils": "catalog:test",
