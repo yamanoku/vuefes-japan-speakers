@@ -35,5 +35,5 @@
     "vue-tsc": "catalog:typescript",
     "wrangler": "catalog:cloudflare"
   },
-  "packageManager": "pnpm@10.28.0"
+  "packageManager": "pnpm@10.28.1"
 }
