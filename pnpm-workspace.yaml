@@ -20,7 +20,7 @@ catalogs:
     happy-dom: 20.3.7
     vitest: 4.0.18
   typescript:
-    vue-tsc: 3.2.3
+    vue-tsc: 3.2.4
   vue:
     vue: 3.5.27
     vue-router: 4.6.4
