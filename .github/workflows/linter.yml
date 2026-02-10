@@ -8,7 +8,7 @@ on:
       - 'app/**'
       - 'server/api/**'
       - 'types/**'
-      - 'package.json'
+      - 'pnpm-workspace.yaml'
       - 'pnpm-lock.yaml'
       - 'eslint.config.mjs'
       - 'nuxt.config.ts'
