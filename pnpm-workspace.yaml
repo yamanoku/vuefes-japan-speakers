@@ -16,7 +16,7 @@ catalogs:
     '@nuxt/eslint-config': 1.13.0
     '@nuxt/test-utils': 3.23.0
     '@vue/test-utils': 2.4.6
-    eslint: 9.39.2
+    eslint: 10.0.0
     happy-dom: 20.6.0
     vitest: 4.0.18
   typescript:
