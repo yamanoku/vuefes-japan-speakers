@@ -9,7 +9,7 @@ catalogs:
     '@iconify-json/lucide': 1.2.93
   nuxt:
     '@nuxt/a11y': 1.0.0-alpha.1
-    '@nuxt/ui': 4.4.0
+    '@nuxt/ui': 4.5.0
     nuxt: 4.3.1
   test:
     '@nuxt/eslint': 1.15.2
