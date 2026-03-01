@@ -6,7 +6,7 @@ catalogs:
     tailwindcss: 4.2.1
   icon:
     '@iconify-json/heroicons-solid': 1.2.1
-    '@iconify-json/lucide': 1.2.93
+    '@iconify-json/lucide': 1.2.94
   nuxt:
     '@nuxt/a11y': 1.0.0-alpha.1
     '@nuxt/ui': 4.5.0
