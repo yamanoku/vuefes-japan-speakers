@@ -10,7 +10,7 @@
     "postinstall": "nuxt prepare",
     "vp:check": "vp check",
     "vp:lint": "vp lint .",
-    "vp:fmt": "vp fmt . --write",
+    "vp:fmt": "vp fmt .",
     "vp:test": "vp test run",
     "vp:test:watch": "vp test",
     "prepare": "vp config"
