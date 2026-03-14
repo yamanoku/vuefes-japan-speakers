@@ -37,6 +37,6 @@ jobs:
       - name: pnpm install
         run: pnpm install
       - name: Lint
-        run: pnpm run vite-plus:lint
+        run: pnpm run vp:lint
         env:
           CI: true

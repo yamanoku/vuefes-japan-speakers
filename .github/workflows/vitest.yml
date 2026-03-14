@@ -37,6 +37,6 @@ jobs:
       - name: pnpm install
         run: pnpm install
       - name: Run tests
-        run: pnpm run vite-plus:test
+        run: pnpm run vp:test
         env:
           CI: true

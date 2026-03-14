@@ -9,10 +9,10 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "typecheck": "nuxt typecheck",
-    "vite-plus:lint": "vp lint .",
-    "vite-plus:lint-fix": "vp lint . --fix",
-    "vite-plus:test": "vp test run",
-    "vite-plus:test:watch": "vp test",
+    "vp:lint": "vp lint .",
+    "vp:lint-fix": "vp lint . --fix",
+    "vp:test": "vp test run",
+    "vp:test:watch": "vp test",
     "prepare": "vp config"
   },
   "dependencies": {
