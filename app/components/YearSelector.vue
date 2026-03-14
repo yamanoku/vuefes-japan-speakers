@@ -18,12 +18,12 @@ const emits = defineEmits<YearSelectorEmits>();
 
 const items = computed(() => [
   { label: '全ての年度', value: 'all' as const },
-  ...YEARS.map(y => ({ label: `${y}年`, value: y })),
+  ...YEARS.map((y) => ({ label: `${y}年`, value: y })),
 ]);
 
 const selectedYear = computed({
   get: () => props.modelValue,
-  set: value => emits('update:modelValue', value as AcceptedYear | 'all'),
+  set: (value) => emits('update:modelValue', value as AcceptedYear | 'all'),
 });
 </script>
 

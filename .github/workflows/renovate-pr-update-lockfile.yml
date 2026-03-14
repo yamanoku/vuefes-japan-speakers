@@ -30,7 +30,6 @@ jobs:
       (github.event.pull_request.user.login == 'renovate[bot]' || github.actor == 'renovate[bot]') &&
       startsWith(github.event.pull_request.head.ref, 'renovate/')
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [24.x]
@@ -56,4 +55,3 @@ jobs:
           add: 'pnpm-lock.yaml'
           message: 'chore: update pnpm-lock.yaml'
           default_author: github_actions
-

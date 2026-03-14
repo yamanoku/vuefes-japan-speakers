@@ -8,7 +8,7 @@ export const speakers2019: SpeakerInfo[] = [
   },
   {
     name: ['Alexandre Chopin'],
-    title: 'What\'s Nuxt?',
+    title: "What's Nuxt?",
     url: 'https://vuefes.jp/2019/sessions/alexchopin/',
   },
   {

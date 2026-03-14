@@ -23,7 +23,7 @@ export const getSpeakersByYear = (year: AcceptedYear): SpeakerInfo[] => {
 };
 
 export const getAllSpeakersWithYear = (): SpeakerWithYear[] => {
-  return YEARS.flatMap(year =>
-    (speakersByYear[year] || []).map(s => ({ ...s, year } as SpeakerWithYear)),
+  return YEARS.flatMap((year) =>
+    (speakersByYear[year] || []).map((s) => ({ ...s, year }) as SpeakerWithYear),
   );
 };

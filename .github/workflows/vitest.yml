@@ -5,14 +5,14 @@ on:
     branches:
       - main
     paths:
-      - "app/**"
-      - "server/api/**"
-      - "types/**"
-      - "package.json"
-      - "pnpm-lock.yaml"
-      - "eslint.config.mjs"
-      - "nuxt.config.ts"
-      - "tsconfig.json"
+      - 'app/**'
+      - 'server/api/**'
+      - 'types/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'eslint.config.mjs'
+      - 'nuxt.config.ts'
+      - 'tsconfig.json'
 
 permissions:
   contents: read
@@ -33,7 +33,7 @@ jobs:
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
+          cache: 'pnpm'
       - name: pnpm install
         run: pnpm install
       - name: Run tests

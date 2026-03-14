@@ -17,7 +17,7 @@ const emits = defineEmits<SpeakerSelectorEmits>();
 
 const items = computed(() => [
   { label: '全ての発表者', value: 'all' },
-  ...props.speakers.map(speaker => ({
+  ...props.speakers.map((speaker) => ({
     label: speaker,
     value: speaker,
   })),
@@ -25,7 +25,7 @@ const items = computed(() => [
 
 const selectedSpeaker = computed({
   get: () => props.modelValue,
-  set: value => emits('update:modelValue', value as string | 'all'),
+  set: (value) => emits('update:modelValue', value as string | 'all'),
 });
 </script>
 

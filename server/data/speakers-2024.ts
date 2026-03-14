@@ -8,12 +8,14 @@ export const speakers2024: SpeakerInfo[] = [
   },
   {
     name: ['辻 佳佑'],
-    title: 'VueとViteで作るUIコンポーネントライブラリ ~デザインシステムとプロダクトの理想的な分離を目指して~',
+    title:
+      'VueとViteで作るUIコンポーネントライブラリ ~デザインシステムとプロダクトの理想的な分離を目指して~',
     url: 'https://vuefes.jp/2024/sessions/keisuke-tsuji',
   },
   {
     name: ['永井 優斗 (Yuto NAGAI)'],
-    title: 'IT未経験者をVue.jsで開発できるITコンサルタントに育てあげる秘訣 - フューチャーの新人研修の取り組み',
+    title:
+      'IT未経験者をVue.jsで開発できるITコンサルタントに育てあげる秘訣 - フューチャーの新人研修の取り組み',
     url: 'https://vuefes.jp/2024/sessions/yuto-nagai',
   },
   {
@@ -128,7 +130,8 @@ export const speakers2024: SpeakerInfo[] = [
   },
   {
     name: ['Yutaro Koizumi'],
-    title: 'Nuxt × Vue Router の力を最大限を引き出す機能を紹介 ～Typed Pages, Nested Routes, Routes\' Matching Syntax～',
+    title:
+      "Nuxt × Vue Router の力を最大限を引き出す機能を紹介 ～Typed Pages, Nested Routes, Routes' Matching Syntax～",
     url: 'https://vuefes.jp/2024/sessions/ykoizumi0903',
   },
   {
@@ -153,12 +156,13 @@ export const speakers2024: SpeakerInfo[] = [
   },
   {
     name: ['Anthony Fu'],
-    title: 'Anthony\'s Road to Open Source - Yak Shaving',
+    title: "Anthony's Road to Open Source - Yak Shaving",
     url: 'https://vuefes.jp/2024/sessions/antfu',
   },
   {
     name: ['GANGAN'],
-    title: 'Nuxt UI Pro、NuxtHub、Nuxt Scripts、Nuxtエコシステムをふんだんに利用して開発するコーポレートサイト',
+    title:
+      'Nuxt UI Pro、NuxtHub、Nuxt Scripts、Nuxtエコシステムをふんだんに利用して開発するコーポレートサイト',
     url: 'https://vuefes.jp/2024/sessions/gangan_nikki',
   },
   {

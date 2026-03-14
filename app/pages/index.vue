@@ -14,7 +14,7 @@ const selectedSpeaker = ref<string | 'all'>('all');
 const availableSpeakers = computed(() => {
   const speakerNames = new Set<string>();
   allSpeakers.forEach((speaker) => {
-    speaker.name.forEach(name => speakerNames.add(name));
+    speaker.name.forEach((name) => speakerNames.add(name));
   });
   return Array.from(speakerNames).sort();
 });
@@ -25,14 +25,12 @@ const filteredSpeakers = computed(() => {
 
   // Filter by year
   if (selectedYear.value !== 'all') {
-    filtered = filtered.filter(speaker => speaker.year === selectedYear.value);
+    filtered = filtered.filter((speaker) => speaker.year === selectedYear.value);
   }
 
   // Filter by speaker
   if (selectedSpeaker.value !== 'all') {
-    filtered = filtered.filter(speaker =>
-      speaker.name.includes(selectedSpeaker.value),
-    );
+    filtered = filtered.filter((speaker) => speaker.name.includes(selectedSpeaker.value));
   }
 
   return filtered;
@@ -45,9 +43,7 @@ const filteredSpeakers = computed(() => {
       Vue Fes Japan Speakers
     </h1>
     <div class="pt-6">
-      <p class="text-lg">
-        Vue Fes Japan歴代スピーカーまとめページ
-      </p>
+      <p class="text-lg">Vue Fes Japan歴代スピーカーまとめページ</p>
     </div>
     <div class="pt-6">
       <SpeakerTable
