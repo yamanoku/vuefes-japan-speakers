@@ -8,10 +8,12 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint .",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "typecheck": "nuxt typecheck"
+    "typecheck": "nuxt typecheck",
+    "vp:lint": "vp lint .",
+    "vp:lint-fix": "vp lint . --fix",
+    "vp:test": "vp test run",
+    "vp:test:watch": "vp test",
+    "prepare": "vp config"
   },
   "dependencies": {
     "@iconify-json/heroicons-solid": "catalog:icon",
@@ -29,9 +31,9 @@
     "@nuxt/test-utils": "catalog:test",
     "@nuxthub/core": "catalog:cloudflare",
     "@vue/test-utils": "catalog:test",
-    "eslint": "catalog:test",
     "happy-dom": "catalog:test",
-    "vitest": "catalog:test",
+    "vite-plus": "catalog:vp",
+    "vitest": "catalog:vp",
     "vue-tsc": "catalog:typescript",
     "wrangler": "catalog:cloudflare"
   },
