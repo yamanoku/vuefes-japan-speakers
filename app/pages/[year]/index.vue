@@ -7,7 +7,7 @@ import { isValidYear } from '~/utils/years';
 type SpeakerWithYear = SpeakerInfo & { year: AcceptedYear };
 
 definePageMeta({
-  validate: route => isValidYear(route.params.year as string),
+  validate: (route) => isValidYear(route.params.year as string),
 });
 
 const route = useRoute();
@@ -15,7 +15,7 @@ const { filterYearSpeaker } = await useFetchSpeaker(route.params.year as string)
 
 const speakersWithYear = computed<SpeakerWithYear[] | undefined>(() => {
   if (!filterYearSpeaker?.value) return undefined;
-  return filterYearSpeaker.value.map(speaker => ({
+  return filterYearSpeaker.value.map((speaker) => ({
     ...speaker,
     year: route.params.year as AcceptedYear,
   }));
@@ -44,7 +44,10 @@ useHead({
       </p>
     </hgroup>
     <div class="pt-6">
-      <nuxt-link to="/" class="text-gray-500 dark:text-gray-400 text-xl underline hover:no-underline">
+      <nuxt-link
+        to="/"
+        class="text-gray-500 dark:text-gray-400 text-xl underline hover:no-underline"
+      >
         TOPページに戻る
       </nuxt-link>
     </div>

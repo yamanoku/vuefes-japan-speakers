@@ -43,7 +43,8 @@ export const speakers2023: SpeakerInfo[] = [
   },
   {
     name: ['みゅーとん (mew-ton)'],
-    title: 'Nuxt 2から3へマイグレーションする方法考えてたら、マイクロフロントエンドのフレームワークができた話',
+    title:
+      'Nuxt 2から3へマイグレーションする方法考えてたら、マイクロフロントエンドのフレームワークができた話',
     url: 'https://vuefes.jp/2023/sessions/mew-ton',
   },
   {
@@ -98,7 +99,7 @@ export const speakers2023: SpeakerInfo[] = [
   },
   {
     name: ['Anthony Fu'],
-    title: 'Anthony\'s Roads to Open Source - The Set Theory',
+    title: "Anthony's Roads to Open Source - The Set Theory",
     url: 'https://vuefes.jp/2023/sessions/antfu',
   },
   {

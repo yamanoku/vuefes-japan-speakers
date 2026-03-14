@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "config:base",
-    "helpers:pinGitHubActionDigests"
-  ],
+  "extends": ["config:base", "helpers:pinGitHubActionDigests"],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "rangeStrategy": "bump",
   "labels": ["dependencies"],
@@ -12,7 +9,5 @@
     "automerge": false
   },
   "schedule": ["after 10pm and before 6am on every weekday"],
-  "assignees": [
-    "yamanoku"
-  ]
+  "assignees": ["yamanoku"]
 }

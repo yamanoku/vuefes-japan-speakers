@@ -1,11 +1,11 @@
-import { describe, it, expect, vi, beforeEach } from "vite-plus/test";
-import { ref } from "vue";
-import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
+import { describe, it, expect, vi, beforeEach } from 'vite-plus/test';
+import { ref } from 'vue';
+import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
 // @ts-expect-error type declarations
-import YearPage from "./index.vue";
+import YearPage from './index.vue';
 
 // Import mocked functions
-import { useFetchSpeaker } from "~/composables/speaker";
+import { useFetchSpeaker } from '~/composables/speaker';
 
 // Create hoisted mocks
 const { useSeoMetaMock, useHeadMock, useRouteMock } = vi.hoisted(() => {
@@ -17,19 +17,19 @@ const { useSeoMetaMock, useHeadMock, useRouteMock } = vi.hoisted(() => {
 });
 
 // Mock Nuxt imports using mockNuxtImport
-mockNuxtImport("useSeoMeta", () => useSeoMetaMock);
-mockNuxtImport("useHead", () => useHeadMock);
-mockNuxtImport("useRoute", () => useRouteMock);
+mockNuxtImport('useSeoMeta', () => useSeoMetaMock);
+mockNuxtImport('useHead', () => useHeadMock);
+mockNuxtImport('useRoute', () => useRouteMock);
 
 // Mock dependencies
-vi.mock("~/composables/speaker", () => ({
+vi.mock('~/composables/speaker', () => ({
   useFetchSpeaker: vi.fn(),
 }));
 
-vi.mock("~/components/SpeakerTable.vue", () => ({
+vi.mock('~/components/SpeakerTable.vue', () => ({
   default: {
-    name: "SpeakerTable",
-    props: ["speakers", "year"],
+    name: 'SpeakerTable',
+    props: ['speakers', 'year'],
     template: '<div class="speaker-table">{{ speakers?.length || 0 }} speakers for year</div>',
   },
 }));
@@ -37,37 +37,37 @@ vi.mock("~/components/SpeakerTable.vue", () => ({
 // Global stubs for Nuxt components
 const globalStubs = {
   NuxtLink: {
-    name: "NuxtLink",
+    name: 'NuxtLink',
     template: '<a :to="to"><slot /></a>',
-    props: ["to"],
+    props: ['to'],
   },
 };
 
-describe("[year]/index.vue", () => {
+describe('[year]/index.vue', () => {
   const mockSpeakers = [
     {
-      year: "2024",
-      name: ["John Doe", "Jane Smith"],
-      title: "Vue.js Advanced",
-      url: "https://example.com/talk1",
+      year: '2024',
+      name: ['John Doe', 'Jane Smith'],
+      title: 'Vue.js Advanced',
+      url: 'https://example.com/talk1',
     },
     {
-      year: "2024",
-      name: ["Alice Johnson"],
-      title: "Nuxt 3 Deep Dive",
-      url: "https://example.com/talk2",
+      year: '2024',
+      name: ['Alice Johnson'],
+      title: 'Nuxt 3 Deep Dive',
+      url: 'https://example.com/talk2',
     },
     {
-      year: "2024",
-      name: ["Bob Wilson"],
-      title: "Composition API Best Practices",
-      url: "https://example.com/talk3",
+      year: '2024',
+      name: ['Bob Wilson'],
+      title: 'Composition API Best Practices',
+      url: 'https://example.com/talk3',
     },
   ];
 
   const mockRoute = {
     params: {
-      year: "2024",
+      year: '2024',
     },
   };
 
@@ -90,7 +90,7 @@ describe("[year]/index.vue", () => {
     });
   });
 
-  it("年とスピーカーリストを含むページをレンダリングする", async () => {
+  it('年とスピーカーリストを含むページをレンダリングする', async () => {
     vi.mocked(useFetchSpeaker).mockImplementation(() =>
       Promise.resolve({
         filterYearSpeaker: ref(mockSpeakers),
@@ -106,19 +106,19 @@ describe("[year]/index.vue", () => {
 
     // Check if component is rendered
     const html = wrapper.html();
-    expect(html).toContain("Vue Fes Japan 2024");
-    expect(html).toContain("公式サイト");
-    expect(html).toContain("TOPページに戻る");
+    expect(html).toContain('Vue Fes Japan 2024');
+    expect(html).toContain('公式サイト');
+    expect(html).toContain('TOPページに戻る');
 
     // Check SpeakerTable component
-    const speakerTable = wrapper.findComponent({ name: "SpeakerTable" });
+    const speakerTable = wrapper.findComponent({ name: 'SpeakerTable' });
     expect(speakerTable.exists()).toBe(true);
-    expect(speakerTable.text()).toContain("3 speakers for year");
+    expect(speakerTable.text()).toContain('3 speakers for year');
     // Year prop might not be set due to test environment limitations
     // The component template shows :year="route.params.year as string"
   });
 
-  it("空のスピーカーリストを含むページをレンダリングする", async () => {
+  it('空のスピーカーリストを含むページをレンダリングする', async () => {
     vi.mocked(useFetchSpeaker).mockImplementation(() =>
       Promise.resolve({
         filterYearSpeaker: ref([]),
@@ -134,17 +134,17 @@ describe("[year]/index.vue", () => {
 
     // Check rendered content
     const html = wrapper.html();
-    expect(html).toContain("Vue Fes Japan 2024");
-    expect(html).toContain("公式サイト");
-    expect(html).toContain("TOPページに戻る");
+    expect(html).toContain('Vue Fes Japan 2024');
+    expect(html).toContain('公式サイト');
+    expect(html).toContain('TOPページに戻る');
 
     // Check that SpeakerTable exists but shows 0 speakers
-    const speakerTable = wrapper.findComponent({ name: "SpeakerTable" });
+    const speakerTable = wrapper.findComponent({ name: 'SpeakerTable' });
     expect(speakerTable.exists()).toBe(true);
-    expect(speakerTable.text()).toContain("0 speakers for year");
+    expect(speakerTable.text()).toContain('0 speakers for year');
   });
 
-  it("正しい年パラメータでuseFetchSpeakerを呼び出す", async () => {
+  it('正しい年パラメータでuseFetchSpeakerを呼び出す', async () => {
     vi.mocked(useFetchSpeaker).mockImplementation(() =>
       Promise.resolve({
         filterYearSpeaker: ref(mockSpeakers),

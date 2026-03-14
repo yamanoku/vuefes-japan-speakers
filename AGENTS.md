@@ -51,6 +51,7 @@ pnpm install
 - データ源: `server/data/` 配下に `speakers-2018.ts` ～ `speakers-2025.ts` などを配置し、`server/data/index.ts` から集約・エクスポートします。
 
 ### 変更に伴う確認ポイント:
+
 - 新しい年を追加したら、API のレスポンスが期待通りかテストで検証（`server/api/speakers/[year].test.ts` など）。
 - UI 側で年選択や一覧表示が反映されるか（`app/utils/years.ts`, `YearSelector.vue`）を確認。
 
@@ -77,12 +78,14 @@ pnpm install
 - 目的: 型の整合性を保ち、潜在的なバグを防止
 
 ### 書き方の指針:
+
 - ユニットテストは入出力と副作用の最小検証に集中。
 - ルート/API は境界値・異常系（存在しない年など）もカバー。
 
 ## 典型タスクの手順
 
 ### 1. 新しい開催年のスピーカーデータを追加
+
 - `server/data/speakers-YYYY.ts` を作成し型に沿ってデータを定義。
 - `server/data/index.ts` にインポートとエクスポートを追加。
 - 必要に応じて `app/utils/years.ts` に年を追加（表示順の維持に注意）。
@@ -90,11 +93,13 @@ pnpm install
 - UI 表示を確認（`/[year]` ページ、年セレクタ）。
 
 ### 2. スピーカー検索/フィルタを調整
+
 - `SpeakerSelector.vue` や `SpeakerTable.vue` を変更。
 - 変更に合わせ `composables/speaker.ts` で取得ロジックやフィルタを調整。
 - 影響範囲のテスト更新（該当ページ/コンポーネントの test）。
 
 ### 3. コンポーネントを追加
+
 - `app/components/` に追加し、該当ページで読み込み。
 - スタイルは Tailwind ユーティリティを優先。
 - UI の振る舞いは小さな単位でテスト。

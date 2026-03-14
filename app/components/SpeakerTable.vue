@@ -29,24 +29,29 @@ const columns = computed<TableColumn<SpeakerWithYear>[]>(() => {
     {
       id: 'expand',
       cell: ({ row }) =>
-        h(UTooltip, {
-          text: '発表タイトル名',
-        }, {
-          default: () => h(UButton, {
-            'color': 'neutral',
-            'variant': 'ghost',
-            'icon': 'i-lucide-chevron-down',
-            'square': true,
-            'aria-label': 'Expand',
-            'ui': {
-              leadingIcon: [
-                'transition-transform',
-                row.getIsExpanded() ? 'duration-200 rotate-180' : '',
-              ],
-            },
-            'onClick': () => row.toggleExpanded(),
-          }),
-        }),
+        h(
+          UTooltip,
+          {
+            text: '発表タイトル名',
+          },
+          {
+            default: () =>
+              h(UButton, {
+                color: 'neutral',
+                variant: 'ghost',
+                icon: 'i-lucide-chevron-down',
+                square: true,
+                'aria-label': 'Expand',
+                ui: {
+                  leadingIcon: [
+                    'transition-transform',
+                    row.getIsExpanded() ? 'duration-200 rotate-180' : '',
+                  ],
+                },
+                onClick: () => row.toggleExpanded(),
+              }),
+          },
+        ),
     },
   ];
 
@@ -79,8 +84,13 @@ const handleSpeakerChange = (value: string | 'all') => {
 
 <template>
   <div>
-    <div class="border border-accented rounded-md not-prose bg-white dark:bg-gray-900 overflow-hidden">
-      <div v-if="showYearSelector || showSpeakerSelector" class="border-b border-accented px-4 py-3">
+    <div
+      class="border border-accented rounded-md not-prose bg-white dark:bg-gray-900 overflow-hidden"
+    >
+      <div
+        v-if="showYearSelector || showSpeakerSelector"
+        class="border-b border-accented px-4 py-3"
+      >
         <div class="flex flex-wrap gap-4">
           <YearSelector
             v-if="showYearSelector"
@@ -122,9 +132,16 @@ const handleSpeakerChange = (value: string | 'all') => {
         </template>
         <template #expanded="{ row }">
           <div class="flex items-start gap-2">
-            <a :href="row.original.url" class="text-sm underline hover:no-underline" target="_blank">
+            <a
+              :href="row.original.url"
+              class="text-sm underline hover:no-underline"
+              target="_blank"
+            >
               {{ row.original.title ? row.original.title : 'TBD' }}
-              <UIcon name="i-heroicons-solid-arrow-top-right-on-square" class="ms-1 align-[-0.15rem]" />
+              <UIcon
+                name="i-heroicons-solid-arrow-top-right-on-square"
+                class="ms-1 align-[-0.15rem]"
+              />
             </a>
           </div>
         </template>

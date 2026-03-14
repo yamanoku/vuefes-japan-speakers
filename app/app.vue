@@ -12,9 +12,7 @@ useHead({
     },
   ],
   titleTemplate: (title) => {
-    return title
-      ? `${title} - Vue Fes Japan Speakers`
-      : 'Vue Fes Japan Speakers';
+    return title ? `${title} - Vue Fes Japan Speakers` : 'Vue Fes Japan Speakers';
   },
   meta: [
     {

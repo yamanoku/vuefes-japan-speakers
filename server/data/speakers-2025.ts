@@ -43,7 +43,8 @@ export const speakers2025: SpeakerInfo[] = [
   },
   {
     name: ['ねぎなす'],
-    title: 'Vueのバリデーション、結局どれを選べばいい？ ― 自作バリデーションの限界と、脱却までの道のり ―',
+    title:
+      'Vueのバリデーション、結局どれを選べばいい？ ― 自作バリデーションの限界と、脱却までの道のり ―',
     url: 'https://vuefes.jp/2025/speaker/neginasu',
   },
   {
@@ -63,7 +64,8 @@ export const speakers2025: SpeakerInfo[] = [
   },
   {
     name: ['平沼 真吾'],
-    title: 'Vue 3.6時代のリアクティビティ最前線 〜Vapor/alien-signalsの実践とパフォーマンス最適化〜',
+    title:
+      'Vue 3.6時代のリアクティビティ最前線 〜Vapor/alien-signalsの実践とパフォーマンス最適化〜',
     url: 'https://vuefes.jp/2025/speaker/hiranuma',
   },
   {
@@ -73,7 +75,8 @@ export const speakers2025: SpeakerInfo[] = [
   },
   {
     name: ['sayn0'],
-    title: 'AI駆動で進める依存ライブラリ更新 ─ Vue プロジェクトの品質向上と開発スピード改善の実践録',
+    title:
+      'AI駆動で進める依存ライブラリ更新 ─ Vue プロジェクトの品質向上と開発スピード改善の実践録',
     url: 'https://vuefes.jp/2025/speaker/sayn0',
   },
   {
@@ -118,7 +121,8 @@ export const speakers2025: SpeakerInfo[] = [
   },
   {
     name: ['永井 優斗 (Yuto NAGAI)'],
-    title: 'React Nativeならぬ"Vue Native"が実現するかも？新世代マルチプラットフォーム開発フレームワークのLynxとLynxのVue.js対応を追ってみよう',
+    title:
+      'React Nativeならぬ"Vue Native"が実現するかも？新世代マルチプラットフォーム開発フレームワークのLynxとLynxのVue.js対応を追ってみよう',
     url: 'https://vuefes.jp/2025/speaker/yut0naga1',
   },
   {
@@ -168,7 +172,8 @@ export const speakers2025: SpeakerInfo[] = [
   },
   {
     name: ['did0es'],
-    title: 'ViteとTypeScriptのProject Referencesで大規模モノレポのUIカタログのリリースサイクルを高速化する',
+    title:
+      'ViteとTypeScriptのProject Referencesで大規模モノレポのUIカタログのリリースサイクルを高速化する',
     url: 'https://vuefes.jp/2025/sponsors/cyberagent#did0es',
   },
 ];

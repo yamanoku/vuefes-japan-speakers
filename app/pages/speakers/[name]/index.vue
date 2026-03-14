@@ -23,7 +23,10 @@ useHead({
       {{ $route.params.name }} 発表一覧
     </h1>
     <div class="pt-6">
-      <nuxt-link to="/" class="text-gray-500 dark:text-gray-400 text-xl underline hover:no-underline">
+      <nuxt-link
+        to="/"
+        class="text-gray-500 dark:text-gray-400 text-xl underline hover:no-underline"
+      >
         TOPページに戻る
       </nuxt-link>
     </div>

@@ -1,21 +1,21 @@
 catalogs:
   cloudflare:
-    "@nuxthub/core": 0.10.7
+    '@nuxthub/core': 0.10.7
     wrangler: 4.73.0
   css:
     tailwindcss: 4.2.1
   icon:
-    "@iconify-json/heroicons-solid": 1.2.1
-    "@iconify-json/lucide": 1.2.97
+    '@iconify-json/heroicons-solid': 1.2.1
+    '@iconify-json/lucide': 1.2.97
   nuxt:
-    "@nuxt/a11y": 1.0.0-alpha.1
-    "@nuxt/ui": 4.5.1
+    '@nuxt/a11y': 1.0.0-alpha.1
+    '@nuxt/ui': 4.5.1
     nuxt: 4.4.2
   test:
-    "@nuxt/eslint": 1.15.2
-    "@nuxt/eslint-config": 1.15.2
-    "@nuxt/test-utils": 4.0.0
-    "@vue/test-utils": 2.4.6
+    '@nuxt/eslint': 1.15.2
+    '@nuxt/eslint-config': 1.15.2
+    '@nuxt/test-utils': 4.0.0
+    '@vue/test-utils': 2.4.6
     happy-dom: 20.8.4
     vitest: 4.1.0
   typescript:
@@ -29,12 +29,12 @@ catalogs:
     vite-plus: latest
 
 overrides:
-  vite: "catalog:vp"
-  vitest: "catalog:vp"
+  vite: 'catalog:vp'
+  vitest: 'catalog:vp'
 peerDependencyRules:
   allowAny:
     - vite
     - vitest
   allowedVersions:
-    vite: "*"
-    vitest: "*"
+    vite: '*'
+    vitest: '*'

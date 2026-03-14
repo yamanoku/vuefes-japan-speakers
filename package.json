@@ -8,9 +8,9 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "typecheck": "nuxt typecheck",
+    "vp:check": "vp check",
     "vp:lint": "vp lint .",
-    "vp:lint-fix": "vp lint . --fix",
+    "vp:fmt": "vp fmt .",
     "vp:test": "vp test run",
     "vp:test:watch": "vp test",
     "prepare": "vp config"

@@ -20,8 +20,8 @@ const fetchNameSpeakers = async (name?: string) => {
   const filterNameSpeaker = computed(() => {
     if (!name) return [];
     const searchTerm = normalize(name);
-    const results = allSpeakers.filter(speaker =>
-      speaker.name.some(speakerName => normalize(speakerName) === searchTerm),
+    const results = allSpeakers.filter((speaker) =>
+      speaker.name.some((speakerName) => normalize(speakerName) === searchTerm),
     );
     return results;
   });
@@ -32,9 +32,7 @@ export const useFetchSpeaker = async (params?: string) => {
   if (!params) {
     return fetchNameSpeakers('');
   }
-  const handler = isValidYear(params)
-    ? fetchYearSpeakers
-    : fetchNameSpeakers;
+  const handler = isValidYear(params) ? fetchYearSpeakers : fetchNameSpeakers;
   return handler(params);
 };
 
@@ -43,11 +41,14 @@ export const useFetchAllSpeakers = async () => {
   return allSpeakers;
 };
 
-export const useFilteredSpeakers = (allSpeakers: Ref<SpeakerWithYear[]>, selectedYear: Ref<AcceptedYear | 'all'>) => {
+export const useFilteredSpeakers = (
+  allSpeakers: Ref<SpeakerWithYear[]>,
+  selectedYear: Ref<AcceptedYear | 'all'>,
+) => {
   return computed(() => {
     if (selectedYear.value === 'all') {
       return allSpeakers.value;
     }
-    return allSpeakers.value.filter(speaker => speaker.year === selectedYear.value);
+    return allSpeakers.value.filter((speaker) => speaker.year === selectedYear.value);
   });
 };
