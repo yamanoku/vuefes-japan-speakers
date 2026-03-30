@@ -21,8 +21,8 @@ catalogs:
       specifier: 1.2.1
       version: 1.2.1
     '@iconify-json/lucide':
-      specifier: 1.2.98
-      version: 1.2.98
+      specifier: 1.2.100
+      version: 1.2.100
   nuxt:
     '@nuxt/a11y':
       specifier: 1.0.0-alpha.1
@@ -94,7 +94,7 @@ importers:
     devDependencies:
       '@iconify-json/lucide':
         specifier: catalog:icon
-        version: 1.2.98
+        version: 1.2.100
       '@nuxt/a11y':
         specifier: catalog:nuxt
         version: 1.0.0-alpha.1(magicast@0.5.2)(vite@7.3.1(@types/node@20.19.25)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.44.1)(yaml@2.8.2))
@@ -630,8 +630,8 @@ packages:
   '@iconify-json/heroicons-solid@1.2.1':
     resolution: {integrity: sha512-sRZ6U1FT1lkxtIuL+iQ9Fpm5IZxvJCDaKdLpP5elgZ6OkQn6j8HVJpxgFIcuJbHC/EeoNp3tHldMEELqN9pZDQ==}
 
-  '@iconify-json/lucide@1.2.98':
-    resolution: {integrity: sha512-Lx2464W8Tty/QEnZ2UPb73nPdML/HpGCj0J0w37jP3/jx3l4fniZBjDxe1TgHiIL5XW9QO3vlx53ZQZ5JsNpzQ==}
+  '@iconify-json/lucide@1.2.100':
+    resolution: {integrity: sha512-vCrhQ/6T530HEMkWOkSyedvMiuQdVU1tMHEs32k4tklJmCmjokH3Dej6ycvfLt7kftBSQ2kPSUiyOpoW3uOF5g==}
 
   '@iconify/collections@1.0.641':
     resolution: {integrity: sha512-G9LdUvewUdXp5SD4g06rWHpWo7s5/rQcsQxAQ3UQUqdRwkcUuPcGrY0qnZ0wzYLaeB0TVUrgC0MIigyhWiNgtQ==}
@@ -6721,7 +6721,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/lucide@1.2.98':
+  '@iconify-json/lucide@1.2.100':
     dependencies:
       '@iconify/types': 2.0.0
 
