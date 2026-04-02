@@ -25,7 +25,7 @@ catalogs:
     vue-router: 5.0.4
   vp:
     vite: npm:@voidzero-dev/vite-plus-core@0.1.15
-    vitest: npm:@voidzero-dev/vite-plus-test@0.1.14
+    vitest: npm:@voidzero-dev/vite-plus-test@0.1.15
     vite-plus: 0.1.15
 
 overrides:
