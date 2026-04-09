@@ -1,59 +1,35 @@
 {
-  "extends": [
-    "config:recommended",
-    "helpers:pinGitHubActionDigests"
-  ],
+  "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "rangeStrategy": "bump",
-  "labels": [
-    "dependencies"
-  ],
+  "labels": ["dependencies"],
   "dependencyDashboard": false,
   "automerge": true,
   "major": {
     "automerge": false
   },
-  "schedule": [
-    "after 10pm every weekday",
-    "before 6am every weekday"
-  ],
-  "assignees": [
-    "yamanoku"
-  ],
+  "schedule": ["after 10pm every weekday", "before 6am every weekday"],
+  "assignees": ["yamanoku"],
   "packageRules": [
     {
       "description": "Nuxt関連のパッケージは1つのPRにまとめる",
       "groupName": "Nuxt packages",
-      "matchPackageNames": [
-        "nuxt",
-        "@nuxt/a11y",
-        "@nuxt/ui"
-      ]
+      "matchPackageNames": ["nuxt", "@nuxt/a11y", "@nuxt/ui"]
     },
     {
       "description": "Vue関連のパッケージは1つのPRにまとめる",
       "groupName": "Vue packages",
-      "matchPackageNames": [
-        "vue",
-        "vue-router",
-        "vue-tsc",
-        "@vue/**"
-      ]
+      "matchPackageNames": ["vue", "vue-router", "vue-tsc", "@vue/**"]
     },
     {
       "description": "Cloudflare関連のパッケージは1つのPRにまとめる",
       "groupName": "Cloudflare packages",
-      "matchPackageNames": [
-        "wrangler",
-        "@nuxthub/**"
-      ]
+      "matchPackageNames": ["wrangler", "@nuxthub/**"]
     },
     {
       "description": "Iconify関連のパッケージは1つのPRにまとめる",
       "groupName": "Iconify packages",
-      "matchPackageNames": [
-        "@iconify-json/**"
-      ]
+      "matchPackageNames": ["@iconify-json/**"]
     },
     {
       "description": "Test関連のパッケージは1つのPRにまとめる",
@@ -69,10 +45,7 @@
     {
       "description": "Vite Plus関連のパッケージは1つのPRにまとめる",
       "groupName": "Vite Plus packages",
-      "matchPackageNames": [
-        "vite-plus",
-        "@voidzero-dev/**"
-      ]
+      "matchPackageNames": ["vite-plus", "@voidzero-dev/**"]
     }
   ]
 }
