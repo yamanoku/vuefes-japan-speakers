@@ -21,7 +21,7 @@ catalogs:
   typescript:
     vue-tsc: 3.2.6
   vue:
-    vue: 3.5.31
+    vue: 3.5.32
     vue-router: 5.0.4
   vp:
     vite: npm:@voidzero-dev/vite-plus-core@0.1.15
