@@ -17,7 +17,7 @@ catalogs:
     '@nuxt/test-utils': 4.0.0
     '@vue/test-utils': 2.4.6
     happy-dom: 20.8.9
-    vitest: 4.1.3
+    vitest: 4.1.4
   typescript:
     vue-tsc: 3.2.6
   vue:
