@@ -1,2 +1,64 @@
 @import 'tailwindcss' theme(static);
 @import '@nuxt/ui';
+
+/* ===== Swiss Design System — Vue Fes Japan Speakers redesign ===== */
+
+:root {
+  --font-display: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-body: 'Inter Tight', 'IBM Plex Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  --font-jp: 'IBM Plex Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --paper: #f4f1eb;
+  --paper-2: #ece7dd;
+  --rule: #1a1a17;
+  --rule-soft: rgba(26, 26, 23, 0.14);
+  --rule-softer: rgba(26, 26, 23, 0.07);
+  --ink: #1a1a17;
+  --ink-2: #3a3a35;
+  --ink-3: #6b6b64;
+  --ink-4: #9a9a91;
+  --accent: oklch(0.58 0.16 32);
+  --accent-ink: #ffffff;
+  --radius: 0;
+  --pad-x: clamp(24px, 4vw, 72px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'ss01', 'cv02', 'cv11';
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}

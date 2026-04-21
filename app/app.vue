@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import FooterComponent from '~/components/FooterComponent.vue';
-
 useHead({
   htmlAttrs: {
     lang: 'ja',
   },
   link: [
+    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
     {
-      rel: 'icon',
-      href: '/favicon.ico',
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Sans+JP:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap',
     },
   ],
   titleTemplate: (title) => {
@@ -35,11 +36,6 @@ useSeoMeta({
   <UApp>
     <NuxtRouteAnnouncer />
     <NuxtLoadingIndicator />
-    <UContainer>
-      <main class="pt-6 px-6">
-        <NuxtPage />
-      </main>
-      <FooterComponent />
-    </UContainer>
+    <NuxtPage />
   </UApp>
 </template>

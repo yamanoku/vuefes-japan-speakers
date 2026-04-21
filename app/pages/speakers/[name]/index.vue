@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import SpeakerTable from '~/components/SpeakerTable.vue';
 import { useFetchSpeaker } from '~/composables/speaker';
+import { hasJapanese } from '~/utils/speakerMap';
 
 const route = useRoute();
-const { filterNameSpeaker } = await useFetchSpeaker(route.params.name as string);
+const speakerName = route.params.name as string;
+
+const { filterNameSpeaker } = await useFetchSpeaker(speakerName);
 
 if (!filterNameSpeaker?.value || filterNameSpeaker.value.length === 0) {
   throw createError({
@@ -12,26 +14,115 @@ if (!filterNameSpeaker?.value || filterNameSpeaker.value.length === 0) {
   });
 }
 
-useHead({
-  title: `${route.params.name as string} 発表一覧`,
+const { t } = useVfjsI18n();
+
+const record = computed(() => {
+  const talks = (filterNameSpeaker?.value ?? [])
+    .map((s) => ({
+      year: s.year,
+      title: s.title,
+      url: s.url,
+      coSpeakers: s.name.filter((n) => n !== speakerName),
+    }))
+    .sort((a, b) => a.year.localeCompare(b.year));
+  const years = [...new Set(talks.map((tk) => tk.year))].sort();
+  return { name: speakerName, years, talks };
 });
+
+useHead({ title: `${speakerName} 発表一覧` });
 </script>
 
 <template>
-  <div>
-    <h1 class="font-semibold text-3xl text-gray-900 dark:text-white leading-tight">
-      {{ $route.params.name }} 発表一覧
-    </h1>
-    <div class="pt-6">
-      <nuxt-link
+  <div
+    style="
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+    "
+  >
+    <AppChrome current="home" />
+
+    <nav class="px-[var(--pad-x)] pt-[20px]">
+      <NuxtLink
         to="/"
-        class="text-gray-500 dark:text-gray-400 text-xl underline hover:no-underline"
+        class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)] no-underline tracking-[0.05em] hover:text-[var(--ink)]"
+        >← {{ t.back_top }}</NuxtLink
       >
-        TOPページに戻る
-      </nuxt-link>
-    </div>
-    <div class="pt-6">
-      <SpeakerTable :speakers="filterNameSpeaker" />
-    </div>
+    </nav>
+
+    <header
+      class="border-b border-[var(--rule)] pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-[var(--pad-x)]"
+    >
+      <h1
+        class="[font-family:var(--font-display)] text-[clamp(28px,4.5vw,72px)] font-bold tracking-[-0.04em] leading-[1] mb-[16px]"
+        :lang="hasJapanese(record.name) ? 'ja' : 'en'"
+      >
+        {{ record.name }}
+      </h1>
+      <div class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)]">
+        <div>{{ t.appearance_count(record.talks.length) }}</div>
+        <div class="mt-[8px]">{{ t.years_appeared }}: {{ record.years.join(' · ') }}</div>
+      </div>
+    </header>
+
+    <section class="px-[var(--pad-x)] py-[40px]">
+      <div
+        class="[font-family:var(--font-mono)] text-[10px] tracking-[0.1em] uppercase text-[var(--ink-3)] mb-[16px]"
+      >
+        {{ t.related_talks }}
+      </div>
+      <ol class="list-none p-0 m-0">
+        <li
+          v-for="(talk, i) in record.talks"
+          :key="i"
+          class="grid grid-cols-[60px_1fr_auto] gap-x-[16px] items-baseline py-[14px] border-t border-[var(--rule-softer)]"
+        >
+          <span class="[font-family:var(--font-mono)] text-[11px] text-[var(--ink-3)]">
+            <NuxtLink
+              class="text-[var(--accent)] no-underline hover:underline"
+              :to="`/${talk.year}`"
+              >{{ talk.year }}</NuxtLink
+            >
+          </span>
+          <a
+            class="text-[16px] text-[var(--ink)] no-underline flex items-baseline gap-[4px] hover:text-[var(--accent)]"
+            :href="talk.url"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span :lang="hasJapanese(talk.title || '') ? 'ja' : 'en'">{{
+              talk.title || t.tbd
+            }}</span>
+            <span class="text-[11px] opacity-70" :aria-label="t.external">↗</span>
+          </a>
+          <span
+            v-if="talk.coSpeakers.length > 0"
+            class="text-[12px] [font-family:var(--font-mono)] text-[var(--ink-3)]"
+          >
+            w/
+            <template v-for="(cn, ci) in talk.coSpeakers" :key="cn">
+              <template v-if="ci > 0">, </template>
+              <NuxtLink
+                class="text-[var(--accent)] no-underline hover:underline"
+                :to="`/speakers/${encodeURIComponent(cn)}`"
+                >{{ cn }}</NuxtLink
+              >
+            </template>
+          </span>
+        </li>
+      </ol>
+    </section>
+
+    <footer
+      class="border-t border-[var(--rule)] flex flex-wrap gap-x-[24px] gap-y-[8px] items-baseline justify-between px-[var(--pad-x)] py-[20px] text-[12px] text-[var(--ink-3)] [font-family:var(--font-mono)]"
+    >
+      <div>
+        Unofficial community archive.
+        <NuxtLink to="/" class="text-inherit hover:text-[var(--ink)]">{{ t.back_top }}</NuxtLink>
+      </div>
+      <div>{{ record.name }} · {{ record.talks.length }} talks</div>
+    </footer>
   </div>
 </template>
