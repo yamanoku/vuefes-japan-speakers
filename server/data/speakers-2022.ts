@@ -22,7 +22,7 @@ export const speakers2022: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2022/sponsor-sessions/cloudsign',
   },
   {
-    name: ['m0nch1'],
+    name: ['m0nch1', 'wattanx'],
     title: 'プロダクト開発を止めずに Composition API と TypeScript に最速で移行するための戦い',
     url: 'https://vuefes.jp/2022/sponsor-sessions/stores',
   },
