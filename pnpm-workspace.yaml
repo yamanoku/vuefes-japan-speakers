@@ -14,7 +14,9 @@ catalogs:
   test:
     '@nuxt/eslint': 1.15.2
     '@nuxt/eslint-config': 1.15.2
+    '@nuxt/eslint-plugin': 1.15.2
     '@nuxt/test-utils': 4.0.2
+    '@stylistic/eslint-plugin': 5.10.0
     '@vue/test-utils': 2.4.6
     happy-dom: 20.9.0
     vitest: 4.1.4
