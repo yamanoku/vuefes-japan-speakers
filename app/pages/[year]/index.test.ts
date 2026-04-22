@@ -1,46 +1,33 @@
 import { describe, it, expect, vi, beforeEach } from 'vite-plus/test';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
 // @ts-expect-error type declarations
 import YearPage from './index.vue';
 
-// Import mocked functions
 import { useFetchSpeaker } from '~/composables/speaker';
 
-// Create hoisted mocks
-const { useSeoMetaMock, useHeadMock, useRouteMock } = vi.hoisted(() => {
-  return {
-    useSeoMetaMock: vi.fn(),
-    useHeadMock: vi.fn(),
-    useRouteMock: vi.fn(),
-  };
-});
+const { useHeadMock, useRouteMock, useVfjsI18nMock } = vi.hoisted(() => ({
+  useHeadMock: vi.fn(),
+  useRouteMock: vi.fn(),
+  useVfjsI18nMock: vi.fn(),
+}));
 
-// Mock Nuxt imports using mockNuxtImport
-mockNuxtImport('useSeoMeta', () => useSeoMetaMock);
 mockNuxtImport('useHead', () => useHeadMock);
 mockNuxtImport('useRoute', () => useRouteMock);
+mockNuxtImport('useVfjsI18n', () => useVfjsI18nMock);
 
-// Mock dependencies
 vi.mock('~/composables/speaker', () => ({
   useFetchSpeaker: vi.fn(),
 }));
 
-vi.mock('~/components/SpeakerTable.vue', () => ({
-  default: {
-    name: 'SpeakerTable',
-    props: ['speakers', 'year'],
-    template: '<div class="speaker-table">{{ speakers?.length || 0 }} speakers for year</div>',
-  },
-}));
-
-// Global stubs for Nuxt components
 const globalStubs = {
   NuxtLink: {
     name: 'NuxtLink',
-    template: '<a :to="to"><slot /></a>',
+    template: '<a :href="to"><slot /></a>',
     props: ['to'],
   },
+  AppHeader: { template: '<div />' },
+  AppFooter: { template: '<div />' },
 };
 
 describe('[year]/index.vue', () => {
@@ -65,102 +52,71 @@ describe('[year]/index.vue', () => {
     },
   ];
 
-  const mockRoute = {
-    params: {
-      year: '2024',
-    },
-  };
+  const mockRoute = { params: { year: '2024' } };
 
   beforeEach(() => {
     vi.clearAllMocks();
-    // Clear all mocks
-    useSeoMetaMock.mockClear();
-    useHeadMock.mockClear();
-    useRouteMock.mockClear();
-
-    // Set up route mock
     useRouteMock.mockReturnValue(mockRoute);
-    // Set default mock implementation
-    vi.mocked(useFetchSpeaker).mockImplementation(() => {
-      // Store the year parameter for verification
-      return Promise.resolve({
-        filterYearSpeaker: ref([]),
-        filterNameSpeaker: undefined,
-      });
+    useVfjsI18nMock.mockReturnValue({
+      t: computed(() => ({
+        year_total_talks: (n: number) => `全 ${n} 発表`,
+        official_site: '公式サイト',
+        tbd: 'タイトル未定',
+        external: '外部リンク',
+        back_top: 'TOPページに戻る',
+      })),
+      lang: ref('ja'),
+      setLang: vi.fn(),
+    });
+    vi.mocked(useFetchSpeaker).mockResolvedValue({
+      filterYearSpeaker: ref([]),
+      filterNameSpeaker: undefined,
     });
   });
 
-  it('年とスピーカーリストを含むページをレンダリングする', async () => {
-    vi.mocked(useFetchSpeaker).mockImplementation(() =>
-      Promise.resolve({
-        filterYearSpeaker: ref(mockSpeakers),
-        filterNameSpeaker: undefined,
-      }),
-    );
-
-    const wrapper = await mountSuspended(YearPage, {
-      global: {
-        stubs: globalStubs,
-      },
+  it('年タイトルとスピーカーリストをレンダリングする', async () => {
+    vi.mocked(useFetchSpeaker).mockResolvedValue({
+      filterYearSpeaker: ref(mockSpeakers),
+      filterNameSpeaker: undefined,
     });
 
-    // Check if component is rendered
-    const html = wrapper.html();
-    expect(html).toContain('Vue Fes Japan 2024');
-    expect(html).toContain('公式サイト');
-    expect(html).toContain('TOPページに戻る');
+    const wrapper = await mountSuspended(YearPage, {
+      global: { stubs: globalStubs },
+    });
 
-    // Check SpeakerTable component
-    const speakerTable = wrapper.findComponent({ name: 'SpeakerTable' });
-    expect(speakerTable.exists()).toBe(true);
-    expect(speakerTable.text()).toContain('3 speakers for year');
-    // Year prop might not be set due to test environment limitations
-    // The component template shows :year="route.params.year as string"
+    const html = wrapper.html();
+    expect(html).toContain('Vue Fes Japan');
+    expect(html).toContain('2024');
+    expect(html).toContain('公式サイト');
+    expect(html).toContain('John Doe');
+    expect(html).toContain('Vue.js Advanced');
+    expect(html).toContain('Alice Johnson');
+    expect(html).toContain('Nuxt 3 Deep Dive');
   });
 
-  it('空のスピーカーリストを含むページをレンダリングする', async () => {
-    vi.mocked(useFetchSpeaker).mockImplementation(() =>
-      Promise.resolve({
-        filterYearSpeaker: ref([]),
-        filterNameSpeaker: undefined,
-      }),
-    );
-
+  it('スピーカーが空の場合でもページをレンダリングする', async () => {
     const wrapper = await mountSuspended(YearPage, {
-      global: {
-        stubs: globalStubs,
-      },
+      global: { stubs: globalStubs },
     });
 
-    // Check rendered content
     const html = wrapper.html();
-    expect(html).toContain('Vue Fes Japan 2024');
-    expect(html).toContain('公式サイト');
-    expect(html).toContain('TOPページに戻る');
-
-    // Check that SpeakerTable exists but shows 0 speakers
-    const speakerTable = wrapper.findComponent({ name: 'SpeakerTable' });
-    expect(speakerTable.exists()).toBe(true);
-    expect(speakerTable.text()).toContain('0 speakers for year');
+    expect(html).toContain('Vue Fes Japan');
+    expect(html).toContain('2024');
   });
 
   it('正しい年パラメータでuseFetchSpeakerを呼び出す', async () => {
-    vi.mocked(useFetchSpeaker).mockImplementation(() =>
-      Promise.resolve({
-        filterYearSpeaker: ref(mockSpeakers),
-        filterNameSpeaker: undefined,
-      }),
-    );
-
     await mountSuspended(YearPage, {
-      global: {
-        stubs: globalStubs,
-      },
+      global: { stubs: globalStubs },
     });
 
-    // Verify it was called (parameter check may not work due to how Nuxt's auto-imports work in tests)
-    await vi.waitFor(() => {
-      expect(useFetchSpeaker).toHaveBeenCalled();
+    expect(useFetchSpeaker).toHaveBeenCalledWith('2024');
+  });
+
+  it('useHeadでタイトルが設定される', async () => {
+    await mountSuspended(YearPage, {
+      global: { stubs: globalStubs },
     });
+
+    expect(useHeadMock).toHaveBeenCalledWith({ title: 'Vue Fes Japan 2024' });
   });
 });
