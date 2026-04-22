@@ -19,24 +19,8 @@ useHead({ title: `Vue Fes Japan ${year}` });
 </script>
 
 <template>
-  <div
-    style="
-      background: var(--paper);
-      color: var(--ink);
-      min-height: 100vh;
-      font-family: var(--font-body);
-      -webkit-font-smoothing: antialiased;
-    "
-  >
-    <AppChrome />
-
-    <nav class="px-[var(--pad-x)] pt-[20px]">
-      <NuxtLink
-        to="/"
-        class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)] no-underline tracking-[0.05em] hover:text-[var(--ink)]"
-        >← {{ t.back_top }}</NuxtLink
-      >
-    </nav>
+  <div>
+    <AppHeader />
 
     <header
       class="border-b border-[var(--rule)] pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-[var(--pad-x)]"
@@ -118,18 +102,6 @@ useHead({ title: `Vue Fes Japan ${year}` });
       </ol>
     </section>
 
-    <footer
-      class="border-t border-[var(--rule)] flex flex-wrap gap-x-[24px] gap-y-[8px] items-baseline justify-between px-[var(--pad-x)] py-[20px] text-[12px] text-[var(--ink-3)] [font-family:var(--font-mono)]"
-    >
-      <div>
-        Unofficial community archive.
-        <NuxtLink
-          to="/"
-          class="text-inherit hover:text-[var(--ink)] underline hover:no-underline"
-          >{{ t.back_top }}</NuxtLink
-        >
-      </div>
-      <div>{{ year }} · {{ filterYearSpeaker?.length ?? 0 }} talks</div>
-    </footer>
+    <AppFooter />
   </div>
 </template>

@@ -44,24 +44,8 @@ useHead({ title: `${speakerName} 発表一覧` });
 </script>
 
 <template>
-  <div
-    style="
-      background: var(--paper);
-      color: var(--ink);
-      min-height: 100vh;
-      font-family: var(--font-body);
-      -webkit-font-smoothing: antialiased;
-    "
-  >
-    <AppChrome />
-
-    <nav class="px-[var(--pad-x)] pt-[20px]">
-      <NuxtLink
-        to="/"
-        class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)] underline hover:no-underline tracking-[0.05em] hover:text-[var(--ink)]"
-        >← {{ t.back_top }}</NuxtLink
-      >
-    </nav>
+  <div>
+    <AppHeader />
 
     <header
       class="border-b border-[var(--rule)] pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-[var(--pad-x)]"
@@ -93,7 +77,7 @@ useHead({ title: `${speakerName} 発表一覧` });
 
     <section class="px-[var(--pad-x)] py-[40px]">
       <div
-        class="[font-family:var(--font-mono)] text-[10px] tracking-[0.1em] uppercase text-[var(--ink-3)] mb-[16px]"
+        class="[font-family:var(--font-mono)] text-[10px] tracking-[0.1em] text-[var(--ink-3)] mb-[16px]"
       >
         {{ t.related_talks }}
       </div>
@@ -139,17 +123,6 @@ useHead({ title: `${speakerName} 発表一覧` });
       </ol>
     </section>
 
-    <footer
-      class="border-t border-[var(--rule)] flex flex-wrap gap-x-[24px] gap-y-[8px] items-baseline justify-between px-[var(--pad-x)] py-[20px] text-[12px] text-[var(--ink-3)] [font-family:var(--font-mono)]"
-    >
-      <div>
-        Unofficial community archive.
-        <NuxtLink to="/" class="text-inherit hover:text-[var(--ink)]">{{ t.back_top }}</NuxtLink>
-      </div>
-      <div>
-        {{ lang === 'en' && record.nameEn ? record.nameEn : record.name }} ·
-        {{ record.talks.length }} talks
-      </div>
-    </footer>
+    <AppFooter />
   </div>
 </template>

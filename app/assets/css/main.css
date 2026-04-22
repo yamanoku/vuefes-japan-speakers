@@ -1,7 +1,4 @@
 @import 'tailwindcss' theme(static);
-@import '@nuxt/ui';
-
-/* ===== Swiss Design System — Vue Fes Japan Speakers redesign ===== */
 
 :root {
   --font-display: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -21,6 +18,22 @@
   --accent-ink: #ffffff;
   --radius: 0;
   --pad-x: clamp(24px, 4vw, 72px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #1c1c19;
+    --paper-2: #262622;
+    --rule: #e8e4dc;
+    --rule-soft: rgba(232, 228, 220, 0.15);
+    --rule-softer: rgba(232, 228, 220, 0.07);
+    --ink: #e8e4dc;
+    --ink-2: #b4b0a8;
+    --ink-3: #7a7a72;
+    --ink-4: #4e4e48;
+    --accent: #2ed9a8;
+    --accent-ink: #0d2820;
+  }
 }
 
 * {
@@ -60,4 +73,7 @@ select:focus-visible,
 input:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
+}
+select {
+  appearance: base-select;
 }

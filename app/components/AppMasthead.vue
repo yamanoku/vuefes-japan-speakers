@@ -17,7 +17,7 @@ const { t } = useVfjsI18n();
         <span>Vue Fes Japan speakers</span>
       </h1>
       <aside
-        class="col-span-3 [font-family:var(--font-mono)] text-[11px] leading-[1.7] tracking-[0.06em] uppercase text-[var(--ink-3)] border-l border-[var(--rule-soft)] pl-[16px] max-[800px]:col-span-12 max-[800px]:border-l-0 max-[800px]:pl-0 max-[800px]:border-t max-[800px]:pt-[16px]"
+        class="col-span-3 [font-family:var(--font-mono)] text-[12px] leading-[1.7] tracking-[0.06em] text-[var(--ink-3)] border-l border-[var(--rule-soft)] pl-[16px] max-[800px]:col-span-12 max-[800px]:border-l-0 max-[800px]:pl-0 max-[800px]:border-t max-[800px]:pt-[16px]"
         aria-label="Archive scope"
       >
         <div>
@@ -30,9 +30,8 @@ const { t } = useVfjsI18n();
         </div>
         <div>
           <b class="text-[var(--ink)] font-[500] not-italic">{{ stats.years }}</b>
-          {{ t.meta_years }} · 2018–2025
+          {{ t.meta_years }}
         </div>
-        <div class="mt-[10px]">{{ t.meta_updated }}: 2026.04</div>
       </aside>
       <p
         class="col-span-9 mt-[28px] text-[clamp(16px,1.4vw,20px)] text-[var(--ink-2)] leading-[1.5] m-0 max-[800px]:col-span-12"

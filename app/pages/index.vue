@@ -36,16 +36,8 @@ const stats = computed(() => {
 </script>
 
 <template>
-  <div
-    style="
-      background: var(--paper);
-      color: var(--ink);
-      min-height: 100vh;
-      font-family: var(--font-body);
-      -webkit-font-smoothing: antialiased;
-    "
-  >
-    <AppChrome />
+  <div>
+    <AppHeader />
     <AppMasthead :stats="stats" />
 
     <div
@@ -64,7 +56,7 @@ const stats = computed(() => {
         "
         @click="view = 'chronicle'"
       >
-        <span class="[font-family:var(--font-mono)] font-normal mr-[4px] text-[var(--ink-4)]"
+        <span class="[font-family:var(--font-mono)] font-normal mr-[4px] text-[var(--ink-3)]"
           >A</span
         >
         · {{ t.view_timeline }}
@@ -85,7 +77,7 @@ const stats = computed(() => {
         "
         @click="view = 'index'"
       >
-        <span class="[font-family:var(--font-mono)] font-normal mr-[4px] text-[var(--ink-4)]"
+        <span class="[font-family:var(--font-mono)] font-normal mr-[4px] text-[var(--ink-3)]"
           >B</span
         >
         · {{ t.view_index }}
@@ -108,7 +100,7 @@ const stats = computed(() => {
       @update:selected-speaker="selectedSpeaker = $event"
       @update:query="query = $event"
     />
-    <IndexView
+    <DirectoryView
       v-else
       :all-speakers="allSpeakers"
       :selected-year="selectedYear"
@@ -120,29 +112,6 @@ const stats = computed(() => {
       @update:query="query = $event"
     />
 
-    <footer
-      class="border-t border-[var(--rule)] grid grid-cols-[1fr_auto] items-end gap-6 px-[var(--pad-x)] py-[40px] [font-family:var(--font-mono)] text-[11px] tracking-[0.05em] text-[var(--ink-3)] uppercase"
-    >
-      <div>
-        Unofficial community archive · Not affiliated with Vue Fes Japan · Source data derived from
-        publicly listed sessions.<br />
-        <a
-          href="#about"
-          class="text-[var(--ink-2)] border-b border-[var(--rule-soft)] hover:text-[var(--ink)] hover:border-[var(--ink)]"
-          >About this redesign</a
-        >
-        ·
-        <a
-          href="https://github.com/yamanoku/vuefes-japan-speakers"
-          target="_blank"
-          rel="noopener"
-          class="text-[var(--ink-2)] border-b border-[var(--rule-soft)] hover:text-[var(--ink)] hover:border-[var(--ink)]"
-          >GitHub</a
-        >
-      </div>
-      <div>
-        VFJS · {{ stats.speakers }} speakers · {{ stats.talks }} talks · {{ stats.years }} editions
-      </div>
-    </footer>
+    <AppFooter />
   </div>
 </template>

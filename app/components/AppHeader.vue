@@ -23,7 +23,7 @@ const { lang, setLang, t } = useVfjsI18n();
 
       <div class="flex items-center gap-2">
         <div
-          class="inline-flex border border-[var(--rule)] [font-family:var(--font-mono)] text-[11px] tracking-[0.08em]"
+          class="inline-flex border border-[var(--rule)] [font-family:var(--font-mono)] text-[12px] tracking-[0.08em]"
           role="group"
           :aria-label="t.language"
         >
