@@ -120,7 +120,9 @@ export const speakers2025: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2025/speaker/Crayfisher-zari',
   },
   {
-    name: ['永井 優斗 (Yuto NAGAI)'],
+    name: ['永井 優斗'],
+    nameRuby: ['ながい ゆうと'],
+    nameEn: ['Yuto NAGAI'],
     title:
       'React Nativeならぬ"Vue Native"が実現するかも？新世代マルチプラットフォーム開発フレームワークのLynxとLynxのVue.js対応を追ってみよう',
     url: 'https://vuefes.jp/2025/speaker/yut0naga1',

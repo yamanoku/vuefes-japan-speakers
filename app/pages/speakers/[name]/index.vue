@@ -14,10 +14,21 @@ if (!filterNameSpeaker?.value || filterNameSpeaker.value.length === 0) {
   });
 }
 
-const { t } = useVfjsI18n();
+const { t, lang } = useVfjsI18n();
 
 const record = computed(() => {
-  const talks = (filterNameSpeaker?.value ?? [])
+  const speakers = filterNameSpeaker?.value ?? [];
+  let nameRuby: string | undefined;
+  let nameEn: string | undefined;
+  for (const s of speakers) {
+    const idx = s.name.indexOf(speakerName);
+    if (idx >= 0) {
+      if (!nameRuby && s.nameRuby?.[idx]) nameRuby = s.nameRuby[idx];
+      if (!nameEn && s.nameEn?.[idx]) nameEn = s.nameEn[idx];
+      if (nameRuby && nameEn) break;
+    }
+  }
+  const talks = speakers
     .map((s) => ({
       year: s.year,
       title: s.title,
@@ -26,7 +37,7 @@ const record = computed(() => {
     }))
     .sort((a, b) => a.year.localeCompare(b.year));
   const years = [...new Set(talks.map((tk) => tk.year))].sort();
-  return { name: speakerName, years, talks };
+  return { name: speakerName, nameRuby, nameEn, years, talks };
 });
 
 useHead({ title: `${speakerName} 発表一覧` });
@@ -42,12 +53,12 @@ useHead({ title: `${speakerName} 発表一覧` });
       -webkit-font-smoothing: antialiased;
     "
   >
-    <AppChrome current="home" />
+    <AppChrome />
 
     <nav class="px-[var(--pad-x)] pt-[20px]">
       <NuxtLink
         to="/"
-        class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)] no-underline tracking-[0.05em] hover:text-[var(--ink)]"
+        class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)] underline hover:no-underline tracking-[0.05em] hover:text-[var(--ink)]"
         >← {{ t.back_top }}</NuxtLink
       >
     </nav>
@@ -59,11 +70,24 @@ useHead({ title: `${speakerName} 発表一覧` });
         class="[font-family:var(--font-display)] text-[clamp(28px,4.5vw,72px)] font-bold tracking-[-0.04em] leading-[1] mb-[16px]"
         :lang="hasJapanese(record.name) ? 'ja' : 'en'"
       >
-        {{ record.name }}
+        <ruby v-if="record.nameRuby && lang === 'ja'"
+          >{{ record.name }}<rt>{{ record.nameRuby }}</rt></ruby
+        >
+        <template v-else>{{
+          lang === 'en' && record.nameEn ? record.nameEn : record.name
+        }}</template>
       </h1>
       <div class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)]">
         <div>{{ t.appearance_count(record.talks.length) }}</div>
-        <div class="mt-[8px]">{{ t.years_appeared }}: {{ record.years.join(' · ') }}</div>
+        <div class="mt-[8px]">
+          {{ t.years_appeared }}:
+          <template v-for="(year, i) in record.years" :key="year">
+            <template v-if="i > 0">, </template>
+            <NuxtLink :to="`/${year}`" class="text-[var(--accent)] underline hover:no-underline">{{
+              year
+            }}</NuxtLink>
+          </template>
+        </div>
       </div>
     </header>
 
@@ -81,7 +105,7 @@ useHead({ title: `${speakerName} 発表一覧` });
         >
           <span class="[font-family:var(--font-mono)] text-[11px] text-[var(--ink-3)]">
             <NuxtLink
-              class="text-[var(--accent)] no-underline hover:underline"
+              class="text-[var(--accent)] underline hover:no-underline"
               :to="`/${talk.year}`"
               >{{ talk.year }}</NuxtLink
             >
@@ -122,7 +146,10 @@ useHead({ title: `${speakerName} 発表一覧` });
         Unofficial community archive.
         <NuxtLink to="/" class="text-inherit hover:text-[var(--ink)]">{{ t.back_top }}</NuxtLink>
       </div>
-      <div>{{ record.name }} · {{ record.talks.length }} talks</div>
+      <div>
+        {{ lang === 'en' && record.nameEn ? record.nameEn : record.name }} ·
+        {{ record.talks.length }} talks
+      </div>
     </footer>
   </div>
 </template>

@@ -17,7 +17,7 @@ const emit = defineEmits<{
   'update:query': [string];
 }>();
 
-const { t } = useVfjsI18n();
+const { t, lang } = useVfjsI18n();
 
 const speakerMap = computed(() => buildSpeakerMap(props.allSpeakers));
 
@@ -166,7 +166,7 @@ const rowgap = computed(
           :id="`year-${year}`"
         >
           <span
-            class="[font-family:var(--font-display)] font-[500] text-[clamp(72px,10vw,160px)] leading-[0.85] tracking-[-0.04em] tabular-nums text-[var(--ink)]"
+            class="[font-family:var(--font-display)] font-[500] text-[clamp(72px,8vw,160px)] leading-[0.85] tracking-[-0.04em] tabular-nums text-[var(--ink)]"
             aria-hidden="true"
             >{{ year }}</span
           >
@@ -210,13 +210,10 @@ const rowgap = computed(
                     class="text-[var(--ink)] border-b border-[var(--rule-soft)] pb-[1px] no-underline transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
                     :to="`/speakers/${encodeURIComponent(n)}`"
                   >
-                    <span>{{ n }}</span>
-                    <span
-                      v-if="getSpeakerCount(n) > 1"
-                      class="[font-family:var(--font-mono)] text-[10px] text-[var(--accent)] ml-[4px] tracking-[0.02em] align-[2px]"
-                      :title="t.appearance_count(getSpeakerCount(n))"
-                      >×{{ getSpeakerCount(n) }}</span
+                    <ruby v-if="s.nameRuby?.[ni] && lang === 'ja'" lang="ja"
+                      >{{ n }}<rt>{{ s.nameRuby[ni] }}</rt></ruby
                     >
+                    <span v-else>{{ lang === 'en' && s.nameEn?.[ni] ? s.nameEn[ni] : n }}</span>
                   </NuxtLink>
                 </template>
               </div>

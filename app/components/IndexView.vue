@@ -18,7 +18,7 @@ const emit = defineEmits<{
   'update:query': [string];
 }>();
 
-const { t } = useVfjsI18n();
+const { t, lang } = useVfjsI18n();
 
 const speakerMap = computed(() => buildSpeakerMap(props.allSpeakers));
 const allRecords = computed(() => Array.from(speakerMap.value.values()));
@@ -235,10 +235,13 @@ const idxpad = computed(
             class="[font-family:var(--font-display)] text-[clamp(15px,1.2vw,18px)] font-[500] tracking-[-0.005em] text-[var(--ink)]"
             :lang="hasJapanese(rec.name) ? 'ja' : 'en'"
           >
-            {{ rec.name }}
+            <ruby v-if="rec.nameRuby && lang === 'ja'"
+              >{{ rec.name }}<rt>{{ rec.nameRuby }}</rt></ruby
+            >
+            <template v-else>{{ lang === 'en' && rec.nameEn ? rec.nameEn : rec.name }}</template>
             <span
               v-if="rec.talks.length > 1"
-              class="[font-family:var(--font-mono)] text-[10px] text-[var(--accent)] ml-[8px] font-normal tracking-[0.02em] align-[2px] border border-[var(--accent)] px-[5px] py-[1px]"
+              class="[font-family:var(--font-mono)] bg-[var(--accent)] text-[10px] text-[var(--accent-ink)] ml-[8px] font-normal tracking-[0.02em] align-[2px] border border-[var(--accent)] px-[5px] py-[1px]"
               :aria-label="t.appearance_count(rec.talks.length)"
               >×{{ rec.talks.length }}</span
             >
@@ -293,7 +296,7 @@ const idxpad = computed(
                 >{{ talk.year }}</span
               >
               <a
-                class="text-[14px] text-[var(--ink)] no-underline border-b border-[var(--rule-soft)] pb-[1px] leading-[1.45] hover:border-[var(--ink)]"
+                class="text-[14px] text-[var(--ink)] pb-[1px] leading-[1.45]"
                 :href="talk.url"
                 target="_blank"
                 rel="noopener noreferrer"

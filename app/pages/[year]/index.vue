@@ -13,7 +13,7 @@ const year = route.params.year as AcceptedYear;
 
 const { filterYearSpeaker } = await useFetchSpeaker(year);
 
-const { t } = useVfjsI18n();
+const { t, lang } = useVfjsI18n();
 
 useHead({ title: `Vue Fes Japan ${year}` });
 </script>
@@ -28,7 +28,7 @@ useHead({ title: `Vue Fes Japan ${year}` });
       -webkit-font-smoothing: antialiased;
     "
   >
-    <AppChrome current="years" />
+    <AppChrome />
 
     <nav class="px-[var(--pad-x)] pt-[20px]">
       <NuxtLink
@@ -44,7 +44,8 @@ useHead({ title: `Vue Fes Japan ${year}` });
       <h1
         class="[font-family:var(--font-display)] text-[clamp(28px,4.5vw,72px)] font-bold tracking-[-0.04em] leading-[1] mb-[16px]"
       >
-        Vue Fes Japan <em class="not-italic text-[var(--accent)]">{{ year }}</em>
+        Vue Fes Japan <span v-if="year === '2022'">Online </span
+        ><em class="not-italic text-[var(--accent)]">{{ year }}</em>
       </h1>
       <div class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)]">
         <div>{{ t.year_total_talks(filterYearSpeaker?.length ?? 0) }}</div>
@@ -53,7 +54,7 @@ useHead({ title: `Vue Fes Japan ${year}` });
             :href="`https://vuefes.jp/${year}/`"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-inherit hover:text-[var(--ink)]"
+            class="text-inherit hover:text-[var(--ink)] underline hover:no-underline"
           >
             {{ t.official_site }} ↗
           </a>
@@ -61,7 +62,7 @@ useHead({ title: `Vue Fes Japan ${year}` });
       </div>
     </header>
 
-    <section>
+    <section class="px-[var(--pad-x)] py-[40px]">
       <ol class="list-none p-0 m-0">
         <li class="border-b border-[var(--rule)]">
           <ul class="list-none p-0 m-0">
@@ -86,7 +87,10 @@ useHead({ title: `Vue Fes Japan ${year}` });
                       class="text-[15px] font-semibold no-underline text-[var(--ink)] tracking-[-0.01em] hover:text-[var(--accent)]"
                       :to="`/speakers/${encodeURIComponent(n)}`"
                     >
-                      <span :lang="hasJapanese(n) ? 'ja' : 'en'">{{ n }}</span>
+                      <ruby v-if="s.nameRuby?.[ni] && lang === 'ja'" lang="ja"
+                        >{{ n }}<rt>{{ s.nameRuby[ni] }}</rt></ruby
+                      >
+                      <span v-else>{{ lang === 'en' && s.nameEn?.[ni] ? s.nameEn[ni] : n }}</span>
                     </NuxtLink>
                   </template>
                 </div>
@@ -96,12 +100,16 @@ useHead({ title: `Vue Fes Japan ${year}` });
                     :href="s.url"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-inherit no-underline hover:text-[var(--ink)] flex items-baseline gap-[4px]"
+                    class="text-inherit hover:text-[var(--ink)] flex items-baseline gap-[4px]"
                   >
-                    <span :lang="hasJapanese(s.title) ? 'ja' : 'en'">{{ s.title }}</span>
+                    <span
+                      class="underline hover:no-underline"
+                      :lang="hasJapanese(s.title) ? 'ja' : 'en'"
+                      >{{ s.title }}</span
+                    >
                     <span class="text-[11px] opacity-70" :aria-label="t.external">↗</span>
                   </a>
-                  <span v-else class="italic text-[var(--ink-4)]">{{ t.tbd }}</span>
+                  <span v-else class="italic text-[var(--ink-4)] no-underline">{{ t.tbd }}</span>
                 </div>
               </div>
             </li>
@@ -115,7 +123,11 @@ useHead({ title: `Vue Fes Japan ${year}` });
     >
       <div>
         Unofficial community archive.
-        <NuxtLink to="/" class="text-inherit hover:text-[var(--ink)]">{{ t.back_top }}</NuxtLink>
+        <NuxtLink
+          to="/"
+          class="text-inherit hover:text-[var(--ink)] underline hover:no-underline"
+          >{{ t.back_top }}</NuxtLink
+        >
       </div>
       <div>{{ year }} · {{ filterYearSpeaker?.length ?? 0 }} talks</div>
     </footer>

@@ -45,7 +45,7 @@ const stats = computed(() => {
       -webkit-font-smoothing: antialiased;
     "
   >
-    <AppChrome current="home" />
+    <AppChrome />
     <AppMasthead :stats="stats" />
 
     <div
@@ -59,7 +59,7 @@ const stats = computed(() => {
         class="px-[22px] py-[16px] [font-family:var(--font-body)] font-[500] text-[14px] tracking-[-0.005em] border-r border-[var(--rule-soft)] cursor-pointer"
         :class="
           view === 'chronicle'
-            ? 'text-[var(--ink)] [box-shadow:inset_0_-2px_0_var(--accent)]'
+            ? 'text-[var(--ink)] [box-shadow:inset_0_-4px_0_var(--accent)]'
             : 'text-[var(--ink-3)] hover:text-[var(--ink)]'
         "
         @click="view = 'chronicle'"
@@ -80,7 +80,7 @@ const stats = computed(() => {
         class="px-[22px] py-[16px] [font-family:var(--font-body)] font-[500] text-[14px] tracking-[-0.005em] border-r border-[var(--rule-soft)] cursor-pointer"
         :class="
           view === 'index'
-            ? 'text-[var(--ink)] [box-shadow:inset_0_-2px_0_var(--accent)]'
+            ? 'text-[var(--ink)] [box-shadow:inset_0_-4px_0_var(--accent)]'
             : 'text-[var(--ink-3)] hover:text-[var(--ink)]'
         "
         @click="view = 'index'"

@@ -2,6 +2,8 @@ import type { SpeakerWithYear } from '~~/types';
 
 export interface SpeakerRecord {
   name: string;
+  nameRuby?: string;
+  nameEn?: string;
   years: string[];
   talks: Array<{
     year: string;
@@ -14,9 +16,14 @@ export interface SpeakerRecord {
 export function buildSpeakerMap(allSpeakers: SpeakerWithYear[]): Map<string, SpeakerRecord> {
   const map = new Map<string, SpeakerRecord>();
   for (const s of allSpeakers) {
-    for (const n of s.name) {
-      if (!map.has(n)) map.set(n, { name: n, years: [], talks: [] });
+    for (let idx = 0; idx < s.name.length; idx++) {
+      const n = s.name[idx] as string;
+      const ruby = s.nameRuby?.[idx];
+      const nameEn = s.nameEn?.[idx];
+      if (!map.has(n)) map.set(n, { name: n, nameRuby: ruby, nameEn, years: [], talks: [] });
       const rec = map.get(n)!;
+      if (!rec.nameRuby && ruby) rec.nameRuby = ruby;
+      if (!rec.nameEn && nameEn) rec.nameEn = nameEn;
       if (!rec.years.includes(s.year)) rec.years.push(s.year);
       rec.talks.push({
         year: s.year,

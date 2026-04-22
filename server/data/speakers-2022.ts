@@ -37,7 +37,8 @@ export const speakers2022: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2022/sponsor-sessions/yesod',
   },
   {
-    name: ['福井 潤之 (フクイ ヒロユキ)'],
+    name: ['福井 潤之'],
+    nameRuby: ['ふくい ひろゆき'],
     title: 'Vue.jsのUIを強化するグレープシティのJavaScriptライブラリ',
     url: 'https://vuefes.jp/2022/sponsor-sessions/grapecity',
   },
@@ -52,7 +53,8 @@ export const speakers2022: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2022/sponsor-sessions/base',
   },
   {
-    name: ['t0yohei (トヨヘイ)'],
+    name: ['t0yohei'],
+    nameRuby: ['トヨヘイ'],
     title: '負債が溜まったレガシーフロントエンド画面を Vue.js でリプレイスした話',
     url: 'https://vuefes.jp/2022/sessions/t0yohei',
   },
@@ -122,7 +124,8 @@ export const speakers2022: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2022/sessions/monsat',
   },
   {
-    name: ['太田 洋介 (ota-meshi)'],
+    name: ['太田 洋介'],
+    nameEn: ['ota-meshi'],
     title: 'eslint-plugin-vueを使用して継続的にVue3移行する',
     url: 'https://vuefes.jp/2022/sessions/ota-meshi',
   },
@@ -157,7 +160,8 @@ export const speakers2022: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2022/sessions/Jess',
   },
   {
-    name: ['みゅーとん (mew-ton)'],
+    name: ['みゅーとん'],
+    nameEn: ['mew-ton'],
     title: 'デザインシステムを後から導入する前提で作った 変更に強いNuxt3プロジェクトの構成',
     url: 'https://vuefes.jp/2022/sessions/mew-ton',
   },
