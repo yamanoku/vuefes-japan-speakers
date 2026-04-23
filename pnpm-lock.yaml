@@ -16,13 +16,6 @@ catalogs:
     tailwindcss:
       specifier: 4.2.4
       version: 4.2.4
-  icon:
-    '@iconify-json/heroicons-solid':
-      specifier: 1.2.1
-      version: 1.2.1
-    '@iconify-json/lucide':
-      specifier: 1.2.102
-      version: 1.2.102
   nuxt:
     '@nuxt/a11y':
       specifier: 1.0.0-alpha.1
@@ -79,9 +72,6 @@ importers:
 
   .:
     dependencies:
-      '@iconify-json/heroicons-solid':
-        specifier: catalog:icon
-        version: 1.2.1
       '@nuxt/ui':
         specifier: catalog:nuxt
         version: 4.6.1(@tiptap/extensions@3.21.0(@tiptap/core@3.21.0(@tiptap/pm@3.21.0))(@tiptap/pm@3.21.0))(@tiptap/y-tiptap@3.0.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.4)(y-protocols@1.0.7(yjs@13.6.28))(yjs@13.6.28))(change-case@5.4.4)(db0@0.3.4)(embla-carousel@8.6.0)(ioredis@5.9.2)(magicast@0.5.1)(tailwindcss@4.2.4)(typescript@5.9.3)(vite@7.3.1(@types/node@20.19.25)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.44.1)(yaml@2.8.2))(vue-router@5.0.6(@vue/compiler-sfc@3.5.33)(vue@3.5.33(typescript@5.9.3)))(vue@3.5.33(typescript@5.9.3))(yjs@13.6.28)(zod@4.2.1)
@@ -98,9 +88,6 @@ importers:
         specifier: catalog:vue
         version: 5.0.6(@vue/compiler-sfc@3.5.33)(vue@3.5.33(typescript@5.9.3))
     devDependencies:
-      '@iconify-json/lucide':
-        specifier: catalog:icon
-        version: 1.2.102
       '@nuxt/a11y':
         specifier: catalog:nuxt
         version: 1.0.0-alpha.1(magicast@0.5.1)(vite@7.3.1(@types/node@20.19.25)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.44.1)(yaml@2.8.2))
@@ -633,12 +620,6 @@ packages:
   '@humanwhocodes/retry@0.4.3':
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
-
-  '@iconify-json/heroicons-solid@1.2.1':
-    resolution: {integrity: sha512-sRZ6U1FT1lkxtIuL+iQ9Fpm5IZxvJCDaKdLpP5elgZ6OkQn6j8HVJpxgFIcuJbHC/EeoNp3tHldMEELqN9pZDQ==}
-
-  '@iconify-json/lucide@1.2.102':
-    resolution: {integrity: sha512-Dm3EEqu5NrmzyDMB2U1+8yroEj2/dB9V4KlH0m/szwwF/ofSf0cPaGTZqkd1aExXjCor+vU53ttRMCGuXf+/cg==}
 
   '@iconify/collections@1.0.641':
     resolution: {integrity: sha512-G9LdUvewUdXp5SD4g06rWHpWo7s5/rQcsQxAQ3UQUqdRwkcUuPcGrY0qnZ0wzYLaeB0TVUrgC0MIigyhWiNgtQ==}
@@ -6758,14 +6739,6 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@iconify-json/heroicons-solid@1.2.1':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/lucide@1.2.102':
-    dependencies:
-      '@iconify/types': 2.0.0
-
   '@iconify/collections@1.0.641':
     dependencies:
       '@iconify/types': 2.0.0
@@ -12643,7 +12616,7 @@ snapshots:
       esbuild: 0.27.3
       fdir: 6.5.0(picomatch@4.0.4)
       picomatch: 4.0.4
-      postcss: 8.5.8
+      postcss: 8.5.10
       rollup: 4.56.0
       tinyglobby: 0.2.15
     optionalDependencies:
