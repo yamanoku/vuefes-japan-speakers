@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { buildSpeakerMap } from '~/utils/speakerMap';
 import { YEARS } from '~~/types';
 import type { SpeakerWithYear, AcceptedYear } from '~~/types';
 
@@ -8,7 +7,6 @@ const props = defineProps<{
   selectedYear: AcceptedYear | 'all';
   selectedSpeaker: string;
   query: string;
-  density: string;
 }>();
 
 const emit = defineEmits<{
@@ -18,8 +16,6 @@ const emit = defineEmits<{
 }>();
 
 const { t, lang } = useVfjsI18n();
-
-const speakerMap = computed(() => buildSpeakerMap(props.allSpeakers));
 
 const uniqueNames = computed(() => {
   const set = new Set<string>();
@@ -54,19 +50,11 @@ const grouped = computed(() => {
   for (const s of filtered.value) map.get(s.year)?.push(s);
   return Array.from(map.entries()).filter(([, arr]) => arr.length > 0);
 });
-
-function getSpeakerCount(name: string): number {
-  return speakerMap.value.get(name)?.years.length ?? 1;
-}
-
-const rowgap = computed(
-  () => ({ compact: '10px', cozy: '18px', airy: '32px' })[props.density] ?? '18px',
-);
 </script>
 
 <template>
   <main>
-    <section :style="{ '--rowgap': rowgap }">
+    <section :style="{ '--rowgap': '18px' }">
       <SpeakerFilterBar
         :query="query"
         :selected-speaker="selectedSpeaker"

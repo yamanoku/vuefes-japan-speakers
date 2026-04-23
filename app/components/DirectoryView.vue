@@ -9,7 +9,6 @@ const props = defineProps<{
   selectedYear: AcceptedYear | 'all';
   selectedSpeaker: string;
   query: string;
-  density: string;
 }>();
 
 const emit = defineEmits<{
@@ -73,15 +72,11 @@ function toggleRow(name: string) {
   else next.add(name);
   openRows.value = next;
 }
-
-const idxpad = computed(
-  () => ({ compact: '8px', cozy: '14px', airy: '22px' })[props.density] ?? '14px',
-);
 </script>
 
 <template>
   <main>
-    <section :style="{ '--idxpad': idxpad }">
+    <section :style="{ '--idxpad': '14px' }">
       <SpeakerFilterBar
         :query="query"
         :selected-speaker="selectedSpeaker"
