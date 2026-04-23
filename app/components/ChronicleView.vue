@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { buildSpeakerMap, hasJapanese } from '~/utils/speakerMap';
+import { buildSpeakerMap } from '~/utils/speakerMap';
 import { YEARS } from '~~/types';
 import type { SpeakerWithYear, AcceptedYear } from '~~/types';
 
@@ -110,7 +110,7 @@ const rowgap = computed(
               >{{ t.year_total_talks(arr.length) }}</span
             >
             <NuxtLink
-              class="[font-family:var(--font-mono)] text-[24px] tracking-[0.08em] uppercase text-[var(--accent)] border-b border-current pb-[2px] no-underline mt-[14px]"
+              class="[font-family:var(--font-mono)] text-[24px] tracking-[0.08em] uppercase text-[var(--ink)] hover:text-[var(--accent)] transition-colors border-b border-current pb-[2px] no-underline mt-[14px]"
               :to="`/${year}`"
               :aria-label="`${year} speakers`"
               >→</NuxtLink
@@ -125,7 +125,7 @@ const rowgap = computed(
               class="grid grid-cols-[56px_1fr] gap-[16px] py-[var(--rowgap)] border-b border-[var(--rule-softer)] items-start"
             >
               <div
-                class="[font-family:var(--font-mono)] text-[14px] text-[var(--ink-4)] pt-[3px]"
+                class="[font-family:var(--font-mono)] text-[14px] text-[var(--ink-2)] pt-[3px]"
                 aria-hidden="true"
               >
                 <span>{{ String(i + 1).padStart(2, '0') }}</span>
@@ -138,7 +138,7 @@ const rowgap = computed(
                   class="[font-family:var(--font-display)] font-[500] text-[clamp(17px,1.5vw,22px)] tracking-[-0.01em] leading-[1.25]"
                 >
                   <template v-for="(n, ni) in s.name" :key="n">
-                    <span v-if="ni > 0" class="text-[var(--ink-4)] font-normal" aria-hidden="true">
+                    <span v-if="ni > 0" class="text-[var(--ink-2)] font-normal" aria-hidden="true">
                       ×
                     </span>
                     <NuxtLink
@@ -161,16 +161,16 @@ const rowgap = computed(
                     rel="noopener noreferrer"
                     class="text-[var(--ink-2)] no-underline hover:text-[var(--ink)]"
                   >
-                    <span :lang="hasJapanese(s.title) ? 'ja' : 'en'">{{ s.title }}</span>
+                    <span class="hover:underline">{{ s.title }}</span>
                     <span
-                      class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-4)] ml-[4px]"
+                      class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] ml-[4px]"
                       :aria-label="t.external"
                       >↗</span
                     >
                   </a>
                   <span
                     v-else
-                    class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-4)] uppercase tracking-[0.06em]"
+                    class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] uppercase tracking-[0.06em]"
                     >{{ t.tbd }}</span
                   >
                 </div>

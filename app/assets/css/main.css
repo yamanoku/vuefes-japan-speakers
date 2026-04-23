@@ -3,7 +3,6 @@
 :root {
   --font-display: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-body: 'Inter Tight', 'IBM Plex Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
-  --font-jp: 'IBM Plex Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
   --paper: #f4f1eb;
   --paper-2: #ece7dd;
@@ -13,10 +12,8 @@
   --ink: #1a1a17;
   --ink-2: #3a3a35;
   --ink-3: #6b6b64;
-  --ink-4: #9a9a91;
   --accent: #007f62;
   --accent-ink: #ffffff;
-  --radius: 0;
   --pad-x: clamp(24px, 4vw, 72px);
 }
 
@@ -30,7 +27,6 @@
     --ink: #e8e4dc;
     --ink-2: #b4b0a8;
     --ink-3: #7a7a72;
-    --ink-4: #4e4e48;
     --accent: #2ed9a8;
     --accent-ink: #0d2820;
   }
@@ -45,7 +41,6 @@
   --ink: #e8e4dc;
   --ink-2: #b4b0a8;
   --ink-3: #7a7a72;
-  --ink-4: #4e4e48;
   --accent: #2ed9a8;
   --accent-ink: #0d2820;
 }
@@ -59,7 +54,6 @@
   --ink: #1a1a17;
   --ink-2: #3a3a35;
   --ink-3: #6b6b64;
-  --ink-4: #9a9a91;
   --accent: #007f62;
   --accent-ink: #ffffff;
 }
