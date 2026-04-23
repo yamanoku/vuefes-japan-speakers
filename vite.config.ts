@@ -580,13 +580,6 @@ export default defineConfig({
             },
           ],
           '@stylistic/block-spacing': ['error', 'always'],
-          '@stylistic/brace-style': [
-            'error',
-            'stroustrup',
-            {
-              allowSingleLine: true,
-            },
-          ],
           '@stylistic/comma-dangle': ['error', 'always-multiline'],
           '@stylistic/comma-spacing': [
             'error',
@@ -713,7 +706,6 @@ export default defineConfig({
           '@stylistic/no-trailing-spaces': 'error',
           '@stylistic/no-whitespace-before-property': 'error',
           '@stylistic/object-curly-spacing': ['error', 'always'],
-          '@stylistic/operator-linebreak': ['error', 'before'],
           '@stylistic/padded-blocks': [
             'error',
             {

@@ -43,6 +43,8 @@ export const speakers2019: SpeakerInfo[] = [
   },
   {
     name: ['大山 奥人'],
+    nameRuby: ['おおやま おくと'],
+    nameEn: ['Okuto Oyama'],
     title: 'Vue.js meets Web Accessibility',
     url: 'https://vuefes.jp/2019/sessions/yamanoku/',
   },
@@ -57,7 +59,8 @@ export const speakers2019: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2019/sessions/jlooper/',
   },
   {
-    name: ['甲斐 啓真 (Keima)'],
+    name: ['甲斐 啓真'],
+    nameEn: ['Keima Kai'],
     title: '次世代のデザインとフロントエンド開発の GUI 化',
     url: 'https://vuefes.jp/2019/sessions/keimakai/',
   },

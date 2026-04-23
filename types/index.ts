@@ -1,5 +1,7 @@
 export type SpeakerInfo = {
   name: string[];
+  nameRuby?: string[];
+  nameEn?: string[];
   title?: string;
   url: string;
 };

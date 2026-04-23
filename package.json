@@ -16,7 +16,6 @@
     "prepare": "vp config"
   },
   "dependencies": {
-    "@iconify-json/heroicons-solid": "catalog:icon",
     "@nuxt/ui": "catalog:nuxt",
     "nuxt": "catalog:nuxt",
     "tailwindcss": "catalog:css",
@@ -24,7 +23,6 @@
     "vue-router": "catalog:vue"
   },
   "devDependencies": {
-    "@iconify-json/lucide": "catalog:icon",
     "@nuxt/a11y": "catalog:nuxt",
     "@nuxt/eslint": "catalog:test",
     "@nuxt/eslint-config": "catalog:test",

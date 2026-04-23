@@ -13,7 +13,9 @@ export const speakers2024: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2024/sessions/keisuke-tsuji',
   },
   {
-    name: ['永井 優斗 (Yuto NAGAI)'],
+    name: ['永井 優斗'],
+    nameRuby: ['ながい ゆうと'],
+    nameEn: ['Yuto NAGAI'],
     title:
       'IT未経験者をVue.jsで開発できるITコンサルタントに育てあげる秘訣 - フューチャーの新人研修の取り組み',
     url: 'https://vuefes.jp/2024/sessions/yuto-nagai',
@@ -64,7 +66,9 @@ export const speakers2024: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2024/sessions/pi0',
   },
   {
-    name: ['山下 裕一朗 (Yuichiro Yamashita)'],
+    name: ['山下 裕一朗'],
+    nameRuby: ['やました ゆういちろう'],
+    nameEn: ['Yuichiro Yamashita'],
     title: 'Vue 3 と Svelte 5 のランタイムを比較する 〜技術を一段深く理解する〜',
     url: 'https://vuefes.jp/2024/sessions/baseballyama',
   },

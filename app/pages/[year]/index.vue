@@ -1,58 +1,109 @@
 <script setup lang="ts">
-import type { AcceptedYear, SpeakerInfo } from '~~/types';
-import SpeakerTable from '~/components/SpeakerTable.vue';
 import { useFetchSpeaker } from '~/composables/speaker';
 import { isValidYear } from '~/utils/years';
-
-type SpeakerWithYear = SpeakerInfo & { year: AcceptedYear };
+import type { AcceptedYear } from '~~/types';
 
 definePageMeta({
   validate: (route) => isValidYear(route.params.year as string),
 });
 
 const route = useRoute();
-const { filterYearSpeaker } = await useFetchSpeaker(route.params.year as string);
+const year = route.params.year as AcceptedYear;
 
-const speakersWithYear = computed<SpeakerWithYear[] | undefined>(() => {
-  if (!filterYearSpeaker?.value) return undefined;
-  return filterYearSpeaker.value.map((speaker) => ({
-    ...speaker,
-    year: route.params.year as AcceptedYear,
-  }));
-});
+const { filterYearSpeaker } = await useFetchSpeaker(year);
 
-useHead({
-  title: `Vue Fes Japan ${route.params.year as string}`,
-});
+const { t, lang } = useVfjsI18n();
+
+useHead({ title: `Vue Fes Japan ${year}` });
 </script>
 
 <template>
   <div>
-    <hgroup>
-      <h1 class="font-semibold text-3xl text-gray-900 dark:text-white leading-tight">
-        Vue Fes Japan {{ $route.params.year }}
-      </h1>
-      <p class="pt-6">
-        <a
-          :href="`https://vuefes.jp/${$route.params.year}/`"
-          target="_blank"
-          class="text-gray-500 dark:text-gray-400 text-xl underline hover:no-underline"
-        >
-          Vue Fes Japan {{ $route.params.year }}公式サイト
-          <UIcon name="i-heroicons-solid-arrow-top-right-on-square" class="ms-1 align-[-0.15rem]" />
-        </a>
-      </p>
-    </hgroup>
-    <div class="pt-6">
-      <nuxt-link
-        to="/"
-        class="text-gray-500 dark:text-gray-400 text-xl underline hover:no-underline"
+    <AppHeader />
+
+    <main>
+      <header
+        class="border-b border-[var(--rule)] pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-[var(--pad-x)]"
       >
-        TOPページに戻る
-      </nuxt-link>
-    </div>
-    <div class="pt-6">
-      <SpeakerTable :speakers="speakersWithYear" :year="route.params.year as string" />
-    </div>
+        <h1
+          class="[font-family:var(--font-display)] text-[clamp(28px,4.5vw,72px)] font-bold tracking-[-0.04em] leading-[1] mb-[16px]"
+        >
+          Vue Fes Japan <span v-if="year === '2022'">Online </span
+          ><em class="not-italic text-[var(--accent)]">{{ year }}</em>
+        </h1>
+        <div class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)]">
+          <div>{{ t.year_total_talks(filterYearSpeaker?.length ?? 0) }}</div>
+          <div class="mt-[8px]">
+            <a
+              :href="`https://vuefes.jp/${year}/`"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[var(--ink)] no-underline flex items-baseline gap-[4px]"
+            >
+              <span class="hover:underline">{{ t.official_site }}</span
+              ><span>↗</span>
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <section class="px-[var(--pad-x)] py-[40px]">
+        <ol class="list-none p-0 m-0">
+          <li class="border-b border-[var(--rule)]">
+            <ul class="list-none p-0 m-0">
+              <li
+                v-for="(s, i) in filterYearSpeaker"
+                :key="i"
+                class="grid grid-cols-[40px_1fr] border-t border-[var(--rule-softer)] py-[18px]"
+              >
+                <div
+                  class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] pt-[5px] text-center"
+                  aria-hidden="true"
+                >
+                  <span>{{ String(i + 1).padStart(2, '0') }}</span>
+                </div>
+                <div class="pr-[24px]">
+                  <div class="flex flex-wrap gap-x-[8px] gap-y-[4px] mb-[6px] \items-center">
+                    <template v-for="(n, ni) in s.name" :key="n">
+                      <span
+                        v-if="ni > 0"
+                        class="text-[var(--ink-2)] text-[12px]"
+                        aria-hidden="true"
+                      >
+                        ×
+                      </span>
+                      <NuxtLink
+                        class="text-[18px] [font-family:var(--font-mono)] border-b border-[var(--rule-soft)] pb-[1px] no-underline transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                        :to="`/speakers/${encodeURIComponent(n)}`"
+                      >
+                        <ruby v-if="s.nameRuby?.[ni] && lang === 'ja'" lang="ja"
+                          >{{ n }}<rt>{{ s.nameRuby[ni] }}</rt></ruby
+                        >
+                        <span v-else>{{ lang === 'en' && s.nameEn?.[ni] ? s.nameEn[ni] : n }}</span>
+                      </NuxtLink>
+                    </template>
+                  </div>
+                  <div class="text-[14px] text-[var(--ink-2)]">
+                    <a
+                      v-if="s.title"
+                      :href="s.url"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-inherit no-underline flex items-baseline gap-[4px]"
+                    >
+                      <span class="hover:underline">{{ s.title }}</span>
+                      <span class="text-[12px]" :aria-label="t.external">↗</span>
+                    </a>
+                    <span v-else class="italic text-[var(--ink-2)] no-underline">{{ t.tbd }}</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+    </main>
+
+    <AppFooter />
   </div>
 </template>

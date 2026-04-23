@@ -1,61 +1,117 @@
 <script setup lang="ts">
-import SpeakerTable from '~/components/SpeakerTable.vue';
 import { useFetchAllSpeakers } from '~/composables/speaker';
+import { YEARS } from '~~/types';
 import type { AcceptedYear } from '~~/types';
 
-// Fetch all speakers with year information
 const allSpeakers = await useFetchAllSpeakers();
 
-// State for selected year and speaker
-const selectedYear = ref<AcceptedYear | 'all'>('all');
-const selectedSpeaker = ref<string | 'all'>('all');
+const { t } = useVfjsI18n();
 
-// Get unique speaker names from all speakers
-const availableSpeakers = computed(() => {
-  const speakerNames = new Set<string>();
-  allSpeakers.forEach((speaker) => {
-    speaker.name.forEach((name) => speakerNames.add(name));
-  });
-  return Array.from(speakerNames).sort();
+const view = ref<'chronicle' | 'index'>('chronicle');
+const density = ref<'compact' | 'cozy' | 'airy'>('airy');
+
+onMounted(() => {
+  const storedView = localStorage.getItem('vfjs:view') as 'chronicle' | 'index' | null;
+  if (storedView === 'chronicle' || storedView === 'index') view.value = storedView;
+  const storedDensity = localStorage.getItem('vfjs:density') as 'compact' | 'cozy' | 'airy' | null;
+  if (storedDensity) density.value = storedDensity;
 });
 
-// Filtered speakers based on selected year and speaker
-const filteredSpeakers = computed(() => {
-  let filtered = [...allSpeakers];
+watch(view, (v) => {
+  if (import.meta.client) localStorage.setItem('vfjs:view', v);
+});
+watch(density, (d) => {
+  if (import.meta.client) localStorage.setItem('vfjs:density', d);
+});
 
-  // Filter by year
-  if (selectedYear.value !== 'all') {
-    filtered = filtered.filter((speaker) => speaker.year === selectedYear.value);
-  }
+const selectedYear = ref<AcceptedYear | 'all'>('all');
+const selectedSpeaker = ref<string>('all');
+const query = ref('');
 
-  // Filter by speaker
-  if (selectedSpeaker.value !== 'all') {
-    filtered = filtered.filter((speaker) => speaker.name.includes(selectedSpeaker.value));
-  }
-
-  return filtered;
+const stats = computed(() => {
+  const speakerSet = new Set<string>();
+  for (const s of allSpeakers) s.name.forEach((n) => speakerSet.add(n));
+  return { speakers: speakerSet.size, talks: allSpeakers.length, years: YEARS.length };
 });
 </script>
 
 <template>
   <div>
-    <h1 class="font-semibold text-3xl text-gray-900 dark:text-white leading-tight">
-      Vue Fes Japan Speakers
-    </h1>
-    <div class="pt-6">
-      <p class="text-lg">Vue Fes Japan歴代スピーカーまとめページ</p>
+    <AppHeader />
+    <AppMasthead :stats="stats" />
+
+    <div
+      class="flex gap-0 px-[var(--pad-x)] border-b border-[var(--rule)] bg-[var(--paper)]"
+      role="tablist"
+      aria-label="View mode"
+    >
+      <button
+        role="tab"
+        :aria-selected="view === 'chronicle'"
+        class="px-[22px] py-[16px] [font-family:var(--font-body)] font-[500] text-[14px] tracking-[-0.005em] border-r border-[var(--rule-soft)] cursor-pointer"
+        :class="
+          view === 'chronicle'
+            ? 'text-[var(--ink)] [box-shadow:inset_0_-4px_0_var(--accent)]'
+            : 'text-[var(--ink-3)] hover:text-[var(--ink)]'
+        "
+        @click="view = 'chronicle'"
+      >
+        <span class="[font-family:var(--font-mono)] font-normal mr-[4px] text-[var(--ink-3)]"
+          >A</span
+        >
+        · {{ t.view_timeline }}
+        <span
+          class="[font-family:var(--font-mono)] text-[var(--ink-4)] text-[12px] tracking-[0.02em]"
+        >
+          — Chronicle</span
+        >
+      </button>
+      <button
+        role="tab"
+        :aria-selected="view === 'index'"
+        class="px-[22px] py-[16px] [font-family:var(--font-body)] font-[500] text-[14px] tracking-[-0.005em] border-r border-[var(--rule-soft)] cursor-pointer"
+        :class="
+          view === 'index'
+            ? 'text-[var(--ink)] [box-shadow:inset_0_-4px_0_var(--accent)]'
+            : 'text-[var(--ink-3)] hover:text-[var(--ink)]'
+        "
+        @click="view = 'index'"
+      >
+        <span class="[font-family:var(--font-mono)] font-normal mr-[4px] text-[var(--ink-3)]"
+          >B</span
+        >
+        · {{ t.view_index }}
+        <span
+          class="[font-family:var(--font-mono)] text-[var(--ink-4)] text-[12px] tracking-[0.02em]"
+        >
+          — Directory</span
+        >
+      </button>
     </div>
-    <div class="pt-6">
-      <SpeakerTable
-        :speakers="filteredSpeakers || []"
-        :show-year-selector="true"
-        :selected-year="selectedYear"
-        :show-speaker-selector="true"
-        :selected-speaker="selectedSpeaker"
-        :available-speakers="availableSpeakers"
-        @update:selected-year="selectedYear = $event"
-        @update:selected-speaker="selectedSpeaker = $event"
-      />
-    </div>
+
+    <ChronicleView
+      v-if="view === 'chronicle'"
+      :all-speakers="allSpeakers"
+      :selected-year="selectedYear"
+      :selected-speaker="selectedSpeaker"
+      :query="query"
+      :density="density"
+      @update:selected-year="selectedYear = $event"
+      @update:selected-speaker="selectedSpeaker = $event"
+      @update:query="query = $event"
+    />
+    <DirectoryView
+      v-else
+      :all-speakers="allSpeakers"
+      :selected-year="selectedYear"
+      :selected-speaker="selectedSpeaker"
+      :query="query"
+      :density="density"
+      @update:selected-year="selectedYear = $event"
+      @update:selected-speaker="selectedSpeaker = $event"
+      @update:query="query = $event"
+    />
+
+    <AppFooter />
   </div>
 </template>

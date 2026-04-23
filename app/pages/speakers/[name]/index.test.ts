@@ -1,49 +1,36 @@
 import { describe, it, expect, vi, beforeEach } from 'vite-plus/test';
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
 import type { AcceptedYear, SpeakerInfo } from '~~/types';
 // @ts-expect-error type declarations
 import SpeakerNamePage from './index.vue';
 
-// Import mocked functions
 import { useFetchSpeaker } from '~/composables/speaker';
 
 type SpeakerWithYear = SpeakerInfo & { year: AcceptedYear };
 
-// Create hoisted mocks
-const { useSeoMetaMock, useHeadMock, useRouteMock } = vi.hoisted(() => {
-  return {
-    useSeoMetaMock: vi.fn(),
-    useHeadMock: vi.fn(),
-    useRouteMock: vi.fn(),
-  };
-});
+const { useHeadMock, useRouteMock, useVfjsI18nMock } = vi.hoisted(() => ({
+  useHeadMock: vi.fn(),
+  useRouteMock: vi.fn(),
+  useVfjsI18nMock: vi.fn(),
+}));
 
-// Mock Nuxt imports using mockNuxtImport
-mockNuxtImport('useSeoMeta', () => useSeoMetaMock);
 mockNuxtImport('useHead', () => useHeadMock);
 mockNuxtImport('useRoute', () => useRouteMock);
-// Mock dependencies
+mockNuxtImport('useVfjsI18n', () => useVfjsI18nMock);
+
 vi.mock('~/composables/speaker', () => ({
   useFetchSpeaker: vi.fn(),
 }));
 
-vi.mock('~/components/SpeakerTable.vue', () => ({
-  default: {
-    name: 'SpeakerTable',
-    props: ['speakers', 'showYear'],
-    template:
-      '<div class="speaker-table">{{ speakers?.length || 0 }} speakers{{ showYear ? " with year" : "" }}</div>',
-  },
-}));
-
-// Global stubs for Nuxt components
 const globalStubs = {
   NuxtLink: {
     name: 'NuxtLink',
-    template: '<a :to="to"><slot /></a>',
+    template: '<a :href="to"><slot /></a>',
     props: ['to'],
   },
+  AppHeader: { template: '<div />' },
+  AppFooter: { template: '<div />' },
 };
 
 describe('speakers/[name]/index.vue', () => {
@@ -62,75 +49,48 @@ describe('speakers/[name]/index.vue', () => {
     },
   ];
 
-  const mockRoute = {
-    params: {
-      name: 'John Doe',
-    },
-  };
+  const mockRoute = { params: { name: 'John Doe' } };
 
   beforeEach(() => {
     vi.clearAllMocks();
-    // Clear all mocks
-    useSeoMetaMock.mockClear();
-    useHeadMock.mockClear();
-    useRouteMock.mockClear();
-
-    // Set up route mock
     useRouteMock.mockReturnValue(mockRoute);
-    // Set default mock implementation
-    vi.mocked(useFetchSpeaker).mockImplementation(() =>
-      Promise.resolve({
-        filterYearSpeaker: undefined,
-        filterNameSpeaker: computed(() => []),
-      }),
-    );
+    useVfjsI18nMock.mockReturnValue({
+      t: computed(() => ({
+        appearance_count: (n: number) => `${n}回登壇`,
+        years_appeared: '登壇年',
+        related_talks: '発表一覧',
+        tbd: 'タイトル未定',
+        external: '外部リンク',
+        back_top: 'TOPページに戻る',
+      })),
+      lang: ref('ja'),
+      setLang: vi.fn(),
+    });
+    vi.mocked(useFetchSpeaker).mockResolvedValue({
+      filterYearSpeaker: undefined,
+      filterNameSpeaker: computed(() => mockSpeakers),
+    });
   });
 
   it('スピーカー名とトークを含むページをレンダリングする', async () => {
-    vi.mocked(useFetchSpeaker).mockImplementation(() =>
-      Promise.resolve({
-        filterYearSpeaker: undefined,
-        filterNameSpeaker: computed(() => mockSpeakers),
-      }),
-    );
-
     const wrapper = await mountSuspended(SpeakerNamePage, {
-      global: {
-        stubs: globalStubs,
-      },
+      global: { stubs: globalStubs },
     });
 
-    // Check if component is rendered
     const html = wrapper.html();
-    expect(html).toContain('John Doe 発表一覧');
-    expect(html).toContain('TOPページに戻る');
-
-    // Check SpeakerTable component
-    const speakerTable = wrapper.findComponent({ name: 'SpeakerTable' });
-    expect(speakerTable.exists()).toBe(true);
-    // The mock template only shows the count, not the full text
-    expect(speakerTable.text()).toContain('2 speakers');
+    expect(html).toContain('John Doe');
+    expect(html).toContain('Vue.js Advanced');
+    expect(html).toContain('Nuxt 3 Deep Dive');
+    expect(html).toContain('2024');
+    expect(html).toContain('2023');
   });
 
   describe('SEOとメタデータ', () => {
     it('useHeadでタイトルが設定される', async () => {
-      vi.mocked(useFetchSpeaker).mockImplementation(() =>
-        Promise.resolve({
-          filterYearSpeaker: undefined,
-          filterNameSpeaker: computed(() => mockSpeakers),
-        }),
-      );
-
       await mountSuspended(SpeakerNamePage, {
-        global: {
-          stubs: globalStubs,
-        },
+        global: { stubs: globalStubs },
       });
 
-      // useHeadが呼び出されたかを確認
-      expect(useHeadMock).toHaveBeenCalled();
-
-      // useHeadに渡された引数を確認
       expect(useHeadMock).toHaveBeenCalledWith({
         title: 'John Doe 発表一覧',
       });
@@ -139,8 +99,7 @@ describe('speakers/[name]/index.vue', () => {
 
   describe('異なるスピーカー名', () => {
     it('日本語のスピーカー名を処理する', async () => {
-      const routeJapanese = { params: { name: '山田太郎' } };
-      useRouteMock.mockReturnValue(routeJapanese);
+      useRouteMock.mockReturnValue({ params: { name: '山田太郎' } });
 
       const speakersJapanese: SpeakerWithYear[] = [
         {
@@ -151,22 +110,18 @@ describe('speakers/[name]/index.vue', () => {
         },
       ];
 
-      vi.mocked(useFetchSpeaker).mockImplementation(() =>
-        Promise.resolve({
-          filterYearSpeaker: undefined,
-          filterNameSpeaker: computed(() => speakersJapanese),
-        }),
-      );
+      vi.mocked(useFetchSpeaker).mockResolvedValue({
+        filterYearSpeaker: undefined,
+        filterNameSpeaker: computed(() => speakersJapanese),
+      });
 
       const wrapper = await mountSuspended(SpeakerNamePage, {
-        global: {
-          stubs: globalStubs,
-        },
+        global: { stubs: globalStubs },
       });
 
       const html = wrapper.html();
-      expect(html).toContain('山田太郎 発表一覧');
-      expect(useFetchSpeaker).toHaveBeenCalled();
+      expect(html).toContain('山田太郎');
+      expect(html).toContain('Vue.jsの基礎');
       expect(useHeadMock).toHaveBeenCalledWith({
         title: '山田太郎 発表一覧',
       });
