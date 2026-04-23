@@ -101,10 +101,10 @@ const idxpad = computed(
 
       <!-- Sort header -->
       <div
-        class="flex items-center gap-[8px] px-[var(--pad-x)] pt-[18px] pb-[10px] border-b border-[var(--rule-soft)] [font-family:var(--font-mono)]"
+        class="flex items-center gap-[8px] px-[var(--pad-x)] pt-[18px] pb-[10px] border-b border-[var(--rule-soft)] [font-family:var(--font-mono)] overflow-x-auto"
       >
         <button
-          class="text-[11px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer"
+          class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           :class="
             sort === 'name'
               ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
@@ -115,7 +115,7 @@ const idxpad = computed(
           Name A→Z
         </button>
         <button
-          class="text-[11px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer"
+          class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           :class="
             sort === 'appearances'
               ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
@@ -126,7 +126,7 @@ const idxpad = computed(
           Appearances ↓
         </button>
         <button
-          class="text-[11px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer"
+          class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           :class="
             sort === 'latest'
               ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
@@ -136,7 +136,7 @@ const idxpad = computed(
         >
           Latest year ↓
         </button>
-        <span class="ml-auto text-[11px] tracking-[0.06em] text-[var(--ink-3)]"
+        <span class="ml-auto text-[12px] tracking-[0.06em] text-[var(--ink-3)] whitespace-nowrap"
           >{{ String(filtered.length).padStart(3, '0') }} /
           {{ String(allRecords.length).padStart(3, '0') }}</span
         >
@@ -157,57 +157,59 @@ const idxpad = computed(
           :data-open="openRows.has(rec.name) ? 'true' : 'false'"
         >
           <button
-            class="w-full grid items-center px-[var(--pad-x)] py-[var(--idxpad)] cursor-pointer text-left"
-            style="
-              grid-template-columns: 44px minmax(0, 1fr) auto 24px;
-              gap: clamp(12px, 2vw, 28px);
-            "
+            class="w-full flex flex-wrap items-center gap-x-[12px] px-[var(--pad-x)] py-[var(--idxpad)] cursor-pointer text-left"
             :class="openRows.has(rec.name) ? 'bg-[var(--paper-2)]' : ''"
             :aria-expanded="openRows.has(rec.name)"
             @click="toggleRow(rec.name)"
           >
             <span
-              class="[font-family:var(--font-mono)] text-[11px] text-[var(--ink-4)] tabular-nums"
-              aria-hidden="true"
-              >{{ String(i + 1).padStart(3, '0') }}</span
-            >
-            <span
-              class="[font-family:var(--font-display)] text-[clamp(15px,1.2vw,18px)] font-[500] tracking-[-0.005em] text-[var(--ink)]"
-              :lang="hasJapanese(rec.name) ? 'ja' : 'en'"
-            >
-              <ruby v-if="rec.nameRuby && lang === 'ja'"
-                >{{ rec.name }}<rt>{{ rec.nameRuby }}</rt></ruby
-              >
-              <template v-else>{{ lang === 'en' && rec.nameEn ? rec.nameEn : rec.name }}</template>
-              <span
-                v-if="rec.talks.length > 1"
-                class="[font-family:var(--font-mono)] bg-[var(--accent)] text-[10px] text-[var(--accent-ink)] ml-[8px] font-normal tracking-[0.02em] align-[2px] border border-[var(--accent)] px-[5px] py-[1px]"
-                :aria-label="t.appearance_count(rec.talks.length)"
-                >×{{ rec.talks.length }}</span
-              >
-            </span>
-            <span
-              class="inline-grid gap-[3px]"
-              style="grid-template-columns: repeat(6, 28px)"
-              :aria-label="t.years_appeared + ': ' + rec.years.join(', ')"
+              class="basis-0 grow-999 min-inline-[50%] flex flex-wrap gap-[8px] justify-start items-center"
             >
               <span
-                v-for="y in YEARS"
-                :key="y"
-                class="w-[28px] h-[22px] flex items-center justify-center [font-family:var(--font-mono)] text-[10px] tracking-[0]"
-                :class="[
-                  rec.years.includes(y) && selectedYear === y
-                    ? 'bg-[var(--accent)] border border-[var(--accent)] text-white'
-                    : rec.years.includes(y)
-                      ? 'bg-[var(--ink)] border border-[var(--ink)] text-[var(--paper)]'
-                      : 'border border-[var(--ink)] text-[var(--ink)]',
-                ]"
-                :title="y"
-                >{{ y.slice(-2) }}</span
+                class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] tabular-nums"
+                aria-hidden="true"
+                >{{ String(i + 1).padStart(3, '0') }}</span
               >
+              <span
+                class="[font-family:var(--font-display)] text-[clamp(15px,1.2vw,18px)] font-[500] tracking-[-0.005em] text-[var(--ink)]"
+                :lang="hasJapanese(rec.name) ? 'ja' : 'en'"
+              >
+                <ruby v-if="rec.nameRuby && lang === 'ja'"
+                  >{{ rec.name }}<rt>{{ rec.nameRuby }}</rt></ruby
+                >
+                <template v-else>{{
+                  lang === 'en' && rec.nameEn ? rec.nameEn : rec.name
+                }}</template>
+                <span
+                  v-if="rec.talks.length > 1"
+                  class="[font-family:var(--font-mono)] bg-[var(--accent)] text-[12px] text-[var(--accent-ink)] ml-[8px] font-normal tracking-[0.02em] align-[2px] border border-[var(--accent)] px-[5px] py-[1px]"
+                  :aria-label="t.appearance_count(rec.talks.length)"
+                  >×{{ rec.talks.length }}</span
+                >
+              </span>
+              <span
+                class="inline-grid gap-[3px] grow-999 justify-end"
+                style="grid-template-columns: repeat(6, 28px)"
+                :aria-label="t.years_appeared + ': ' + rec.years.join(', ')"
+              >
+                <span
+                  v-for="y in YEARS"
+                  :key="y"
+                  class="w-[28px] h-[22px] flex items-center justify-center [font-family:var(--font-mono)] text-[12px] tracking-[0]"
+                  :class="[
+                    rec.years.includes(y) && selectedYear === y
+                      ? 'bg-[var(--accent)] border border-[var(--accent)] text-white'
+                      : rec.years.includes(y)
+                        ? 'bg-[var(--ink)] border border-[var(--ink)] text-[var(--paper)]'
+                        : 'border border-[var(--ink)] text-[var(--ink)]',
+                  ]"
+                  :title="y"
+                  >{{ y.slice(-2) }}</span
+                >
+              </span>
             </span>
             <span
-              class="[font-family:var(--font-mono)] text-[16px] text-[var(--ink-3)] text-right"
+              class="basis-[24px] grow-1 [font-family:var(--font-mono)] text-[16px] text-[var(--ink-3)] text-center"
               aria-hidden="true"
               >{{ openRows.has(rec.name) ? '−' : '+' }}</span
             >
@@ -215,13 +217,12 @@ const idxpad = computed(
           <div
             v-if="openRows.has(rec.name)"
             class="bg-[var(--paper-2)] border-t border-[var(--rule-softer)] pt-[8px] pb-[22px] px-[var(--pad-x)]"
-            style="padding-left: calc(var(--pad-x) + 44px + clamp(12px, 2vw, 28px))"
           >
             <NuxtLink
-              class="[font-family:var(--font-mono)] text-[11px] tracking-[0.06em] uppercase text-[var(--accent)] border-b border-current pb-[1px] no-underline"
+              class="[font-family:var(--font-mono)] text-[12px] tracking-[0.06em] text-[var(--ink)] underline hover:no-underline"
               :to="`/speakers/${encodeURIComponent(rec.name)}`"
             >
-              {{ t.speaker_profile }} → {{ rec.name }}
+              {{ t.speaker_profile }}: {{ rec.name }}
             </NuxtLink>
             <ol class="list-none p-0 m-0 mt-[14px]">
               <li
@@ -231,21 +232,20 @@ const idxpad = computed(
                 style="grid-template-columns: 56px minmax(0, 1fr) auto"
                 :class="k === 0 ? 'border-t-0' : ''"
               >
-                <span
-                  class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)] tabular-nums"
-                  >{{ talk.year }}</span
+                <NuxtLink
+                  :to="`/${talk.year}`"
+                  class="underline hover:no-underline [font-family:var(--font-mono)] text-[12px] text-[var(--ink)] tabular-nums"
+                  >{{ talk.year }}</NuxtLink
                 >
                 <a
-                  class="text-[14px] text-[var(--ink)] pb-[1px] leading-[1.45]"
+                  class="text-[14px] text-[var(--ink)] pb-[1px] leading-[1.45] no-underline"
                   :href="talk.url"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span :lang="hasJapanese(talk.title || '') ? 'ja' : 'en'">{{
-                    talk.title || t.tbd
-                  }}</span>
+                  <span class="hover:underline">{{ talk.title || t.tbd }}</span>
                   <span
-                    class="[font-family:var(--font-mono)] text-[11px] text-[var(--ink-4)] ml-[4px]"
+                    class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] ml-[4px]"
                     :aria-label="t.external"
                     >↗</span
                   >

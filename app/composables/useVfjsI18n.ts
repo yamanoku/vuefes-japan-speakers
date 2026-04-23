@@ -20,6 +20,10 @@ export interface VfjsTranslations {
   view_index: string;
   density: string;
   language: string;
+  color_scheme: string;
+  color_scheme_light: string;
+  color_scheme_dark: string;
+  color_scheme_system: string;
   empty: string;
   tbd: string;
   external: string;
@@ -56,6 +60,10 @@ const translations: Record<'ja' | 'en', VfjsTranslations> = {
     view_index: '一覧',
     density: '行間',
     language: '言語',
+    color_scheme: '配色',
+    color_scheme_light: 'ライト',
+    color_scheme_dark: 'ダーク',
+    color_scheme_system: 'システム',
     empty: '該当するスピーカーが見つかりません。',
     tbd: 'タイトル未定',
     external: '外部リンク',
@@ -90,6 +98,10 @@ const translations: Record<'ja' | 'en', VfjsTranslations> = {
     view_index: 'Index',
     density: 'Density',
     language: 'Language',
+    color_scheme: 'Color scheme',
+    color_scheme_light: 'Light',
+    color_scheme_dark: 'Dark',
+    color_scheme_system: 'System',
     empty: 'No speakers match the current filters.',
     tbd: 'TBD',
     external: 'External',
