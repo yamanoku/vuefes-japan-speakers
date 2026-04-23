@@ -67,7 +67,7 @@ useHead({ title: `${speakerName} 発表一覧` });
           {{ t.years_appeared }}:
           <template v-for="(year, i) in record.years" :key="year">
             <template v-if="i > 0">, </template>
-            <NuxtLink :to="`/${year}`" class="text-[var(--accent)] underline hover:no-underline">{{
+            <NuxtLink :to="`/${year}`" class="text-[var(--ink)] underline hover:no-underline">{{
               year
             }}</NuxtLink>
           </template>
@@ -89,7 +89,7 @@ useHead({ title: `${speakerName} 発表一覧` });
         >
           <span class="[font-family:var(--font-mono)] text-[11px] text-[var(--ink-3)]">
             <NuxtLink
-              class="text-[var(--accent)] underline hover:no-underline"
+              class="text-[var(--ink)] underline hover:no-underline"
               :to="`/${talk.year}`"
               >{{ talk.year }}</NuxtLink
             >
