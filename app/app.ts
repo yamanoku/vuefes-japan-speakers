@@ -4,9 +4,9 @@ import { getAllSpeakersWithYear, getSpeakersByYear } from "~~/server/data";
 import { YEARS } from "~~/types";
 import { getSpeakerNames, getSpeakerTalks } from "~/composables/speaker";
 import { isValidYear } from "~/utils/years";
-import HomeRoute from "./routes/HomeRoute";
-import SpeakerRoute from "./routes/SpeakerRoute";
-import YearRoute from "./routes/YearRoute";
+import HomeRoute from "./routes/HomeRoute.vue";
+import SpeakerRoute from "./routes/SpeakerRoute.vue";
+import YearRoute from "./routes/YearRoute.vue";
 
 const siteTitle = "Vue Fes Japan Speakers";
 
