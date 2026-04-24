@@ -153,6 +153,12 @@ export const speakers2023: SpeakerInfo[] = [
     url: "https://vuefes.jp/2023/sessions/hitoki-wakugawa",
   },
   {
+    name: ["takanorip", "miyaoka", "wattanx", "やまのく", "うしろのこ", "kazupon"],
+    title: "なぜVueを選んだのか？",
+    url: "https://vuefes.jp/2023/#events-panel",
+    format: "panel",
+  },
+  {
     name: ["Harlan Wilton"],
     title: "Getting your head around your <head>",
     url: "https://vuefes.jp/2023/sessions/harlan-zw",

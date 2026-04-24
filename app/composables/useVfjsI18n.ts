@@ -21,6 +21,7 @@ export interface VfjsTranslations {
   empty: string;
   tbd: string;
   external: string;
+  session_format_panel: string;
   speaker_profile: string;
   years_appeared: string;
   back_top: string;
@@ -53,6 +54,7 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     empty: "該当するスピーカーが見つかりません。",
     tbd: "タイトル未定",
     external: "外部リンク",
+    session_format_panel: "パネル",
     speaker_profile: "スピーカー",
     years_appeared: "登壇年",
     back_top: "TOPページに戻る",
@@ -83,6 +85,7 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     empty: "No speakers match the current filters.",
     tbd: "TBD",
     external: "External",
+    session_format_panel: "Panel",
     speaker_profile: "Speaker",
     years_appeared: "Appeared in",
     back_top: "Back to top page",

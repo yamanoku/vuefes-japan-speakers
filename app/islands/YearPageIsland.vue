@@ -95,6 +95,12 @@ const { t, lang } = useVfjsI18n();
                       rel="noopener noreferrer"
                       class="text-inherit no-underline flex items-baseline gap-[4px]"
                     >
+                      <span
+                        v-if="speaker.format === 'panel'"
+                        class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--accent)] text-[var(--accent)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
+                      >
+                        {{ t.session_format_panel }}
+                      </span>
                       <span class="hover:underline">{{ speaker.title }}</span>
                       <span class="text-[12px]" :aria-label="t.external">↗</span>
                     </a>

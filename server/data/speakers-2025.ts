@@ -133,6 +133,18 @@ export const speakers2025: SpeakerInfo[] = [
     url: "https://vuefes.jp/2025/speaker/kaede-kato",
   },
   {
+    name: ["kazupon", "ubugeeei", "Anthony Fu", "Naoki Haba"],
+    title: "kazuponが見つけた才能たち ─ Vue.jsそしてOSSエコシステムを変える開発者発掘術",
+    url: "https://vuefes.jp/2025/event?session=student-support-contents#student-support-contents",
+    format: "panel",
+  },
+  {
+    name: ["Evan You", "Dan Abramov", "dominikg", "Kia King Ishii"],
+    title: "フロントエンドの未来を語る ─ React/Vue.js/Svelte が見据える次の 10 年",
+    url: "https://vuefes.jp/2025/event?session=panel-discussion#panel-discussion",
+    format: "panel",
+  },
+  {
     name: ["Nobuaki Kambe"],
     title: "webpack 依存からの脱却！快適フロントエンド開発を Viteで実現する",
     url: "https://vuefes.jp/2025/sponsors/bengo4#nobuaki-kambe",

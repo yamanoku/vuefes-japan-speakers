@@ -10,6 +10,7 @@ export interface SpeakerRecord {
     year: string;
     title: string | undefined;
     url: string;
+    format?: SpeakerWithYear["format"];
     coSpeakers: string[];
   }>;
 }
@@ -30,6 +31,7 @@ export function buildSpeakerMap(allSpeakers: SpeakerWithYear[]): Map<string, Spe
         year: s.year,
         title: s.title,
         url: s.url,
+        format: s.format,
         coSpeakers: s.name.filter((x) => x !== n),
       });
     }

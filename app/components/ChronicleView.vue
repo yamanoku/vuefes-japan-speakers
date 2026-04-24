@@ -97,7 +97,7 @@ const grouped = computed(() => {
             :id="`year-${year}`"
           >
             <span
-              class="[font-family:var(--font-display)] font-[500] text-[clamp(72px,8vw,160px)] leading-[0.85] tracking-[-0.04em] tabular-nums text-[var(--ink)]"
+              class="[font-family:var(--font-display)] font-[500] text-[clamp(72px,8vw,120px)] leading-[0.85] tracking-[-0.04em] tabular-nums text-[var(--ink)]"
               aria-hidden="true"
             >
               {{ year }}
@@ -161,6 +161,12 @@ const grouped = computed(() => {
                     rel="noopener noreferrer"
                     class="text-[var(--ink-2)] no-underline hover:text-[var(--ink)]"
                   >
+                    <span
+                      v-if="s.format === 'panel'"
+                      class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--accent)] text-[var(--accent)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
+                    >
+                      {{ t.session_format_panel }}
+                    </span>
                     <span class="hover:underline">{{ s.title }}</span>
                     <span
                       class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] ml-[4px]"

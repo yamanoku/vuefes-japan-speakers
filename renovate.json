@@ -32,6 +32,11 @@
       "matchPackageNames": ["@vue/test-utils", "playwright"]
     },
     {
+      "description": "Vize関連のパッケージは1つのPRにまとめる",
+      "groupName": "Vize packages",
+      "matchPackageNames": ["vize", "@vizejs/**", "oxlint", "oxlint-plugin-vize"]
+    },
+    {
       "description": "Vite Plus関連のパッケージは1つのPRにまとめる",
       "groupName": "Vite packages",
       "matchPackageNames": [

@@ -1,9 +1,12 @@
+export type SessionFormat = "panel";
+
 export type SpeakerInfo = {
   name: string[];
   nameRuby?: string[];
   nameEn?: string[];
   title?: string;
   url: string;
+  format?: SessionFormat;
 };
 
 export const YEARS = ["2018", "2019", "2022", "2023", "2024", "2025"] as const;

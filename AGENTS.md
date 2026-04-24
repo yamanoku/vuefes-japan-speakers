@@ -70,6 +70,7 @@ vp config
 - データ源: `server/data/speakers-YYYY.ts`
 - 集約: `server/data/index.ts`
 - 有効年: `types/index.ts` の `YEARS`
+- パネルディスカッションは `SpeakerInfo` の `format: "panel"` で表現します。
 
 現在の有効年は `2018`、`2019`、`2022`、`2023`、`2024`、`2025` です。2020 年と 2021 年は含まれていません。
 
