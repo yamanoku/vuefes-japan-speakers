@@ -34,6 +34,7 @@ const record = computed(() => {
       year: s.year,
       title: s.title,
       url: s.url,
+      format: s.format,
       coSpeakers: s.name.filter((n) => n !== speakerName),
     }))
     .sort((a, b) => compareLexicalJa(a.year, b.year));
@@ -104,6 +105,11 @@ useHead({ title: `${speakerName} 発表一覧` });
             <span :lang="hasJapanese(talk.title || '') ? 'ja' : 'en'">{{
               talk.title || t.tbd
             }}</span>
+            <span
+              v-if="talk.format === 'panel'"
+              class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--accent)] text-[var(--accent)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
+              >{{ t.session_format_panel }}</span
+            >
             <span class="text-[11px] opacity-70" :aria-label="t.external">↗</span>
           </a>
           <span

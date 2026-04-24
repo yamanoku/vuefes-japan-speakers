@@ -99,6 +99,12 @@ export const speakers2022: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2022/sessions/kenji7157',
   },
   {
+    name: ['kiaking', 'kazupon', 'jay-es', 'torish14'],
+    title: 'OSS はじめの一歩',
+    url: 'https://vuefes.jp/2022/#oss-first-step',
+    format: 'panel',
+  },
+  {
     name: ['志賀 奎太'],
     title: '施策を止めるな！Vue2からVue3への移行',
     url: 'https://vuefes.jp/2022/sessions/shigasy',
