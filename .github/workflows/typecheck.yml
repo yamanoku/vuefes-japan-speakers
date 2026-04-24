@@ -15,7 +15,6 @@ on:
       - "vitest.config.ts"
       - "tsconfig.json"
       - "tsconfig.vize.json"
-      - "scripts/vize-typecheck.mjs"
       - ".github/workflows/typecheck.yml"
 
 permissions:
