@@ -1,7 +1,7 @@
 import { computed, type Ref } from "vue";
-import { getAllSpeakersWithYear, getSpeakersByYear } from "~~/server/data";
-import type { AcceptedYear, SpeakerWithYear } from "~~/types";
-import { compareLexicalJa } from "~/utils/stringCollate";
+import { getAllSpeakersWithYear, getSpeakersByYear } from "../../server/data";
+import type { AcceptedYear, SpeakerWithYear } from "../../types";
+import { compareLexicalJa } from "../utils/stringCollate";
 
 const normalize = (value: string) => value.toLowerCase().trim();
 

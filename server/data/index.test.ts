@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vite-plus/test";
-import { YEARS } from "~~/types";
+import { YEARS } from "../../types";
 import { getAllSpeakersWithYear, getSpeakersByYear } from "./index";
 
 describe("speaker data accessors", () => {

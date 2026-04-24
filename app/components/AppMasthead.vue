@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import AppLogoMark from "~/components/AppLogoMark.vue";
-import { useVfjsI18n } from "~/composables/useVfjsI18n";
+import AppLogoMark from "./AppLogoMark.vue";
+import { useVfjsI18n } from "../composables/useVfjsI18n";
 
 defineProps<{
   stats: { speakers: number; talks: number; years: number };

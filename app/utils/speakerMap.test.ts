@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vite-plus/test";
-import type { SpeakerWithYear } from "~~/types";
+import type { SpeakerWithYear } from "../../types";
 import { buildSpeakerMap } from "./speakerMap";
 
 describe("buildSpeakerMap", () => {

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import type { SpeakerWithYear, AcceptedYear } from "~~/types";
-import { compareLexicalJa } from "~/utils/stringCollate";
-import { YEARS } from "~~/types";
-import SpeakerFilterBar from "~/components/SpeakerFilterBar.vue";
-import YearFilterBar from "~/components/YearFilterBar.vue";
-import { useVfjsI18n } from "~/composables/useVfjsI18n";
+import type { SpeakerWithYear, AcceptedYear } from "../../types";
+import { compareLexicalJa } from "../utils/stringCollate";
+import { YEARS } from "../../types";
+import SpeakerFilterBar from "./SpeakerFilterBar.vue";
+import YearFilterBar from "./YearFilterBar.vue";
+import { useVfjsI18n } from "../composables/useVfjsI18n";
 
 const props = defineProps<{
   allSpeakers: SpeakerWithYear[];

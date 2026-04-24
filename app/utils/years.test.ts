@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vite-plus/test";
 import { isValidYear } from "./years";
-import type { AcceptedYear } from "~~/types";
+import type { AcceptedYear } from "../../types";
 
 describe("isValidYear", () => {
   describe("有効な年", () => {

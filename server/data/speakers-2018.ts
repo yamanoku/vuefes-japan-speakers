@@ -1,4 +1,4 @@
-import type { SpeakerInfo } from "~~/types";
+import type { SpeakerInfo } from "../../types";
 
 export const speakers2018: SpeakerInfo[] = [
   {

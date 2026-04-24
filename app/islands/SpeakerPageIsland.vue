@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import type { SpeakerWithYear } from "~~/types";
-import AppFooter from "~/components/AppFooter.vue";
-import AppHeader from "~/components/AppHeader.vue";
-import { useVfjsI18n } from "~/composables/useVfjsI18n";
-import { compareLexicalJa } from "~/utils/stringCollate";
-import { hasJapanese } from "~/utils/speakerMap";
+import type { SpeakerWithYear } from "../../types";
+import AppFooter from "../components/AppFooter.vue";
+import AppHeader from "../components/AppHeader.vue";
+import { useVfjsI18n } from "../composables/useVfjsI18n";
+import { compareLexicalJa } from "../utils/stringCollate";
+import { hasJapanese } from "../utils/speakerMap";
 
 const props = defineProps<{
   found: boolean;

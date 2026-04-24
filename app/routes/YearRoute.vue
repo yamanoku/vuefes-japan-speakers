@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SpeakerInfo } from "~~/types";
+import type { SpeakerInfo } from "../../types";
 import { YearPageIsland } from "../island-definitions";
 
 defineOptions({

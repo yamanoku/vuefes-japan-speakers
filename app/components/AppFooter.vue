@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useVfjsI18n } from "~/composables/useVfjsI18n";
+import { useVfjsI18n } from "../composables/useVfjsI18n";
 
 const { t } = useVfjsI18n();
 </script>

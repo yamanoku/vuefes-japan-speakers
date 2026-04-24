@@ -11,12 +11,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
-    "types": ["node", "vite/client"],
-    "baseUrl": ".",
-    "paths": {
-      "~/*": ["app/*"],
-      "~~/*": ["./*"]
-    }
+    "types": ["node", "vite/client"]
   },
   "include": [
     "app/**/*.ts",

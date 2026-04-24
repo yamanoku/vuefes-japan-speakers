@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import AppLogoMark from "~/components/AppLogoMark.vue";
-import { useColorScheme } from "~/composables/useColorScheme";
-import { useVfjsI18n } from "~/composables/useVfjsI18n";
+import AppLogoMark from "./AppLogoMark.vue";
+import { useColorScheme } from "../composables/useColorScheme";
+import { useVfjsI18n } from "../composables/useVfjsI18n";
 
 const { lang, setLang, t } = useVfjsI18n();
 const { scheme, setScheme } = useColorScheme();

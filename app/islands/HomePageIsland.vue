@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue";
-import type { AcceptedYear, SpeakerWithYear } from "~~/types";
-import { YEARS } from "~~/types";
-import AppFooter from "~/components/AppFooter.vue";
-import AppHeader from "~/components/AppHeader.vue";
-import AppMasthead from "~/components/AppMasthead.vue";
-import ChronicleView from "~/components/ChronicleView.vue";
-import DirectoryView from "~/components/DirectoryView.vue";
-import { useVfjsI18n } from "~/composables/useVfjsI18n";
+import type { AcceptedYear, SpeakerWithYear } from "../../types";
+import { YEARS } from "../../types";
+import AppFooter from "../components/AppFooter.vue";
+import AppHeader from "../components/AppHeader.vue";
+import AppMasthead from "../components/AppMasthead.vue";
+import ChronicleView from "../components/ChronicleView.vue";
+import DirectoryView from "../components/DirectoryView.vue";
+import { useVfjsI18n } from "../composables/useVfjsI18n";
 
 const props = defineProps<{
   allSpeakers: SpeakerWithYear[];

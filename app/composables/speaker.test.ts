@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vite-plus/test";
 import { ref } from "vue";
-import type { AcceptedYear, SpeakerWithYear } from "~~/types";
+import type { AcceptedYear, SpeakerWithYear } from "../../types";
 import { getSpeakerNames, getSpeakerTalks, useFilteredSpeakers } from "./speaker";
 
 const speakers: SpeakerWithYear[] = [

@@ -1,5 +1,5 @@
-import type { SpeakerInfo, AcceptedYear, SpeakerWithYear } from "~~/types";
-import { YEARS } from "~~/types";
+import type { SpeakerInfo, AcceptedYear, SpeakerWithYear } from "../../types";
+import { YEARS } from "../../types";
 import { speakers2018 } from "./speakers-2018";
 import { speakers2019 } from "./speakers-2019";
 import { speakers2022 } from "./speakers-2022";

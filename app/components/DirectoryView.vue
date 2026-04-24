@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import type { SpeakerWithYear, AcceptedYear } from "~~/types";
-import { compareLexicalJa } from "~/utils/stringCollate";
-import { buildSpeakerMap, hasJapanese } from "~/utils/speakerMap";
-import type { SpeakerRecord } from "~/utils/speakerMap";
-import { YEARS } from "~~/types";
-import SpeakerFilterBar from "~/components/SpeakerFilterBar.vue";
-import YearFilterBar from "~/components/YearFilterBar.vue";
-import { useVfjsI18n } from "~/composables/useVfjsI18n";
+import type { SpeakerWithYear, AcceptedYear } from "../../types";
+import { compareLexicalJa } from "../utils/stringCollate";
+import { buildSpeakerMap, hasJapanese } from "../utils/speakerMap";
+import type { SpeakerRecord } from "../utils/speakerMap";
+import { YEARS } from "../../types";
+import SpeakerFilterBar from "./SpeakerFilterBar.vue";
+import YearFilterBar from "./YearFilterBar.vue";
+import { useVfjsI18n } from "../composables/useVfjsI18n";
 
 const props = defineProps<{
   allSpeakers: SpeakerWithYear[];

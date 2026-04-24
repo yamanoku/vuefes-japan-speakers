@@ -1,9 +1,9 @@
 import { defineApp, defineRoute } from "@vuerend/core";
 import type { RouteContext } from "@vuerend/core";
-import { getAllSpeakersWithYear, getSpeakersByYear } from "~~/server/data";
-import { YEARS } from "~~/types";
-import { getSpeakerNames, getSpeakerTalks } from "~/composables/speaker";
-import { isValidYear } from "~/utils/years";
+import { getAllSpeakersWithYear, getSpeakersByYear } from "../server/data";
+import { YEARS } from "../types";
+import { getSpeakerNames, getSpeakerTalks } from "./composables/speaker";
+import { isValidYear } from "./utils/years";
 import HomeRoute from "./routes/HomeRoute.vue";
 import SpeakerRoute from "./routes/SpeakerRoute.vue";
 import YearRoute from "./routes/YearRoute.vue";

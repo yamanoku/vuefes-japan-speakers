@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { SpeakerInfo } from "~~/types";
-import AppFooter from "~/components/AppFooter.vue";
-import AppHeader from "~/components/AppHeader.vue";
-import { useVfjsI18n } from "~/composables/useVfjsI18n";
+import type { SpeakerInfo } from "../../types";
+import AppFooter from "../components/AppFooter.vue";
+import AppHeader from "../components/AppHeader.vue";
+import { useVfjsI18n } from "../composables/useVfjsI18n";
 
 defineProps<{
   found: boolean;
