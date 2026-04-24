@@ -15,7 +15,6 @@ on:
       - "vitest.config.ts"
       - "tsconfig.json"
       - "tsconfig.vize.json"
-      - "scripts/oxlint-vize.mjs"
       - ".github/workflows/linter.yml"
 
 permissions:

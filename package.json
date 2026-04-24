@@ -9,7 +9,7 @@
     "fmt": "vp fmt .",
     "fmt:check": "vp fmt . --check",
     "generate": "vite build",
-    "lint": "node scripts/oxlint-vize.mjs .",
+    "lint": "vp lint .",
     "preview": "vite preview --outDir dist/client",
     "test": "vp test run",
     "test:watch": "vp test",

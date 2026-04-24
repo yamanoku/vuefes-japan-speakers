@@ -109,7 +109,7 @@ vp config
 ## Vize / Lint / 型チェック
 
 - Compiler: `@vizejs/vite-plugin` を `vite.config.ts` で vuerend の `vuePlugin` として渡します。
-- Lint: `vite.config.ts` の `lint` 設定を `scripts/oxlint-vize.mjs` から `oxlint-vize` に渡し、TS/JS の Oxlint ルールと Vize の Vue 診断をまとめて実行します。
+- Lint: `vite.config.ts` の `lint` 設定を `vp lint .` で読み込み、TS/JS の Oxlint ルールと Vize の Vue 診断をまとめて実行します。
 - 型チェック: `vize check --tsconfig tsconfig.vize.json` を `vp run typecheck` 経由で実行します。
 - Vize 関連 package は `pnpm-workspace.yaml` の `vize` catalog にまとめます。
 
