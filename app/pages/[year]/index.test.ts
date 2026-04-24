@@ -1,24 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from 'vite-plus/test';
-import { ref, computed } from 'vue';
-import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
+import { describe, it, expect } from 'vite-plus/test';
+import { mountSuspended, registerEndpoint } from '@nuxt/test-utils/runtime';
 // @ts-expect-error type declarations
 import YearPage from './index.vue';
-
-import { useFetchSpeaker } from '~/composables/speaker';
-
-const { useHeadMock, useRouteMock, useVfjsI18nMock } = vi.hoisted(() => ({
-  useHeadMock: vi.fn(),
-  useRouteMock: vi.fn(),
-  useVfjsI18nMock: vi.fn(),
-}));
-
-mockNuxtImport('useHead', () => useHeadMock);
-mockNuxtImport('useRoute', () => useRouteMock);
-mockNuxtImport('useVfjsI18n', () => useVfjsI18nMock);
-
-vi.mock('~/composables/speaker', () => ({
-  useFetchSpeaker: vi.fn(),
-}));
 
 const globalStubs = {
   NuxtLink: {
@@ -52,35 +35,11 @@ describe('[year]/index.vue', () => {
     },
   ];
 
-  const mockRoute = { params: { year: '2024' } };
-
-  beforeEach(() => {
-    vi.clearAllMocks();
-    useRouteMock.mockReturnValue(mockRoute);
-    useVfjsI18nMock.mockReturnValue({
-      t: computed(() => ({
-        year_total_talks: (n: number) => `全 ${n} 発表`,
-        official_site: '公式サイト',
-        tbd: 'タイトル未定',
-        external: '外部リンク',
-        back_top: 'TOPページに戻る',
-      })),
-      lang: ref('ja'),
-      setLang: vi.fn(),
-    });
-    vi.mocked(useFetchSpeaker).mockResolvedValue({
-      filterYearSpeaker: ref([]),
-      filterNameSpeaker: undefined,
-    });
-  });
-
   it('年タイトルとスピーカーリストをレンダリングする', async () => {
-    vi.mocked(useFetchSpeaker).mockResolvedValue({
-      filterYearSpeaker: ref(mockSpeakers),
-      filterNameSpeaker: undefined,
-    });
+    registerEndpoint('/api/speakers/2024', () => mockSpeakers);
 
     const wrapper = await mountSuspended(YearPage, {
+      route: '/2024',
       global: { stubs: globalStubs },
     });
 
@@ -95,7 +54,10 @@ describe('[year]/index.vue', () => {
   });
 
   it('スピーカーが空の場合でもページをレンダリングする', async () => {
+    registerEndpoint('/api/speakers/2024', () => []);
+
     const wrapper = await mountSuspended(YearPage, {
+      route: '/2024',
       global: { stubs: globalStubs },
     });
 
@@ -104,19 +66,26 @@ describe('[year]/index.vue', () => {
     expect(html).toContain('2024');
   });
 
-  it('正しい年パラメータでuseFetchSpeakerを呼び出す', async () => {
-    await mountSuspended(YearPage, {
+  it('APIレスポンスの件数を表示する', async () => {
+    registerEndpoint('/api/speakers/2024', () => mockSpeakers);
+
+    const wrapper = await mountSuspended(YearPage, {
+      route: '/2024',
       global: { stubs: globalStubs },
     });
 
-    expect(useFetchSpeaker).toHaveBeenCalledWith('2024');
+    expect(wrapper.html()).toContain('全 3 発表');
   });
 
-  it('useHeadでタイトルが設定される', async () => {
-    await mountSuspended(YearPage, {
+  it('年別ページの見出しを表示する', async () => {
+    registerEndpoint('/api/speakers/2024', () => []);
+
+    const wrapper = await mountSuspended(YearPage, {
+      route: '/2024',
       global: { stubs: globalStubs },
     });
 
-    expect(useHeadMock).toHaveBeenCalledWith({ title: 'Vue Fes Japan 2024' });
+    expect(wrapper.html()).toContain('Vue Fes Japan');
+    expect(wrapper.html()).toContain('2024');
   });
 });

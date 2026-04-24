@@ -22,7 +22,7 @@ catalogs:
     '@nuxt/test-utils': 4.0.2
     '@stylistic/eslint-plugin': 5.10.0
     '@vue/test-utils': 2.4.6
-    happy-dom: 20.9.0
+    playwright: 1.59.1
     vitest: 4.1.5
   typescript:
     vue-tsc: 3.2.7

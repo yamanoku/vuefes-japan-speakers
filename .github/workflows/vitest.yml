@@ -35,6 +35,8 @@ jobs:
           cache: true
       - name: Install dependencies
         run: vp install
+      - name: Install Playwright browsers
+        run: vp exec playwright install --with-deps chromium
       - name: Run vp test
         run: vp test run
         env:

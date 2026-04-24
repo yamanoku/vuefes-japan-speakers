@@ -31,7 +31,7 @@
     "@nuxthub/core": "catalog:cloudflare",
     "@stylistic/eslint-plugin": "catalog:test",
     "@vue/test-utils": "catalog:test",
-    "happy-dom": "catalog:test",
+    "playwright": "catalog:test",
     "vite-plus": "catalog:vp",
     "vitest": "catalog:vp",
     "vue-tsc": "catalog:typescript",

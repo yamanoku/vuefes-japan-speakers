@@ -26,18 +26,18 @@ vp config
 
 ## よく使うコマンド
 
-| 用途 | 推奨コマンド | npm script |
-| --- | --- | --- |
-| 開発サーバ | `vp run dev` | `pnpm dev` |
-| ビルド | `vp run build` | `pnpm build` |
-| 静的生成 | `vp run generate` | `pnpm generate` |
-| プレビュー | `vp run preview` | `pnpm preview` |
-| Lint | `vp lint .` | `pnpm vp:lint` |
-| Format | `vp fmt .` | `pnpm vp:fmt` |
-| Format 確認 | `vp fmt . --check` | - |
-| Type Check | `vp check` | `pnpm vp:check` |
-| Test | `vp test run` | `pnpm vp:test` |
-| Test（watch） | `vp test` | `pnpm vp:test:watch` |
+| 用途          | 推奨コマンド       | npm script           |
+| ------------- | ------------------ | -------------------- |
+| 開発サーバ    | `vp run dev`       | `pnpm dev`           |
+| ビルド        | `vp run build`     | `pnpm build`         |
+| 静的生成      | `vp run generate`  | `pnpm generate`      |
+| プレビュー    | `vp run preview`   | `pnpm preview`       |
+| Lint          | `vp lint .`        | `pnpm vp:lint`       |
+| Format        | `vp fmt .`         | `pnpm vp:fmt`        |
+| Format 確認   | `vp fmt . --check` | -                    |
+| Type Check    | `vp check`         | `pnpm vp:check`      |
+| Test          | `vp test run`      | `pnpm vp:test`       |
+| Test（watch） | `vp test`          | `pnpm vp:test:watch` |
 
 作業前後の検証は、変更内容に応じて `vp lint .`、`vp fmt . --check`、`vp check`、`vp test run` を組み合わせます。
 
@@ -57,7 +57,7 @@ vp config
 - `public/`: ロゴ、favicon、OG 画像などの静的ファイル
 - `pnpm-workspace.yaml`: catalog と依存バージョンの定義
 - `vite.config.ts`: Vite+ の lint / staged 設定
-- `vitest.config.ts`: Nuxt テスト環境と happy-dom 設定
+- `vitest.config.ts`: Nuxt テスト環境と Browser Mode 設定
 - `nuxt.config.ts`: Nuxt モジュール、Nitro、NuxtHub、ESLint 設定
 
 ## API とデータ
@@ -112,8 +112,7 @@ vp config
 
 ## テスト
 
-- ランナー: Vitest（Vite+ 経由）
-- DOM: Nuxt テスト環境 + happy-dom
+- ランナー: Vitest Browser Mode（Vite+ / Playwright / Chromium）
 - 設定: `vitest.config.ts`
 - テスト位置:
   - `app/**.test.ts`
@@ -198,4 +197,4 @@ NuxtHub / Cloudflare 関連の依存は `pnpm-workspace.yaml` の `cloudflare` c
 - パッケージマネージャーの確認: `pnpm -v` で `10.33.2` 系か確認する。
 - 型エラー: `vp check` で原因を洗い出し、型定義・import・データ構造を直す。
 - Nuxt 生成物の不整合: 開発サーバを再起動し、必要なら `vp config` を再実行する。
-- テスト環境の差異: `vitest.config.ts` の Nuxt 環境と happy-dom 設定を確認する。
+- テスト環境の差異: `vitest.config.ts` の Nuxt 環境と Browser Mode 設定を確認する。
