@@ -36,6 +36,6 @@ jobs:
       - name: Install Playwright browsers
         run: vp exec playwright install --with-deps chromium
       - name: Run tests
-        run: pnpm test
+        run: vp run test
         env:
           CI: true

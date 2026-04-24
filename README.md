@@ -30,37 +30,37 @@ vp config
 
 ## Commands
 
-Vuerend / Vite のアプリとして動きます。Vue SFC compiler、lint、type check には Vize 0.65.0 系を使い、format と test は Vite+ 経由で実行します。
+Vuerend / Vite のアプリとして動きます。Vue SFC compiler、lint、type check には Vize 0.65.0 系を使い、日常コマンドは Vite+（`vp`）経由で実行します。
 
-| 用途          | コマンド                              |
-| ------------- | ------------------------------------- |
-| 開発サーバ    | `pnpm dev` / `vp run dev`             |
-| ビルド        | `pnpm build` / `vp run build`         |
-| 静的生成      | `pnpm generate`                       |
-| プレビュー    | `pnpm preview`                        |
-| Lint          | `pnpm lint`                           |
-| Format        | `pnpm fmt` / `vp fmt .`               |
-| Format Check  | `pnpm fmt:check` / `vp fmt . --check` |
-| Type Check    | `pnpm typecheck`                      |
-| Test          | `pnpm test`                           |
-| Test（watch） | `pnpm test:watch`                     |
+| 用途          | コマンド            |
+| ------------- | ------------------- |
+| 開発サーバ    | `vp run dev`        |
+| ビルド        | `vp run build`      |
+| 静的生成      | `vp run generate`   |
+| プレビュー    | `vp run preview`    |
+| Lint          | `vp run lint`       |
+| Format        | `vp run fmt`        |
+| Format Check  | `vp run fmt:check`  |
+| Type Check    | `vp run typecheck`  |
+| Test          | `vp run test`       |
+| Test（watch） | `vp run test:watch` |
 
 ## CI
 
-GitHub Actions でも同じ pnpm scripts を実行します。
+GitHub Actions でも同じ Vite+ コマンドを実行します。
 
-- `pnpm lint`
-- `pnpm fmt:check`
-- `pnpm typecheck`
-- `pnpm test`
+- `vp run lint`
+- `vp run fmt:check`
+- `vp run typecheck`
+- `vp run test`
 
 ## Deploy
 
-`pnpm generate` で `dist/client` に静的ファイルを生成します。生成後の確認には `pnpm preview` を使います。
+`vp run generate` で `dist/client` に静的ファイルを生成します。生成後の確認には `vp run preview` を使います。
 
 ```bash
-pnpm generate
-pnpm preview
+vp run generate
+vp run preview
 ```
 
 ## License

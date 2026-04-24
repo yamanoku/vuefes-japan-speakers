@@ -35,6 +35,6 @@ jobs:
       - name: Install dependencies
         run: vp install
       - name: Run lint
-        run: pnpm lint
+        run: vp run lint
         env:
           CI: true

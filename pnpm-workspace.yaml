@@ -16,7 +16,6 @@ catalogs:
   typescript:
     "@types/node": 24.12.2
     typescript: 5.9.3
-    vue-tsc: 3.2.7
   vite:
     vite: 8.0.10
   vue:

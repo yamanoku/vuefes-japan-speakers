@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "check": "pnpm lint && pnpm typecheck",
+    "check": "vp run lint && vp run typecheck",
     "dev": "vite dev",
     "fmt": "vp fmt .",
     "fmt:check": "vp fmt . --check",
@@ -38,8 +38,7 @@
     "vite": "catalog:vite",
     "vite-plus": "catalog:vp",
     "vitest": "catalog:vp",
-    "vize": "catalog:vize",
-    "vue-tsc": "catalog:typescript"
+    "vize": "catalog:vize"
   },
   "packageManager": "pnpm@10.33.2"
 }

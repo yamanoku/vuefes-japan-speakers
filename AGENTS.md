@@ -26,20 +26,20 @@ vp config
 
 ## よく使うコマンド
 
-| 用途          | 推奨コマンド       | npm script        |
-| ------------- | ------------------ | ----------------- |
-| 開発サーバ    | `vp run dev`       | `pnpm dev`        |
-| ビルド        | `vp run build`     | `pnpm build`      |
-| 静的生成      | `vp run generate`  | `pnpm generate`   |
-| プレビュー    | `vp run preview`   | `pnpm preview`    |
-| Lint          | `pnpm lint`        | `pnpm lint`       |
-| Format        | `vp fmt .`         | `pnpm fmt`        |
-| Format 確認   | `vp fmt . --check` | `pnpm fmt:check`  |
-| Type Check    | `pnpm typecheck`   | `pnpm typecheck`  |
-| Test          | `vp test run`      | `pnpm test`       |
-| Test（watch） | `vp test`          | `pnpm test:watch` |
+| 用途          | 推奨コマンド        |
+| ------------- | ------------------- |
+| 開発サーバ    | `vp run dev`        |
+| ビルド        | `vp run build`      |
+| 静的生成      | `vp run generate`   |
+| プレビュー    | `vp run preview`    |
+| Lint          | `vp run lint`       |
+| Format        | `vp run fmt`        |
+| Format 確認   | `vp run fmt:check`  |
+| Type Check    | `vp run typecheck`  |
+| Test          | `vp run test`       |
+| Test（watch） | `vp run test:watch` |
 
-作業前後の検証は、変更内容に応じて `pnpm lint`、`pnpm fmt:check`、`pnpm typecheck`、`pnpm test` を組み合わせます。
+作業前後の検証は、変更内容に応じて `vp run lint`、`vp run fmt:check`、`vp run typecheck`、`vp run test` を組み合わせます。
 
 ## ディレクトリ構成（要点）
 
@@ -124,10 +124,10 @@ vp config
 - 実行:
 
 ```bash
-pnpm test
+vp run test
 ```
 
-ウォッチ実行は `pnpm test:watch` を使います。
+ウォッチ実行は `vp run test:watch` を使います。
 
 ### テスト方針
 
@@ -138,10 +138,10 @@ pnpm test
 
 ## 型チェックと lint
 
-- 型チェック: `pnpm typecheck`
-- Lint: `pnpm lint`
-- Format: `pnpm fmt`
-- Format 確認: `pnpm fmt:check`
+- 型チェック: `vp run typecheck`
+- Lint: `vp run lint`
+- Format: `vp run fmt`
+- Format 確認: `vp run fmt:check`
 
 型エラーを隠すための型削除や過度な型アサーションは避け、原因を直してください。
 
@@ -171,30 +171,30 @@ pnpm test
 
 GitHub Actions は Vite+ セットアップ後に以下を実行します。
 
-- `pnpm lint`
-- `pnpm fmt:check`
-- `pnpm typecheck`
-- `pnpm test`
+- `vp run lint`
+- `vp run fmt:check`
+- `vp run typecheck`
+- `vp run test`
 
 Browser Mode の test job では、テスト前に `vp exec playwright install --with-deps chromium` で Chromium を導入します。CI の対象 path は `app/**`、`server/**`、`types/**`、各種設定ファイル、lockfile などです。ドキュメントのみの変更では一部の workflow が走らない場合があります。
 
 ## デプロイ
 
-`pnpm generate` で `dist/client` に静的ファイルを生成します。生成後の確認には `pnpm preview` を使います。
+`vp run generate` で `dist/client` に静的ファイルを生成します。生成後の確認には `vp run preview` を使います。
 
 ## 開発フロー（推奨）
 
 - ブランチ: `feat/*`、`fix/*`、`chore/*`、`docs/*` など用途別に作成する。
 - コミット: Conventional Commits を使う。例: `docs: update agents guide`
 - 実装: 小さめの差分で進め、関連テストやドキュメントも合わせて更新する。
-- 検証: 変更内容に応じて `pnpm lint && pnpm fmt:check && pnpm typecheck && pnpm test` を実行する。
+- 検証: 変更内容に応じて `vp run lint && vp run fmt:check && vp run typecheck && vp run test` を実行する。
 - レビュー: 変更点の要約、確認したコマンド、必要に応じてスクリーンショットや再現手順を添える。
 
 ## トラブルシュート
 
 - 依存関係の不整合: `vp install` を実行し、必要なら `vp config` も実行する。
-- パッケージマネージャーの確認: `pnpm -v` で `10.33.2` 系か確認する。
-- 型エラー: `pnpm typecheck` で原因を洗い出し、型定義・import・データ構造を直す。
+- パッケージマネージャーの確認: `package.json` の `packageManager` を確認する。
+- 型エラー: `vp run typecheck` で原因を洗い出し、型定義・import・データ構造を直す。
 - Vite+ 設定の不整合: `vp config` を再実行する。
 - Browser Mode のブラウザ不足: `vp exec playwright install chromium` を実行する。Linux CI では `--with-deps` も付ける。
 - キャッシュ問題: Vite や生成物のキャッシュが怪しい場合は開発サーバを再起動する。

@@ -35,6 +35,6 @@ jobs:
       - name: Install dependencies
         run: vp install
       - name: Run format check
-        run: pnpm fmt:check
+        run: vp run fmt:check
         env:
           CI: true

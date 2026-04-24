@@ -35,6 +35,6 @@ jobs:
       - name: Install dependencies
         run: vp install
       - name: Run type check
-        run: pnpm typecheck
+        run: vp run typecheck
         env:
           CI: true

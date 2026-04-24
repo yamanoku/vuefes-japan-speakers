@@ -19,7 +19,7 @@
     {
       "description": "Vue関連のパッケージは1つのPRにまとめる",
       "groupName": "Vue packages",
-      "matchPackageNames": ["vue", "vue-tsc", "@vue/**"]
+      "matchPackageNames": ["vue", "@vue/**"]
     },
     {
       "description": "Iconify関連のパッケージは1つのPRにまとめる",

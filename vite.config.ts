@@ -103,7 +103,7 @@ export default defineConfig({
     },
   },
   staged: {
-    "*": "pnpm check",
+    "*": "vp run check",
   },
   fmt,
   lint,
