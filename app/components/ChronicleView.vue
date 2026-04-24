@@ -90,7 +90,7 @@ const grouped = computed(() => {
             :id="`year-${year}`"
           >
             <span
-              class="[font-family:var(--font-display)] font-[500] text-[clamp(72px,8vw,160px)] leading-[0.85] tracking-[-0.04em] tabular-nums text-[var(--ink)]"
+              class="[font-family:var(--font-display)] font-[500] text-[clamp(72px,8vw,120px)] leading-[0.85] tracking-[-0.04em] tabular-nums text-[var(--ink)]"
               aria-hidden="true"
               >{{ year }}</span
             >
