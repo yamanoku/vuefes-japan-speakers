@@ -3,17 +3,11 @@ import { computed, ref } from 'vue';
 import type { SpeakerInfo, AcceptedYear } from '~~/types';
 
 // 実際の実装をインポート
-import { isValidYear, getAvailableYears } from '~/utils/years';
+import { isValidYear } from '~/utils/years';
 import { useFilteredSpeakers } from './speaker';
 
-// getAvailableYearsのみモック化
-vi.mock('~/utils/years', async () => {
-  const actual = await vi.importActual<typeof import('~/utils/years')>('~/utils/years');
-  return {
-    ...actual,
-    getAvailableYears: vi.fn(() => ['2018', '2019', '2022', '2023', '2024', '2025']),
-  };
-});
+const availableYears: AcceptedYear[] = ['2018', '2019', '2022', '2023', '2024', '2025'];
+const getAvailableYearsMock = vi.fn(() => [...availableYears]);
 
 // Nuxtコンポーザブルをモック化
 const mockUseFetch = vi.fn();
@@ -37,7 +31,7 @@ const useFetchSpeaker = async (params?: string) => {
         return { filterYearSpeaker: data, filterNameSpeaker: undefined };
       }
     : async (name: string) => {
-        const years = getAvailableYears();
+        const years = getAvailableYearsMock();
         const promises = years.map((year) =>
           (globalThis as unknown as { $fetch: typeof $fetch })
             .$fetch<SpeakerInfo[]>(`/api/speakers/${year}`)
@@ -61,7 +55,7 @@ const useFetchSpeaker = async (params?: string) => {
 };
 
 const useFetchAllSpeakers = async () => {
-  const years = getAvailableYears();
+  const years = getAvailableYearsMock();
   const promises = years.map((year) =>
     $fetch<SpeakerInfo[]>(`/api/speakers/${year}`).then((speakers) =>
       speakers.map((speaker) => ({ ...speaker, year })),
@@ -73,7 +67,10 @@ const useFetchAllSpeakers = async () => {
 
 describe('speaker composables', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    mockUseFetch.mockReset();
+    mockFetch.mockReset();
+    getAvailableYearsMock.mockReset();
+    getAvailableYearsMock.mockReturnValue([...availableYears]);
   });
 
   describe('useFetchSpeaker', () => {
@@ -126,7 +123,7 @@ describe('speaker composables', () => {
       const result = await useFetchSpeaker('John Doe');
 
       expect(isValidYear('John Doe')).toBe(false);
-      expect(getAvailableYears).toHaveBeenCalled();
+      expect(getAvailableYearsMock).toHaveBeenCalled();
       expect(mockFetch).toHaveBeenCalledTimes(6); // 各年に対して呼ばれる（6年分）
 
       // filterNameSpeakerがcomputed refであることを確認
@@ -235,7 +232,7 @@ describe('speaker composables', () => {
 
       const result = await useFetchAllSpeakers();
 
-      expect(getAvailableYears).toHaveBeenCalled();
+      expect(getAvailableYearsMock).toHaveBeenCalled();
       expect(mockFetch).toHaveBeenCalledWith('/api/speakers/2023');
       expect(mockFetch).toHaveBeenCalledWith('/api/speakers/2024');
       expect(result).toEqual([
@@ -483,7 +480,7 @@ describe('speaker composables', () => {
     });
 
     it('空の年配列を適切に処理する', async () => {
-      vi.mocked(getAvailableYears).mockReturnValue([]);
+      getAvailableYearsMock.mockReturnValue([]);
 
       const result = await useFetchAllSpeakers();
 

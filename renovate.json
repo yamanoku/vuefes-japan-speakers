@@ -39,7 +39,7 @@
         "@nuxt/eslint-config",
         "@nuxt/test-utils",
         "@vue/test-utils",
-        "happy-dom"
+        "playwright"
       ]
     },
     {
