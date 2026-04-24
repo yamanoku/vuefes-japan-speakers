@@ -1,0 +1,30 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 64 64"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">Vue Fes Japan Speakers mark</title>
+  <desc id="desc">A V-shaped Vue Fes mark above a circular speaker archive mark.</desc>
+  <style>
+    .paper {
+      fill: #f4f1eb;
+    }
+
+    .accent {
+      fill: #007f62;
+    }
+
+  </style>
+  <rect class="paper" width="64" height="64" rx="14" />
+  <g transform="translate(16.02 4) scale(.6241)">
+    <path
+      class="accent"
+      d="M25.61,10.25L31.52,0h19.7l-25.61,44.35L0,0h19.7l5.91,10.25Z"
+    />
+    <path
+      class="accent"
+      d="M26.19,89.73c12.25,0,22.19-9.93,22.19-22.19s-9.93-22.19-22.19-22.19-22.19,9.93-22.19,22.19,9.93,22.19,22.19,22.19Z"
+    />
+  </g>
+</svg>

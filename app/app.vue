@@ -4,7 +4,8 @@ useHead({
     lang: 'ja',
   },
   link: [
-    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+    { rel: 'alternate icon', href: '/favicon.ico' },
     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
     { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
     {
@@ -23,6 +24,16 @@ useHead({
     {
       name: 'og:image',
       content: '/og-image.png',
+    },
+    {
+      name: 'theme-color',
+      content: '#f4f1eb',
+      media: '(prefers-color-scheme: light)',
+    },
+    {
+      name: 'theme-color',
+      content: '#1c1c19',
+      media: '(prefers-color-scheme: dark)',
     },
   ],
 });
