@@ -33,8 +33,12 @@ const inputs = [
   ...roots.flatMap(collectSourceFiles),
 ].sort();
 
-const result = spawnSync('vize', ['check', '--tsconfig', 'tsconfig.vize.json', ...inputs], {
-  stdio: 'inherit',
-});
+const result = spawnSync(
+  'vize',
+  ['check', '--servers', '1', '--tsconfig', 'tsconfig.vize.json', ...inputs],
+  {
+    stdio: 'inherit',
+  },
+);
 
 process.exit(result.status ?? 1);

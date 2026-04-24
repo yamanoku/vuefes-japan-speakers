@@ -13,7 +13,6 @@ on:
       - 'pnpm-lock.yaml'
       - 'vite.config.ts'
       - 'vitest.config.ts'
-      - 'vize.config.json'
       - 'nuxt.config.ts'
       - 'tsconfig.json'
       - 'tsconfig.vize.json'

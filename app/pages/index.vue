@@ -49,16 +49,20 @@ const stats = computed(() => {
         class="px-[22px] py-[16px] [font-family:var(--font-body)] font-[500] text-[14px] tracking-[-0.005em] border-r border-[var(--rule-soft)] cursor-pointer"
         role="tab"
         :aria-selected="view === 'chronicle'"
-        :class="view === 'chronicle'
-    ? 'text-[var(--ink)] [box-shadow:inset_0_-4px_0_var(--accent)]'
-    : 'text-[var(--ink-3)] hover:text-[var(--ink)]'"
+        :class="
+          view === 'chronicle'
+            ? 'text-[var(--ink)] [box-shadow:inset_0_-4px_0_var(--accent)]'
+            : 'text-[var(--ink-3)] hover:text-[var(--ink)]'
+        "
         @click="view = 'chronicle'"
       >
         <span class="[font-family:var(--font-mono)] font-normal mr-[4px] text-[var(--ink-3)]">
           A
         </span>
         · {{ t.view_timeline }}
-        <span class="[font-family:var(--font-mono)] text-[var(--ink-4)] text-[12px] tracking-[0.02em]">
+        <span
+          class="[font-family:var(--font-mono)] text-[var(--ink-4)] text-[12px] tracking-[0.02em]"
+        >
           — Chronicle
         </span>
       </button>
@@ -66,16 +70,20 @@ const stats = computed(() => {
         class="px-[22px] py-[16px] [font-family:var(--font-body)] font-[500] text-[14px] tracking-[-0.005em] border-r border-[var(--rule-soft)] cursor-pointer"
         role="tab"
         :aria-selected="view === 'index'"
-        :class="view === 'index'
-    ? 'text-[var(--ink)] [box-shadow:inset_0_-4px_0_var(--accent)]'
-    : 'text-[var(--ink-3)] hover:text-[var(--ink)]'"
+        :class="
+          view === 'index'
+            ? 'text-[var(--ink)] [box-shadow:inset_0_-4px_0_var(--accent)]'
+            : 'text-[var(--ink-3)] hover:text-[var(--ink)]'
+        "
         @click="view = 'index'"
       >
         <span class="[font-family:var(--font-mono)] font-normal mr-[4px] text-[var(--ink-3)]">
           B
         </span>
         · {{ t.view_index }}
-        <span class="[font-family:var(--font-mono)] text-[var(--ink-4)] text-[12px] tracking-[0.02em]">
+        <span
+          class="[font-family:var(--font-mono)] text-[var(--ink-4)] text-[12px] tracking-[0.02em]"
+        >
           — Directory
         </span>
       </button>
@@ -90,7 +98,7 @@ const stats = computed(() => {
       @update:query="query = $event"
       @update:selected-speaker="selectedSpeaker = $event"
       @update:selected-year="selectedYear = $event"
-     />
+    />
     <DirectoryView
       v-else
       :all-speakers="allSpeakers"
@@ -101,7 +109,7 @@ const stats = computed(() => {
       @update:query="query = $event"
       @update:selected-speaker="selectedSpeaker = $event"
       @update:selected-year="selectedYear = $event"
-     />
+    />
     <AppFooter />
   </div>
 </template>

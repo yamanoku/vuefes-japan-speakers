@@ -21,12 +21,14 @@ useHead({ title: `Vue Fes Japan ${year}` });
   <div>
     <AppHeader />
     <main>
-      <header class="border-b border-[var(--rule)] pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-[var(--pad-x)]">
-        <h1 class="[font-family:var(--font-display)] text-[clamp(28px,4.5vw,72px)] font-bold tracking-[-0.04em] leading-[1] mb-[16px]">
+      <header
+        class="border-b border-[var(--rule)] pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-[var(--pad-x)]"
+      >
+        <h1
+          class="[font-family:var(--font-display)] text-[clamp(28px,4.5vw,72px)] font-bold tracking-[-0.04em] leading-[1] mb-[16px]"
+        >
           Vue Fes Japan
-          <span v-if="year === '2022'">
-            Online
-          </span>
+          <span v-if="year === '2022'">Online</span>
           <em class="not-italic text-[var(--accent)]">
             {{ year }}
           </em>
@@ -45,9 +47,7 @@ useHead({ title: `Vue Fes Japan ${year}` });
               <span class="hover:underline">
                 {{ t.official_site }}
               </span>
-              <span>
-                ↗
-              </span>
+              <span>↗</span>
             </a>
           </div>
         </div>
@@ -72,7 +72,11 @@ useHead({ title: `Vue Fes Japan ${year}` });
                 <div class="pr-[24px]">
                   <div class="flex flex-wrap gap-x-[8px] gap-y-[4px] mb-[6px] items-center">
                     <template v-for="(n, ni) in s.name" :key="n">
-                      <span v-if="ni > 0" aria-hidden="true" class="text-[var(--ink-2)] text-[12px]">
+                      <span
+                        v-if="ni > 0"
+                        aria-hidden="true"
+                        class="text-[var(--ink-2)] text-[12px]"
+                      >
                         ×
                       </span>
                       <NuxtLink
@@ -102,9 +106,7 @@ useHead({ title: `Vue Fes Japan ${year}` });
                       <span class="hover:underline">
                         {{ s.title }}
                       </span>
-                      <span class="text-[12px]" :aria-label="t.external">
-                        ↗
-                      </span>
+                      <span class="text-[12px]" :aria-label="t.external">↗</span>
                     </a>
                     <span v-else class="italic text-[var(--ink-2)] no-underline">
                       {{ t.tbd }}

@@ -1,4 +1,4 @@
-name: Vize Format
+name: Vite+ Format
 
 on:
   pull_request:
@@ -14,7 +14,6 @@ on:
       - 'pnpm-lock.yaml'
       - 'vite.config.ts'
       - 'vitest.config.ts'
-      - 'vize.config.json'
       - 'nuxt.config.ts'
       - 'tsconfig.json'
       - 'tsconfig.vize.json'
@@ -37,12 +36,8 @@ jobs:
           cache: pnpm
       - name: Enable pnpm
         run: corepack enable
-      - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Install Vize CLI
-        run: cargo install --git https://github.com/ubugeeei/vize --tag v0.63.0 --locked vize
       - name: Run format check
         run: pnpm fmt:check
         env:

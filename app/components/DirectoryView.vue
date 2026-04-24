@@ -92,32 +92,40 @@ function toggleRow(name: string) {
         :counts="counts"
         :selected-year="selectedYear"
         @update:selected-year="emit('update:selectedYear', $event)"
-       />
+      />
       <!-- Sort header -->
-      <div class="flex items-center gap-[8px] px-[var(--pad-x)] pt-[18px] pb-[10px] border-b border-[var(--rule-soft)] [font-family:var(--font-mono)] overflow-x-auto">
+      <div
+        class="flex items-center gap-[8px] px-[var(--pad-x)] pt-[18px] pb-[10px] border-b border-[var(--rule-soft)] [font-family:var(--font-mono)] overflow-x-auto"
+      >
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
-          :class="sort === 'name'
-    ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
-    : 'border-[var(--rule-soft)] text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-[var(--ink)]'"
+          :class="
+            sort === 'name'
+              ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
+              : 'border-[var(--rule-soft)] text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-[var(--ink)]'
+          "
           @click="sort = 'name'"
         >
           Name A→Z
         </button>
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
-          :class="sort === 'appearances'
-    ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
-    : 'border-[var(--rule-soft)] text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-[var(--ink)]'"
+          :class="
+            sort === 'appearances'
+              ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
+              : 'border-[var(--rule-soft)] text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-[var(--ink)]'
+          "
           @click="sort = 'appearances'"
         >
           Appearances ↓
         </button>
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
-          :class="sort === 'latest'
-    ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
-    : 'border-[var(--rule-soft)] text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-[var(--ink)]'"
+          :class="
+            sort === 'latest'
+              ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
+              : 'border-[var(--rule-soft)] text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-[var(--ink)]'
+          "
           @click="sort = 'latest'"
         >
           Latest year ↓
@@ -146,7 +154,9 @@ function toggleRow(name: string) {
             :class="openRows.has(rec.name) ? 'bg-[var(--paper-2)]' : ''"
             @click="toggleRow(rec.name)"
           >
-            <span class="basis-0 grow-999 min-inline-[50%] flex flex-wrap gap-[8px] justify-start items-center">
+            <span
+              class="basis-0 grow-999 min-inline-[50%] flex flex-wrap gap-[8px] justify-start items-center"
+            >
               <span
                 aria-hidden="true"
                 class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] tabular-nums"
@@ -164,9 +174,7 @@ function toggleRow(name: string) {
                   </rt>
                 </ruby>
                 <template v-else>
-                  {{
-                  lang === 'en' && rec.nameEn ? rec.nameEn : rec.name
-                  }}
+                  {{ lang === 'en' && rec.nameEn ? rec.nameEn : rec.name }}
                 </template>
                 <span
                   v-if="rec.talks.length > 1"
@@ -186,12 +194,12 @@ function toggleRow(name: string) {
                   :key="y"
                   class="w-[28px] h-[22px] flex items-center justify-center [font-family:var(--font-mono)] text-[12px] tracking-[0]"
                   :class="[
-    rec.years.includes(y) && selectedYear === y
-      ? 'bg-[var(--accent)] border border-[var(--accent)] text-white'
-      : rec.years.includes(y)
-        ? 'bg-[var(--ink)] border border-[var(--ink)] text-[var(--paper)]'
-        : 'border border-[var(--ink)] text-[var(--ink)]',
-  ]"
+                    rec.years.includes(y) && selectedYear === y
+                      ? 'bg-[var(--accent)] border border-[var(--accent)] text-white'
+                      : rec.years.includes(y)
+                        ? 'bg-[var(--ink)] border border-[var(--ink)] text-[var(--paper)]'
+                        : 'border border-[var(--ink)] text-[var(--ink)]',
+                  ]"
                   :title="y"
                 >
                   {{ y.slice(-2) }}
@@ -251,9 +259,7 @@ function toggleRow(name: string) {
                 >
                   w/
                   <template v-for="(cn, ci) in talk.coSpeakers" :key="cn">
-                    <template v-if="ci > 0">
-                      ,
-                    </template>
+                    <template v-if="ci > 0">,</template>
                     <NuxtLink
                       class="text-[var(--ink)] border-b border-[var(--rule-soft)] pb-[1px] no-underline hover:border-[var(--ink)]"
                       :to="`/speakers/${encodeURIComponent(cn)}`"

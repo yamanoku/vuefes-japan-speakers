@@ -6,8 +6,8 @@
     "build": "nuxt build",
     "check": "pnpm lint && pnpm typecheck",
     "dev": "nuxt dev",
-    "fmt": "vize fmt --write app server types",
-    "fmt:check": "vize fmt --check app server types",
+    "fmt": "vp fmt --write",
+    "fmt:check": "vp fmt --check",
     "generate": "nuxt generate",
     "lint": "node scripts/oxlint-vize.mjs .",
     "preview": "nuxt preview",
@@ -32,6 +32,7 @@
     "happy-dom": "catalog:test",
     "oxlint": "catalog:vize",
     "oxlint-plugin-vize": "catalog:vize",
+    "vite-plus": "catalog:vp",
     "vitest": "catalog:test",
     "wrangler": "catalog:cloudflare"
   },

@@ -7,14 +7,20 @@ const { t } = useVfjsI18n();
 </script>
 
 <template>
-  <section class="border-b border-[var(--rule)] pt-[clamp(48px,8vw,120px)] pb-[clamp(40px,6vw,72px)] px-[var(--pad-x)]">
+  <section
+    class="border-b border-[var(--rule)] pt-[clamp(48px,8vw,120px)] pb-[clamp(40px,6vw,72px)] px-[var(--pad-x)]"
+  >
     <div class="grid grid-cols-12 gap-6 items-end">
-      <div class="col-span-9 flex items-center gap-[clamp(18px,2.4vw,34px)] max-[800px]:col-span-12 max-[560px]:flex-col max-[560px]:items-start">
-        <AppLogoMark class="w-[clamp(42px,5vw,72px)] h-auto text-[var(--ink)] mb-[0.08em] max-[560px]:mb-0" />
-        <h1 class="m-0 [font-family:var(--font-display)] font-[500] text-[clamp(38px,6.2vw,104px)] leading-[0.96] text-[var(--ink)] word-break-keep-all">
-          <span>
-            Vue Fes Japan Speakers
-          </span>
+      <div
+        class="col-span-9 flex items-center gap-[clamp(18px,2.4vw,34px)] max-[800px]:col-span-12 max-[560px]:flex-col max-[560px]:items-start"
+      >
+        <AppLogoMark
+          class="w-[clamp(42px,5vw,72px)] h-auto text-[var(--ink)] mb-[0.08em] max-[560px]:mb-0"
+        />
+        <h1
+          class="m-0 [font-family:var(--font-display)] font-[500] text-[clamp(38px,6.2vw,104px)] leading-[0.96] text-[var(--ink)] word-break-keep-all"
+        >
+          <span>Vue Fes Japan Speakers</span>
         </h1>
       </div>
       <aside
@@ -40,7 +46,9 @@ const { t } = useVfjsI18n();
           {{ t.meta_years }}
         </div>
       </aside>
-      <p class="col-span-9 mt-[28px] text-[clamp(16px,1.4vw,20px)] text-[var(--ink-2)] leading-[1.5] m-0 max-[800px]:col-span-12">
+      <p
+        class="col-span-9 mt-[28px] text-[clamp(16px,1.4vw,20px)] text-[var(--ink-2)] leading-[1.5] m-0 max-[800px]:col-span-12"
+      >
         {{ t.sub_all }}
       </p>
     </div>

@@ -29,20 +29,20 @@ pnpm install
 
 ## Commands
 
-開発サーバやビルドなどの npm scripts は pnpm 経由で実行します。Lint / Format / Type Check は Vize 系ツールを利用します。
+開発サーバやビルドなどの npm scripts は pnpm 経由で実行できます。Vite+ の `vp dev` / `vp build` も Nuxt に橋渡しされ、Format は Vite+ の `vp fmt`、Lint / Type Check は Vize 系ツールを利用します。
 
-| 用途          | コマンド          |
-| ------------- | ----------------- |
-| 開発サーバ    | `pnpm dev`        |
-| ビルド        | `pnpm build`      |
-| 静的生成      | `pnpm generate`   |
-| プレビュー    | `pnpm preview`    |
-| Lint          | `pnpm lint`       |
-| Format        | `pnpm fmt`        |
-| Format Check  | `pnpm fmt:check`  |
-| Type Check    | `pnpm typecheck`  |
-| Test          | `pnpm test`       |
-| Test（watch） | `pnpm test:watch` |
+| 用途          | コマンド                            |
+| ------------- | ----------------------------------- |
+| 開発サーバ    | `pnpm dev` / `vp dev`               |
+| ビルド        | `pnpm build` / `vp build`           |
+| 静的生成      | `pnpm generate`                     |
+| プレビュー    | `pnpm preview`                      |
+| Lint          | `pnpm lint`                         |
+| Format        | `pnpm fmt` / `vp fmt --write`       |
+| Format Check  | `pnpm fmt:check` / `vp fmt --check` |
+| Type Check    | `pnpm typecheck`                    |
+| Test          | `pnpm test`                         |
+| Test（watch） | `pnpm test:watch`                   |
 
 ## CI
 
@@ -53,7 +53,7 @@ GitHub Actions でも同じ pnpm scripts を実行します。
 - `pnpm typecheck`
 - `pnpm test`
 
-`pnpm fmt:check` と `pnpm typecheck` は Rust-native Vize CLI を利用します。
+`pnpm fmt:check` は Vite+、`pnpm typecheck` は Rust-native Vize CLI を利用します。
 
 ## Deploy
 

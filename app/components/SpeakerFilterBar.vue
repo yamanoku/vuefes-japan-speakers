@@ -16,7 +16,9 @@ const speakerId = useId();
 </script>
 
 <template>
-  <div class="grid grid-cols-2 gap-[24px] px-[var(--pad-x)] py-[20px] border-b border-[var(--rule-soft)] items-center max-[700px]:grid-cols-1">
+  <div
+    class="grid grid-cols-2 gap-[24px] px-[var(--pad-x)] py-[20px] border-b border-[var(--rule-soft)] items-center max-[700px]:grid-cols-1"
+  >
     <div class="grid grid-cols-[auto_1fr] gap-[12px] items-center">
       <label
         class="[font-family:var(--font-mono)] text-[12px] tracking-[0.1em] text-[var(--ink)] whitespace-nowrap"
@@ -31,7 +33,7 @@ const speakerId = useId();
         :placeholder="t.filter_search_ph"
         :value="query"
         @input="emit('update:query', ($event.target as HTMLInputElement).value)"
-       />
+      />
     </div>
     <div class="grid grid-cols-[auto_1fr] gap-[12px] items-center">
       <label

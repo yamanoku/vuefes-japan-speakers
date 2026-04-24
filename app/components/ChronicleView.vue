@@ -70,7 +70,7 @@ const grouped = computed(() => {
         :counts="counts"
         :selected-year="selectedYear"
         @update:selected-year="emit('update:selectedYear', $event)"
-       />
+      />
       <div
         v-if="grouped.length === 0"
         class="px-[var(--pad-x)] py-[80px] text-center [font-family:var(--font-mono)] text-[13px] tracking-[0.05em] uppercase text-[var(--ink-3)]"
@@ -94,7 +94,9 @@ const grouped = computed(() => {
             >
               {{ year }}
             </span>
-            <span class="[font-family:var(--font-mono)] text-[12px] tracking-[0.08em] uppercase text-[var(--ink-3)] mt-[10px]">
+            <span
+              class="[font-family:var(--font-mono)] text-[12px] tracking-[0.08em] uppercase text-[var(--ink-3)] mt-[10px]"
+            >
               {{ t.year_total_talks(arr.length) }}
             </span>
             <NuxtLink
@@ -120,9 +122,13 @@ const grouped = computed(() => {
                   {{ String(i + 1).padStart(2, '0') }}
                 </span>
               </div>
-              <div class="grid grid-cols-[minmax(0,300px)_minmax(0,1fr)] gap-[clamp(16px,2vw,32px)] items-baseline max-[700px]:grid-cols-1 max-[700px]:gap-[6px]">
+              <div
+                class="grid grid-cols-[minmax(0,300px)_minmax(0,1fr)] gap-[clamp(16px,2vw,32px)] items-baseline max-[700px]:grid-cols-1 max-[700px]:gap-[6px]"
+              >
                 <!-- Speaker names -->
-                <div class="[font-family:var(--font-display)] font-[500] text-[clamp(17px,1.5vw,22px)] tracking-[-0.01em] leading-[1.25]">
+                <div
+                  class="[font-family:var(--font-display)] font-[500] text-[clamp(17px,1.5vw,22px)] tracking-[-0.01em] leading-[1.25]"
+                >
                   <template v-for="(n, ni) in s.name" :key="n">
                     <span v-if="ni > 0" aria-hidden="true" class="text-[var(--ink-2)] font-normal">
                       ×
