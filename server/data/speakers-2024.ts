@@ -83,6 +83,12 @@ export const speakers2024: SpeakerInfo[] = [
     url: 'https://vuefes.jp/2024/sessions/alexander-lichter',
   },
   {
+    name: ['Evan You', 'Boshen Chen', '太田 洋介', 'Sosuke Suzuki', 'unvalley', 'Kia King Ishii'],
+    title: '次世代フロントエンドクロストーク',
+    url: 'https://vuefes.jp/2024/#crosstalk',
+    format: 'panel',
+  },
+  {
     name: ['いがにん'],
     title: 'Vue.js、Nuxtの機能を使い、大量のコピペコードをリファクタリングする',
     url: 'https://vuefes.jp/2024/sessions/igayamaguchi',
@@ -168,6 +174,12 @@ export const speakers2024: SpeakerInfo[] = [
     title:
       'Nuxt UI Pro、NuxtHub、Nuxt Scripts、Nuxtエコシステムをふんだんに利用して開発するコーポレートサイト',
     url: 'https://vuefes.jp/2024/sessions/gangan_nikki',
+  },
+  {
+    name: ['kazupon', 'Nozomu Ikuta', 'ubugeeei', 'jay-es', 'からころ'],
+    title: 'Vue.jsコミュニティにようこそ！',
+    url: 'https://vuefes.jp/2024/#welcome-vuejs-community',
+    format: 'panel',
   },
   {
     name: ['成瀬 允宣'],

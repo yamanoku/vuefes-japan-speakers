@@ -239,6 +239,11 @@ function toggleRow(name: string) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
+                  <span
+                    v-if="talk.format === 'panel'"
+                    class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--accent)] text-[var(--accent)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
+                    >{{ t.session_format_panel }}</span
+                  >
                   <span class="hover:underline">{{ talk.title || t.tbd }}</span>
                   <span
                     class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] ml-[4px]"
