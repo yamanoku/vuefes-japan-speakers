@@ -1,6 +1,8 @@
 import type { SpeakerInfo, AcceptedYear, SpeakerWithYear } from '~~/types';
 import { isValidYear } from '~/utils/years';
 
+const ALL_SPEAKERS_KEY = 'vfjs:all-speakers';
+
 const normalize = (s: string) => s.toLowerCase().trim();
 
 const fetchYearSpeakers = async (year: string) => {
@@ -9,9 +11,10 @@ const fetchYearSpeakers = async (year: string) => {
 };
 
 const fetchAllSpeakersWithYears = async () => {
-  // Single call to aggregated API
-  const all = await $fetch<SpeakerWithYear[]>(`/api/speakers`);
-  return all;
+  const { data } = await useAsyncData(ALL_SPEAKERS_KEY, () =>
+    $fetch<SpeakerWithYear[]>(`/api/speakers`),
+  );
+  return data.value ?? [];
 };
 
 const fetchNameSpeakers = async (name?: string) => {
@@ -36,10 +39,10 @@ export const useFetchSpeaker = async (params?: string) => {
   return handler(params);
 };
 
-export const useFetchAllSpeakers = async () => {
-  const allSpeakers = await fetchAllSpeakersWithYears();
-  return allSpeakers;
-};
+export const useFetchAllSpeakers = () =>
+  useAsyncData(ALL_SPEAKERS_KEY, () => $fetch<SpeakerWithYear[]>(`/api/speakers`), {
+    default: () => [],
+  });
 
 export const useFilteredSpeakers = (
   allSpeakers: Ref<SpeakerWithYear[]>,

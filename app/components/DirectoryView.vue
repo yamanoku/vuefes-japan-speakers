@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { compareLexicalJa } from '~/utils/stringCollate';
 import { buildSpeakerMap, hasJapanese } from '~/utils/speakerMap';
 import type { SpeakerRecord } from '~/utils/speakerMap';
 import { YEARS } from '~~/types';
@@ -49,16 +50,16 @@ const filtered = computed<SpeakerRecord[]>(() => {
     list = [...list].sort(
       (a, b) =>
         b.talks.length - a.talks.length ||
-        a.years[0]?.localeCompare(b.years[0] || '') ||
-        a.name.localeCompare(b.name),
+        compareLexicalJa(a.years[0] || '', b.years[0] || '') ||
+        compareLexicalJa(a.name, b.name),
     );
   } else if (sort.value === 'name') {
-    list = [...list].sort((a, b) => a.name.localeCompare(b.name));
+    list = [...list].sort((a, b) => compareLexicalJa(a.name, b.name));
   } else if (sort.value === 'latest') {
     list = [...list].sort(
       (a, b) =>
-        b.years[b.years.length - 1]?.localeCompare(a.years[a.years.length - 1] || '') ||
-        a.name.localeCompare(b.name),
+        compareLexicalJa(b.years[b.years.length - 1] || '', a.years[a.years.length - 1] || '') ||
+        compareLexicalJa(a.name, b.name),
     );
   }
   return list;

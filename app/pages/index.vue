@@ -3,7 +3,7 @@ import { useFetchAllSpeakers } from '~/composables/speaker';
 import { YEARS } from '~~/types';
 import type { AcceptedYear } from '~~/types';
 
-const allSpeakers = await useFetchAllSpeakers();
+const { data: allSpeakers } = await useFetchAllSpeakers();
 
 const { t } = useVfjsI18n();
 
@@ -29,9 +29,10 @@ const selectedSpeaker = ref<string>('all');
 const query = ref('');
 
 const stats = computed(() => {
+  const list = allSpeakers.value;
   const speakerSet = new Set<string>();
-  for (const s of allSpeakers) s.name.forEach((n) => speakerSet.add(n));
-  return { speakers: speakerSet.size, talks: allSpeakers.length, years: YEARS.length };
+  for (const s of list) s.name.forEach((n) => speakerSet.add(n));
+  return { speakers: speakerSet.size, talks: list.length, years: YEARS.length };
 });
 </script>
 

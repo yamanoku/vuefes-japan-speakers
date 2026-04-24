@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useFetchSpeaker } from '~/composables/speaker';
+import { compareLexicalJa } from '~/utils/stringCollate';
 import { hasJapanese } from '~/utils/speakerMap';
 
 const route = useRoute();
@@ -35,7 +36,7 @@ const record = computed(() => {
       url: s.url,
       coSpeakers: s.name.filter((n) => n !== speakerName),
     }))
-    .sort((a, b) => a.year.localeCompare(b.year));
+    .sort((a, b) => compareLexicalJa(a.year, b.year));
   const years = [...new Set(talks.map((tk) => tk.year))].sort();
   return { name: speakerName, nameRuby, nameEn, years, talks };
 });
