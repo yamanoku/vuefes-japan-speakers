@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vite-plus/test';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { getRouterParam, createError, type H3Event, type EventHandlerRequest } from 'h3';
 import type { SpeakerInfo } from '~~/types';
 import handler from './[year]';

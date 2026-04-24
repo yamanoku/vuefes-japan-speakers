@@ -47,39 +47,44 @@ useHead({ title: `${speakerName} 発表一覧` });
 <template>
   <div>
     <AppHeader />
-
-    <header
-      class="border-b border-[var(--rule)] pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-[var(--pad-x)]"
-    >
+    <header class="border-b border-[var(--rule)] pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-[var(--pad-x)]">
       <h1
         class="[font-family:var(--font-display)] text-[clamp(28px,4.5vw,72px)] font-bold tracking-[-0.04em] leading-[1] mb-[16px]"
         :lang="hasJapanese(record.name) ? 'ja' : 'en'"
       >
-        <ruby v-if="record.nameRuby && lang === 'ja'"
-          >{{ record.name }}<rt>{{ record.nameRuby }}</rt></ruby
-        >
-        <template v-else>{{
+        <ruby v-if="record.nameRuby && lang === 'ja'">
+          {{ record.name }}
+          <rt>
+            {{ record.nameRuby }}
+          </rt>
+        </ruby>
+        <template v-else>
+          {{
           lang === 'en' && record.nameEn ? record.nameEn : record.name
-        }}</template>
+          }}
+        </template>
       </h1>
       <div class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)]">
-        <div>{{ t.appearance_count(record.talks.length) }}</div>
+        <div>
+          {{ t.appearance_count(record.talks.length) }}
+        </div>
         <div class="mt-[8px]">
           {{ t.years_appeared }}:
           <template v-for="(year, i) in record.years" :key="year">
-            <template v-if="i > 0">, </template>
-            <NuxtLink :to="`/${year}`" class="text-[var(--ink)] underline hover:no-underline">{{
+            <template v-if="i > 0">
+              ,
+            </template>
+            <NuxtLink class="text-[var(--ink)] underline hover:no-underline" :to="`/${year}`">
+              {{
               year
-            }}</NuxtLink>
+              }}
+            </NuxtLink>
           </template>
         </div>
       </div>
     </header>
-
     <section class="px-[var(--pad-x)] py-[40px]">
-      <div
-        class="[font-family:var(--font-mono)] text-[10px] tracking-[0.1em] text-[var(--ink-3)] mb-[16px]"
-      >
+      <div class="[font-family:var(--font-mono)] text-[10px] tracking-[0.1em] text-[var(--ink-3)] mb-[16px]">
         {{ t.related_talks }}
       </div>
       <ol class="list-none p-0 m-0">
@@ -89,22 +94,24 @@ useHead({ title: `${speakerName} 発表一覧` });
           class="grid grid-cols-[60px_1fr_auto] gap-x-[16px] items-baseline py-[14px] border-t border-[var(--rule-softer)]"
         >
           <span class="[font-family:var(--font-mono)] text-[11px] text-[var(--ink-3)]">
-            <NuxtLink
-              class="text-[var(--ink)] underline hover:no-underline"
-              :to="`/${talk.year}`"
-              >{{ talk.year }}</NuxtLink
-            >
+            <NuxtLink class="text-[var(--ink)] underline hover:no-underline" :to="`/${talk.year}`">
+              {{ talk.year }}
+            </NuxtLink>
           </span>
           <a
             class="text-[16px] text-[var(--ink)] no-underline flex items-baseline gap-[4px] hover:text-[var(--accent)]"
-            :href="talk.url"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
+            :href="talk.url"
           >
-            <span :lang="hasJapanese(talk.title || '') ? 'ja' : 'en'">{{
+            <span :lang="hasJapanese(talk.title || '') ? 'ja' : 'en'">
+              {{
               talk.title || t.tbd
-            }}</span>
-            <span class="text-[11px] opacity-70" :aria-label="t.external">↗</span>
+              }}
+            </span>
+            <span class="text-[11px] opacity-70" :aria-label="t.external">
+              ↗
+            </span>
           </a>
           <span
             v-if="talk.coSpeakers.length > 0"
@@ -112,18 +119,20 @@ useHead({ title: `${speakerName} 発表一覧` });
           >
             w/
             <template v-for="(cn, ci) in talk.coSpeakers" :key="cn">
-              <template v-if="ci > 0">, </template>
+              <template v-if="ci > 0">
+                ,
+              </template>
               <NuxtLink
                 class="text-[var(--ink)] underline hover:no-underline"
                 :to="`/speakers/${encodeURIComponent(cn)}`"
-                >{{ cn }}</NuxtLink
               >
+                {{ cn }}
+              </NuxtLink>
             </template>
           </span>
         </li>
       </ol>
     </section>
-
     <AppFooter />
   </div>
 </template>

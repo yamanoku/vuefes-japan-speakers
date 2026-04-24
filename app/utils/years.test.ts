@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vite-plus/test';
+import { describe, it, expect } from 'vitest';
 import { isValidYear } from './years';
 import type { AcceptedYear } from '~~/types';
 

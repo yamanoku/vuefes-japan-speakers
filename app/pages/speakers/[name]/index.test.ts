@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vite-plus/test';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ref, computed } from 'vue';
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
 import type { AcceptedYear, SpeakerInfo } from '~~/types';
@@ -49,7 +49,7 @@ describe('speakers/[name]/index.vue', () => {
     },
   ];
 
-  const mockRoute = { params: { name: 'John Doe' } };
+  const mockRoute = { params: { name: 'John Doe' }, matched: [] };
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -74,6 +74,7 @@ describe('speakers/[name]/index.vue', () => {
 
   it('スピーカー名とトークを含むページをレンダリングする', async () => {
     const wrapper = await mountSuspended(SpeakerNamePage, {
+      route: '/speakers/John%20Doe',
       global: { stubs: globalStubs },
     });
 
@@ -88,6 +89,7 @@ describe('speakers/[name]/index.vue', () => {
   describe('SEOとメタデータ', () => {
     it('useHeadでタイトルが設定される', async () => {
       await mountSuspended(SpeakerNamePage, {
+        route: '/speakers/John%20Doe',
         global: { stubs: globalStubs },
       });
 
@@ -99,7 +101,7 @@ describe('speakers/[name]/index.vue', () => {
 
   describe('異なるスピーカー名', () => {
     it('日本語のスピーカー名を処理する', async () => {
-      useRouteMock.mockReturnValue({ params: { name: '山田太郎' } });
+      useRouteMock.mockReturnValue({ params: { name: '山田太郎' }, matched: [] });
 
       const speakersJapanese: SpeakerWithYear[] = [
         {
@@ -116,6 +118,7 @@ describe('speakers/[name]/index.vue', () => {
       });
 
       const wrapper = await mountSuspended(SpeakerNamePage, {
+        route: '/speakers/%E5%B1%B1%E7%94%B0%E5%A4%AA%E9%83%8E',
         global: { stubs: globalStubs },
       });
 

@@ -7,6 +7,7 @@
 - フレームワーク: Nuxt 4（Vue 3）
 - 目的: 歴代の Vue Fes Japan スピーカーと発表タイトルを一覧できる非公式アーカイブ
 - UI/スタイル: Nuxt UI 4 + Tailwind CSS 4 + カスタムコンポーネント
+- ツールチェーン: Vize（Vue SFC compiler は opt-in / lint / type check）+ Vite+
 - データ供給: Nuxt サーバルート（`server/api`）から年別・全件データを返却
 - デプロイ: NuxtHub / Cloudflare 系の設定を利用
 
@@ -28,18 +29,18 @@ vp config
 
 | 用途 | 推奨コマンド | npm script |
 | --- | --- | --- |
-| 開発サーバ | `vp run dev` | `pnpm dev` |
-| ビルド | `vp run build` | `pnpm build` |
-| 静的生成 | `vp run generate` | `pnpm generate` |
-| プレビュー | `vp run preview` | `pnpm preview` |
-| Lint | `vp lint .` | `pnpm vp:lint` |
-| Format | `vp fmt .` | `pnpm vp:fmt` |
-| Format 確認 | `vp fmt . --check` | - |
-| Type Check | `vp check` | `pnpm vp:check` |
-| Test | `vp test run` | `pnpm vp:test` |
-| Test（watch） | `vp test` | `pnpm vp:test:watch` |
+| 開発サーバ | `vp dev` | `pnpm dev` |
+| ビルド | `vp build` | `pnpm build` |
+| 静的生成 | `pnpm generate` | `pnpm generate` |
+| プレビュー | `pnpm preview` | `pnpm preview` |
+| Lint | `pnpm lint` | `pnpm lint` |
+| Format | `vp fmt --write` | `pnpm fmt` |
+| Format 確認 | `vp fmt --check` | `pnpm fmt:check` |
+| Type Check | `pnpm typecheck` | `pnpm typecheck` |
+| Test | `pnpm test` | `pnpm test` |
+| Test（watch） | `pnpm test:watch` | `pnpm test:watch` |
 
-作業前後の検証は、変更内容に応じて `vp lint .`、`vp fmt . --check`、`vp check`、`vp test run` を組み合わせます。
+作業前後の検証は、変更内容に応じて `pnpm lint`、`pnpm fmt:check`、`pnpm typecheck`、`pnpm test` を組み合わせます。
 
 ## ディレクトリ構成（要点）
 
@@ -56,9 +57,10 @@ vp config
 - `types/`: `SpeakerInfo`、`SpeakerWithYear`、`YEARS` などの共有型
 - `public/`: ロゴ、favicon、OG 画像などの静的ファイル
 - `pnpm-workspace.yaml`: catalog と依存バージョンの定義
-- `vite.config.ts`: Vite+ の lint / staged 設定
+- `nuxt.config.ts`: Nuxt モジュール、Nitro、NuxtHub、Vize 設定
+- `vite.config.ts`: Vite+ の lint / format / `vp dev` / `vp build` 設定
 - `vitest.config.ts`: Nuxt テスト環境と happy-dom 設定
-- `nuxt.config.ts`: Nuxt モジュール、Nitro、NuxtHub、ESLint 設定
+- `tsconfig.vize.json`: Vize 型チェック用の TS 設定
 
 ## API とデータ
 
@@ -110,9 +112,16 @@ vp config
   - `@import 'tailwindcss' theme(static);`
   - `--paper`、`--ink`、`--accent`、`--rule` などの CSS カスタムプロパティを定義します。
 
+## Vize / Lint / 型チェック
+
+- Compiler: `@vizejs/nuxt` を `nuxt.config.ts` に組み込みます。Nuxt 4.4.2 の内部ルート描画との互換性を保つため、Vize の Vue SFC compiler は `VIZE_NUXT_COMPILER=1` の明示 opt-in で有効化します。
+- Lint: `vite.config.ts` の `lint` 設定を `scripts/oxlint-vize.mjs` から `oxlint-vize` に渡し、TS/JS の Oxlint ルールと Vize の Vue 診断をまとめて実行します。
+- 型チェック: `scripts/vize-typecheck.mjs` から Rust binary の `vize check --tsconfig tsconfig.vize.json` を明示的な TS 入力で実行します。
+- 設定: `vite.config.ts` に Lint / Format / `vp dev` / `vp build` の設定を集約します。
+
 ## テスト
 
-- ランナー: Vitest（Vite+ 経由）
+- ランナー: Vitest
 - DOM: Nuxt テスト環境 + happy-dom
 - 設定: `vitest.config.ts`
 - テスト位置:
@@ -121,10 +130,10 @@ vp config
 - 実行:
 
 ```bash
-vp test run
+pnpm test
 ```
 
-ウォッチ実行は `vp test` を使います。
+ウォッチ実行は `pnpm test:watch` を使います。
 
 ### テスト方針
 
@@ -134,12 +143,12 @@ vp test run
 
 ## 型チェックと lint
 
-- 型チェック: `vp check`
-- Lint: `vp lint .`
-- Format: `vp fmt .`
-- Format 確認: `vp fmt . --check`
+- 型チェック: `pnpm typecheck`
+- Lint: `pnpm lint`
+- Format: `pnpm fmt`
+- Format 確認: `pnpm fmt:check`
 
-型エラーを隠すための型削除や過度な型アサーションは避け、原因を直してください。`vite.config.ts` の staged 設定では `vp check --fix` が走る想定です。
+型エラーを隠すための型削除や過度な型アサーションは避け、原因を直してください。
 
 ## 典型タスクの手順
 
@@ -167,10 +176,10 @@ vp test run
 
 GitHub Actions は Vite+ セットアップ後に以下を実行します。
 
-- `vp lint .`
-- `vp fmt . --check`
-- `vp check`
-- `vp test run`
+- `pnpm lint`
+- `pnpm fmt:check`
+- `pnpm typecheck`
+- `pnpm test`
 
 CI の対象 path は `app/**`、`server/**`、`types/**`、各種設定ファイル、lockfile などです。ドキュメントのみの変更では一部の workflow が走らない場合があります。
 
@@ -189,13 +198,13 @@ NuxtHub / Cloudflare 関連の依存は `pnpm-workspace.yaml` の `cloudflare` c
 - ブランチ: `feat/*`、`fix/*`、`chore/*`、`docs/*` など用途別に作成する。
 - コミット: Conventional Commits を使う。例: `docs: update agents guide`
 - 実装: 小さめの差分で進め、関連テストやドキュメントも合わせて更新する。
-- 検証: 変更内容に応じて `vp lint . && vp fmt . --check && vp check && vp test run` を実行する。
+- 検証: 変更内容に応じて `pnpm lint && pnpm fmt:check && pnpm typecheck && pnpm test` を実行する。
 - レビュー: 変更点の要約、確認したコマンド、必要に応じてスクリーンショットや再現手順を添える。
 
 ## トラブルシュート
 
 - 依存関係の不整合: `vp install` を実行し、必要なら `vp config` も実行する。
 - パッケージマネージャーの確認: `pnpm -v` で `10.33.2` 系か確認する。
-- 型エラー: `vp check` で原因を洗い出し、型定義・import・データ構造を直す。
+- 型エラー: `pnpm typecheck` で原因を洗い出し、型定義・import・データ構造を直す。
 - Nuxt 生成物の不整合: 開発サーバを再起動し、必要なら `vp config` を再実行する。
 - テスト環境の差異: `vitest.config.ts` の Nuxt 環境と happy-dom 設定を確認する。

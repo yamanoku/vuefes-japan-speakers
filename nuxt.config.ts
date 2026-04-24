@@ -2,7 +2,7 @@ import { defineNuxtConfig } from 'nuxt/config';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   // https://nuxt.com/modules
-  modules: ['@nuxthub/core', '@nuxt/eslint', '@nuxt/ui', '@nuxt/a11y'],
+  modules: ['@nuxthub/core', '@vizejs/nuxt', '@nuxt/ui', '@nuxt/a11y'],
 
   // https://devtools.nuxt.com
   devtools: { enabled: true },
@@ -26,14 +26,7 @@ export default defineNuxtConfig({
   // https://hub.nuxt.com/docs/getting-started/installation#options
   hub: {},
 
-  // https://eslint.nuxt.com
-  eslint: {
-    config: {
-      stylistic: {
-        quotes: 'single',
-        semi: true,
-      },
-      typescript: true,
-    },
+  vize: {
+    compiler: process.env.VIZE_NUXT_COMPILER !== '0',
   },
 });

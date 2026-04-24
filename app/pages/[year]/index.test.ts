@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vite-plus/test';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ref, computed } from 'vue';
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime';
 // @ts-expect-error type declarations
@@ -52,7 +52,7 @@ describe('[year]/index.vue', () => {
     },
   ];
 
-  const mockRoute = { params: { year: '2024' } };
+  const mockRoute = { params: { year: '2024' }, matched: [] };
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -81,6 +81,7 @@ describe('[year]/index.vue', () => {
     });
 
     const wrapper = await mountSuspended(YearPage, {
+      route: '/2024',
       global: { stubs: globalStubs },
     });
 
@@ -96,6 +97,7 @@ describe('[year]/index.vue', () => {
 
   it('スピーカーが空の場合でもページをレンダリングする', async () => {
     const wrapper = await mountSuspended(YearPage, {
+      route: '/2024',
       global: { stubs: globalStubs },
     });
 
@@ -106,6 +108,7 @@ describe('[year]/index.vue', () => {
 
   it('正しい年パラメータでuseFetchSpeakerを呼び出す', async () => {
     await mountSuspended(YearPage, {
+      route: '/2024',
       global: { stubs: globalStubs },
     });
 
@@ -114,6 +117,7 @@ describe('[year]/index.vue', () => {
 
   it('useHeadでタイトルが設定される', async () => {
     await mountSuspended(YearPage, {
+      route: '/2024',
       global: { stubs: globalStubs },
     });
 

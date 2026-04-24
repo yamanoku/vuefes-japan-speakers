@@ -1,4 +1,4 @@
-name: VP Format
+name: Vize Format
 
 on:
   pull_request:
@@ -12,11 +12,12 @@ on:
       - 'package.json'
       - 'pnpm-workspace.yaml'
       - 'pnpm-lock.yaml'
-      - 'vite.config.ts'
       - 'vitest.config.ts'
-      - 'eslint.config.mjs'
+      - '.oxlintrc.json'
+      - 'vize.config.json'
       - 'nuxt.config.ts'
       - 'tsconfig.json'
+      - 'tsconfig.vize.json'
       - 'server/tsconfig.json'
       - '.github/workflows/format.yml'
 
@@ -29,14 +30,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Setup Vite+
-        uses: voidzero-dev/setup-vp@be55d5df2da88a2387a2e6764871ca9e5387e187 # v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
           node-version: '24'
-          cache: true
+          cache: pnpm
+      - name: Enable pnpm
+        run: corepack enable
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
       - name: Install dependencies
-        run: vp install
-      - name: Run vp fmt
-        run: vp fmt . --check
+        run: pnpm install --frozen-lockfile
+      - name: Install Vize CLI
+        run: cargo install --git https://github.com/ubugeeei/vize --tag v0.63.0 --locked vize
+      - name: Run format check
+        run: pnpm fmt:check
         env:
           CI: true

@@ -21,19 +21,16 @@ const { t } = useVfjsI18n();
     :aria-label="t.filter_year"
   >
     <div class="flex items-center flex-wrap gap-[6px]">
-      <span
-        class="[font-family:var(--font-mono)] text-[12px] tracking-[0.1em] text-[var(--ink)] mr-[12px]"
-        >{{ t.filter_year }}</span
-      >
+      <span class="[font-family:var(--font-mono)] text-[12px] tracking-[0.1em] text-[var(--ink)] mr-[12px]">
+        {{ t.filter_year }}
+      </span>
       <div class="flex gap-[6px] flex-wrap" role="group" :aria-label="t.filter_year">
         <button
-          type="button"
           class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] [font-family:var(--font-mono)] text-[12px] tracking-[0.02em] border border-[var(--rule-soft)] cursor-pointer transition-colors"
-          :class="
-            selectedYear === 'all'
-              ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
-              : 'text-[var(--ink-2)] hover:border-[var(--ink)] hover:text-[var(--ink)]'
-          "
+          type="button"
+          :class="selectedYear === 'all'
+    ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
+    : 'text-[var(--ink-2)] hover:border-[var(--ink)] hover:text-[var(--ink)]'"
           :data-active="selectedYear === 'all' ? 'true' : 'false'"
           @click="emit('update:selectedYear', 'all')"
         >
@@ -42,13 +39,11 @@ const { t } = useVfjsI18n();
         <button
           v-for="y in YEARS"
           :key="y"
-          type="button"
           class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] [font-family:var(--font-mono)] text-[12px] tracking-[0.02em] border border-[var(--rule-soft)] cursor-pointer transition-colors"
-          :class="
-            selectedYear === y
-              ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
-              : 'text-[var(--ink-2)] hover:border-[var(--ink)] hover:text-[var(--ink)]'
-          "
+          type="button"
+          :class="selectedYear === y
+    ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
+    : 'text-[var(--ink-2)] hover:border-[var(--ink)] hover:text-[var(--ink)]'"
           :data-active="selectedYear === y ? 'true' : 'false'"
           @click="emit('update:selectedYear', y)"
         >

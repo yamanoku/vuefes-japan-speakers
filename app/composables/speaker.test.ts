@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vite-plus/test';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { computed, ref } from 'vue';
 import type { SpeakerInfo, AcceptedYear } from '~~/types';
 

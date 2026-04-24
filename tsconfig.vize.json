@@ -1,0 +1,17 @@
+{
+  "extends": "./.nuxt/tsconfig.json",
+  "include": [
+    "./.nuxt/types/imports.d.ts",
+    "./app/**/*.ts",
+    "./server/**/*.ts",
+    "./types/**/*.ts"
+  ],
+  "exclude": [
+    "./app/**/*.test.ts",
+    "./server/**/*.test.ts",
+    "./app/**/*.vue",
+    "./node_modules",
+    "./.output",
+    "./dist"
+  ]
+}
