@@ -114,7 +114,7 @@ useHead({ title: `${speakerName} 発表一覧` });
             <template v-for="(cn, ci) in talk.coSpeakers" :key="cn">
               <template v-if="ci > 0">, </template>
               <NuxtLink
-                class="text-[var(--accent)] no-underline hover:underline"
+                class="text-[var(--ink)] no-underline hover:underline"
                 :to="`/speakers/${encodeURIComponent(cn)}`"
                 >{{ cn }}</NuxtLink
               >
