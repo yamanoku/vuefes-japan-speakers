@@ -1,136 +1,201 @@
 # AGENTS Guide (vuefes-japan-speakers)
 
-このドキュメントは、エージェントや貢献者が本リポジトリで効率よく作業するための実務ガイドです。セットアップ、構成、一般的なタスクの手順、テスト/デプロイの流れを簡潔にまとめています。
+このドキュメントは、本リポジトリで作業するエージェントや貢献者向けの実務ガイドです。セットアップ、構成、よくある変更、検証、デプロイの要点をまとめています。
 
 ## プロジェクト概要
 
 - フレームワーク: Nuxt 4（Vue 3）
-- 目的: 歴代の Vue Fes Japan スピーカー一覧を表示
-- UI/スタイル: Tailwind CSS 4（カスタムコンポーネント中心）
-- データ供給: Nuxt サーバルート（`server/api`）から年別データを返却
+- 目的: 歴代の Vue Fes Japan スピーカーと発表タイトルを一覧できる非公式アーカイブ
+- UI/スタイル: Nuxt UI 4 + Tailwind CSS 4 + カスタムコンポーネント
+- データ供給: Nuxt サーバルート（`server/api`）から年別・全件データを返却
+- デプロイ: NuxtHub / Cloudflare 系の設定を利用
 
 ## 前提・セットアップ
 
-- 推奨: Node.js LTS, pnpm（`packageManager: pnpm@10.33.1`）
-- 依存関係のインストール:
+- 推奨: Node.js LTS。CI は Node.js 24 で動作します。
+- パッケージマネージャー: `pnpm@10.33.2`（`package.json` の `packageManager` を参照）
+- このリポジトリでは Vite+（`vp`）経由の操作を基本にします。
 
 ```bash
-pnpm install
+curl -fsSL https://vite.plus | bash
+vp install
+vp config
 ```
 
-## よく使うスクリプト
+`vp install` は `packageManager` を見て依存関係を入れます。`vp config` は `vite.config.ts` の設定を反映します。通常は install 時にも実行されますが、生成設定や Vite+ 設定を変更した場合は手動で実行してください。
 
-- 開発サーバ: `pnpm dev`
-- ビルド: `pnpm build`
-- 静的生成: `pnpm generate`
-- プレビュー: `pnpm preview`
-- 型チェック: `pnpm vp:check`
-- Lint: `pnpm vp:lint`
-- フォーマット: `pnpm vp:fmt`
-- テスト（全件）: `pnpm vp:test`
-- テスト（監視）: `pnpm vp:test:watch`
+## よく使うコマンド
+
+| 用途 | 推奨コマンド | npm script |
+| --- | --- | --- |
+| 開発サーバ | `vp run dev` | `pnpm dev` |
+| ビルド | `vp run build` | `pnpm build` |
+| 静的生成 | `vp run generate` | `pnpm generate` |
+| プレビュー | `vp run preview` | `pnpm preview` |
+| Lint | `vp lint .` | `pnpm vp:lint` |
+| Format | `vp fmt .` | `pnpm vp:fmt` |
+| Format 確認 | `vp fmt . --check` | - |
+| Type Check | `vp check` | `pnpm vp:check` |
+| Test | `vp test run` | `pnpm vp:test` |
+| Test（watch） | `vp test` | `pnpm vp:test:watch` |
+
+作業前後の検証は、変更内容に応じて `vp lint .`、`vp fmt . --check`、`vp check`、`vp test run` を組み合わせます。
 
 ## ディレクトリ構成（要点）
 
 - `app/`
-  - `pages/` ページ
-  - `components/` UI コンポーネント
-  - `composables/` アプリ用のロジック（`useVfjsI18n`, `useColorScheme`, `speaker` など）
-  - `utils/` ユーティリティ関数
-  - `assets/css/main.css` グローバル CSS・カラートークン定義
+  - `app.vue`: ルート、SEO、フォント、アイコンなどの共通設定
+  - `pages/`: トップ、年別一覧、スピーカー詳細ページ
+  - `components/`: ヘッダー、フッター、マストヘッド、一覧・タイムライン、フィルタ UI
+  - `composables/`: `useVfjsI18n`、`useColorScheme`、スピーカー取得・絞り込みロジック
+  - `utils/`: 年判定、文字列ソート、スピーカー集約などのユーティリティ
+  - `assets/css/main.css`: Tailwind 読み込み、フォント、カラートークン、フォーカススタイル
 - `server/`
-  - `api/` API ルート
-  - `data/` 年別スピーカーデータ（`speakers-YYYY.ts` とインデックス）
-- `public/` 静的ファイル
-- `nuxt.config.ts` Nuxt 設定ファイル
-- `eslint.config.mjs`, `vitest.config.ts`, `tsconfig.json` ツール設定
+  - `api/`: `/api/speakers` と `/api/speakers/[year]`
+  - `data/`: 年別スピーカーデータと集約ロジック
+- `types/`: `SpeakerInfo`、`SpeakerWithYear`、`YEARS` などの共有型
+- `public/`: ロゴ、favicon、OG 画像などの静的ファイル
+- `pnpm-workspace.yaml`: catalog と依存バージョンの定義
+- `vite.config.ts`: Vite+ の lint / staged 設定
+- `vitest.config.ts`: Nuxt テスト環境と happy-dom 設定
+- `nuxt.config.ts`: Nuxt モジュール、Nitro、NuxtHub、ESLint 設定
 
 ## API とデータ
 
-- 一覧: `server/api/speakers.ts`
+- 全件: `server/api/speakers.ts`
 - 年別: `server/api/speakers/[year].ts`
-- データ源: `server/data/` 配下に `speakers-2018.ts` ～ `speakers-2025.ts` などを配置し、`server/data/index.ts` から集約・エクスポートします。
+- データ源: `server/data/speakers-YYYY.ts`
+- 集約: `server/data/index.ts`
+- 有効年: `types/index.ts` の `YEARS`
 
-### 変更に伴う確認ポイント:
+現在の有効年は `2018`、`2019`、`2022`、`2023`、`2024`、`2025` です。2020 年と 2021 年は含まれていません。
 
-- 新しい年を追加したら、API のレスポンスが期待通りかテストで検証（`server/api/speakers/[year].test.ts` など）。
-- UI 側で年選択や一覧表示が反映されるか（`app/utils/years.ts`, `YearFilterBar.vue`）を確認。
+### 新しい開催年を追加するとき
+
+- `server/data/speakers-YYYY.ts` を作成し、`SpeakerInfo[]` に沿ってデータを定義する。
+- `server/data/index.ts` に import と `speakersByYear` のエントリを追加する。
+- `types/index.ts` の `YEARS` に年を追加する。UI の年表示はこの値を参照します。
+- `server/api/speakers/[year].test.ts` の有効年・エラーメッセージ期待値を更新する。
+- 必要に応じて `README.md` の参考リンクも更新する。
+- `/`、`/[year]`、`/speakers/[name]` で表示とリンクを確認する。
 
 ## UI/ページの要点
 
 - ルーティング:
-  - `app/pages/[year]/index.vue` 年別一覧ページ
-  - `app/pages/speakers/[name]/index.vue` スピーカー詳細/個別ページ
-- コンポーネント:
-  - `AppHeader.vue` ナビゲーション・言語切替・カラースキーム切替
-  - `AppMasthead.vue` / `AppFooter.vue` ページ共通ヘッダ・フッタ
-  - `DirectoryView.vue` 全スピーカー一覧（開示行で年バッジ表示）
-  - `ChronicleView.vue` 年別タイムライン表示
-  - `SpeakerFilterBar.vue` / `YearFilterBar.vue` フィルタ UI
-- スタイル: Tailwind CSS 4 ユーティリティ + CSS カスタムプロパティ（`var(--paper)`, `var(--ink)`, `var(--accent)` 等）
+  - `app/pages/index.vue`: 全体ビュー。タイムライン表示と一覧表示を切り替えます。
+  - `app/pages/[year]/index.vue`: 年別一覧ページ
+  - `app/pages/speakers/[name]/index.vue`: スピーカー詳細ページ
+- 主要コンポーネント:
+  - `AppHeader.vue`: ナビゲーション、言語切替、配色切替
+  - `AppMasthead.vue`: トップページの概要・統計表示
+  - `ChronicleView.vue`: 年別タイムライン表示
+  - `DirectoryView.vue`: スピーカー単位の一覧。並び替えと開閉行を持ちます。
+  - `SpeakerFilterBar.vue` / `YearFilterBar.vue`: 検索・年フィルタ UI
+  - `AppFooter.vue`: フッター
+- 表示状態:
+  - トップページの view は `localStorage('vfjs:view')` に保存されます。
+  - density は `localStorage('vfjs:density')` に保存されます。
+  - 言語は `localStorage('vfjs:lang')` に保存されます。
 
 ## カラースキーム
 
-`useColorScheme` composable でライト / ダーク / システム の3段階を管理します。
+`useColorScheme` composable で `light` / `dark` / `system` を管理します。
 
-- 状態: `'light' | 'dark' | 'system'`（デフォルト: `'system'`）
+- デフォルト: `system`
 - 保存先: `localStorage('vfjs:color-scheme')`
-- 適用方法: `:root` の `data-color-scheme` 属性を操作
-  - `system` → 属性を削除し `@media (prefers-color-scheme: dark)` に委ねる
-  - `light` / `dark` → `data-color-scheme="light/dark"` をセット
-- CSS 定義: `app/assets/css/main.css` にトークンを定義（ライト/ダーク両方）
-  - `@import 'tailwindcss'`（`theme(static)` は LightningCSS minify エラーを引き起こすため除去済み）
+- 適用方法:
+  - `system`: `document.documentElement` の `data-color-scheme` 属性を削除し、`prefers-color-scheme` に委ねる。
+  - `light` / `dark`: `data-color-scheme="light"` または `data-color-scheme="dark"` をセットする。
+- CSS 定義: `app/assets/css/main.css`
+  - `@import 'tailwindcss' theme(static);`
+  - `--paper`、`--ink`、`--accent`、`--rule` などの CSS カスタムプロパティを定義します。
 
 ## テスト
 
-- ランナー: Vitest（DOM: happy-dom）
-- 位置: `app/**.test.ts`, `server/**.test.ts`
-- 実行: `pnpm vp:test:watch`
+- ランナー: Vitest（Vite+ 経由）
+- DOM: Nuxt テスト環境 + happy-dom
+- 設定: `vitest.config.ts`
+- テスト位置:
+  - `app/**.test.ts`
+  - `server/**.test.ts`
+- 実行:
 
-## 型チェック
+```bash
+vp test run
+```
 
-- ランナー: vite-plus（`vp check`）
-- 実行: `pnpm vp:check`
-- 目的: 型の整合性を保ち、潜在的なバグを防止
+ウォッチ実行は `vp test` を使います。
 
-### 書き方の指針:
+### テスト方針
 
-- ユニットテストは入出力と副作用の最小検証に集中。
-- ルート/API は境界値・異常系（存在しない年など）もカバー。
+- ユニットテストは入出力と副作用の最小検証に集中する。
+- API ルートは有効値、境界値、異常系を確認する。
+- 年追加時は `YEARS`、API のエラーメッセージ、UI 側の年表示が連動しているか確認する。
+
+## 型チェックと lint
+
+- 型チェック: `vp check`
+- Lint: `vp lint .`
+- Format: `vp fmt .`
+- Format 確認: `vp fmt . --check`
+
+型エラーを隠すための型削除や過度な型アサーションは避け、原因を直してください。`vite.config.ts` の staged 設定では `vp check --fix` が走る想定です。
 
 ## 典型タスクの手順
 
-### 1. 新しい開催年のスピーカーデータを追加
+### スピーカー検索/フィルタを調整
 
-- `server/data/speakers-YYYY.ts` を作成し型に沿ってデータを定義。
-- `server/data/index.ts` にインポートとエクスポートを追加。
-- 必要に応じて `app/utils/years.ts` に年を追加（表示順の維持に注意）。
-- API テストを追加/更新（`server/api/speakers/[year].test.ts`）。
-- UI 表示を確認（`/[year]` ページ、年セレクタ）。
+- `SpeakerFilterBar.vue`、`YearFilterBar.vue`、`DirectoryView.vue`、`ChronicleView.vue` を確認する。
+- 取得・絞り込みロジックが必要なら `app/composables/speaker.ts` を更新する。
+- スピーカー集約や日本語判定に関わる場合は `app/utils/speakerMap.ts`、`app/utils/stringCollate.ts` も確認する。
+- 影響範囲のテストを更新する。
 
-### 2. スピーカー検索/フィルタを調整
+### コンポーネントを追加
 
-- `SpeakerFilterBar.vue` や `DirectoryView.vue` を変更。
-- 変更に合わせ `composables/speaker.ts` で取得ロジックやフィルタを調整。
-- 影響範囲のテスト更新（該当ページ/コンポーネントの test）。
+- `app/components/` に追加し、該当ページで利用する。
+- 既存の CSS カスタムプロパティと Tailwind ユーティリティに合わせる。
+- グローバルな見た目やフォーカススタイルは `app/assets/css/main.css` を確認する。
+- UI の振る舞いは小さな単位でテストする。
 
-### 3. コンポーネントを追加
+### 表示文言や言語切替を変更
 
-- `app/components/` に追加し、該当ページで読み込み。
-- スタイルは Tailwind ユーティリティを優先。
-- UI の振る舞いは小さな単位でテスト。
+- 文言は `app/composables/useVfjsI18n.ts` の `translations` を更新する。
+- `ja` と `en` の両方を揃える。
+- スピーカー名の英語表記はデータ側の `nameEn` を確認する。
+
+## CI
+
+GitHub Actions は Vite+ セットアップ後に以下を実行します。
+
+- `vp lint .`
+- `vp fmt . --check`
+- `vp check`
+- `vp test run`
+
+CI の対象 path は `app/**`、`server/**`、`types/**`、各種設定ファイル、lockfile などです。ドキュメントのみの変更では一部の workflow が走らない場合があります。
+
+## デプロイ
+
+NuxtHub へのデプロイは以下を使います。
+
+```bash
+vpx nuxthub deploy
+```
+
+NuxtHub / Cloudflare 関連の依存は `pnpm-workspace.yaml` の `cloudflare` catalog にまとまっています。
 
 ## 開発フロー（推奨）
 
-- ブランチ: `feat/*`, `fix/*`, `chore/*` など用途別に作成。
-- 実装: 小さなコミットで進め、関連テストを同時に更新。
-- 検証: `pnpm vp:lint && pnpm vp:check && pnpm vp:test` で事前チェック。
-  - 型チェックは特に重要。型を消すなどしてエラーを隠さないこと。その場合は詰めます。
-- レビュー: 変更点の要約、スクリーンショットや再現手順があると親切。
+- ブランチ: `feat/*`、`fix/*`、`chore/*`、`docs/*` など用途別に作成する。
+- コミット: Conventional Commits を使う。例: `docs: update agents guide`
+- 実装: 小さめの差分で進め、関連テストやドキュメントも合わせて更新する。
+- 検証: 変更内容に応じて `vp lint . && vp fmt . --check && vp check && vp test run` を実行する。
+- レビュー: 変更点の要約、確認したコマンド、必要に応じてスクリーンショットや再現手順を添える。
 
 ## トラブルシュート
 
-- Node/pnpm の不整合: ローカルの pnpm を `pnpm -v` で確認（推奨 10 系）。
-- 型エラー: `pnpm vp:check` で事前に洗い出し。
-  - 再三忠告しますが、型を消すなどしてエラーを隠さないこと。その場合は詰めます。
-- キャッシュ問題: Nuxt のキャッシュが怪しい場合は開発サーバ再起動で解消することがあります。
+- 依存関係の不整合: `vp install` を実行し、必要なら `vp config` も実行する。
+- パッケージマネージャーの確認: `pnpm -v` で `10.33.2` 系か確認する。
+- 型エラー: `vp check` で原因を洗い出し、型定義・import・データ構造を直す。
+- Nuxt 生成物の不整合: 開発サーバを再起動し、必要なら `vp config` を再実行する。
+- テスト環境の差異: `vitest.config.ts` の Nuxt 環境と happy-dom 設定を確認する。
