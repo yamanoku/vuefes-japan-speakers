@@ -3,17 +3,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "vp build",
-    "check": "vp run lint && vp run typecheck",
-    "dev": "vp dev",
-    "fmt": "vp fmt .",
-    "fmt:check": "vp fmt . --check",
-    "generate": "vp build",
-    "lint": "vp lint .",
-    "preview": "vp preview --outDir dist/client",
-    "test": "vp test run",
-    "test:watch": "vp test",
-    "typecheck": "vize check --servers 1 --tsconfig tsconfig.vize.json",
     "prepare": "vp config"
   },
   "dependencies": {

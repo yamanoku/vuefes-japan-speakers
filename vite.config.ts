@@ -3,6 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import vize from "@vizejs/vite-plugin";
 import { vuerend } from "@vuerend/core/vite";
 import { defineConfig } from "vite-plus";
+import { playwright } from "vite-plus/test/browser-playwright";
 
 const ignorePatterns = [
   "**/.cache/**",
@@ -109,6 +110,53 @@ export default defineConfig({
   },
   staged: {
     "*": "vp run check",
+  },
+  test: {
+    browser: {
+      enabled: true,
+      provider: playwright(),
+      instances: [{ browser: "chromium" }],
+    },
+  },
+  run: {
+    tasks: {
+      build: {
+        command: "vp build",
+      },
+      check: {
+        command: "vp run lint && vp run typecheck",
+      },
+      dev: {
+        command: "vp dev",
+        cache: false,
+      },
+      fmt: {
+        command: "vp fmt .",
+      },
+      "fmt:check": {
+        command: "vp fmt . --check",
+      },
+      generate: {
+        command: "vp build",
+      },
+      lint: {
+        command: "vp lint .",
+      },
+      preview: {
+        command: "vp preview --outDir dist/client",
+        cache: false,
+      },
+      test: {
+        command: "vp test run",
+      },
+      "test:watch": {
+        command: "vp test watch",
+        cache: false,
+      },
+      typecheck: {
+        command: "vize check --servers 1 --tsconfig tsconfig.vize.json",
+      },
+    },
   },
   fmt,
   lint,

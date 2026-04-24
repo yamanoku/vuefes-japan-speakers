@@ -3,7 +3,6 @@
   "include": [
     "./env.d.ts",
     "./vite.config.ts",
-    "./vitest.config.ts",
     "./app/**/*.ts",
     "./app/**/*.vue",
     "./server/**/*.ts",

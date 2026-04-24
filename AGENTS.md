@@ -58,8 +58,7 @@ vp config
 - `types/`: `SpeakerInfo`、`SpeakerWithYear`、`YEARS` などの共有型
 - `public/`: ロゴ、favicon、OG 画像などの静的ファイル
 - `pnpm-workspace.yaml`: catalog と依存バージョンの定義
-- `vite.config.ts`: Vite / vuerend / Vite+ / Vize lint 設定
-- `vitest.config.ts`: Vitest Browser Mode（Playwright / Chromium）の設定
+- `vite.config.ts`: Vite / vuerend / Vite+ / Vize lint / Vitest Browser Mode / `vp run` task 設定
 - `tsconfig.json`, `tsconfig.vize.json`: TypeScript と Vize 型チェック設定
 
 ## ルートとデータ
@@ -117,7 +116,7 @@ vp config
 
 - ランナー: Vitest（Vite+ 経由）
 - 実行環境: Vitest Browser Mode（Playwright / Chromium）
-- 設定: `vitest.config.ts`
+- 設定: `vite.config.ts`
 - テスト位置:
   - `app/**.test.ts`
   - `server/**.test.ts`
@@ -134,7 +133,7 @@ vp run test
 - ユニットテストは入出力と副作用の最小検証に集中する。
 - データ取得ロジックは有効値、境界値、異常系を確認する。
 - 年追加時は `YEARS`、データ集約、UI 側の年表示が連動しているか確認する。
-- Browser Mode で落ちる場合は、まず `vitest.config.ts` の `browser` 設定と Playwright のブラウザ導入状況を確認する。
+- Browser Mode で落ちる場合は、まず `vite.config.ts` の `test.browser` 設定と Playwright のブラウザ導入状況を確認する。
 
 ## 型チェックと lint
 
