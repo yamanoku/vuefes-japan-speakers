@@ -1,7 +1,3 @@
-<template>
-  <YearPageIsland :found="found" :speakers="speakers" :year="year" />
-</template>
-
 <script setup lang="ts">
 import type { SpeakerInfo } from "~~/types";
 import { YearPageIsland } from "../island-definitions";
@@ -16,3 +12,7 @@ defineProps<{
   year: string;
 }>();
 </script>
+
+<template>
+  <YearPageIsland :found="found" :speakers="speakers" :year="year" />
+</template>
