@@ -23,26 +23,45 @@
 
 ## Setup
 
-```bash
-pnpm install
-```
-
-## Development Server
+[Vite+](https://viteplus.dev/)（`vp`）を利用します。`vp install` は `package.json` の `packageManager` を参照して、必要なパッケージマネージャーを選択します。
 
 ```bash
-pnpm dev
+curl -fsSL https://vite.plus | bash
+vp install
+vp config
 ```
 
-## Production
+`vp config` は vite-plus の設定を反映します。通常は install 時にも実行されますが、`vite.config.ts` を変更したときや生成設定が足りないときは手動で実行してください。
 
-```bash
-pnpm build
-```
+## Commands
+
+開発サーバやビルドなどの npm scripts も、Lint / Format / Type Check / Test も `vp` 経由で実行します。
+
+| 用途          | コマンド          |
+| ------------- | ----------------- |
+| 開発サーバ    | `vp run dev`      |
+| ビルド        | `vp run build`    |
+| 静的生成      | `vp run generate` |
+| プレビュー    | `vp run preview`  |
+| Lint          | `vp lint .`       |
+| Format        | `vp fmt .`        |
+| Type Check    | `vp check`        |
+| Test          | `vp test run`     |
+| Test（watch） | `vp test`         |
+
+## CI
+
+GitHub Actions でも同じ `vp` コマンドを実行します。
+
+- `vp lint .`
+- `vp fmt . --check`
+- `vp check`
+- `vp test run`
 
 ## Deploy
 
 ```bash
-npx nuxthub deploy
+vpx nuxthub deploy
 ```
 
 ## License

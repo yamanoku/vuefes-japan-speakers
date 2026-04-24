@@ -1,4 +1,4 @@
-name: VP Format
+name: VP Type Check
 
 on:
   pull_request:
@@ -6,7 +6,6 @@ on:
       - main
     paths:
       - 'app/**'
-      - 'README.md'
       - 'server/**'
       - 'types/**'
       - 'package.json'
@@ -18,13 +17,13 @@ on:
       - 'nuxt.config.ts'
       - 'tsconfig.json'
       - 'server/tsconfig.json'
-      - '.github/workflows/format.yml'
+      - '.github/workflows/typecheck.yml'
 
 permissions:
   contents: read
 
 jobs:
-  format:
+  typecheck:
     runs-on: ubuntu-latest
 
     steps:
@@ -36,7 +35,7 @@ jobs:
           cache: true
       - name: Install dependencies
         run: vp install
-      - name: Run vp fmt
-        run: vp fmt . --check
+      - name: Run vp check
+        run: vp check
         env:
           CI: true
