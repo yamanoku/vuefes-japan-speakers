@@ -1,4 +1,4 @@
-name: Linter
+name: VP Lint
 
 on:
   pull_request:
@@ -6,37 +6,36 @@ on:
       - main
     paths:
       - 'app/**'
-      - 'server/api/**'
+      - 'server/**'
       - 'types/**'
+      - 'package.json'
       - 'pnpm-workspace.yaml'
       - 'pnpm-lock.yaml'
+      - 'vite.config.ts'
+      - 'vitest.config.ts'
       - 'eslint.config.mjs'
       - 'nuxt.config.ts'
       - 'tsconfig.json'
+      - 'server/tsconfig.json'
+      - '.github/workflows/linter.yml'
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [24.x]
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Install pnpm
-        uses: pnpm/action-setup@903f9c1a6ebcba6cf41d87230be49611ac97822e # v6.0.3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@be55d5df2da88a2387a2e6764871ca9e5387e187 # v1
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-      - name: pnpm install
-        run: pnpm install
-      - name: Lint
-        run: pnpm run vp:lint
+          node-version: '24'
+          cache: true
+      - name: Install dependencies
+        run: vp install
+      - name: Run vp lint
+        run: vp lint .
         env:
           CI: true
