@@ -14,7 +14,7 @@ const { t } = useVfjsI18n();
       <h1
         class="col-span-9 m-0 [font-family:var(--font-display)] font-[500] text-[clamp(38px,6.2vw,104px)] leading-[0.96] tracking-[-0.03em] text-[var(--ink)] word-break-keep-all max-[800px]:col-span-12"
       >
-        <span>Vue Fes Japan speakers</span>
+        <span>Vue Fes Japan Speakers</span>
       </h1>
       <aside
         class="col-span-3 [font-family:var(--font-mono)] text-[12px] leading-[1.7] tracking-[0.06em] text-[var(--ink-3)] border-l border-[var(--rule-soft)] pl-[16px] max-[800px]:col-span-12 max-[800px]:border-l-0 max-[800px]:pl-0 max-[800px]:border-t max-[800px]:pt-[16px]"
