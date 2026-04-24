@@ -1,0 +1,58 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 420 112"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">Vue Fes Japan Speakers</title>
+  <desc id="desc">The Vue Fes V/O mark paired with the Vue Fes Japan Speakers wordmark.</desc>
+  <style>
+    .accent {
+      fill: #007f62;
+    }
+
+    .ink {
+      fill: #1a1a17;
+    }
+
+    .subtle {
+      fill: #6b6b64;
+    }
+
+    .word {
+      font-family: "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 36px;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    .sub {
+      font-family: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .08em;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .ink {
+        fill: #e8e4dc;
+      }
+
+      .subtle {
+        fill: #b4b0a8;
+      }
+    }
+  </style>
+  <g transform="translate(18 12) scale(.98)">
+    <path
+      class="accent"
+      d="M25.61,10.25L31.52,0h19.7l-25.61,44.35L0,0h19.7l5.91,10.25Z"
+    />
+    <path
+      class="accent"
+      d="M26.19,89.73c12.25,0,22.19-9.93,22.19-22.19s-9.93-22.19-22.19-22.19-22.19,9.93-22.19,22.19,9.93,22.19,22.19,22.19Z"
+    />
+  </g>
+  <text class="word ink" x="88" y="51">Vue Fes Japan</text>
+  <text class="sub subtle" x="90" y="78">SPEAKERS ARCHIVE</text>
+</svg>

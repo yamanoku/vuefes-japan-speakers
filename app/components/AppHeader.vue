@@ -12,12 +12,9 @@ const { scheme, setScheme } = useColorScheme();
     <div class="flex flex-wrap justify-between items-center gap-2 py-[14px] px-[var(--pad-x)]">
       <NuxtLink
         to="/"
-        class="flex items-baseline gap-[10px] [font-family:var(--font-display)] font-semibold text-[15px] whitespace-nowrap leading-[1.15] text-[var(--ink)] no-underline hover:text-[var(--accent)] transition-colors tracking-[-0.01em]"
+        class="flex items-center gap-[10px] [font-family:var(--font-display)] font-semibold text-[15px] whitespace-nowrap leading-[1.15] text-[var(--ink)] no-underline hover:text-[var(--accent)] transition-colors"
       >
-        <span
-          class="w-[14px] h-[14px] rounded-full bg-[var(--accent)] inline-block translate-y-[1px] shrink-0"
-          aria-hidden="true"
-        />
+        <AppLogoMark class="w-[16px] h-auto text-[var(--ink)]" />
         <span>Vue Fes Japan Speakers</span>
       </NuxtLink>
 
