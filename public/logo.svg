@@ -7,6 +7,10 @@
   <title id="title">Vue Fes Japan Speakers</title>
   <desc id="desc">The Vue Fes V/O mark paired with the Vue Fes Japan Speakers wordmark.</desc>
   <style>
+    .paper {
+      fill: #f4f1eb;
+    }
+
     .accent {
       fill: #007f62;
     }
@@ -33,16 +37,8 @@
       letter-spacing: .08em;
     }
 
-    @media (prefers-color-scheme: dark) {
-      .ink {
-        fill: #e8e4dc;
-      }
-
-      .subtle {
-        fill: #b4b0a8;
-      }
-    }
   </style>
+  <rect class="paper" width="420" height="112" />
   <g transform="translate(18 12) scale(.98)">
     <path
       class="accent"

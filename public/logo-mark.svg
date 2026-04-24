@@ -15,11 +15,6 @@
       fill: #007f62;
     }
 
-    @media (prefers-color-scheme: dark) {
-      .paper {
-        fill: #1c1c19;
-      }
-    }
   </style>
   <rect class="paper" width="64" height="64" rx="14" />
   <g transform="translate(16.02 4) scale(.6241)">
