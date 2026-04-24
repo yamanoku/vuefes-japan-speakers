@@ -1,4 +1,4 @@
-name: VP Test
+name: Vite+ Test
 
 on:
   pull_request:
@@ -13,8 +13,8 @@ on:
       - "pnpm-lock.yaml"
       - "vite.config.ts"
       - "vitest.config.ts"
-      - "eslint.config.mjs"
       - "tsconfig.json"
+      - "tsconfig.vize.json"
       - ".github/workflows/vitest.yml"
 
 permissions:
@@ -35,7 +35,7 @@ jobs:
         run: vp install
       - name: Install Playwright browsers
         run: vp exec playwright install --with-deps chromium
-      - name: Run vp test
-        run: vp test run
+      - name: Run tests
+        run: pnpm test
         env:
           CI: true

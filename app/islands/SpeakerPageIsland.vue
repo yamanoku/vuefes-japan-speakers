@@ -51,22 +51,23 @@ const record = computed(() => {
           class="[font-family:var(--font-display)] text-[clamp(28px,4.5vw,72px)] font-bold tracking-[-0.04em] leading-[1] mb-[16px]"
           :lang="hasJapanese(record.name) ? 'ja' : 'en'"
         >
-          <ruby v-if="record.nameRuby && lang === 'ja'"
-            >{{ record.name }}<rt>{{ record.nameRuby }}</rt></ruby
-          >
-          <template v-else>{{
-            lang === "en" && record.nameEn ? record.nameEn : record.name
-          }}</template>
+          <ruby v-if="record.nameRuby && lang === 'ja'">
+            {{ record.name }}
+            <rt>{{ record.nameRuby }}</rt>
+          </ruby>
+          <template v-else>
+            {{ lang === "en" && record.nameEn ? record.nameEn : record.name }}
+          </template>
         </h1>
         <div class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)]">
           <div>{{ t.appearance_count(record.talks.length) }}</div>
           <div class="mt-[8px]">
             {{ t.years_appeared }}:
             <template v-for="(year, index) in record.years" :key="year">
-              <template v-if="index > 0">, </template>
-              <a :href="`/${year}`" class="text-[var(--ink)] underline hover:no-underline">{{
-                year
-              }}</a>
+              <template v-if="index > 0">,</template>
+              <a :href="`/${year}`" class="text-[var(--ink)] underline hover:no-underline">
+                {{ year }}
+              </a>
             </template>
           </div>
         </div>
@@ -85,9 +86,9 @@ const record = computed(() => {
             class="grid grid-cols-[60px_1fr_auto] gap-x-[16px] items-baseline py-[14px] border-t border-[var(--rule-softer)]"
           >
             <span class="[font-family:var(--font-mono)] text-[11px] text-[var(--ink-3)]">
-              <a class="text-[var(--ink)] underline hover:no-underline" :href="`/${talk.year}`">{{
-                talk.year
-              }}</a>
+              <a class="text-[var(--ink)] underline hover:no-underline" :href="`/${talk.year}`">
+                {{ talk.year }}
+              </a>
             </span>
             <a
               class="text-[16px] text-[var(--ink)] no-underline flex items-baseline gap-[4px] hover:text-[var(--accent)]"
@@ -95,9 +96,9 @@ const record = computed(() => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span :lang="hasJapanese(talk.title || '') ? 'ja' : 'en'">{{
-                talk.title || t.tbd
-              }}</span>
+              <span :lang="hasJapanese(talk.title || '') ? 'ja' : 'en'">
+                {{ talk.title || t.tbd }}
+              </span>
               <span class="text-[11px] opacity-70" :aria-label="t.external">↗</span>
             </a>
             <span
@@ -109,12 +110,13 @@ const record = computed(() => {
                 v-for="(coSpeakerName, coSpeakerIndex) in talk.coSpeakers"
                 :key="coSpeakerName"
               >
-                <template v-if="coSpeakerIndex > 0">, </template>
+                <template v-if="coSpeakerIndex > 0">,</template>
                 <a
                   class="text-[var(--ink)] underline hover:no-underline"
                   :href="`/speakers/${encodeURIComponent(coSpeakerName)}`"
-                  >{{ coSpeakerName }}</a
                 >
+                  {{ coSpeakerName }}
+                </a>
               </template>
             </span>
           </li>

@@ -1,4 +1,4 @@
-name: VP Format
+name: Vite+ Format
 
 on:
   pull_request:
@@ -14,8 +14,8 @@ on:
       - "pnpm-lock.yaml"
       - "vite.config.ts"
       - "vitest.config.ts"
-      - "eslint.config.mjs"
       - "tsconfig.json"
+      - "tsconfig.vize.json"
       - ".github/workflows/format.yml"
 
 permissions:
@@ -34,7 +34,7 @@ jobs:
           cache: true
       - name: Install dependencies
         run: vp install
-      - name: Run vp fmt
-        run: vp fmt . --check
+      - name: Run format check
+        run: pnpm fmt:check
         env:
           CI: true

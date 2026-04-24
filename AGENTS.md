@@ -7,6 +7,7 @@
 - フレームワーク: vuerend（Vue 3 / Vite）
 - 目的: 歴代の Vue Fes Japan スピーカーと発表タイトルを一覧できる非公式アーカイブ
 - UI/スタイル: Tailwind CSS 4 + カスタムコンポーネント
+- ツールチェーン: Vize 0.65.0 系（Vue SFC compiler / lint / type check）+ Vite+
 - データ供給: `server/data` の静的データを vuerend ルートの props として渡す
 
 ## 前提・セットアップ
@@ -25,20 +26,20 @@ vp config
 
 ## よく使うコマンド
 
-| 用途          | 推奨コマンド       | npm script           |
-| ------------- | ------------------ | -------------------- |
-| 開発サーバ    | `vp run dev`       | `pnpm dev`           |
-| ビルド        | `vp run build`     | `pnpm build`         |
-| 静的生成      | `vp run generate`  | `pnpm generate`      |
-| プレビュー    | `vp run preview`   | `pnpm preview`       |
-| Lint          | `vp lint .`        | `pnpm vp:lint`       |
-| Format        | `vp fmt .`         | `pnpm vp:fmt`        |
-| Format 確認   | `vp fmt . --check` | -                    |
-| Type Check    | `vp check`         | `pnpm vp:check`      |
-| Test          | `vp test run`      | `pnpm vp:test`       |
-| Test（watch） | `vp test`          | `pnpm vp:test:watch` |
+| 用途          | 推奨コマンド       | npm script        |
+| ------------- | ------------------ | ----------------- |
+| 開発サーバ    | `vp run dev`       | `pnpm dev`        |
+| ビルド        | `vp run build`     | `pnpm build`      |
+| 静的生成      | `vp run generate`  | `pnpm generate`   |
+| プレビュー    | `vp run preview`   | `pnpm preview`    |
+| Lint          | `pnpm lint`        | `pnpm lint`       |
+| Format        | `vp fmt .`         | `pnpm fmt`        |
+| Format 確認   | `vp fmt . --check` | `pnpm fmt:check`  |
+| Type Check    | `pnpm typecheck`   | `pnpm typecheck`  |
+| Test          | `vp test run`      | `pnpm test`       |
+| Test（watch） | `vp test`          | `pnpm test:watch` |
 
-作業前後の検証は、変更内容に応じて `vp lint .`、`vp fmt . --check`、`vp check`、`vp test run` を組み合わせます。
+作業前後の検証は、変更内容に応じて `pnpm lint`、`pnpm fmt:check`、`pnpm typecheck`、`pnpm test` を組み合わせます。
 
 ## ディレクトリ構成（要点）
 
@@ -57,9 +58,9 @@ vp config
 - `types/`: `SpeakerInfo`、`SpeakerWithYear`、`YEARS` などの共有型
 - `public/`: ロゴ、favicon、OG 画像などの静的ファイル
 - `pnpm-workspace.yaml`: catalog と依存バージョンの定義
-- `vite.config.ts`: Vite / vuerend / Vite+ の設定
+- `vite.config.ts`: Vite / vuerend / Vite+ / Vize lint 設定
 - `vitest.config.ts`: Vitest Browser Mode（Playwright / Chromium）の設定
-- `eslint.config.mjs`, `tsconfig.json`: ツール設定
+- `tsconfig.json`, `tsconfig.vize.json`: TypeScript と Vize 型チェック設定
 
 ## ルートとデータ
 
@@ -104,18 +105,12 @@ vp config
   - 言語は `localStorage('vfjs:lang')` に保存されます。
 - スタイル: Tailwind CSS 4 ユーティリティ + CSS カスタムプロパティ（`var(--paper)`, `var(--ink)`, `var(--accent)` 等）
 
-## カラースキーム
+## Vize / Lint / 型チェック
 
-`useColorScheme` composable で `light` / `dark` / `system` を管理します。
-
-- デフォルト: `system`
-- 保存先: `localStorage('vfjs:color-scheme')`
-- 適用方法:
-  - `system`: `document.documentElement` の `data-color-scheme` 属性を削除し、`prefers-color-scheme` に委ねる。
-  - `light` / `dark`: `data-color-scheme="light"` または `data-color-scheme="dark"` をセットする。
-- CSS 定義: `app/assets/css/main.css`
-  - `@import 'tailwindcss' theme(static);`
-  - `--paper`、`--ink`、`--accent`、`--rule` などの CSS カスタムプロパティを定義します。
+- Compiler: `@vizejs/vite-plugin` を `vite.config.ts` で vuerend の `vuePlugin` として渡します。
+- Lint: `vite.config.ts` の `lint` 設定を `scripts/oxlint-vize.mjs` から `oxlint-vize` に渡し、TS/JS の Oxlint ルールと Vize の Vue 診断をまとめて実行します。
+- 型チェック: `scripts/vize-typecheck.mjs` から npm package の `vize check --tsconfig tsconfig.vize.json` を明示的な入力で実行します。
+- Vize 関連 package は `pnpm-workspace.yaml` の `vize` catalog にまとめます。
 
 ## テスト
 
@@ -128,10 +123,10 @@ vp config
 - 実行:
 
 ```bash
-vp test run
+pnpm test
 ```
 
-ウォッチ実行は `vp test` を使います。
+ウォッチ実行は `pnpm test:watch` を使います。
 
 ### テスト方針
 
@@ -142,12 +137,12 @@ vp test run
 
 ## 型チェックと lint
 
-- 型チェック: `vp check`
-- Lint: `vp lint .`
-- Format: `vp fmt .`
-- Format 確認: `vp fmt . --check`
+- 型チェック: `pnpm typecheck`
+- Lint: `pnpm lint`
+- Format: `pnpm fmt`
+- Format 確認: `pnpm fmt:check`
 
-型エラーを隠すための型削除や過度な型アサーションは避け、原因を直してください。`vite.config.ts` の staged 設定では `vp check --fix` が走る想定です。
+型エラーを隠すための型削除や過度な型アサーションは避け、原因を直してください。
 
 ## 典型タスクの手順
 
@@ -175,25 +170,30 @@ vp test run
 
 GitHub Actions は Vite+ セットアップ後に以下を実行します。
 
-- `vp lint .`
-- `vp fmt . --check`
-- `vp check`
-- `vp test run`
+- `pnpm lint`
+- `pnpm fmt:check`
+- `pnpm typecheck`
+- `pnpm test`
 
 Browser Mode の test job では、テスト前に `vp exec playwright install --with-deps chromium` で Chromium を導入します。CI の対象 path は `app/**`、`server/**`、`types/**`、各種設定ファイル、lockfile などです。ドキュメントのみの変更では一部の workflow が走らない場合があります。
+
+## デプロイ
+
+`pnpm generate` で `dist/client` に静的ファイルを生成します。生成後の確認には `pnpm preview` を使います。
 
 ## 開発フロー（推奨）
 
 - ブランチ: `feat/*`、`fix/*`、`chore/*`、`docs/*` など用途別に作成する。
 - コミット: Conventional Commits を使う。例: `docs: update agents guide`
 - 実装: 小さめの差分で進め、関連テストやドキュメントも合わせて更新する。
-- 検証: 変更内容に応じて `vp lint . && vp fmt . --check && vp check && vp test run` を実行する。
+- 検証: 変更内容に応じて `pnpm lint && pnpm fmt:check && pnpm typecheck && pnpm test` を実行する。
 - レビュー: 変更点の要約、確認したコマンド、必要に応じてスクリーンショットや再現手順を添える。
 
 ## トラブルシュート
 
-- Node/pnpm の不整合: `node -v` と `pnpm -v` を確認する。
+- 依存関係の不整合: `vp install` を実行し、必要なら `vp config` も実行する。
+- パッケージマネージャーの確認: `pnpm -v` で `10.33.2` 系か確認する。
+- 型エラー: `pnpm typecheck` で原因を洗い出し、型定義・import・データ構造を直す。
 - Vite+ 設定の不整合: `vp config` を再実行する。
-- 型エラー: `vp check` で先に洗い出す。型を消してエラーを隠さない。
 - Browser Mode のブラウザ不足: `vp exec playwright install chromium` を実行する。Linux CI では `--with-deps` も付ける。
 - キャッシュ問題: Vite や生成物のキャッシュが怪しい場合は開発サーバを再起動する。

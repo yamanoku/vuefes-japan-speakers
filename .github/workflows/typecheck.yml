@@ -1,4 +1,4 @@
-name: VP Type Check
+name: Vize Type Check
 
 on:
   pull_request:
@@ -13,8 +13,9 @@ on:
       - "pnpm-lock.yaml"
       - "vite.config.ts"
       - "vitest.config.ts"
-      - "eslint.config.mjs"
       - "tsconfig.json"
+      - "tsconfig.vize.json"
+      - "scripts/vize-typecheck.mjs"
       - ".github/workflows/typecheck.yml"
 
 permissions:
@@ -33,7 +34,7 @@ jobs:
           cache: true
       - name: Install dependencies
         run: vp install
-      - name: Run vp check
-        run: vp check
+      - name: Run type check
+        run: pnpm typecheck
         env:
           CI: true

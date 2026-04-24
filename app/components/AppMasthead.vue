@@ -27,19 +27,25 @@ const { t } = useVfjsI18n();
         </h1>
       </div>
       <aside
-        class="col-span-3 [font-family:var(--font-mono)] text-[12px] leading-[1.7] tracking-[0.06em] text-[var(--ink-3)] border-l border-[var(--rule-soft)] pl-[16px] max-[800px]:col-span-12 max-[800px]:border-l-0 max-[800px]:pl-0 max-[800px]:border-t max-[800px]:pt-[16px]"
         aria-label="Archive scope"
+        class="col-span-3 [font-family:var(--font-mono)] text-[12px] leading-[1.7] tracking-[0.06em] text-[var(--ink-3)] border-l border-[var(--rule-soft)] pl-[16px] max-[800px]:col-span-12 max-[800px]:border-l-0 max-[800px]:pl-0 max-[800px]:border-t max-[800px]:pt-[16px]"
       >
         <div>
-          <b class="text-[var(--ink)] font-[500] not-italic">{{ stats.speakers }}</b>
+          <b class="text-[var(--ink)] font-[500] not-italic">
+            {{ stats.speakers }}
+          </b>
           {{ t.meta_speakers }}
         </div>
         <div>
-          <b class="text-[var(--ink)] font-[500] not-italic">{{ stats.talks }}</b>
+          <b class="text-[var(--ink)] font-[500] not-italic">
+            {{ stats.talks }}
+          </b>
           {{ t.meta_talks }}
         </div>
         <div>
-          <b class="text-[var(--ink)] font-[500] not-italic">{{ stats.years }}</b>
+          <b class="text-[var(--ink)] font-[500] not-italic">
+            {{ stats.years }}
+          </b>
           {{ t.meta_years }}
         </div>
       </aside>

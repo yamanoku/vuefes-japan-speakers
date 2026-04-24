@@ -4,12 +4,19 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
+    "check": "pnpm lint && pnpm typecheck",
     "dev": "vite dev",
+    "fmt": "vp fmt .",
+    "fmt:check": "vp fmt . --check",
     "generate": "vite build",
+    "lint": "node scripts/oxlint-vize.mjs .",
     "preview": "vite preview --outDir dist/client",
+    "test": "vp test run",
+    "test:watch": "vp test",
+    "typecheck": "node scripts/vize-typecheck.mjs",
     "vp:check": "vp check",
-    "vp:lint": "vp lint .",
     "vp:fmt": "vp fmt .",
+    "vp:lint": "vp lint .",
     "vp:test": "vp test run",
     "vp:test:watch": "vp test",
     "prepare": "vp config"
@@ -22,13 +29,16 @@
   },
   "devDependencies": {
     "@types/node": "catalog:typescript",
-    "@vitejs/plugin-vue": "catalog:vite",
+    "@vizejs/vite-plugin": "catalog:vize",
     "@vue/test-utils": "catalog:test",
+    "oxlint": "catalog:vize",
+    "oxlint-plugin-vize": "catalog:vize",
     "playwright": "catalog:test",
     "typescript": "catalog:typescript",
     "vite": "catalog:vite",
     "vite-plus": "catalog:vp",
     "vitest": "catalog:vp",
+    "vize": "catalog:vize",
     "vue-tsc": "catalog:typescript"
   },
   "packageManager": "pnpm@10.33.2"

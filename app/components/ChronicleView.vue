@@ -99,18 +99,21 @@ const grouped = computed(() => {
             <span
               class="[font-family:var(--font-display)] font-[500] text-[clamp(72px,8vw,160px)] leading-[0.85] tracking-[-0.04em] tabular-nums text-[var(--ink)]"
               aria-hidden="true"
-              >{{ year }}</span
             >
+              {{ year }}
+            </span>
             <span
               class="[font-family:var(--font-mono)] text-[12px] tracking-[0.08em] uppercase text-[var(--ink-3)] mt-[10px]"
-              >{{ t.year_total_talks(arr.length) }}</span
             >
+              {{ t.year_total_talks(arr.length) }}
+            </span>
             <a
               class="[font-family:var(--font-mono)] text-[24px] tracking-[0.08em] uppercase text-[var(--ink)] hover:text-[var(--accent)] transition-colors border-b border-current pb-[2px] no-underline mt-[14px]"
               :href="`/${year}`"
               :aria-label="`${year} speakers`"
-              >→</a
             >
+              →
+            </a>
           </div>
 
           <!-- Rows -->
@@ -141,9 +144,10 @@ const grouped = computed(() => {
                       class="text-[var(--ink)] border-b border-[var(--rule-soft)] pb-[1px] no-underline transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
                       :href="`/speakers/${encodeURIComponent(n)}`"
                     >
-                      <ruby v-if="s.nameRuby?.[ni] && lang === 'ja'" lang="ja"
-                        >{{ n }}<rt>{{ s.nameRuby[ni] }}</rt></ruby
-                      >
+                      <ruby v-if="s.nameRuby?.[ni] && lang === 'ja'" lang="ja">
+                        {{ n }}
+                        <rt>{{ s.nameRuby[ni] }}</rt>
+                      </ruby>
                       <span v-else>{{ lang === "en" && s.nameEn?.[ni] ? s.nameEn[ni] : n }}</span>
                     </a>
                   </template>
@@ -161,14 +165,16 @@ const grouped = computed(() => {
                     <span
                       class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] ml-[4px]"
                       :aria-label="t.external"
-                      >↗</span
                     >
+                      ↗
+                    </span>
                   </a>
                   <span
                     v-else
                     class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] uppercase tracking-[0.06em]"
-                    >{{ t.tbd }}</span
                   >
+                    {{ t.tbd }}
+                  </span>
                 </div>
               </div>
             </li>

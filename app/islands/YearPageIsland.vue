@@ -24,8 +24,9 @@ const { t, lang } = useVfjsI18n();
         <h1
           class="[font-family:var(--font-display)] text-[clamp(28px,4.5vw,72px)] font-bold tracking-[-0.04em] leading-[1] mb-[16px]"
         >
-          Vue Fes Japan <span v-if="year === '2022'">Online </span
-          ><em class="not-italic text-[var(--accent)]">{{ year }}</em>
+          Vue Fes Japan
+          <span v-if="year === '2022'">Online</span>
+          <em class="not-italic text-[var(--accent)]">{{ year }}</em>
         </h1>
         <div class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)]">
           <div>{{ t.year_total_talks(speakers.length) }}</div>
@@ -36,8 +37,8 @@ const { t, lang } = useVfjsI18n();
               rel="noopener noreferrer"
               class="text-[var(--ink)] no-underline flex items-baseline gap-[4px]"
             >
-              <span class="hover:underline">{{ t.official_site }}</span
-              ><span>↗</span>
+              <span class="hover:underline">{{ t.official_site }}</span>
+              <span>↗</span>
             </a>
           </div>
         </div>
@@ -72,14 +73,17 @@ const { t, lang } = useVfjsI18n();
                         class="text-[18px] [font-family:var(--font-mono)] border-b border-[var(--rule-soft)] pb-[1px] no-underline transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
                         :href="`/speakers/${encodeURIComponent(name)}`"
                       >
-                        <ruby v-if="speaker.nameRuby?.[nameIndex] && lang === 'ja'" lang="ja"
-                          >{{ name }}<rt>{{ speaker.nameRuby[nameIndex] }}</rt></ruby
-                        >
-                        <span v-else>{{
-                          lang === "en" && speaker.nameEn?.[nameIndex]
-                            ? speaker.nameEn[nameIndex]
-                            : name
-                        }}</span>
+                        <ruby v-if="speaker.nameRuby?.[nameIndex] && lang === 'ja'" lang="ja">
+                          {{ name }}
+                          <rt>{{ speaker.nameRuby[nameIndex] }}</rt>
+                        </ruby>
+                        <span v-else>
+                          {{
+                            lang === "en" && speaker.nameEn?.[nameIndex]
+                              ? speaker.nameEn[nameIndex]
+                              : name
+                          }}
+                        </span>
                       </a>
                     </template>
                   </div>

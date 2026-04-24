@@ -113,7 +113,7 @@ export const useVfjsI18n = () => {
   const setLang = (value: "ja" | "en") => {
     lang.value = value;
   };
-  const t = computed(() => translations[lang.value]);
+  const t = computed(() => translations[lang.value as "ja" | "en"]);
 
   return { lang, setLang, t };
 };

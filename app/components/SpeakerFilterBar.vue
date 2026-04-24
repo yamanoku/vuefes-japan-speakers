@@ -26,8 +26,9 @@ const speakerId = "speaker-filter-speaker";
       <label
         class="[font-family:var(--font-mono)] text-[12px] tracking-[0.1em] text-[var(--ink)] whitespace-nowrap"
         :for="searchId"
-        >{{ t.filter_search }}</label
       >
+        {{ t.filter_search }}
+      </label>
       <input
         :id="searchId"
         type="search"
@@ -41,8 +42,9 @@ const speakerId = "speaker-filter-speaker";
       <label
         class="[font-family:var(--font-mono)] text-[12px] tracking-[0.1em] text-[var(--ink)] whitespace-nowrap"
         :for="speakerId"
-        >{{ t.filter_speaker }}</label
       >
+        {{ t.filter_speaker }}
+      </label>
       <select
         :id="speakerId"
         class="bg-transparent border-0 border-b border-[var(--rule-soft)] px-0 pr-[24px] py-[8px] [font-family:var(--font-body)] text-[15px] text-[var(--ink)] cursor-pointer appearance-none outline-none w-full focus:border-[var(--accent)]"

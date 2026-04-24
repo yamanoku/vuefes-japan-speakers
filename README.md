@@ -23,40 +23,36 @@
 
 ## Setup
 
-[Vite+](https://viteplus.dev/)（`vp`）を利用します。`vp install` は `package.json` の `packageManager` を参照して、必要なパッケージマネージャーを選択します。
-
 ```bash
-curl -fsSL https://vite.plus | bash
 vp install
 vp config
 ```
 
-`vp config` は vite-plus の設定を反映します。通常は install 時にも実行されますが、`vite.config.ts` を変更したときや生成設定が足りないときは手動で実行してください。
-
 ## Commands
 
-開発サーバやビルドなどの npm scripts も、Lint / Format / Type Check / Test も `vp` 経由で実行します。
+Vuerend / Vite のアプリとして動きます。Vue SFC compiler、lint、type check には Vize 0.65.0 系を使い、format と test は Vite+ 経由で実行します。
 
-| 用途          | コマンド          |
-| ------------- | ----------------- |
-| 開発サーバ    | `vp run dev`      |
-| ビルド        | `vp run build`    |
-| 静的生成      | `vp run generate` |
-| プレビュー    | `vp run preview`  |
-| Lint          | `vp lint .`       |
-| Format        | `vp fmt .`        |
-| Type Check    | `vp check`        |
-| Test          | `vp test run`     |
-| Test（watch） | `vp test`         |
+| 用途          | コマンド                              |
+| ------------- | ------------------------------------- |
+| 開発サーバ    | `pnpm dev` / `vp run dev`             |
+| ビルド        | `pnpm build` / `vp run build`         |
+| 静的生成      | `pnpm generate`                       |
+| プレビュー    | `pnpm preview`                        |
+| Lint          | `pnpm lint`                           |
+| Format        | `pnpm fmt` / `vp fmt .`               |
+| Format Check  | `pnpm fmt:check` / `vp fmt . --check` |
+| Type Check    | `pnpm typecheck`                      |
+| Test          | `pnpm test`                           |
+| Test（watch） | `pnpm test:watch`                     |
 
 ## CI
 
-GitHub Actions でも同じ `vp` コマンドを実行します。
+GitHub Actions でも同じ pnpm scripts を実行します。
 
-- `vp lint .`
-- `vp fmt . --check`
-- `vp check`
-- `vp test run`
+- `pnpm lint`
+- `pnpm fmt:check`
+- `pnpm typecheck`
+- `pnpm test`
 
 ## Deploy
 

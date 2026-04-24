@@ -139,10 +139,10 @@ function toggleRow(name: string) {
         >
           Latest year ↓
         </button>
-        <span class="ml-auto text-[12px] tracking-[0.06em] text-[var(--ink-3)] whitespace-nowrap"
-          >{{ String(filtered.length).padStart(3, "0") }} /
-          {{ String(allRecords.length).padStart(3, "0") }}</span
-        >
+        <span class="ml-auto text-[12px] tracking-[0.06em] text-[var(--ink-3)] whitespace-nowrap">
+          {{ String(filtered.length).padStart(3, "0") }} /
+          {{ String(allRecords.length).padStart(3, "0") }}
+        </span>
       </div>
 
       <div
@@ -171,24 +171,27 @@ function toggleRow(name: string) {
               <span
                 class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] tabular-nums"
                 aria-hidden="true"
-                >{{ String(i + 1).padStart(3, "0") }}</span
               >
+                {{ String(i + 1).padStart(3, "0") }}
+              </span>
               <span
                 class="[font-family:var(--font-display)] text-[clamp(15px,1.2vw,18px)] font-[500] tracking-[-0.005em] text-[var(--ink)]"
                 :lang="hasJapanese(rec.name) ? 'ja' : 'en'"
               >
-                <ruby v-if="rec.nameRuby && lang === 'ja'"
-                  >{{ rec.name }}<rt>{{ rec.nameRuby }}</rt></ruby
-                >
-                <template v-else>{{
-                  lang === "en" && rec.nameEn ? rec.nameEn : rec.name
-                }}</template>
+                <ruby v-if="rec.nameRuby && lang === 'ja'">
+                  {{ rec.name }}
+                  <rt>{{ rec.nameRuby }}</rt>
+                </ruby>
+                <template v-else>
+                  {{ lang === "en" && rec.nameEn ? rec.nameEn : rec.name }}
+                </template>
                 <span
                   v-if="rec.talks.length > 1"
                   class="[font-family:var(--font-mono)] bg-[var(--accent)] text-[12px] text-[var(--accent-ink)] ml-[8px] font-normal tracking-[0.02em] align-[2px] border border-[var(--accent)] px-[5px] py-[1px]"
                   :aria-label="t.appearance_count(rec.talks.length)"
-                  >×{{ rec.talks.length }}</span
                 >
+                  ×{{ rec.talks.length }}
+                </span>
               </span>
               <span
                 class="inline-grid gap-[3px] grow-999 justify-end"
@@ -207,15 +210,17 @@ function toggleRow(name: string) {
                         : 'border border-[var(--ink)] text-[var(--ink)]',
                   ]"
                   :title="y"
-                  >{{ y.slice(-2) }}</span
                 >
+                  {{ y.slice(-2) }}
+                </span>
               </span>
             </span>
             <span
               class="basis-[24px] grow-1 [font-family:var(--font-mono)] text-[16px] text-[var(--ink-3)] text-center"
               aria-hidden="true"
-              >{{ openRows.has(rec.name) ? "−" : "+" }}</span
             >
+              {{ openRows.has(rec.name) ? "−" : "+" }}
+            </span>
           </button>
           <div
             v-if="openRows.has(rec.name)"
@@ -238,8 +243,9 @@ function toggleRow(name: string) {
                 <a
                   :href="`/${talk.year}`"
                   class="underline hover:no-underline [font-family:var(--font-mono)] text-[12px] text-[var(--ink)] tabular-nums"
-                  >{{ talk.year }}</a
                 >
+                  {{ talk.year }}
+                </a>
                 <a
                   class="text-[14px] text-[var(--ink)] pb-[1px] leading-[1.45] no-underline"
                   :href="talk.url"
@@ -250,8 +256,9 @@ function toggleRow(name: string) {
                   <span
                     class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] ml-[4px]"
                     :aria-label="t.external"
-                    >↗</span
                   >
+                    ↗
+                  </span>
                 </a>
                 <span
                   v-if="talk.coSpeakers.length > 0"
@@ -259,12 +266,13 @@ function toggleRow(name: string) {
                 >
                   w/
                   <template v-for="(cn, ci) in talk.coSpeakers" :key="cn">
-                    <template v-if="ci > 0">, </template>
+                    <template v-if="ci > 0">,</template>
                     <a
                       class="text-[var(--ink)] border-b border-[var(--rule-soft)] pb-[1px] no-underline hover:border-[var(--ink)]"
                       :href="`/speakers/${encodeURIComponent(cn)}`"
-                      >{{ cn }}</a
                     >
+                      {{ cn }}
+                    </a>
                   </template>
                 </span>
               </li>

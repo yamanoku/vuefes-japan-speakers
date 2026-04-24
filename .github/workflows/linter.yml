@@ -1,4 +1,4 @@
-name: VP Lint
+name: Vize Lint
 
 on:
   pull_request:
@@ -13,8 +13,9 @@ on:
       - "pnpm-lock.yaml"
       - "vite.config.ts"
       - "vitest.config.ts"
-      - "eslint.config.mjs"
       - "tsconfig.json"
+      - "tsconfig.vize.json"
+      - "scripts/oxlint-vize.mjs"
       - ".github/workflows/linter.yml"
 
 permissions:
@@ -33,7 +34,7 @@ jobs:
           cache: true
       - name: Install dependencies
         run: vp install
-      - name: Run vp lint
-        run: vp lint .
+      - name: Run lint
+        run: pnpm lint
         env:
           CI: true

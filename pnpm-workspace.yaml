@@ -18,12 +18,16 @@ catalogs:
     typescript: 5.9.3
     vue-tsc: 3.2.7
   vite:
-    "@vitejs/plugin-vue": 6.0.6
     vite: 8.0.10
   vue:
     vue: 3.5.33
   vuerend:
     "@vuerend/core": 0.1.1-alpha.3
+  vize:
+    "@vizejs/vite-plugin": 0.65.0
+    oxlint: 1.61.0
+    oxlint-plugin-vize: 0.65.0
+    vize: 0.65.0
   vp:
     vite: npm:@voidzero-dev/vite-plus-core@0.1.19
     vite-plus: 0.1.19

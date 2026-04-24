@@ -16,6 +16,10 @@ node_modules
 logs
 *.log
 
+# Tool generated files
+__agent_only
+__oxlint_plugin_vize_temp__
+
 # Misc
 .DS_Store
 .fleet

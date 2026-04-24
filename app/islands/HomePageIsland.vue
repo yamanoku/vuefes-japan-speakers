@@ -66,15 +66,15 @@ const stats = computed(() => {
         "
         @click="view = 'chronicle'"
       >
-        <span class="[font-family:var(--font-mono)] font-normal mr-[4px] text-[var(--ink-3)]"
-          >A</span
-        >
+        <span class="[font-family:var(--font-mono)] font-normal mr-[4px] text-[var(--ink-3)]">
+          A
+        </span>
         - {{ t.view_timeline }}
         <span
           class="[font-family:var(--font-mono)] text-[var(--ink-4)] text-[12px] tracking-[0.02em]"
         >
-          - Chronicle</span
-        >
+          - Chronicle
+        </span>
       </button>
       <button
         role="tab"
@@ -87,15 +87,15 @@ const stats = computed(() => {
         "
         @click="view = 'index'"
       >
-        <span class="[font-family:var(--font-mono)] font-normal mr-[4px] text-[var(--ink-3)]"
-          >B</span
-        >
+        <span class="[font-family:var(--font-mono)] font-normal mr-[4px] text-[var(--ink-3)]">
+          B
+        </span>
         - {{ t.view_index }}
         <span
           class="[font-family:var(--font-mono)] text-[var(--ink-4)] text-[12px] tracking-[0.02em]"
         >
-          - Directory</span
-        >
+          - Directory
+        </span>
       </button>
     </div>
 
