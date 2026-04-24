@@ -26,20 +26,20 @@ vp config
 
 ## よく使うコマンド
 
-| 用途          | 推奨コマンド        |
-| ------------- | ------------------- |
-| 開発サーバ    | `vp run dev`        |
-| ビルド        | `vp run build`      |
-| 静的生成      | `vp run generate`   |
-| プレビュー    | `vp run preview`    |
-| Lint          | `vp run lint`       |
-| Format        | `vp run fmt`        |
-| Format 確認   | `vp run fmt:check`  |
-| Type Check    | `vp run typecheck`  |
-| Test          | `vp run test`       |
-| Test（watch） | `vp run test:watch` |
+| 用途          | 推奨コマンド                      |
+| ------------- | --------------------------------- |
+| 開発サーバ    | `vp dev`                          |
+| ビルド        | `vp build`                        |
+| 静的生成      | `vp build`                        |
+| プレビュー    | `vp preview --outDir dist/client` |
+| Lint          | `vp lint .`                       |
+| Format        | `vp fmt .`                        |
+| Format 確認   | `vp fmt . --check`                |
+| Type Check    | `vp run typecheck`                |
+| Test          | `vp test run`                     |
+| Test（watch） | `vp test watch`                   |
 
-作業前後の検証は、変更内容に応じて `vp run lint`、`vp run fmt:check`、`vp run typecheck`、`vp run test` を組み合わせます。
+作業前後の検証は、変更内容に応じて `vp lint .`、`vp fmt . --check`、`vp run typecheck`、`vp test run` を組み合わせます。
 
 ## ディレクトリ構成（要点）
 
@@ -85,9 +85,9 @@ vp config
 ## UI/ページの要点
 
 - ルーティング:
-  - `app/routes/HomeRoute.ts`: 全体一覧ページ
-  - `app/routes/YearRoute.ts`: 年別一覧ページ
-  - `app/routes/SpeakerRoute.ts`: スピーカー詳細ページ
+  - `app/routes/HomeRoute.vue`: 全体一覧ページ
+  - `app/routes/YearRoute.vue`: 年別一覧ページ
+  - `app/routes/SpeakerRoute.vue`: スピーカー詳細ページ
 - ページ island:
   - `HomePageIsland.vue`: 全体一覧のインタラクション
   - `YearPageIsland.vue`: 年別一覧のインタラクション
@@ -123,10 +123,10 @@ vp config
 - 実行:
 
 ```bash
-vp run test
+vp test run
 ```
 
-ウォッチ実行は `vp run test:watch` を使います。
+ウォッチ実行は `vp test watch` を使います。
 
 ### テスト方針
 
@@ -138,9 +138,9 @@ vp run test
 ## 型チェックと lint
 
 - 型チェック: `vp run typecheck`
-- Lint: `vp run lint`
-- Format: `vp run fmt`
-- Format 確認: `vp run fmt:check`
+- Lint: `vp lint .`
+- Format: `vp fmt .`
+- Format 確認: `vp fmt . --check`
 
 型エラーを隠すための型削除や過度な型アサーションは避け、原因を直してください。
 
@@ -170,23 +170,23 @@ vp run test
 
 GitHub Actions は Vite+ セットアップ後に以下を実行します。
 
-- `vp run lint`
-- `vp run fmt:check`
+- `vp lint .`
+- `vp fmt . --check`
 - `vp run typecheck`
-- `vp run test`
+- `vp test run`
 
 Browser Mode の test job では、テスト前に `vp exec playwright install --with-deps chromium` で Chromium を導入します。CI の対象 path は `app/**`、`server/**`、`types/**`、各種設定ファイル、lockfile などです。ドキュメントのみの変更では一部の workflow が走らない場合があります。
 
 ## デプロイ
 
-`vp run generate` で `dist/client` に静的ファイルを生成します。生成後の確認には `vp run preview` を使います。
+`vp build` で `dist/client` に静的ファイルを生成します。生成後の確認には `vp preview --outDir dist/client` を使います。
 
 ## 開発フロー（推奨）
 
 - ブランチ: `feat/*`、`fix/*`、`chore/*`、`docs/*` など用途別に作成する。
 - コミット: Conventional Commits を使う。例: `docs: update agents guide`
 - 実装: 小さめの差分で進め、関連テストやドキュメントも合わせて更新する。
-- 検証: 変更内容に応じて `vp run lint && vp run fmt:check && vp run typecheck && vp run test` を実行する。
+- 検証: 変更内容に応じて `vp lint . && vp fmt . --check && vp run typecheck && vp test run` を実行する。
 - レビュー: 変更点の要約、確認したコマンド、必要に応じてスクリーンショットや再現手順を添える。
 
 ## トラブルシュート

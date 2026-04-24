@@ -33,6 +33,6 @@ jobs:
       - name: Install dependencies
         run: vp install
       - name: Run lint
-        run: vp run lint
+        run: vp lint .
         env:
           CI: true

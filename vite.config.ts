@@ -1,7 +1,10 @@
+import { createReadStream, existsSync, statSync } from "node:fs";
+import { extname, relative, resolve, sep } from "node:path";
 import { fileURLToPath, URL } from "node:url";
 import tailwindcss from "@tailwindcss/vite";
 import vize from "@vizejs/vite-plugin";
 import { vuerend } from "@vuerend/core/vite";
+import type { Plugin } from "vite";
 import { defineConfig } from "vite-plus";
 import { playwright } from "vite-plus/test/browser-playwright";
 
@@ -14,8 +17,6 @@ const ignorePatterns = [
   "**/dist/**",
   "**/node_modules/**",
   "**/public/**",
-  "**/__agent_only/**",
-  "**/__oxlint_plugin_vize_temp__/**",
 ];
 
 const lint = {
@@ -85,6 +86,65 @@ const fmt = {
 
 export { fmt, lint };
 
+function staticHtmlPreview(): Plugin {
+  return {
+    name: "vfjs:static-html-preview",
+    configurePreviewServer(server) {
+      const previewOutDir = resolve(server.config.root, server.config.build.outDir);
+
+      server.middlewares.use((request, response, next) => {
+        if (request.method !== "GET" && request.method !== "HEAD") {
+          next();
+          return;
+        }
+
+        if (!request.url) {
+          next();
+          return;
+        }
+
+        const url = new URL(request.url, "http://localhost");
+        if (extname(url.pathname) !== "") {
+          next();
+          return;
+        }
+
+        const pathname = url.pathname.replace(/\/+$/, "");
+        const htmlPathname = pathname === "" ? "/index.html" : `${pathname}/index.html`;
+        const htmlFile = resolve(previewOutDir, `.${htmlPathname}`);
+        const relativeHtmlFile = relative(previewOutDir, htmlFile);
+
+        if (
+          relativeHtmlFile === "" ||
+          relativeHtmlFile.startsWith("..") ||
+          relativeHtmlFile.startsWith(sep) ||
+          !existsSync(htmlFile)
+        ) {
+          next();
+          return;
+        }
+
+        const htmlStat = statSync(htmlFile);
+        if (!htmlStat.isFile()) {
+          next();
+          return;
+        }
+
+        response.statusCode = 200;
+        response.setHeader("Content-Type", "text/html;charset=utf-8");
+        response.setHeader("Content-Length", htmlStat.size);
+
+        if (request.method === "HEAD") {
+          response.end();
+          return;
+        }
+
+        createReadStream(htmlFile).pipe(response);
+      });
+    },
+  };
+}
+
 export default defineConfig({
   plugins: [
     tailwindcss(),
@@ -96,6 +156,7 @@ export default defineConfig({
         ignorePatterns: ["node_modules/**", "dist/**", ".cache/**"],
       }),
     }),
+    staticHtmlPreview(),
   ],
   resolve: {
     alias: {
@@ -120,38 +181,8 @@ export default defineConfig({
   },
   run: {
     tasks: {
-      build: {
-        command: "vp build",
-      },
       check: {
-        command: "vp run lint && vp run typecheck",
-      },
-      dev: {
-        command: "vp dev",
-        cache: false,
-      },
-      fmt: {
-        command: "vp fmt .",
-      },
-      "fmt:check": {
-        command: "vp fmt . --check",
-      },
-      generate: {
-        command: "vp build",
-      },
-      lint: {
-        command: "vp lint .",
-      },
-      preview: {
-        command: "vp preview --outDir dist/client",
-        cache: false,
-      },
-      test: {
-        command: "vp test run",
-      },
-      "test:watch": {
-        command: "vp test watch",
-        cache: false,
+        command: "vp lint . && vp run typecheck",
       },
       typecheck: {
         command: "vize check --servers 1 --tsconfig tsconfig.vize.json",

@@ -32,35 +32,35 @@ vp config
 
 Vuerend / Vite のアプリとして動きます。Vue SFC compiler、lint、type check には Vize 0.65.0 系を使い、日常コマンドは Vite+（`vp`）経由で実行します。
 
-| 用途          | コマンド            |
-| ------------- | ------------------- |
-| 開発サーバ    | `vp run dev`        |
-| ビルド        | `vp run build`      |
-| 静的生成      | `vp run generate`   |
-| プレビュー    | `vp run preview`    |
-| Lint          | `vp run lint`       |
-| Format        | `vp run fmt`        |
-| Format Check  | `vp run fmt:check`  |
-| Type Check    | `vp run typecheck`  |
-| Test          | `vp run test`       |
-| Test（watch） | `vp run test:watch` |
+| 用途          | コマンド                          |
+| ------------- | --------------------------------- |
+| 開発サーバ    | `vp dev`                          |
+| ビルド        | `vp build`                        |
+| 静的生成      | `vp build`                        |
+| プレビュー    | `vp preview --outDir dist/client` |
+| Lint          | `vp lint .`                       |
+| Format        | `vp fmt .`                        |
+| Format Check  | `vp fmt . --check`                |
+| Type Check    | `vp run typecheck`                |
+| Test          | `vp test run`                     |
+| Test（watch） | `vp test watch`                   |
 
 ## CI
 
 GitHub Actions でも同じ Vite+ コマンドを実行します。
 
-- `vp run lint`
-- `vp run fmt:check`
+- `vp lint .`
+- `vp fmt . --check`
 - `vp run typecheck`
-- `vp run test`
+- `vp test run`
 
 ## Deploy
 
-`vp run generate` で `dist/client` に静的ファイルを生成します。生成後の確認には `vp run preview` を使います。
+`vp build` で `dist/client` に静的ファイルを生成します。生成後の確認には `vp preview --outDir dist/client` を使います。
 
 ```bash
-vp run generate
-vp run preview
+vp build
+vp preview --outDir dist/client
 ```
 
 ## License
