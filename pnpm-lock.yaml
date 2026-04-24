@@ -51,6 +51,9 @@ catalogs:
       specifier: npm:@voidzero-dev/vite-plus-test@0.1.19
       version: 0.1.19
   vue:
+    '@vue/server-renderer':
+      specifier: 3.5.33
+      version: 3.5.33
     vue:
       specifier: 3.5.33
       version: 3.5.33
@@ -66,6 +69,9 @@ importers:
       '@tailwindcss/vite':
         specifier: catalog:css
         version: 4.2.4(vite@8.0.10(@types/node@24.12.2)(jiti@2.6.1))
+      '@vue/server-renderer':
+        specifier: catalog:vue
+        version: 3.5.33(vue@3.5.33(typescript@5.9.3))
       '@vuerend/core':
         specifier: catalog:vuerend
         version: 0.1.1-alpha.3(vite@8.0.10(@types/node@24.12.2)(jiti@2.6.1))(vue@3.5.33(typescript@5.9.3))

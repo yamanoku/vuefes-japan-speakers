@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "catalog:css",
+    "@vue/server-renderer": "catalog:vue",
     "@vuerend/core": "catalog:vuerend",
     "tailwindcss": "catalog:css",
     "vue": "catalog:vue"

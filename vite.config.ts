@@ -98,6 +98,13 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      // Vize SSR imports the package root; Vite's module runner needs the ESM build.
+      "@vue/server-renderer": fileURLToPath(
+        new URL(
+          "./node_modules/@vue/server-renderer/dist/server-renderer.esm-bundler.js",
+          import.meta.url,
+        ),
+      ),
       "~": fileURLToPath(new URL("./app", import.meta.url)),
       "~~": fileURLToPath(new URL(".", import.meta.url)),
     },

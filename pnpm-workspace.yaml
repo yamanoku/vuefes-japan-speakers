@@ -19,6 +19,7 @@ catalogs:
   vite:
     vite: 8.0.10
   vue:
+    "@vue/server-renderer": 3.5.33
     vue: 3.5.33
   vuerend:
     "@vuerend/core": 0.1.1-alpha.3
