@@ -2,6 +2,7 @@
   "extends": "./.nuxt/tsconfig.json",
   "include": [
     "./.nuxt/types/imports.d.ts",
+    "./vite.config.ts",
     "./app/**/*.ts",
     "./server/**/*.ts",
     "./types/**/*.ts"

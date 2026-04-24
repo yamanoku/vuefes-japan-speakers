@@ -3,7 +3,7 @@ import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const roots = ['app', 'server', 'types'];
-const generatedInputs = ['.nuxt/types/imports.d.ts'];
+const explicitInputs = ['.nuxt/types/imports.d.ts', 'vite.config.ts'];
 const sourceExtensions = ['.ts', '.tsx', '.mts', '.cts', '.d.ts'];
 
 const isSourceFile = (filePath) =>
@@ -29,7 +29,7 @@ const collectSourceFiles = (dir) => {
 };
 
 const inputs = [
-  ...generatedInputs.filter((filePath) => existsSync(filePath)),
+  ...explicitInputs.filter((filePath) => existsSync(filePath)),
   ...roots.flatMap(collectSourceFiles),
 ].sort();
 

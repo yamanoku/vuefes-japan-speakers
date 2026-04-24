@@ -11,13 +11,14 @@ on:
       - 'package.json'
       - 'pnpm-workspace.yaml'
       - 'pnpm-lock.yaml'
+      - 'vite.config.ts'
       - 'vitest.config.ts'
-      - '.oxlintrc.json'
       - 'vize.config.json'
       - 'nuxt.config.ts'
       - 'tsconfig.json'
       - 'tsconfig.vize.json'
       - 'server/tsconfig.json'
+      - 'scripts/oxlint-vize.mjs'
       - '.github/workflows/linter.yml'
 
 permissions:

@@ -9,7 +9,7 @@
     "fmt": "vize fmt --write app server types",
     "fmt:check": "vize fmt --check app server types",
     "generate": "nuxt generate",
-    "lint": "oxlint-vize -c .oxlintrc.json .",
+    "lint": "node scripts/oxlint-vize.mjs .",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "test": "VIZE_NUXT_COMPILER=0 vitest run",
