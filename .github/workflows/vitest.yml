@@ -5,19 +5,17 @@ on:
     branches:
       - main
     paths:
-      - 'app/**'
-      - 'server/**'
-      - 'types/**'
-      - 'package.json'
-      - 'pnpm-workspace.yaml'
-      - 'pnpm-lock.yaml'
-      - 'vite.config.ts'
-      - 'vitest.config.ts'
-      - 'eslint.config.mjs'
-      - 'nuxt.config.ts'
-      - 'tsconfig.json'
-      - 'server/tsconfig.json'
-      - '.github/workflows/vitest.yml'
+      - "app/**"
+      - "server/**"
+      - "types/**"
+      - "package.json"
+      - "pnpm-workspace.yaml"
+      - "pnpm-lock.yaml"
+      - "vite.config.ts"
+      - "vitest.config.ts"
+      - "eslint.config.mjs"
+      - "tsconfig.json"
+      - ".github/workflows/vitest.yml"
 
 permissions:
   contents: read
@@ -31,10 +29,12 @@ jobs:
       - name: Setup Vite+
         uses: voidzero-dev/setup-vp@be55d5df2da88a2387a2e6764871ca9e5387e187 # v1
         with:
-          node-version: '24'
+          node-version: "24"
           cache: true
       - name: Install dependencies
         run: vp install
+      - name: Install Playwright browsers
+        run: vp exec playwright install --with-deps chromium
       - name: Run vp test
         run: vp test run
         env:

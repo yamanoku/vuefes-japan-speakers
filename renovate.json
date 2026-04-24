@@ -12,19 +12,14 @@
   "assignees": ["yamanoku"],
   "packageRules": [
     {
-      "description": "Nuxt関連のパッケージは1つのPRにまとめる",
-      "groupName": "Nuxt packages",
-      "matchPackageNames": ["nuxt", "@nuxt/a11y", "@nuxt/ui"]
+      "description": "vuerend関連のパッケージは1つのPRにまとめる",
+      "groupName": "vuerend packages",
+      "matchPackageNames": ["@vuerend/**"]
     },
     {
       "description": "Vue関連のパッケージは1つのPRにまとめる",
       "groupName": "Vue packages",
-      "matchPackageNames": ["vue", "vue-router", "vue-tsc", "@vue/**"]
-    },
-    {
-      "description": "Cloudflare関連のパッケージは1つのPRにまとめる",
-      "groupName": "Cloudflare packages",
-      "matchPackageNames": ["wrangler", "@nuxthub/**"]
+      "matchPackageNames": ["vue", "vue-tsc", "@vue/**"]
     },
     {
       "description": "Iconify関連のパッケージは1つのPRにまとめる",
@@ -34,18 +29,18 @@
     {
       "description": "Test関連のパッケージは1つのPRにまとめる",
       "groupName": "Test packages",
-      "matchPackageNames": [
-        "@nuxt/eslint",
-        "@nuxt/eslint-config",
-        "@nuxt/test-utils",
-        "@vue/test-utils",
-        "happy-dom"
-      ]
+      "matchPackageNames": ["@vue/test-utils", "playwright"]
     },
     {
       "description": "Vite Plus関連のパッケージは1つのPRにまとめる",
-      "groupName": "Vite Plus packages",
-      "matchPackageNames": ["vite-plus", "@voidzero-dev/**"]
+      "groupName": "Vite packages",
+      "matchPackageNames": [
+        "vite",
+        "@vitejs/**",
+        "vite-plus",
+        "@voidzero-dev/**",
+        "@tailwindcss/vite"
+      ]
     }
   ]
 }

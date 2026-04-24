@@ -1,19 +1,23 @@
 <script setup lang="ts">
-import { compareLexicalJa } from '~/utils/stringCollate';
-import { YEARS } from '~~/types';
-import type { SpeakerWithYear, AcceptedYear } from '~~/types';
+import { computed } from "vue";
+import type { SpeakerWithYear, AcceptedYear } from "~~/types";
+import { compareLexicalJa } from "~/utils/stringCollate";
+import { YEARS } from "~~/types";
+import SpeakerFilterBar from "~/components/SpeakerFilterBar.vue";
+import YearFilterBar from "~/components/YearFilterBar.vue";
+import { useVfjsI18n } from "~/composables/useVfjsI18n";
 
 const props = defineProps<{
   allSpeakers: SpeakerWithYear[];
-  selectedYear: AcceptedYear | 'all';
+  selectedYear: AcceptedYear | "all";
   selectedSpeaker: string;
   query: string;
 }>();
 
 const emit = defineEmits<{
-  'update:selectedYear': [AcceptedYear | 'all'];
-  'update:selectedSpeaker': [string];
-  'update:query': [string];
+  "update:selectedYear": [AcceptedYear | "all"];
+  "update:selectedSpeaker": [string];
+  "update:query": [string];
 }>();
 
 const { t, lang } = useVfjsI18n();
@@ -23,6 +27,10 @@ const uniqueNames = computed(() => {
   props.allSpeakers.forEach((s) => s.name.forEach((n) => set.add(n)));
   return Array.from(set).sort(compareLexicalJa);
 });
+
+const speakerOptions = computed(() =>
+  uniqueNames.value.map((name) => ({ label: name, value: name })),
+);
 
 const counts = computed(() => {
   const c: Record<string, number> = { all: props.allSpeakers.length };
@@ -35,10 +43,10 @@ const counts = computed(() => {
 const filtered = computed(() => {
   const q = props.query.trim().toLowerCase();
   return props.allSpeakers.filter((s) => {
-    if (props.selectedYear !== 'all' && s.year !== props.selectedYear) return false;
-    if (props.selectedSpeaker !== 'all' && !s.name.includes(props.selectedSpeaker)) return false;
+    if (props.selectedYear !== "all" && s.year !== props.selectedYear) return false;
+    if (props.selectedSpeaker !== "all" && !s.name.includes(props.selectedSpeaker)) return false;
     if (q) {
-      const hay = (s.title || '') + ' ' + s.name.join(' ');
+      const hay = (s.title || "") + " " + s.name.join(" ");
       if (!hay.toLowerCase().includes(q)) return false;
     }
     return true;
@@ -59,11 +67,10 @@ const grouped = computed(() => {
       <SpeakerFilterBar
         :query="query"
         :selected-speaker="selectedSpeaker"
+        :speaker-options="speakerOptions"
         @update:query="emit('update:query', $event)"
         @update:selected-speaker="emit('update:selectedSpeaker', $event)"
-      >
-        <option v-for="n in uniqueNames" :key="n" :value="n">{{ n }}</option>
-      </SpeakerFilterBar>
+      />
 
       <YearFilterBar
         :selected-year="selectedYear"
@@ -98,11 +105,11 @@ const grouped = computed(() => {
               class="[font-family:var(--font-mono)] text-[12px] tracking-[0.08em] uppercase text-[var(--ink-3)] mt-[10px]"
               >{{ t.year_total_talks(arr.length) }}</span
             >
-            <NuxtLink
+            <a
               class="[font-family:var(--font-mono)] text-[24px] tracking-[0.08em] uppercase text-[var(--ink)] hover:text-[var(--accent)] transition-colors border-b border-current pb-[2px] no-underline mt-[14px]"
-              :to="`/${year}`"
+              :href="`/${year}`"
               :aria-label="`${year} speakers`"
-              >→</NuxtLink
+              >→</a
             >
           </div>
 
@@ -117,7 +124,7 @@ const grouped = computed(() => {
                 class="[font-family:var(--font-mono)] text-[14px] text-[var(--ink-2)] pt-[3px]"
                 aria-hidden="true"
               >
-                <span>{{ String(i + 1).padStart(2, '0') }}</span>
+                <span>{{ String(i + 1).padStart(2, "0") }}</span>
               </div>
               <div
                 class="grid grid-cols-[minmax(0,300px)_minmax(0,1fr)] gap-[clamp(16px,2vw,32px)] items-baseline max-[700px]:grid-cols-1 max-[700px]:gap-[6px]"
@@ -130,15 +137,15 @@ const grouped = computed(() => {
                     <span v-if="ni > 0" class="text-[var(--ink-2)] font-normal" aria-hidden="true">
                       ×
                     </span>
-                    <NuxtLink
+                    <a
                       class="text-[var(--ink)] border-b border-[var(--rule-soft)] pb-[1px] no-underline transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
-                      :to="`/speakers/${encodeURIComponent(n)}`"
+                      :href="`/speakers/${encodeURIComponent(n)}`"
                     >
                       <ruby v-if="s.nameRuby?.[ni] && lang === 'ja'" lang="ja"
                         >{{ n }}<rt>{{ s.nameRuby[ni] }}</rt></ruby
                       >
-                      <span v-else>{{ lang === 'en' && s.nameEn?.[ni] ? s.nameEn[ni] : n }}</span>
-                    </NuxtLink>
+                      <span v-else>{{ lang === "en" && s.nameEn?.[ni] ? s.nameEn[ni] : n }}</span>
+                    </a>
                   </template>
                 </div>
                 <!-- Talk title -->

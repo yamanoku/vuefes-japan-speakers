@@ -1,14 +1,13 @@
 # AGENTS Guide (vuefes-japan-speakers)
 
-このドキュメントは、本リポジトリで作業するエージェントや貢献者向けの実務ガイドです。セットアップ、構成、よくある変更、検証、デプロイの要点をまとめています。
+このドキュメントは、本リポジトリで作業するエージェントや貢献者向けの実務ガイドです。セットアップ、構成、よくある変更、検証の要点をまとめています。
 
 ## プロジェクト概要
 
-- フレームワーク: Nuxt 4（Vue 3）
+- フレームワーク: vuerend（Vue 3 / Vite）
 - 目的: 歴代の Vue Fes Japan スピーカーと発表タイトルを一覧できる非公式アーカイブ
-- UI/スタイル: Nuxt UI 4 + Tailwind CSS 4 + カスタムコンポーネント
-- データ供給: Nuxt サーバルート（`server/api`）から年別・全件データを返却
-- デプロイ: NuxtHub / Cloudflare 系の設定を利用
+- UI/スタイル: Tailwind CSS 4 + カスタムコンポーネント
+- データ供給: `server/data` の静的データを vuerend ルートの props として渡す
 
 ## 前提・セットアップ
 
@@ -26,44 +25,47 @@ vp config
 
 ## よく使うコマンド
 
-| 用途 | 推奨コマンド | npm script |
-| --- | --- | --- |
-| 開発サーバ | `vp run dev` | `pnpm dev` |
-| ビルド | `vp run build` | `pnpm build` |
-| 静的生成 | `vp run generate` | `pnpm generate` |
-| プレビュー | `vp run preview` | `pnpm preview` |
-| Lint | `vp lint .` | `pnpm vp:lint` |
-| Format | `vp fmt .` | `pnpm vp:fmt` |
-| Format 確認 | `vp fmt . --check` | - |
-| Type Check | `vp check` | `pnpm vp:check` |
-| Test | `vp test run` | `pnpm vp:test` |
-| Test（watch） | `vp test` | `pnpm vp:test:watch` |
+| 用途          | 推奨コマンド       | npm script           |
+| ------------- | ------------------ | -------------------- |
+| 開発サーバ    | `vp run dev`       | `pnpm dev`           |
+| ビルド        | `vp run build`     | `pnpm build`         |
+| 静的生成      | `vp run generate`  | `pnpm generate`      |
+| プレビュー    | `vp run preview`   | `pnpm preview`       |
+| Lint          | `vp lint .`        | `pnpm vp:lint`       |
+| Format        | `vp fmt .`         | `pnpm vp:fmt`        |
+| Format 確認   | `vp fmt . --check` | -                    |
+| Type Check    | `vp check`         | `pnpm vp:check`      |
+| Test          | `vp test run`      | `pnpm vp:test`       |
+| Test（watch） | `vp test`          | `pnpm vp:test:watch` |
 
 作業前後の検証は、変更内容に応じて `vp lint .`、`vp fmt . --check`、`vp check`、`vp test run` を組み合わせます。
 
 ## ディレクトリ構成（要点）
 
 - `app/`
-  - `app.vue`: ルート、SEO、フォント、アイコンなどの共通設定
-  - `pages/`: トップ、年別一覧、スピーカー詳細ページ
+  - `app.ts`: vuerend アプリとルート定義
+  - `routes/`: ルートコンポーネント
+  - `islands/`: クライアントで hydrate するページ island
+  - `island-definitions.ts`: island 定義
+  - `islands.ts`: クライアント island レジストリ
   - `components/`: ヘッダー、フッター、マストヘッド、一覧・タイムライン、フィルタ UI
   - `composables/`: `useVfjsI18n`、`useColorScheme`、スピーカー取得・絞り込みロジック
   - `utils/`: 年判定、文字列ソート、スピーカー集約などのユーティリティ
   - `assets/css/main.css`: Tailwind 読み込み、フォント、カラートークン、フォーカススタイル
 - `server/`
-  - `api/`: `/api/speakers` と `/api/speakers/[year]`
-  - `data/`: 年別スピーカーデータと集約ロジック
+  - `data/`: 年別スピーカーデータ（`speakers-YYYY.ts`）と集約ロジック
 - `types/`: `SpeakerInfo`、`SpeakerWithYear`、`YEARS` などの共有型
 - `public/`: ロゴ、favicon、OG 画像などの静的ファイル
 - `pnpm-workspace.yaml`: catalog と依存バージョンの定義
-- `vite.config.ts`: Vite+ の lint / staged 設定
-- `vitest.config.ts`: Nuxt テスト環境と happy-dom 設定
-- `nuxt.config.ts`: Nuxt モジュール、Nitro、NuxtHub、ESLint 設定
+- `vite.config.ts`: Vite / vuerend / Vite+ の設定
+- `vitest.config.ts`: Vitest Browser Mode（Playwright / Chromium）の設定
+- `eslint.config.mjs`, `tsconfig.json`: ツール設定
 
-## API とデータ
+## ルートとデータ
 
-- 全件: `server/api/speakers.ts`
-- 年別: `server/api/speakers/[year].ts`
+- 全件: `app/app.ts` の `/` ルートで `getAllSpeakersWithYear()` を渡す
+- 年別: `app/app.ts` の `/:year` ルートで `getSpeakersByYear(year)` を渡す
+- スピーカー別: `app/app.ts` の `/speakers/:name` ルートで `getSpeakerTalks(name)` を渡す
 - データ源: `server/data/speakers-YYYY.ts`
 - 集約: `server/data/index.ts`
 - 有効年: `types/index.ts` の `YEARS`
@@ -75,16 +77,20 @@ vp config
 - `server/data/speakers-YYYY.ts` を作成し、`SpeakerInfo[]` に沿ってデータを定義する。
 - `server/data/index.ts` に import と `speakersByYear` のエントリを追加する。
 - `types/index.ts` の `YEARS` に年を追加する。UI の年表示はこの値を参照します。
-- `server/api/speakers/[year].test.ts` の有効年・エラーメッセージ期待値を更新する。
+- `server/data/index.test.ts` や該当 island のテストで props と表示が期待通りか検証する。
 - 必要に応じて `README.md` の参考リンクも更新する。
 - `/`、`/[year]`、`/speakers/[name]` で表示とリンクを確認する。
 
 ## UI/ページの要点
 
 - ルーティング:
-  - `app/pages/index.vue`: 全体ビュー。タイムライン表示と一覧表示を切り替えます。
-  - `app/pages/[year]/index.vue`: 年別一覧ページ
-  - `app/pages/speakers/[name]/index.vue`: スピーカー詳細ページ
+  - `app/routes/HomeRoute.ts`: 全体一覧ページ
+  - `app/routes/YearRoute.ts`: 年別一覧ページ
+  - `app/routes/SpeakerRoute.ts`: スピーカー詳細ページ
+- ページ island:
+  - `HomePageIsland.vue`: 全体一覧のインタラクション
+  - `YearPageIsland.vue`: 年別一覧のインタラクション
+  - `SpeakerPageIsland.vue`: スピーカー詳細のインタラクション
 - 主要コンポーネント:
   - `AppHeader.vue`: ナビゲーション、言語切替、配色切替
   - `AppMasthead.vue`: トップページの概要・統計表示
@@ -96,6 +102,7 @@ vp config
   - トップページの view は `localStorage('vfjs:view')` に保存されます。
   - density は `localStorage('vfjs:density')` に保存されます。
   - 言語は `localStorage('vfjs:lang')` に保存されます。
+- スタイル: Tailwind CSS 4 ユーティリティ + CSS カスタムプロパティ（`var(--paper)`, `var(--ink)`, `var(--accent)` 等）
 
 ## カラースキーム
 
@@ -113,7 +120,7 @@ vp config
 ## テスト
 
 - ランナー: Vitest（Vite+ 経由）
-- DOM: Nuxt テスト環境 + happy-dom
+- 実行環境: Vitest Browser Mode（Playwright / Chromium）
 - 設定: `vitest.config.ts`
 - テスト位置:
   - `app/**.test.ts`
@@ -129,8 +136,9 @@ vp test run
 ### テスト方針
 
 - ユニットテストは入出力と副作用の最小検証に集中する。
-- API ルートは有効値、境界値、異常系を確認する。
-- 年追加時は `YEARS`、API のエラーメッセージ、UI 側の年表示が連動しているか確認する。
+- データ取得ロジックは有効値、境界値、異常系を確認する。
+- 年追加時は `YEARS`、データ集約、UI 側の年表示が連動しているか確認する。
+- Browser Mode で落ちる場合は、まず `vitest.config.ts` の `browser` 設定と Playwright のブラウザ導入状況を確認する。
 
 ## 型チェックと lint
 
@@ -152,7 +160,7 @@ vp test run
 
 ### コンポーネントを追加
 
-- `app/components/` に追加し、該当ページで利用する。
+- `app/components/` に追加し、該当ページや island で利用する。
 - 既存の CSS カスタムプロパティと Tailwind ユーティリティに合わせる。
 - グローバルな見た目やフォーカススタイルは `app/assets/css/main.css` を確認する。
 - UI の振る舞いは小さな単位でテストする。
@@ -172,17 +180,7 @@ GitHub Actions は Vite+ セットアップ後に以下を実行します。
 - `vp check`
 - `vp test run`
 
-CI の対象 path は `app/**`、`server/**`、`types/**`、各種設定ファイル、lockfile などです。ドキュメントのみの変更では一部の workflow が走らない場合があります。
-
-## デプロイ
-
-NuxtHub へのデプロイは以下を使います。
-
-```bash
-vpx nuxthub deploy
-```
-
-NuxtHub / Cloudflare 関連の依存は `pnpm-workspace.yaml` の `cloudflare` catalog にまとまっています。
+Browser Mode の test job では、テスト前に `vp exec playwright install --with-deps chromium` で Chromium を導入します。CI の対象 path は `app/**`、`server/**`、`types/**`、各種設定ファイル、lockfile などです。ドキュメントのみの変更では一部の workflow が走らない場合があります。
 
 ## 開発フロー（推奨）
 
@@ -194,8 +192,8 @@ NuxtHub / Cloudflare 関連の依存は `pnpm-workspace.yaml` の `cloudflare` c
 
 ## トラブルシュート
 
-- 依存関係の不整合: `vp install` を実行し、必要なら `vp config` も実行する。
-- パッケージマネージャーの確認: `pnpm -v` で `10.33.2` 系か確認する。
-- 型エラー: `vp check` で原因を洗い出し、型定義・import・データ構造を直す。
-- Nuxt 生成物の不整合: 開発サーバを再起動し、必要なら `vp config` を再実行する。
-- テスト環境の差異: `vitest.config.ts` の Nuxt 環境と happy-dom 設定を確認する。
+- Node/pnpm の不整合: `node -v` と `pnpm -v` を確認する。
+- Vite+ 設定の不整合: `vp config` を再実行する。
+- 型エラー: `vp check` で先に洗い出す。型を消してエラーを隠さない。
+- Browser Mode のブラウザ不足: `vp exec playwright install chromium` を実行する。Linux CI では `--with-deps` も付ける。
+- キャッシュ問題: Vite や生成物のキャッシュが怪しい場合は開発サーバを再起動する。

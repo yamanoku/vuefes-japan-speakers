@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import AppLogoMark from "~/components/AppLogoMark.vue";
+import { useColorScheme } from "~/composables/useColorScheme";
+import { useVfjsI18n } from "~/composables/useVfjsI18n";
+
 const { lang, setLang, t } = useVfjsI18n();
 const { scheme, setScheme } = useColorScheme();
 </script>
@@ -10,13 +14,13 @@ const { scheme, setScheme } = useColorScheme();
     role="banner"
   >
     <div class="flex flex-wrap justify-between items-center gap-2 py-[14px] px-[var(--pad-x)]">
-      <NuxtLink
-        to="/"
+      <a
+        href="/"
         class="flex items-center gap-[10px] [font-family:var(--font-display)] font-semibold text-[15px] whitespace-nowrap leading-[1.15] text-[var(--ink)] no-underline hover:text-[var(--accent)] transition-colors"
       >
         <AppLogoMark class="w-[16px] h-auto text-[var(--ink)]" />
         <span>Vue Fes Japan Speakers</span>
-      </NuxtLink>
+      </a>
 
       <div class="flex items-center gap-2">
         <select

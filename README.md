@@ -60,8 +60,11 @@ GitHub Actions でも同じ `vp` コマンドを実行します。
 
 ## Deploy
 
+`pnpm generate` で `dist/client` に静的ファイルを生成します。生成後の確認には `pnpm preview` を使います。
+
 ```bash
-vpx nuxthub deploy
+pnpm generate
+pnpm preview
 ```
 
 ## License

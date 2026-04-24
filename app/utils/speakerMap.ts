@@ -1,5 +1,5 @@
-import { compareLexicalJa } from '~/utils/stringCollate';
-import type { SpeakerWithYear } from '~~/types';
+import { compareLexicalJa } from "~/utils/stringCollate";
+import type { SpeakerWithYear } from "~~/types";
 
 export interface SpeakerRecord {
   name: string;

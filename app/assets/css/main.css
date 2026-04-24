@@ -1,9 +1,9 @@
-@import 'tailwindcss' theme(static);
+@import "tailwindcss";
 
 :root {
-  --font-display: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-body: 'Inter Tight', 'IBM Plex Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --font-display: "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: "Inter Tight", "IBM Plex Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   --paper: #f4f1eb;
   --paper-2: #ece7dd;
   --rule: #1a1a17;
@@ -18,7 +18,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-color-scheme='light']) {
+  :root:not([data-color-scheme="light"]) {
     --paper: #1c1c19;
     --paper-2: #262622;
     --rule: #e8e4dc;
@@ -32,7 +32,7 @@
   }
 }
 
-:root[data-color-scheme='dark'] {
+:root[data-color-scheme="dark"] {
   --paper: #1c1c19;
   --paper-2: #262622;
   --rule: #e8e4dc;
@@ -45,7 +45,7 @@
   --accent-ink: #0d2820;
 }
 
-:root[data-color-scheme='light'] {
+:root[data-color-scheme="light"] {
   --paper: #f4f1eb;
   --paper-2: #ece7dd;
   --rule: #1a1a17;
@@ -73,7 +73,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  font-feature-settings: 'ss01', 'cv02', 'cv11';
+  font-feature-settings: "ss01", "cv02", "cv11";
 }
 
 @media (prefers-reduced-motion: reduce) {

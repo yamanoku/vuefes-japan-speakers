@@ -1,18 +1,21 @@
 <script setup lang="ts">
+import { useVfjsI18n } from "~/composables/useVfjsI18n";
+
 defineProps<{
   query: string;
   selectedSpeaker: string;
+  speakerOptions: Array<{ label: string; value: string }>;
 }>();
 
 const emit = defineEmits<{
-  'update:query': [string];
-  'update:selectedSpeaker': [string];
+  "update:query": [string];
+  "update:selectedSpeaker": [string];
 }>();
 
 const { t } = useVfjsI18n();
 
-const searchId = useId();
-const speakerId = useId();
+const searchId = "speaker-filter-search";
+const speakerId = "speaker-filter-speaker";
 </script>
 
 <template>
@@ -47,7 +50,9 @@ const speakerId = useId();
         @change="emit('update:selectedSpeaker', ($event.target as HTMLSelectElement).value)"
       >
         <option value="all">{{ t.filter_all_speakers }}</option>
-        <slot />
+        <option v-for="option in speakerOptions" :key="option.value" :value="option.value">
+          {{ option.label }}
+        </option>
       </select>
     </div>
   </div>

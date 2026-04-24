@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { YEARS } from '~~/types';
-import type { AcceptedYear } from '~~/types';
+import { YEARS } from "~~/types";
+import type { AcceptedYear } from "~~/types";
+import { useVfjsI18n } from "~/composables/useVfjsI18n";
 
 defineProps<{
-  selectedYear: AcceptedYear | 'all';
+  selectedYear: AcceptedYear | "all";
   counts: Record<string, number>;
 }>();
 
 const emit = defineEmits<{
-  'update:selectedYear': [AcceptedYear | 'all'];
+  "update:selectedYear": [AcceptedYear | "all"];
 }>();
 
 const { t } = useVfjsI18n();

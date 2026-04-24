@@ -1,3 +1,5 @@
+import { computed, onMounted, ref, watch } from "vue";
+
 export interface VfjsTranslations {
   nav_all_label: string;
   sub_all: string;
@@ -28,88 +30,88 @@ export interface VfjsTranslations {
   appearance_count: (n: number) => string;
 }
 
-const translations: Record<'ja' | 'en', VfjsTranslations> = {
+const translations: Record<"ja" | "en", VfjsTranslations> = {
   ja: {
-    nav_all_label: '全スピーカー一覧',
+    nav_all_label: "全スピーカー一覧",
     sub_all:
-      'Vue Fes Japan に登壇したすべてのスピーカーと発表タイトルをまとめた非公式アーカイブです。',
-    meta_speakers: '登壇者',
-    meta_talks: '発表',
-    meta_years: '開催年',
-    filter_year: '年度',
-    filter_speaker: '発表者',
-    filter_all_speakers: 'すべての発表者',
-    filter_search: 'キーワードで絞り込み',
-    filter_search_ph: '発表タイトル・スピーカー名で検索',
-    view_timeline: 'タイムライン',
-    view_index: '一覧',
-    language: '言語',
-    color_scheme: '配色',
-    color_scheme_light: 'ライト',
-    color_scheme_dark: 'ダーク',
-    color_scheme_system: 'システム',
-    empty: '該当するスピーカーが見つかりません。',
-    tbd: 'タイトル未定',
-    external: '外部リンク',
-    speaker_profile: 'スピーカー',
-    years_appeared: '登壇年',
-    back_top: 'TOPページに戻る',
-    official_site: '公式サイト',
-    related_talks: '発表一覧',
+      "Vue Fes Japan に登壇したすべてのスピーカーと発表タイトルをまとめた非公式アーカイブです。",
+    meta_speakers: "登壇者",
+    meta_talks: "発表",
+    meta_years: "開催年",
+    filter_year: "年度",
+    filter_speaker: "発表者",
+    filter_all_speakers: "すべての発表者",
+    filter_search: "キーワードで絞り込み",
+    filter_search_ph: "発表タイトル・スピーカー名で検索",
+    view_timeline: "タイムライン",
+    view_index: "一覧",
+    language: "言語",
+    color_scheme: "配色",
+    color_scheme_light: "ライト",
+    color_scheme_dark: "ダーク",
+    color_scheme_system: "システム",
+    empty: "該当するスピーカーが見つかりません。",
+    tbd: "タイトル未定",
+    external: "外部リンク",
+    speaker_profile: "スピーカー",
+    years_appeared: "登壇年",
+    back_top: "TOPページに戻る",
+    official_site: "公式サイト",
+    related_talks: "発表一覧",
     year_total_talks: (n: number) => `全 ${n} 発表`,
     appearance_count: (n: number) => `${n}回登壇`,
   },
   en: {
-    nav_all_label: 'All speakers',
+    nav_all_label: "All speakers",
     sub_all:
-      'An unofficial, community-maintained index of every speaker and talk at Vue Fes Japan.',
-    meta_speakers: 'Speakers',
-    meta_talks: 'Talks',
-    meta_years: 'Editions',
-    filter_year: 'Year',
-    filter_speaker: 'Speaker',
-    filter_all_speakers: 'All speakers',
-    filter_search: 'Search',
-    filter_search_ph: 'Search talk titles or speaker names',
-    view_timeline: 'Timeline',
-    view_index: 'Index',
-    language: 'Language',
-    color_scheme: 'Color scheme',
-    color_scheme_light: 'Light',
-    color_scheme_dark: 'Dark',
-    color_scheme_system: 'System',
-    empty: 'No speakers match the current filters.',
-    tbd: 'TBD',
-    external: 'External',
-    speaker_profile: 'Speaker',
-    years_appeared: 'Appeared in',
-    back_top: 'Back to top page',
-    official_site: 'Official site',
-    related_talks: 'Talks',
+      "An unofficial, community-maintained index of every speaker and talk at Vue Fes Japan.",
+    meta_speakers: "Speakers",
+    meta_talks: "Talks",
+    meta_years: "Editions",
+    filter_year: "Year",
+    filter_speaker: "Speaker",
+    filter_all_speakers: "All speakers",
+    filter_search: "Search",
+    filter_search_ph: "Search talk titles or speaker names",
+    view_timeline: "Timeline",
+    view_index: "Index",
+    language: "Language",
+    color_scheme: "Color scheme",
+    color_scheme_light: "Light",
+    color_scheme_dark: "Dark",
+    color_scheme_system: "System",
+    empty: "No speakers match the current filters.",
+    tbd: "TBD",
+    external: "External",
+    speaker_profile: "Speaker",
+    years_appeared: "Appeared in",
+    back_top: "Back to top page",
+    official_site: "Official site",
+    related_talks: "Talks",
     year_total_talks: (n: number) => `${n} talks total`,
-    appearance_count: (n: number) => `${n} appearance${n > 1 ? 's' : ''}`,
+    appearance_count: (n: number) => `${n} appearance${n > 1 ? "s" : ""}`,
   },
 };
 
-export const useVfjsI18n = () => {
-  const lang = useState<'ja' | 'en'>('vfjs:lang', () => 'ja');
+const lang = ref<"ja" | "en">("ja");
 
+export const useVfjsI18n = () => {
   onMounted(() => {
-    const stored = localStorage.getItem('vfjs:lang') as 'ja' | 'en' | null;
-    if (stored === 'ja' || stored === 'en') {
+    const stored = localStorage.getItem("vfjs:lang") as "ja" | "en" | null;
+    if (stored === "ja" || stored === "en") {
       lang.value = stored;
     }
   });
 
-  watch(lang, (val) => {
-    if (import.meta.client) {
-      localStorage.setItem('vfjs:lang', val);
-      document.documentElement.lang = val;
+  watch(lang, (value) => {
+    if (typeof document !== "undefined") {
+      localStorage.setItem("vfjs:lang", value);
+      document.documentElement.lang = value;
     }
   });
 
-  const setLang = (l: 'ja' | 'en') => {
-    lang.value = l;
+  const setLang = (value: "ja" | "en") => {
+    lang.value = value;
   };
   const t = computed(() => translations[lang.value]);
 

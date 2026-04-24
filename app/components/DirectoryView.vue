@@ -1,29 +1,39 @@
 <script setup lang="ts">
-import { compareLexicalJa } from '~/utils/stringCollate';
-import { buildSpeakerMap, hasJapanese } from '~/utils/speakerMap';
-import type { SpeakerRecord } from '~/utils/speakerMap';
-import { YEARS } from '~~/types';
-import type { SpeakerWithYear, AcceptedYear } from '~~/types';
+import { computed, ref } from "vue";
+import type { SpeakerWithYear, AcceptedYear } from "~~/types";
+import { compareLexicalJa } from "~/utils/stringCollate";
+import { buildSpeakerMap, hasJapanese } from "~/utils/speakerMap";
+import type { SpeakerRecord } from "~/utils/speakerMap";
+import { YEARS } from "~~/types";
+import SpeakerFilterBar from "~/components/SpeakerFilterBar.vue";
+import YearFilterBar from "~/components/YearFilterBar.vue";
+import { useVfjsI18n } from "~/composables/useVfjsI18n";
 
 const props = defineProps<{
   allSpeakers: SpeakerWithYear[];
-  selectedYear: AcceptedYear | 'all';
+  selectedYear: AcceptedYear | "all";
   selectedSpeaker: string;
   query: string;
 }>();
 
 const emit = defineEmits<{
-  'update:selectedYear': [AcceptedYear | 'all'];
-  'update:selectedSpeaker': [string];
-  'update:query': [string];
+  "update:selectedYear": [AcceptedYear | "all"];
+  "update:selectedSpeaker": [string];
+  "update:query": [string];
 }>();
 
 const { t, lang } = useVfjsI18n();
 
 const speakerMap = computed(() => buildSpeakerMap(props.allSpeakers));
 const allRecords = computed(() => Array.from(speakerMap.value.values()));
+const speakerOptions = computed(() =>
+  allRecords.value.map((record) => ({
+    label: `${record.name} (${record.talks.length})`,
+    value: record.name,
+  })),
+);
 
-const sort = ref<'name' | 'appearances' | 'latest'>('appearances');
+const sort = ref<"name" | "appearances" | "latest">("appearances");
 
 const counts = computed(() => {
   const c: Record<string, number> = { all: allRecords.value.length };
@@ -36,29 +46,29 @@ const counts = computed(() => {
 const filtered = computed<SpeakerRecord[]>(() => {
   const q = props.query.trim().toLowerCase();
   let list = allRecords.value.filter((rec) => {
-    if (props.selectedYear !== 'all' && !rec.years.includes(props.selectedYear)) return false;
-    if (props.selectedSpeaker !== 'all' && rec.name !== props.selectedSpeaker) return false;
+    if (props.selectedYear !== "all" && !rec.years.includes(props.selectedYear)) return false;
+    if (props.selectedSpeaker !== "all" && rec.name !== props.selectedSpeaker) return false;
     if (q) {
-      const titles = rec.talks.map((tk) => tk.title || '').join(' ');
-      const hay = (rec.name + ' ' + titles).toLowerCase();
+      const titles = rec.talks.map((tk) => tk.title || "").join(" ");
+      const hay = (rec.name + " " + titles).toLowerCase();
       if (!hay.includes(q)) return false;
     }
     return true;
   });
 
-  if (sort.value === 'appearances') {
+  if (sort.value === "appearances") {
     list = [...list].sort(
       (a, b) =>
         b.talks.length - a.talks.length ||
-        compareLexicalJa(a.years[0] || '', b.years[0] || '') ||
+        compareLexicalJa(a.years[0] || "", b.years[0] || "") ||
         compareLexicalJa(a.name, b.name),
     );
-  } else if (sort.value === 'name') {
+  } else if (sort.value === "name") {
     list = [...list].sort((a, b) => compareLexicalJa(a.name, b.name));
-  } else if (sort.value === 'latest') {
+  } else if (sort.value === "latest") {
     list = [...list].sort(
       (a, b) =>
-        compareLexicalJa(b.years[b.years.length - 1] || '', a.years[a.years.length - 1] || '') ||
+        compareLexicalJa(b.years[b.years.length - 1] || "", a.years[a.years.length - 1] || "") ||
         compareLexicalJa(a.name, b.name),
     );
   }
@@ -81,13 +91,10 @@ function toggleRow(name: string) {
       <SpeakerFilterBar
         :query="query"
         :selected-speaker="selectedSpeaker"
+        :speaker-options="speakerOptions"
         @update:query="emit('update:query', $event)"
         @update:selected-speaker="emit('update:selectedSpeaker', $event)"
-      >
-        <option v-for="r in allRecords" :key="r.name" :value="r.name">
-          {{ r.name }} ({{ r.talks.length }})
-        </option>
-      </SpeakerFilterBar>
+      />
 
       <YearFilterBar
         :selected-year="selectedYear"
@@ -133,8 +140,8 @@ function toggleRow(name: string) {
           Latest year ↓
         </button>
         <span class="ml-auto text-[12px] tracking-[0.06em] text-[var(--ink-3)] whitespace-nowrap"
-          >{{ String(filtered.length).padStart(3, '0') }} /
-          {{ String(allRecords.length).padStart(3, '0') }}</span
+          >{{ String(filtered.length).padStart(3, "0") }} /
+          {{ String(allRecords.length).padStart(3, "0") }}</span
         >
       </div>
 
@@ -164,7 +171,7 @@ function toggleRow(name: string) {
               <span
                 class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] tabular-nums"
                 aria-hidden="true"
-                >{{ String(i + 1).padStart(3, '0') }}</span
+                >{{ String(i + 1).padStart(3, "0") }}</span
               >
               <span
                 class="[font-family:var(--font-display)] text-[clamp(15px,1.2vw,18px)] font-[500] tracking-[-0.005em] text-[var(--ink)]"
@@ -174,7 +181,7 @@ function toggleRow(name: string) {
                   >{{ rec.name }}<rt>{{ rec.nameRuby }}</rt></ruby
                 >
                 <template v-else>{{
-                  lang === 'en' && rec.nameEn ? rec.nameEn : rec.name
+                  lang === "en" && rec.nameEn ? rec.nameEn : rec.name
                 }}</template>
                 <span
                   v-if="rec.talks.length > 1"
@@ -207,19 +214,19 @@ function toggleRow(name: string) {
             <span
               class="basis-[24px] grow-1 [font-family:var(--font-mono)] text-[16px] text-[var(--ink-3)] text-center"
               aria-hidden="true"
-              >{{ openRows.has(rec.name) ? '−' : '+' }}</span
+              >{{ openRows.has(rec.name) ? "−" : "+" }}</span
             >
           </button>
           <div
             v-if="openRows.has(rec.name)"
             class="bg-[var(--paper-2)] border-t border-[var(--rule-softer)] pt-[8px] pb-[22px] px-[var(--pad-x)]"
           >
-            <NuxtLink
+            <a
               class="[font-family:var(--font-mono)] text-[12px] tracking-[0.06em] text-[var(--ink)] underline hover:no-underline"
-              :to="`/speakers/${encodeURIComponent(rec.name)}`"
+              :href="`/speakers/${encodeURIComponent(rec.name)}`"
             >
               {{ t.speaker_profile }}: {{ rec.name }}
-            </NuxtLink>
+            </a>
             <ol class="list-none p-0 m-0 mt-[14px]">
               <li
                 v-for="(talk, k) in rec.talks"
@@ -228,10 +235,10 @@ function toggleRow(name: string) {
                 style="grid-template-columns: 56px minmax(0, 1fr) auto"
                 :class="k === 0 ? 'border-t-0' : ''"
               >
-                <NuxtLink
-                  :to="`/${talk.year}`"
+                <a
+                  :href="`/${talk.year}`"
                   class="underline hover:no-underline [font-family:var(--font-mono)] text-[12px] text-[var(--ink)] tabular-nums"
-                  >{{ talk.year }}</NuxtLink
+                  >{{ talk.year }}</a
                 >
                 <a
                   class="text-[14px] text-[var(--ink)] pb-[1px] leading-[1.45] no-underline"
@@ -253,10 +260,10 @@ function toggleRow(name: string) {
                   w/
                   <template v-for="(cn, ci) in talk.coSpeakers" :key="cn">
                     <template v-if="ci > 0">, </template>
-                    <NuxtLink
+                    <a
                       class="text-[var(--ink)] border-b border-[var(--rule-soft)] pb-[1px] no-underline hover:border-[var(--ink)]"
-                      :to="`/speakers/${encodeURIComponent(cn)}`"
-                      >{{ cn }}</NuxtLink
+                      :href="`/speakers/${encodeURIComponent(cn)}`"
+                      >{{ cn }}</a
                     >
                   </template>
                 </span>

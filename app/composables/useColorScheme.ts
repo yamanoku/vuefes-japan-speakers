@@ -1,36 +1,37 @@
-type ColorScheme = 'light' | 'dark' | 'system';
+import { onMounted, ref, watch } from "vue";
 
-const STORAGE_KEY = 'vfjs:color-scheme';
+type ColorScheme = "light" | "dark" | "system";
 
-function applyScheme(val: ColorScheme) {
-  if (!import.meta.client) return;
-  if (val === 'system') {
-    document.documentElement.removeAttribute('data-color-scheme');
+const STORAGE_KEY = "vfjs:color-scheme";
+const scheme = ref<ColorScheme>("system");
+
+function applyScheme(value: ColorScheme) {
+  if (typeof document === "undefined") return;
+  if (value === "system") {
+    document.documentElement.removeAttribute("data-color-scheme");
   } else {
-    document.documentElement.setAttribute('data-color-scheme', val);
+    document.documentElement.setAttribute("data-color-scheme", value);
   }
 }
 
 export const useColorScheme = () => {
-  const scheme = useState<ColorScheme>('vfjs:color-scheme', () => 'system');
-
   onMounted(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as ColorScheme | null;
-    if (stored === 'light' || stored === 'dark' || stored === 'system') {
+    if (stored === "light" || stored === "dark" || stored === "system") {
       scheme.value = stored;
     }
     applyScheme(scheme.value);
   });
 
-  watch(scheme, (val) => {
-    if (import.meta.client) {
-      localStorage.setItem(STORAGE_KEY, val);
-      applyScheme(val);
+  watch(scheme, (value) => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(STORAGE_KEY, value);
+      applyScheme(value);
     }
   });
 
-  const setScheme = (s: ColorScheme) => {
-    scheme.value = s;
+  const setScheme = (value: ColorScheme) => {
+    scheme.value = value;
   };
 
   return { scheme, setScheme };
