@@ -27,17 +27,17 @@ vp config
 
 ## よく使うコマンド
 
-| 用途 | 推奨コマンド | npm script |
-| --- | --- | --- |
-| 開発サーバ | `vp dev` | `pnpm dev` |
-| ビルド | `vp build` | `pnpm build` |
-| 静的生成 | `pnpm generate` | `pnpm generate` |
-| プレビュー | `pnpm preview` | `pnpm preview` |
-| Lint | `pnpm lint` | `pnpm lint` |
-| Format | `vp fmt --write` | `pnpm fmt` |
-| Format 確認 | `vp fmt --check` | `pnpm fmt:check` |
-| Type Check | `pnpm typecheck` | `pnpm typecheck` |
-| Test | `pnpm test` | `pnpm test` |
+| 用途          | 推奨コマンド      | npm script        |
+| ------------- | ----------------- | ----------------- |
+| 開発サーバ    | `vp dev`          | `pnpm dev`        |
+| ビルド        | `vp build`        | `pnpm build`      |
+| 静的生成      | `pnpm generate`   | `pnpm generate`   |
+| プレビュー    | `pnpm preview`    | `pnpm preview`    |
+| Lint          | `pnpm lint`       | `pnpm lint`       |
+| Format        | `vp fmt --write`  | `pnpm fmt`        |
+| Format 確認   | `vp fmt --check`  | `pnpm fmt:check`  |
+| Type Check    | `pnpm typecheck`  | `pnpm typecheck`  |
+| Test          | `pnpm test`       | `pnpm test`       |
 | Test（watch） | `pnpm test:watch` | `pnpm test:watch` |
 
 作業前後の検証は、変更内容に応じて `pnpm lint`、`pnpm fmt:check`、`pnpm typecheck`、`pnpm test` を組み合わせます。

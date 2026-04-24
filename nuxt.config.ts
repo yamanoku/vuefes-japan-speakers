@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from 'nuxt/config';
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   // https://nuxt.com/modules
@@ -27,6 +28,7 @@ export default defineNuxtConfig({
   hub: {},
 
   vize: {
-    compiler: process.env.VIZE_NUXT_COMPILER !== '0',
+    compiler: process.env.VIZE_NUXT_COMPILER === '1',
+    musea: false,
   },
 });

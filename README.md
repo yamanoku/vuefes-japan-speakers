@@ -29,7 +29,7 @@ pnpm install
 
 ## Commands
 
-開発サーバやビルドなどの npm scripts は pnpm 経由で実行できます。Vite+ の `vp dev` / `vp build` も Nuxt に橋渡しされ、Format は Vite+ の `vp fmt`、Lint / Type Check は Vize 系ツールを利用します。
+開発サーバやビルドなどの npm scripts は pnpm 経由で実行できます。Vite+ の `vp dev` / `vp build` も Nuxt に橋渡しされ、Format は Vite+ の `vp fmt`、Lint / Type Check は Vize 系ツールを利用します。Vize の Vue SFC compiler は Nuxt 4.4.2 の内部ルート描画との互換性を保つため、`VIZE_NUXT_COMPILER=1` の明示 opt-in で有効化します。
 
 | 用途          | コマンド                            |
 | ------------- | ----------------------------------- |
