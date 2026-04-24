@@ -1,3 +1,4 @@
+import { compareLexicalJa } from '~/utils/stringCollate';
 import type { SpeakerWithYear } from '~~/types';
 
 export interface SpeakerRecord {
@@ -34,7 +35,7 @@ export function buildSpeakerMap(allSpeakers: SpeakerWithYear[]): Map<string, Spe
     }
   }
   for (const rec of map.values()) {
-    rec.talks.sort((a, b) => a.year.localeCompare(b.year));
+    rec.talks.sort((a, b) => compareLexicalJa(a.year, b.year));
     rec.years.sort();
   }
   return map;

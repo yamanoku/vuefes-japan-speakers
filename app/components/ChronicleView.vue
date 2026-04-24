@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { compareLexicalJa } from '~/utils/stringCollate';
 import { YEARS } from '~~/types';
 import type { SpeakerWithYear, AcceptedYear } from '~~/types';
 
@@ -20,7 +21,7 @@ const { t, lang } = useVfjsI18n();
 const uniqueNames = computed(() => {
   const set = new Set<string>();
   props.allSpeakers.forEach((s) => s.name.forEach((n) => set.add(n)));
-  return Array.from(set).sort((a, b) => a.localeCompare(b));
+  return Array.from(set).sort(compareLexicalJa);
 });
 
 const counts = computed(() => {
