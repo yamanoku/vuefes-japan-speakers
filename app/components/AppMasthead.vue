@@ -12,7 +12,7 @@ const { t } = useVfjsI18n();
   >
     <div class="grid grid-cols-12 gap-6 items-end">
       <div
-        class="col-span-9 flex items-end gap-[clamp(18px,2.4vw,34px)] max-[800px]:col-span-12 max-[560px]:flex-col max-[560px]:items-start"
+        class="col-span-9 flex items-center gap-[clamp(18px,2.4vw,34px)] max-[800px]:col-span-12 max-[560px]:flex-col max-[560px]:items-start"
       >
         <AppLogoMark
           class="w-[clamp(42px,5vw,72px)] h-auto text-[var(--ink)] mb-[0.08em] max-[560px]:mb-0"
