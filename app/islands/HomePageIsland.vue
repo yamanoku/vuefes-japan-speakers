@@ -1,38 +1,51 @@
 <script setup lang="ts">
-import { useFetchAllSpeakers } from '~/composables/speaker';
-import { YEARS } from '~~/types';
-import type { AcceptedYear } from '~~/types';
+import { computed, onMounted, ref, watch } from "vue";
+import type { AcceptedYear, SpeakerWithYear } from "../../types";
+import { YEARS } from "../../types";
+import AppFooter from "../components/AppFooter.vue";
+import AppHeader from "../components/AppHeader.vue";
+import AppMasthead from "../components/AppMasthead.vue";
+import ChronicleView from "../components/ChronicleView.vue";
+import DirectoryView from "../components/DirectoryView.vue";
+import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-const { data: allSpeakers } = await useFetchAllSpeakers();
+const props = defineProps<{
+  allSpeakers: SpeakerWithYear[];
+}>();
 
 const { t } = useVfjsI18n();
 
-const view = ref<'chronicle' | 'index'>('chronicle');
-const density = ref<'compact' | 'cozy' | 'airy'>('airy');
+const view = ref<"chronicle" | "index">("chronicle");
+const density = ref<"compact" | "cozy" | "airy">("airy");
 
 onMounted(() => {
-  const storedView = localStorage.getItem('vfjs:view') as 'chronicle' | 'index' | null;
-  if (storedView === 'chronicle' || storedView === 'index') view.value = storedView;
-  const storedDensity = localStorage.getItem('vfjs:density') as 'compact' | 'cozy' | 'airy' | null;
+  const storedView = localStorage.getItem("vfjs:view") as "chronicle" | "index" | null;
+  if (storedView === "chronicle" || storedView === "index") view.value = storedView;
+  const storedDensity = localStorage.getItem("vfjs:density") as "compact" | "cozy" | "airy" | null;
   if (storedDensity) density.value = storedDensity;
 });
 
-watch(view, (v) => {
-  if (import.meta.client) localStorage.setItem('vfjs:view', v);
+watch(view, (value) => {
+  if (typeof window !== "undefined") localStorage.setItem("vfjs:view", value);
 });
-watch(density, (d) => {
-  if (import.meta.client) localStorage.setItem('vfjs:density', d);
+watch(density, (value) => {
+  if (typeof window !== "undefined") localStorage.setItem("vfjs:density", value);
 });
 
-const selectedYear = ref<AcceptedYear | 'all'>('all');
-const selectedSpeaker = ref<string>('all');
-const query = ref('');
+const selectedYear = ref<AcceptedYear | "all">("all");
+const selectedSpeaker = ref<string>("all");
+const query = ref("");
 
 const stats = computed(() => {
-  const list = allSpeakers.value;
   const speakerSet = new Set<string>();
-  for (const s of list) s.name.forEach((n) => speakerSet.add(n));
-  return { speakers: speakerSet.size, talks: list.length, years: YEARS.length };
+  for (const speaker of props.allSpeakers) {
+    speaker.name.forEach((name) => speakerSet.add(name));
+  }
+  return {
+    speakers: speakerSet.size,
+    talks: props.allSpeakers.length,
+    years: YEARS.length,
+  };
 });
 </script>
 
@@ -57,15 +70,15 @@ const stats = computed(() => {
         "
         @click="view = 'chronicle'"
       >
-        <span class="[font-family:var(--font-mono)] font-normal mr-[4px] text-[var(--ink-3)]"
-          >A</span
-        >
-        · {{ t.view_timeline }}
+        <span class="[font-family:var(--font-mono)] font-normal mr-[4px] text-[var(--ink-3)]">
+          A
+        </span>
+        - {{ t.view_timeline }}
         <span
           class="[font-family:var(--font-mono)] text-[var(--ink-4)] text-[12px] tracking-[0.02em]"
         >
-          — Chronicle</span
-        >
+          - Chronicle
+        </span>
       </button>
       <button
         role="tab"
@@ -78,15 +91,15 @@ const stats = computed(() => {
         "
         @click="view = 'index'"
       >
-        <span class="[font-family:var(--font-mono)] font-normal mr-[4px] text-[var(--ink-3)]"
-          >B</span
-        >
-        · {{ t.view_index }}
+        <span class="[font-family:var(--font-mono)] font-normal mr-[4px] text-[var(--ink-3)]">
+          B
+        </span>
+        - {{ t.view_index }}
         <span
           class="[font-family:var(--font-mono)] text-[var(--ink-4)] text-[12px] tracking-[0.02em]"
         >
-          — Directory</span
-        >
+          - Directory
+        </span>
       </button>
     </div>
 

@@ -1,11 +1,13 @@
-# Nuxt dev/build outputs
-.output
+# Vite / vuerend dev and build outputs
+.cache
+dist
 .data
+
+# Legacy generated outputs
+.output
 .nuxt
 .nuxtrc
 .nitro
-.cache
-dist
 
 # Node dependencies
 node_modules
@@ -13,6 +15,10 @@ node_modules
 # Logs
 logs
 *.log
+
+# Tool generated files
+__agent_only
+__oxlint_plugin_vize_temp__
 
 # Misc
 .DS_Store

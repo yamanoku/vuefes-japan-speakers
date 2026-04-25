@@ -3,39 +3,27 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "vp:check": "vp check",
-    "vp:lint": "vp lint .",
-    "vp:fmt": "vp fmt .",
-    "vp:test": "vp test run",
-    "vp:test:watch": "vp test",
     "prepare": "vp config"
   },
   "dependencies": {
-    "@nuxt/ui": "catalog:nuxt",
-    "nuxt": "catalog:nuxt",
+    "@tailwindcss/vite": "catalog:css",
+    "@vue/server-renderer": "catalog:vue",
+    "@vuerend/core": "catalog:vuerend",
     "tailwindcss": "catalog:css",
-    "vue": "catalog:vue",
-    "vue-router": "catalog:vue"
+    "vue": "catalog:vue"
   },
   "devDependencies": {
-    "@nuxt/a11y": "catalog:nuxt",
-    "@nuxt/eslint": "catalog:test",
-    "@nuxt/eslint-config": "catalog:test",
-    "@nuxt/eslint-plugin": "catalog:test",
-    "@nuxt/test-utils": "catalog:test",
-    "@nuxthub/core": "catalog:cloudflare",
-    "@stylistic/eslint-plugin": "catalog:test",
+    "@types/node": "catalog:typescript",
+    "@vizejs/vite-plugin": "catalog:vize",
     "@vue/test-utils": "catalog:test",
+    "oxlint": "catalog:vize",
+    "oxlint-plugin-vize": "catalog:vize",
     "playwright": "catalog:test",
+    "typescript": "catalog:typescript",
+    "vite": "catalog:vite",
     "vite-plus": "catalog:vp",
     "vitest": "catalog:vp",
-    "vue-tsc": "catalog:typescript",
-    "wrangler": "catalog:cloudflare"
+    "vize": "catalog:vize"
   },
   "packageManager": "pnpm@10.33.2"
 }

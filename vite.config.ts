@@ -1,848 +1,249 @@
-import { defineConfig } from 'vite-plus';
+import {
+  createReadStream,
+  existsSync,
+  readFileSync,
+  rmSync,
+  statSync,
+  writeFileSync,
+} from "node:fs";
+import type { IncomingMessage, ServerResponse } from "node:http";
+import { extname, relative, resolve, sep } from "node:path";
+import { fileURLToPath, URL } from "node:url";
+import tailwindcss from "@tailwindcss/vite";
+import vize from "@vizejs/vite-plugin";
+import { vuerend } from "@vuerend/core/vite";
+import type { Plugin } from "vite";
+import { defineConfig } from "vite-plus";
+import { playwright } from "vite-plus/test/browser-playwright";
+
+const ignorePatterns = [
+  "**/.cache/**",
+  "**/.data/**",
+  "**/.nuxt/**",
+  "**/.nitro/**",
+  "**/.output/**",
+  "**/dist/**",
+  "**/node_modules/**",
+  "**/public/**",
+];
+
+const lint = {
+  $schema: "./node_modules/oxlint/configuration_schema.json",
+  plugins: ["typescript", "oxc", "import", "unicorn", "vue"] as [
+    "typescript",
+    "oxc",
+    "import",
+    "unicorn",
+    "vue",
+  ],
+  jsPlugins: ["oxlint-plugin-vize"],
+  settings: {
+    vize: {
+      preset: "opinionated",
+      helpLevel: "short",
+    },
+  },
+  env: {
+    builtin: true,
+    browser: true,
+    es2024: true,
+    node: true,
+  },
+  ignorePatterns,
+  rules: {
+    "vize/vue/require-v-for-key": "error",
+    "vize/vue/no-v-html": "warn",
+    "vize/vue/no-unused-vars": "warn",
+    "vize/vue/valid-v-bind": "error",
+    "vize/vue/valid-v-for": "error",
+    "vize/vue/valid-v-if": "error",
+    "vize/vue/valid-v-model": "error",
+    "vize/vue/valid-v-on": "error",
+    "vize/vue/valid-v-slot": "error",
+    "no-console": "warn",
+    "no-debugger": "error",
+    "no-unused-vars": "warn",
+    "import/no-duplicates": "error",
+    "typescript/consistent-type-imports": "error",
+    "typescript/no-explicit-any": "error",
+    "vue/no-arrow-functions-in-watch": "error",
+    "vue/no-export-in-script-setup": "error",
+    "vue/no-lifecycle-after-await": "error",
+    "vue/prefer-import-from-vue": "error",
+    "vue/valid-define-emits": "error",
+    "vue/valid-define-props": "error",
+  } as const,
+  globals: {
+    defineEmits: "readonly",
+    defineExpose: "readonly",
+    defineProps: "readonly",
+    withDefaults: "readonly",
+  },
+};
+
+const fmt = {
+  printWidth: 100,
+  tabWidth: 2,
+  semi: true,
+  singleQuote: false,
+  trailingComma: "all" as const,
+  htmlWhitespaceSensitivity: "ignore" as const,
+  sortPackageJson: true,
+  ignorePatterns,
+};
+
+export { fmt, lint };
+
+function staticHtmlPreview(): Plugin {
+  return {
+    name: "vfjs:static-html-preview",
+    configurePreviewServer(server) {
+      const previewOutDir = resolve(server.config.root, server.config.build.outDir);
+
+      const sendHtml = (
+        request: IncomingMessage,
+        response: ServerResponse,
+        htmlFile: string,
+        statusCode: number,
+      ) => {
+        const htmlStat = statSync(htmlFile);
+        if (!htmlStat.isFile()) {
+          return false;
+        }
+
+        response.statusCode = statusCode;
+        response.setHeader("Content-Type", "text/html;charset=utf-8");
+        response.setHeader("Content-Length", htmlStat.size);
+
+        if (request.method === "HEAD") {
+          response.end();
+        } else {
+          createReadStream(htmlFile).pipe(response);
+        }
+
+        return true;
+      };
+
+      server.middlewares.use((request, response, next) => {
+        if (request.method !== "GET" && request.method !== "HEAD") {
+          next();
+          return;
+        }
+
+        if (!request.url) {
+          next();
+          return;
+        }
+
+        const url = new URL(request.url, "http://localhost");
+        if (extname(url.pathname) !== "") {
+          next();
+          return;
+        }
+
+        const pathname = url.pathname.replace(/\/+$/, "");
+        const htmlPathname = pathname === "" ? "/index.html" : `${pathname}/index.html`;
+        const htmlFile = resolve(previewOutDir, `.${htmlPathname}`);
+        const notFoundFile = resolve(previewOutDir, "404.html");
+        const relativeHtmlFile = relative(previewOutDir, htmlFile);
+
+        if (
+          relativeHtmlFile !== "" &&
+          !relativeHtmlFile.startsWith("..") &&
+          !relativeHtmlFile.startsWith(sep) &&
+          existsSync(htmlFile) &&
+          sendHtml(request, response, htmlFile, 200)
+        ) {
+          return;
+        }
+
+        if (existsSync(notFoundFile) && sendHtml(request, response, notFoundFile, 404)) {
+          return;
+        }
+
+        next();
+      });
+    },
+  };
+}
+
+function cloudflarePages404(): Plugin {
+  let root = process.cwd();
+
+  return {
+    name: "vfjs:cloudflare-pages-404",
+    apply: "build",
+    configResolved(config) {
+      root = config.root;
+    },
+    async buildApp() {
+      write404Html();
+    },
+    closeBundle() {
+      write404Html();
+    },
+  };
+
+  function write404Html() {
+    const clientOutDir = resolve(root, "dist/client");
+    const generated404 = resolve(clientOutDir, "404.html/index.html");
+    const target404 = resolve(clientOutDir, "404.html");
+
+    if (!existsSync(generated404)) {
+      return;
+    }
+
+    const html = readFileSync(generated404);
+    rmSync(target404, { force: true, recursive: true });
+    writeFileSync(target404, html);
+  }
+}
 
 export default defineConfig({
+  plugins: [
+    tailwindcss(),
+    vuerend({
+      app: "./app/app.ts",
+      islands: "./app/islands.ts",
+      vuePlugin: vize({
+        scanPatterns: ["app/**/*.vue"],
+        ignorePatterns: ["node_modules/**", "dist/**", ".cache/**"],
+      }),
+    }),
+    staticHtmlPreview(),
+    cloudflarePages404(),
+  ],
+  resolve: {
+    alias: {
+      // Vize SSR imports the package root; Vite's module runner needs the ESM build.
+      "@vue/server-renderer": fileURLToPath(
+        new URL(
+          "./node_modules/@vue/server-renderer/dist/server-renderer.esm-bundler.js",
+          import.meta.url,
+        ),
+      ),
+    },
+  },
   staged: {
-    '*': 'vp check --fix',
+    "*": "vp run check",
   },
-  lint: {
-    plugins: ['oxc', 'typescript', 'unicorn', 'react', 'import'],
-    categories: {
-      correctness: 'warn',
-    },
-    env: {
-      builtin: true,
-      browser: true,
-      es2024: true,
-      node: true,
-    },
-    ignorePatterns: [
-      '**/.output',
-      '**/.data',
-      '**/.nuxt',
-      '**/.nuxtrc',
-      '**/.nitro',
-      '**/.cache',
-      '**/dist',
-      '**/node_modules',
-      '**/logs',
-      '**/*.log',
-      '**/.DS_Store',
-      '**/.fleet',
-      '**/.idea',
-      '**/.env',
-      '**/.env.*',
-      '!**/.env.example',
-      '**/.vercel',
-      '**/.netlify',
-      '**/public',
-    ],
-    rules: {
-      'constructor-super': 'error',
-      'for-direction': 'error',
-      'getter-return': 'error',
-      'no-async-promise-executor': 'error',
-      'no-case-declarations': 'error',
-      'no-class-assign': 'error',
-      'no-compare-neg-zero': 'error',
-      'no-cond-assign': 'error',
-      'no-const-assign': 'error',
-      'no-constant-binary-expression': 'error',
-      'no-constant-condition': 'error',
-      'no-control-regex': 'error',
-      'no-debugger': 'error',
-      'no-delete-var': 'error',
-      'no-dupe-class-members': 'error',
-      'no-dupe-else-if': 'error',
-      'no-dupe-keys': 'error',
-      'no-duplicate-case': 'error',
-      'no-empty': 'error',
-      'no-empty-character-class': 'error',
-      'no-empty-pattern': 'error',
-      'no-empty-static-block': 'error',
-      'no-ex-assign': 'error',
-      'no-extra-boolean-cast': 'error',
-      'no-fallthrough': 'error',
-      'no-func-assign': 'error',
-      'no-global-assign': 'error',
-      'no-import-assign': 'error',
-      'no-invalid-regexp': 'error',
-      'no-irregular-whitespace': 'error',
-      'no-loss-of-precision': 'error',
-      'no-misleading-character-class': 'error',
-      'no-new-native-nonconstructor': 'error',
-      'no-nonoctal-decimal-escape': 'error',
-      'no-obj-calls': 'error',
-      'no-prototype-builtins': 'error',
-      'no-redeclare': 'error',
-      'no-regex-spaces': 'error',
-      'no-self-assign': 'error',
-      'no-setter-return': 'error',
-      'no-shadow-restricted-names': 'error',
-      'no-sparse-arrays': 'error',
-      'no-this-before-super': 'error',
-      'no-undef': 'error',
-      'no-unexpected-multiline': 'error',
-      'no-unreachable': 'error',
-      'no-unsafe-finally': 'error',
-      'no-unsafe-negation': 'error',
-      'no-unsafe-optional-chaining': 'error',
-      'no-unused-labels': 'error',
-      'no-unused-private-class-members': 'error',
-      'no-unused-vars': 'error',
-      'no-useless-backreference': 'error',
-      'no-useless-catch': 'error',
-      'no-useless-escape': 'error',
-      'no-with': 'error',
-      'require-yield': 'error',
-      'use-isnan': 'error',
-      'valid-typeof': 'error',
-      'import/first': 'error',
-      'import/no-duplicates': 'error',
-      'import/no-mutable-exports': 'error',
-      'import/no-named-default': 'error',
-      '@nuxt/prefer-import-meta': 'error',
-    },
-    globals: {
-      defineNuxtConfig: 'readonly',
-      computed: 'readonly',
-      defineEmits: 'readonly',
-      defineExpose: 'readonly',
-      defineProps: 'readonly',
-      onMounted: 'readonly',
-      onUnmounted: 'readonly',
-      reactive: 'readonly',
-      ref: 'readonly',
-      shallowReactive: 'readonly',
-      shallowRef: 'readonly',
-      toRef: 'readonly',
-      toRefs: 'readonly',
-      watch: 'readonly',
-      watchEffect: 'readonly',
-      $fetch: 'readonly',
-      useFetchAllSpeakers: 'readonly',
-      useFetchSpeaker: 'readonly',
-      useFilteredSpeakers: 'readonly',
-      getAvailableYears: 'readonly',
-      isValidYear: 'readonly',
-      defineAppConfig: 'readonly',
-      __buildAssetsURL: 'readonly',
-      __publicAssetsURL: 'readonly',
-      defineLocale: 'readonly',
-      extendLocale: 'readonly',
-      defineShortcuts: 'readonly',
-      extractShortcuts: 'readonly',
-      avatarGroupInjectionKey: 'readonly',
-      useAvatarGroup: 'readonly',
-      useComponentIcons: 'readonly',
-      provideThemeContext: 'readonly',
-      useComponentUI: 'readonly',
-      useContentSearch: 'readonly',
-      useEditorMenu: 'readonly',
-      fieldGroupInjectionKey: 'readonly',
-      useFieldGroup: 'readonly',
-      useFileUpload: 'readonly',
-      formBusInjectionKey: 'readonly',
-      formErrorsInjectionKey: 'readonly',
-      formFieldInjectionKey: 'readonly',
-      formInputsInjectionKey: 'readonly',
-      formLoadingInjectionKey: 'readonly',
-      formOptionsInjectionKey: 'readonly',
-      formStateInjectionKey: 'readonly',
-      inputIdInjectionKey: 'readonly',
-      useFormField: 'readonly',
-      kbdKeysMap: 'readonly',
-      useKbd: 'readonly',
-      localeContextInjectionKey: 'readonly',
-      useLocale: 'readonly',
-      useOverlay: 'readonly',
-      portalTargetInjectionKey: 'readonly',
-      usePortal: 'readonly',
-      useResizable: 'readonly',
-      useScrollspy: 'readonly',
-      toastMaxInjectionKey: 'readonly',
-      useToast: 'readonly',
-      useColorMode: 'readonly',
-      definePageMeta: 'readonly',
-      defineNuxtLink: 'readonly',
-      clearNuxtData: 'readonly',
-      refreshNuxtData: 'readonly',
-      useAsyncData: 'readonly',
-      useLazyAsyncData: 'readonly',
-      useNuxtData: 'readonly',
-      reloadNuxtApp: 'readonly',
-      defineNuxtComponent: 'readonly',
-      refreshCookie: 'readonly',
-      useCookie: 'readonly',
-      clearError: 'readonly',
-      createError: 'readonly',
-      isNuxtError: 'readonly',
-      showError: 'readonly',
-      useError: 'readonly',
-      useFetch: 'readonly',
-      useLazyFetch: 'readonly',
-      injectHead: 'readonly',
-      useHead: 'readonly',
-      useHeadSafe: 'readonly',
-      useSeoMeta: 'readonly',
-      useServerHead: 'readonly',
-      useServerHeadSafe: 'readonly',
-      useServerSeoMeta: 'readonly',
-      useHydration: 'readonly',
-      defineLazyHydrationComponent: 'readonly',
-      useLoadingIndicator: 'readonly',
-      getAppManifest: 'readonly',
-      getRouteRules: 'readonly',
-      callOnce: 'readonly',
-      definePayloadReducer: 'readonly',
-      definePayloadReviver: 'readonly',
-      isPrerendered: 'readonly',
-      loadPayload: 'readonly',
-      preloadPayload: 'readonly',
-      prefetchComponents: 'readonly',
-      preloadComponents: 'readonly',
-      preloadRouteComponents: 'readonly',
-      usePreviewMode: 'readonly',
-      onNuxtReady: 'readonly',
-      useRouteAnnouncer: 'readonly',
-      abortNavigation: 'readonly',
-      addRouteMiddleware: 'readonly',
-      defineNuxtRouteMiddleware: 'readonly',
-      navigateTo: 'readonly',
-      setPageLayout: 'readonly',
-      useRoute: 'readonly',
-      useRouter: 'readonly',
-      useRuntimeHook: 'readonly',
-      useScript: 'readonly',
-      useScriptClarity: 'readonly',
-      useScriptCloudflareWebAnalytics: 'readonly',
-      useScriptCrisp: 'readonly',
-      useScriptDatabuddyAnalytics: 'readonly',
-      useScriptEventPage: 'readonly',
-      useScriptFathomAnalytics: 'readonly',
-      useScriptGoogleAdsense: 'readonly',
-      useScriptGoogleAnalytics: 'readonly',
-      useScriptGoogleMaps: 'readonly',
-      useScriptGoogleTagManager: 'readonly',
-      useScriptHotjar: 'readonly',
-      useScriptIntercom: 'readonly',
-      useScriptLemonSqueezy: 'readonly',
-      useScriptMatomoAnalytics: 'readonly',
-      useScriptMetaPixel: 'readonly',
-      useScriptNpm: 'readonly',
-      useScriptPayPal: 'readonly',
-      useScriptPlausibleAnalytics: 'readonly',
-      useScriptRedditPixel: 'readonly',
-      useScriptRybbitAnalytics: 'readonly',
-      useScriptSegment: 'readonly',
-      useScriptSnapchatPixel: 'readonly',
-      useScriptStripe: 'readonly',
-      useScriptTriggerConsent: 'readonly',
-      useScriptTriggerElement: 'readonly',
-      useScriptUmamiAnalytics: 'readonly',
-      useScriptVimeoPlayer: 'readonly',
-      useScriptXPixel: 'readonly',
-      useScriptYouTubePlayer: 'readonly',
-      onPrehydrate: 'readonly',
-      prerenderRoutes: 'readonly',
-      setResponseStatus: 'readonly',
-      useRequestEvent: 'readonly',
-      useRequestFetch: 'readonly',
-      useRequestHeader: 'readonly',
-      useRequestHeaders: 'readonly',
-      useResponseHeader: 'readonly',
-      clearNuxtState: 'readonly',
-      useState: 'readonly',
-      useRequestURL: 'readonly',
-      updateAppConfig: 'readonly',
-      useAppConfig: 'readonly',
-      defineNuxtPlugin: 'readonly',
-      definePayloadPlugin: 'readonly',
-      tryUseNuxtApp: 'readonly',
-      useNuxtApp: 'readonly',
-      useRuntimeConfig: 'readonly',
-      appendCorsHeaders: 'readonly',
-      appendCorsPreflightHeaders: 'readonly',
-      appendHeader: 'readonly',
-      appendHeaders: 'readonly',
-      appendResponseHeader: 'readonly',
-      appendResponseHeaders: 'readonly',
-      assertMethod: 'readonly',
-      callNodeListener: 'readonly',
-      clearResponseHeaders: 'readonly',
-      clearSession: 'readonly',
-      createApp: 'readonly',
-      createAppEventHandler: 'readonly',
-      createEvent: 'readonly',
-      createEventStream: 'readonly',
-      createRouter: 'readonly',
-      defaultContentType: 'readonly',
-      defineEventHandler: 'readonly',
-      defineLazyEventHandler: 'readonly',
-      defineNodeListener: 'readonly',
-      defineNodeMiddleware: 'readonly',
-      defineRequestMiddleware: 'readonly',
-      defineResponseMiddleware: 'readonly',
-      defineWebSocket: 'readonly',
-      defineWebSocketHandler: 'readonly',
-      deleteCookie: 'readonly',
-      dynamicEventHandler: 'readonly',
-      eventHandler: 'readonly',
-      EventHandler: 'readonly',
-      EventHandlerObject: 'readonly',
-      EventHandlerRequest: 'readonly',
-      EventHandlerResponse: 'readonly',
-      fetchWithEvent: 'readonly',
-      fromNodeMiddleware: 'readonly',
-      fromPlainHandler: 'readonly',
-      fromWebHandler: 'readonly',
-      getCookie: 'readonly',
-      getHeader: 'readonly',
-      getHeaders: 'readonly',
-      getMethod: 'readonly',
-      getProxyRequestHeaders: 'readonly',
-      getQuery: 'readonly',
-      getRequestFingerprint: 'readonly',
-      getRequestHeader: 'readonly',
-      getRequestHeaders: 'readonly',
-      getRequestHost: 'readonly',
-      getRequestIP: 'readonly',
-      getRequestPath: 'readonly',
-      getRequestProtocol: 'readonly',
-      getRequestURL: 'readonly',
-      getRequestWebStream: 'readonly',
-      getResponseHeader: 'readonly',
-      getResponseHeaders: 'readonly',
-      getResponseStatus: 'readonly',
-      getResponseStatusText: 'readonly',
-      getRouterParam: 'readonly',
-      getRouterParams: 'readonly',
-      getSession: 'readonly',
-      getValidatedQuery: 'readonly',
-      getValidatedRouterParams: 'readonly',
-      H3Error: 'readonly',
-      H3Event: 'readonly',
-      H3EventContext: 'readonly',
-      handleCacheHeaders: 'readonly',
-      handleCors: 'readonly',
-      isCorsOriginAllowed: 'readonly',
-      isError: 'readonly',
-      isEvent: 'readonly',
-      isEventHandler: 'readonly',
-      isMethod: 'readonly',
-      isPreflightRequest: 'readonly',
-      isStream: 'readonly',
-      isWebResponse: 'readonly',
-      lazyEventHandler: 'readonly',
-      parseCookies: 'readonly',
-      promisifyNodeListener: 'readonly',
-      proxyRequest: 'readonly',
-      readBody: 'readonly',
-      readFormData: 'readonly',
-      readMultipartFormData: 'readonly',
-      readRawBody: 'readonly',
-      readValidatedBody: 'readonly',
-      removeResponseHeader: 'readonly',
-      sanitizeStatusCode: 'readonly',
-      sanitizeStatusMessage: 'readonly',
-      sealSession: 'readonly',
-      send: 'readonly',
-      sendError: 'readonly',
-      sendIterable: 'readonly',
-      sendNoContent: 'readonly',
-      sendProxy: 'readonly',
-      sendRedirect: 'readonly',
-      sendStream: 'readonly',
-      sendWebResponse: 'readonly',
-      serveStatic: 'readonly',
-      setCookie: 'readonly',
-      setHeader: 'readonly',
-      setHeaders: 'readonly',
-      setResponseHeader: 'readonly',
-      setResponseHeaders: 'readonly',
-      splitCookiesString: 'readonly',
-      toEventHandler: 'readonly',
-      toNodeListener: 'readonly',
-      toPlainHandler: 'readonly',
-      toWebHandler: 'readonly',
-      toWebRequest: 'readonly',
-      unsealSession: 'readonly',
-      updateSession: 'readonly',
-      useBase: 'readonly',
-      useSession: 'readonly',
-      writeEarlyHints: 'readonly',
-      useNitroApp: 'readonly',
-      cachedEventHandler: 'readonly',
-      cachedFunction: 'readonly',
-      defineCachedEventHandler: 'readonly',
-      defineCachedFunction: 'readonly',
-      useEvent: 'readonly',
-      defineNitroErrorHandler: 'readonly',
-      defineRouteMeta: 'readonly',
-      defineNitroPlugin: 'readonly',
-      nitroPlugin: 'readonly',
-      defineRenderHandler: 'readonly',
-      useStorage: 'readonly',
-      defineTask: 'readonly',
-      runTask: 'readonly',
-      Component: 'readonly',
-      ComponentPublicInstance: 'readonly',
-      ComputedRef: 'readonly',
-      customRef: 'readonly',
-      defineAsyncComponent: 'readonly',
-      defineComponent: 'readonly',
-      DirectiveBinding: 'readonly',
-      effect: 'readonly',
-      effectScope: 'readonly',
-      ExtractDefaultPropTypes: 'readonly',
-      ExtractPropTypes: 'readonly',
-      ExtractPublicPropTypes: 'readonly',
-      getCurrentInstance: 'readonly',
-      getCurrentScope: 'readonly',
-      h: 'readonly',
-      hasInjectionContext: 'readonly',
-      inject: 'readonly',
-      InjectionKey: 'readonly',
-      isProxy: 'readonly',
-      isReactive: 'readonly',
-      isReadonly: 'readonly',
-      isRef: 'readonly',
-      isShallow: 'readonly',
-      markRaw: 'readonly',
-      MaybeRef: 'readonly',
-      MaybeRefOrGetter: 'readonly',
-      nextTick: 'readonly',
-      onActivated: 'readonly',
-      onBeforeMount: 'readonly',
-      onBeforeUnmount: 'readonly',
-      onBeforeUpdate: 'readonly',
-      onDeactivated: 'readonly',
-      onErrorCaptured: 'readonly',
-      onRenderTracked: 'readonly',
-      onRenderTriggered: 'readonly',
-      onScopeDispose: 'readonly',
-      onServerPrefetch: 'readonly',
-      onUpdated: 'readonly',
-      onWatcherCleanup: 'readonly',
-      PropType: 'readonly',
-      provide: 'readonly',
-      proxyRefs: 'readonly',
-      readonly: 'readonly',
-      Ref: 'readonly',
-      resolveComponent: 'readonly',
-      shallowReadonly: 'readonly',
-      toRaw: 'readonly',
-      toValue: 'readonly',
-      triggerRef: 'readonly',
-      unref: 'readonly',
-      useAttrs: 'readonly',
-      useCssModule: 'readonly',
-      useCssVars: 'readonly',
-      useId: 'readonly',
-      useModel: 'readonly',
-      useShadowRoot: 'readonly',
-      useSlots: 'readonly',
-      useTemplateRef: 'readonly',
-      useTransitionState: 'readonly',
-      VNode: 'readonly',
-      watchPostEffect: 'readonly',
-      watchSyncEffect: 'readonly',
-      withCtx: 'readonly',
-      withDirectives: 'readonly',
-      withKeys: 'readonly',
-      withMemo: 'readonly',
-      withModifiers: 'readonly',
-      withScopeId: 'readonly',
-      WritableComputedRef: 'readonly',
-      isVue2: 'readonly',
-      isVue3: 'readonly',
-      onBeforeRouteLeave: 'readonly',
-      onBeforeRouteUpdate: 'readonly',
-      useLink: 'readonly',
-    },
-    jsPlugins: ['@nuxt/eslint-plugin'],
-    overrides: [
-      {
-        files: ['**/*.ts', '**/*.tsx', '**/*.mts', '**/*.cts', '**/*.vue'],
-        rules: {
-          'constructor-super': 'off',
-          'getter-return': 'off',
-          'no-class-assign': 'off',
-          'no-const-assign': 'off',
-          'no-dupe-class-members': 'off',
-          'no-dupe-keys': 'off',
-          'no-func-assign': 'off',
-          'no-import-assign': 'off',
-          'no-new-native-nonconstructor': 'off',
-          'no-obj-calls': 'off',
-          'no-redeclare': 'off',
-          'no-setter-return': 'off',
-          'no-this-before-super': 'off',
-          'no-undef': 'off',
-          'no-unreachable': 'off',
-          'no-unsafe-negation': 'off',
-          'no-var': 'error',
-          'no-with': 'off',
-          'prefer-const': 'error',
-          'prefer-rest-params': 'error',
-          'prefer-spread': 'error',
-          '@typescript-eslint/ban-ts-comment': [
-            'error',
-            {
-              minimumDescriptionLength: 10,
-            },
-          ],
-          'no-array-constructor': 'error',
-          '@typescript-eslint/no-duplicate-enum-values': 'error',
-          '@typescript-eslint/no-empty-object-type': 'error',
-          '@typescript-eslint/no-explicit-any': 'error',
-          '@typescript-eslint/no-extra-non-null-assertion': 'error',
-          '@typescript-eslint/no-misused-new': 'error',
-          '@typescript-eslint/no-namespace': 'error',
-          '@typescript-eslint/no-non-null-asserted-optional-chain': 'error',
-          '@typescript-eslint/no-require-imports': 'error',
-          '@typescript-eslint/no-this-alias': 'error',
-          '@typescript-eslint/no-unnecessary-type-constraint': 'error',
-          '@typescript-eslint/no-unsafe-declaration-merging': 'error',
-          '@typescript-eslint/no-unsafe-function-type': 'error',
-          'no-unused-expressions': 'error',
-          'no-unused-vars': [
-            'error',
-            {
-              args: 'after-used',
-              argsIgnorePattern: '^_',
-              ignoreRestSiblings: true,
-              vars: 'all',
-              varsIgnorePattern: '^_',
-            },
-          ],
-          '@typescript-eslint/no-wrapper-object-types': 'error',
-          '@typescript-eslint/prefer-as-const': 'error',
-          '@typescript-eslint/prefer-namespace-keyword': 'error',
-          '@typescript-eslint/triple-slash-reference': 'error',
-          '@typescript-eslint/no-dynamic-delete': 'error',
-          '@typescript-eslint/no-extraneous-class': 'error',
-          '@typescript-eslint/no-invalid-void-type': 'error',
-          '@typescript-eslint/no-non-null-asserted-nullish-coalescing': 'error',
-          '@typescript-eslint/no-non-null-assertion': 'off',
-          'no-useless-constructor': 'error',
-          '@typescript-eslint/prefer-literal-enum-member': 'error',
-          '@typescript-eslint/unified-signatures': 'error',
-          'valid-typeof': 'off',
-          '@typescript-eslint/consistent-type-imports': [
-            'error',
-            {
-              disallowTypeAnnotations: false,
-              prefer: 'type-imports',
-            },
-          ],
-          '@typescript-eslint/no-import-type-side-effects': 'error',
-        },
-      },
-      {
-        files: ['**/*.vue'],
-        rules: {
-          'vue/no-arrow-functions-in-watch': 'error',
-          'vue/no-deprecated-destroyed-lifecycle': 'error',
-          'vue/no-export-in-script-setup': 'error',
-          'vue/no-lifecycle-after-await': 'error',
-          'vue/prefer-import-from-vue': 'error',
-          'vue/valid-define-emits': 'error',
-          'vue/valid-define-props': 'error',
-          'vue/no-multiple-slot-args': 'warn',
-          'vue/no-required-prop-with-default': 'warn',
-        },
-        plugins: ['vue'],
-      },
-      {
-        files: ['app/pages/**/*.{js,ts,jsx,tsx,vue}'],
-        rules: {
-          '@nuxt/no-page-meta-runtime-values': 'error',
-        },
-        jsPlugins: ['@nuxt/eslint-plugin'],
-      },
-      {
-        files: ['**/.config/nuxt.?([cm])[jt]s?(x)', '**/nuxt.config.?([cm])[jt]s?(x)'],
-        rules: {
-          '@nuxt/no-nuxt-config-test-key': 'error',
-          '@nuxt/nuxt-config-keys-order': 'error',
-        },
-        jsPlugins: ['@nuxt/eslint-plugin'],
-      },
-      {
-        files: ['**/*.?([cm])[jt]s?(x)', '**/*.vue'],
-        rules: {
-          '@stylistic/array-bracket-spacing': ['error', 'never'],
-          '@stylistic/arrow-spacing': [
-            'error',
-            {
-              after: true,
-              before: true,
-            },
-          ],
-          '@stylistic/block-spacing': ['error', 'always'],
-          '@stylistic/comma-dangle': ['error', 'always-multiline'],
-          '@stylistic/comma-spacing': [
-            'error',
-            {
-              after: true,
-              before: false,
-            },
-          ],
-          '@stylistic/comma-style': ['error', 'last'],
-          '@stylistic/computed-property-spacing': [
-            'error',
-            'never',
-            {
-              enforceForClassMembers: true,
-            },
-          ],
-          '@stylistic/dot-location': ['error', 'property'],
-          '@stylistic/eol-last': 'error',
-          '@stylistic/generator-star-spacing': [
-            'error',
-            {
-              after: true,
-              before: false,
-            },
-          ],
-          '@stylistic/indent': [
-            'error',
-            2,
-            {
-              ArrayExpression: 1,
-              CallExpression: {
-                arguments: 1,
-              },
-              flatTernaryExpressions: false,
-              FunctionDeclaration: {
-                body: 1,
-                parameters: 1,
-                returnType: 1,
-              },
-              FunctionExpression: {
-                body: 1,
-                parameters: 1,
-                returnType: 1,
-              },
-              ignoreComments: false,
-              ignoredNodes: ['TSUnionType', 'TSIntersectionType'],
-              ImportDeclaration: 1,
-              MemberExpression: 1,
-              ObjectExpression: 1,
-              offsetTernaryExpressions: true,
-              outerIIFEBody: 1,
-              SwitchCase: 1,
-              tabLength: 2,
-              VariableDeclarator: 1,
-            },
-          ],
-          '@stylistic/indent-binary-ops': ['error', 2],
-          '@stylistic/key-spacing': [
-            'error',
-            {
-              afterColon: true,
-              beforeColon: false,
-            },
-          ],
-          '@stylistic/keyword-spacing': [
-            'error',
-            {
-              after: true,
-              before: true,
-            },
-          ],
-          '@stylistic/lines-between-class-members': [
-            'error',
-            'always',
-            {
-              exceptAfterSingleLine: true,
-            },
-          ],
-          '@stylistic/max-statements-per-line': [
-            'error',
-            {
-              max: 1,
-            },
-          ],
-          '@stylistic/member-delimiter-style': [
-            'error',
-            {
-              multiline: {
-                delimiter: 'semi',
-                requireLast: true,
-              },
-              multilineDetection: 'brackets',
-              overrides: {
-                interface: {
-                  multiline: {
-                    delimiter: 'semi',
-                    requireLast: true,
-                  },
-                },
-              },
-              singleline: {
-                delimiter: 'semi',
-              },
-            },
-          ],
-          '@stylistic/multiline-ternary': ['error', 'always-multiline'],
-          '@stylistic/new-parens': 'error',
-          '@stylistic/no-extra-parens': ['error', 'functions'],
-          '@stylistic/no-floating-decimal': 'error',
-          '@stylistic/no-mixed-operators': [
-            'error',
-            {
-              allowSamePrecedence: true,
-              groups: [
-                ['==', '!=', '===', '!==', '>', '>=', '<', '<='],
-                ['&&', '||'],
-                ['in', 'instanceof'],
-              ],
-            },
-          ],
-          '@stylistic/no-mixed-spaces-and-tabs': 'error',
-          '@stylistic/no-multi-spaces': 'error',
-          '@stylistic/no-tabs': 'error',
-          '@stylistic/no-trailing-spaces': 'error',
-          '@stylistic/no-whitespace-before-property': 'error',
-          '@stylistic/object-curly-spacing': ['error', 'always'],
-          '@stylistic/padded-blocks': [
-            'error',
-            {
-              blocks: 'never',
-              classes: 'never',
-              switches: 'never',
-            },
-          ],
-          '@stylistic/quotes': [
-            'error',
-            'single',
-            {
-              allowTemplateLiterals: 'always',
-              avoidEscape: false,
-            },
-          ],
-          '@stylistic/rest-spread-spacing': ['error', 'never'],
-          '@stylistic/semi': ['error', 'always'],
-          '@stylistic/semi-spacing': [
-            'error',
-            {
-              after: true,
-              before: false,
-            },
-          ],
-          '@stylistic/space-before-blocks': ['error', 'always'],
-          '@stylistic/space-before-function-paren': [
-            'error',
-            {
-              anonymous: 'always',
-              asyncArrow: 'always',
-              named: 'never',
-            },
-          ],
-          '@stylistic/space-in-parens': ['error', 'never'],
-          '@stylistic/space-infix-ops': 'error',
-          '@stylistic/space-unary-ops': [
-            'error',
-            {
-              nonwords: false,
-              words: true,
-            },
-          ],
-          '@stylistic/spaced-comment': [
-            'error',
-            'always',
-            {
-              block: {
-                balanced: true,
-                exceptions: ['*'],
-                markers: ['!'],
-              },
-              line: {
-                exceptions: ['/', '#'],
-                markers: ['/'],
-              },
-            },
-          ],
-          '@stylistic/template-curly-spacing': 'error',
-          '@stylistic/template-tag-spacing': ['error', 'never'],
-          '@stylistic/type-annotation-spacing': ['error', {}],
-          '@stylistic/type-generic-spacing': 'error',
-          '@stylistic/type-named-tuple-spacing': 'error',
-          '@stylistic/wrap-iife': [
-            'error',
-            'any',
-            {
-              functionPrototypeMethods: true,
-            },
-          ],
-          '@stylistic/yield-star-spacing': [
-            'error',
-            {
-              after: true,
-              before: false,
-            },
-          ],
-          '@stylistic/jsx-closing-bracket-location': 'error',
-          '@stylistic/jsx-closing-tag-location': 'error',
-          '@stylistic/jsx-curly-brace-presence': [
-            'error',
-            {
-              propElementValues: 'always',
-            },
-          ],
-          '@stylistic/jsx-curly-newline': 'error',
-          '@stylistic/jsx-curly-spacing': ['error', 'never'],
-          '@stylistic/jsx-equals-spacing': 'error',
-          '@stylistic/jsx-first-prop-new-line': 'error',
-          '@stylistic/jsx-function-call-newline': ['error', 'multiline'],
-          '@stylistic/jsx-indent-props': ['error', 2],
-          '@stylistic/jsx-max-props-per-line': [
-            'error',
-            {
-              maximum: 1,
-              when: 'multiline',
-            },
-          ],
-          '@stylistic/jsx-one-expression-per-line': [
-            'error',
-            {
-              allow: 'single-child',
-            },
-          ],
-          '@stylistic/jsx-quotes': 'error',
-          '@stylistic/jsx-tag-spacing': [
-            'error',
-            {
-              afterOpening: 'never',
-              beforeClosing: 'never',
-              beforeSelfClosing: 'always',
-              closingSlash: 'never',
-            },
-          ],
-          '@stylistic/jsx-wrap-multilines': [
-            'error',
-            {
-              arrow: 'parens-new-line',
-              assignment: 'parens-new-line',
-              condition: 'parens-new-line',
-              declaration: 'parens-new-line',
-              logical: 'parens-new-line',
-              prop: 'parens-new-line',
-              propertyValue: 'parens-new-line',
-              return: 'parens-new-line',
-            },
-          ],
-        },
-        jsPlugins: ['@stylistic/eslint-plugin'],
-      },
-    ],
-    options: {
-      typeAware: true,
-      typeCheck: true,
+  test: {
+    browser: {
+      enabled: true,
+      provider: playwright(),
+      instances: [{ browser: "chromium" }],
     },
   },
-  fmt: {
-    singleQuote: true,
+  run: {
+    tasks: {
+      check: {
+        command: "vp lint . && vp run typecheck",
+      },
+      typecheck: {
+        command: "vize check --servers 1 --tsconfig tsconfig.vize.json",
+      },
+    },
   },
+  fmt,
+  lint,
 });

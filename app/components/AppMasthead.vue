@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import AppLogoMark from "./AppLogoMark.vue";
+import { useVfjsI18n } from "../composables/useVfjsI18n";
+
 defineProps<{
   stats: { speakers: number; talks: number; years: number };
 }>();
@@ -28,15 +31,21 @@ const { t } = useVfjsI18n();
         aria-label="Archive scope"
       >
         <div>
-          <b class="text-[var(--ink)] font-[500] not-italic">{{ stats.speakers }}</b>
+          <b class="text-[var(--ink)] font-[500] not-italic">
+            {{ stats.speakers }}
+          </b>
           {{ t.meta_speakers }}
         </div>
         <div>
-          <b class="text-[var(--ink)] font-[500] not-italic">{{ stats.talks }}</b>
+          <b class="text-[var(--ink)] font-[500] not-italic">
+            {{ stats.talks }}
+          </b>
           {{ t.meta_talks }}
         </div>
         <div>
-          <b class="text-[var(--ink)] font-[500] not-italic">{{ stats.years }}</b>
+          <b class="text-[var(--ink)] font-[500] not-italic">
+            {{ stats.years }}
+          </b>
           {{ t.meta_years }}
         </div>
       </aside>

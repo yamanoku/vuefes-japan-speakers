@@ -1,5 +1,5 @@
-import { compareLexicalJa } from '~/utils/stringCollate';
-import type { SpeakerWithYear } from '~~/types';
+import { compareLexicalJa } from "./stringCollate";
+import type { SpeakerWithYear } from "../../types";
 
 export interface SpeakerRecord {
   name: string;
@@ -10,7 +10,7 @@ export interface SpeakerRecord {
     year: string;
     title: string | undefined;
     url: string;
-    format?: SpeakerWithYear['format'];
+    format?: SpeakerWithYear["format"];
     coSpeakers: string[];
   }>;
 }

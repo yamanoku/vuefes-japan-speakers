@@ -1,24 +1,21 @@
-name: VP Format
+name: Vite+ Format
 
 on:
   pull_request:
     branches:
       - main
     paths:
-      - 'app/**'
-      - 'README.md'
-      - 'server/**'
-      - 'types/**'
-      - 'package.json'
-      - 'pnpm-workspace.yaml'
-      - 'pnpm-lock.yaml'
-      - 'vite.config.ts'
-      - 'vitest.config.ts'
-      - 'eslint.config.mjs'
-      - 'nuxt.config.ts'
-      - 'tsconfig.json'
-      - 'server/tsconfig.json'
-      - '.github/workflows/format.yml'
+      - "app/**"
+      - "README.md"
+      - "server/**"
+      - "types/**"
+      - "package.json"
+      - "pnpm-workspace.yaml"
+      - "pnpm-lock.yaml"
+      - "vite.config.ts"
+      - "tsconfig.json"
+      - "tsconfig.vize.json"
+      - ".github/workflows/format.yml"
 
 permissions:
   contents: read
@@ -32,11 +29,11 @@ jobs:
       - name: Setup Vite+
         uses: voidzero-dev/setup-vp@be55d5df2da88a2387a2e6764871ca9e5387e187 # v1
         with:
-          node-version: '24'
+          node-version: "24"
           cache: true
       - name: Install dependencies
         run: vp install
-      - name: Run vp fmt
+      - name: Run format check
         run: vp fmt . --check
         env:
           CI: true

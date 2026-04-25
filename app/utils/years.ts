@@ -1,5 +1,5 @@
-import { YEARS } from '~~/types';
-import type { AcceptedYear } from '~~/types';
+import { YEARS } from "../../types";
+import type { AcceptedYear } from "../../types";
 
 export const getAvailableYears = (): readonly AcceptedYear[] => YEARS;
 

@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { YEARS } from '~~/types';
-import type { AcceptedYear } from '~~/types';
+import { YEARS } from "../../types";
+import type { AcceptedYear } from "../../types";
+import { useVfjsI18n } from "../composables/useVfjsI18n";
 
 defineProps<{
-  selectedYear: AcceptedYear | 'all';
+  selectedYear: AcceptedYear | "all";
   counts: Record<string, number>;
 }>();
 
 const emit = defineEmits<{
-  'update:selectedYear': [AcceptedYear | 'all'];
+  "update:selectedYear": [AcceptedYear | "all"];
 }>();
 
 const { t } = useVfjsI18n();
@@ -23,12 +24,13 @@ const { t } = useVfjsI18n();
     <div class="flex items-center flex-wrap gap-[6px]">
       <span
         class="[font-family:var(--font-mono)] text-[12px] tracking-[0.1em] text-[var(--ink)] mr-[12px]"
-        >{{ t.filter_year }}</span
       >
+        {{ t.filter_year }}
+      </span>
       <div class="flex gap-[6px] flex-wrap" role="group" :aria-label="t.filter_year">
         <button
-          type="button"
           class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] [font-family:var(--font-mono)] text-[12px] tracking-[0.02em] border border-[var(--rule-soft)] cursor-pointer transition-colors"
+          type="button"
           :class="
             selectedYear === 'all'
               ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
@@ -42,8 +44,8 @@ const { t } = useVfjsI18n();
         <button
           v-for="y in YEARS"
           :key="y"
-          type="button"
           class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] [font-family:var(--font-mono)] text-[12px] tracking-[0.02em] border border-[var(--rule-soft)] cursor-pointer transition-colors"
+          type="button"
           :class="
             selectedYear === y
               ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
