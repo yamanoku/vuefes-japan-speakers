@@ -246,9 +246,8 @@ function toggleRow(name: string) {
                     >
                     <span class="hover:underline">{{ talk.title || t.tbd }}</span>
                     <span
-                      class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] ml-[4px]"
-                      :aria-label="t.external"
-                      >↗</span
+                      class="[font-family:var(--font-mono)] text-[10px] text-[var(--ink-2)] ml-[4px]"
+                      >({{ t.external }})</span
                     >
                   </a>
                   <span

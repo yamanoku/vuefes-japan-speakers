@@ -41,7 +41,7 @@ useHead({ title: `Vue Fes Japan ${year}` });
               class="text-[var(--ink)] no-underline flex items-baseline gap-[4px]"
             >
               <span class="hover:underline">{{ t.official_site }}</span
-              ><span>↗</span>
+              ><span>{{ t.external }}</span>
             </a>
           </div>
         </div>
@@ -89,7 +89,7 @@ useHead({ title: `Vue Fes Japan ${year}` });
                       :href="s.url"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="text-inherit no-underline flex items-baseline gap-[4px]"
+                      class="no-underline"
                     >
                       <span
                         v-if="s.format === 'panel'"
@@ -97,7 +97,7 @@ useHead({ title: `Vue Fes Japan ${year}` });
                         >{{ t.session_format_panel }}</span
                       >
                       <span>{{ s.title }}</span>
-                      <span class="text-[12px]" :aria-label="t.external">↗</span>
+                      <span class="text-[10px] ml-[4px]">({{ t.external }})</span>
                     </a>
                     <span v-else class="italic text-[var(--ink-2)] no-underline">{{ t.tbd }}</span>
                   </div>

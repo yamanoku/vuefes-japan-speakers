@@ -98,20 +98,22 @@ useHead({ title: `${speakerName} 発表一覧` });
           </span>
           <div class="flex flex-col gap-y-[8px]">
             <a
-              class="text-[16px] text-[var(--ink)] no-underline flex items-baseline gap-[4px]"
+              class="text-[16px] text-[var(--ink)] no-underline flex flex-wrap items-baseline gap-[4px]"
               :href="talk.url"
               target="_blank"
               rel="noopener noreferrer"
             >
               <span
                 v-if="talk.format === 'panel'"
-                class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--ink)] text-[var(--ink)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
+                class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--ink)] text-[var(--ink)] px-[5px] py-[1px] leading-[1.15]"
                 >{{ t.session_format_panel }}</span
               >
-              <span :lang="hasJapanese(talk.title || '') ? 'ja' : 'en'">{{
-                talk.title || t.tbd
-              }}</span>
-              <span class="text-[11px] opacity-70" :aria-label="t.external">↗</span>
+              <span>
+                <span :lang="hasJapanese(talk.title || '') ? 'ja' : 'en'">{{
+                  talk.title || t.tbd
+                }}</span>
+                <span class="text-[10px] ml-[4px]">({{ t.external }})</span>
+              </span>
             </a>
             <span
               v-if="talk.coSpeakers.length > 0"

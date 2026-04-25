@@ -24,7 +24,7 @@ const { t } = useVfjsI18n();
         </h1>
       </div>
       <aside
-        class="grid items-center col-span-3 [font-family:var(--font-mono)] text-[20px] leading-[1.7] tracking-[0.06em] text-[var(--ink-3)] border-l border-[var(--rule)] pl-[16px] max-[800px]:col-span-12 max-[800px]:border-l-0 max-[800px]:pl-0 max-[800px]:border-t max-[800px]:pt-[16px]"
+        class="grid items-center col-span-3 [font-family:var(--font-mono)] text-[20px] leading-[1.7] tracking-[0.06em] border-l border-[var(--rule)] pl-[16px] max-[800px]:col-span-12 max-[800px]:border-l-0 max-[800px]:pl-0 max-[800px]:border-t max-[800px]:pt-[16px]"
         aria-label="Archive scope"
       >
         <div>
