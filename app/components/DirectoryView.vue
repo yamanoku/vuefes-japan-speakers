@@ -102,17 +102,6 @@ function toggleRow(name: string) {
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           :class="
-            sort === 'name'
-              ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
-              : 'border-[var(--rule-soft)] text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-[var(--ink)]'
-          "
-          @click="sort = 'name'"
-        >
-          Name A→Z
-        </button>
-        <button
-          class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
-          :class="
             sort === 'appearances'
               ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
               : 'border-[var(--rule-soft)] text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-[var(--ink)]'
@@ -120,6 +109,17 @@ function toggleRow(name: string) {
           @click="sort = 'appearances'"
         >
           Appearances ↓
+        </button>
+        <button
+          class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
+          :class="
+            sort === 'name'
+              ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
+              : 'border-[var(--rule-soft)] text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-[var(--ink)]'
+          "
+          @click="sort = 'name'"
+        >
+          Name A→Z
         </button>
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
@@ -224,8 +224,7 @@ function toggleRow(name: string) {
               <li
                 v-for="(talk, k) in rec.talks"
                 :key="k"
-                class="grid gap-[16px] items-baseline py-[6px] border-t border-[var(--rule-softer)]"
-                style="grid-template-columns: 56px minmax(0, 1fr) auto"
+                class="grid grid-cols-[30px_1fr] gap-[16px] items-baseline py-[6px] border-t border-[var(--rule-softer)]"
                 :class="k === 0 ? 'border-t-0' : ''"
               >
                 <NuxtLink
@@ -233,38 +232,39 @@ function toggleRow(name: string) {
                   class="underline hover:no-underline [font-family:var(--font-mono)] text-[12px] text-[var(--ink)] tabular-nums"
                   >{{ talk.year }}</NuxtLink
                 >
-                <a
-                  class="text-[14px] text-[var(--ink)] pb-[1px] leading-[1.45] no-underline"
-                  :href="talk.url"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span
-                    v-if="talk.format === 'panel'"
-                    class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--accent)] text-[var(--accent)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
-                    >{{ t.session_format_panel }}</span
+                <div class="flex flex-col gap-y-[8px]">
+                  <a
+                    class="text-[14px] text-[var(--ink)] pb-[1px] leading-[1.45] no-underline group"
+                    :href="talk.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                  <span class="hover:underline">{{ talk.title || t.tbd }}</span>
-                  <span
-                    class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] ml-[4px]"
-                    :aria-label="t.external"
-                    >↗</span
-                  >
-                </a>
-                <span
-                  v-if="talk.coSpeakers.length > 0"
-                  class="text-[12px] [font-family:var(--font-mono)] text-[var(--ink-3)]"
-                >
-                  w/
-                  <template v-for="(cn, ci) in talk.coSpeakers" :key="cn">
-                    <template v-if="ci > 0">, </template>
-                    <NuxtLink
-                      class="text-[var(--ink)] border-b border-[var(--rule-soft)] pb-[1px] no-underline hover:border-[var(--ink)]"
-                      :to="`/speakers/${encodeURIComponent(cn)}`"
-                      >{{ cn }}</NuxtLink
+                    <span
+                      v-if="talk.format === 'panel'"
+                      class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--ink)] text-[var(--ink)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
+                      >{{ t.session_format_panel }}</span
                     >
-                  </template>
-                </span>
+                    <span class="group-hover:underline">{{ talk.title || t.tbd }}</span>
+                    <span
+                      class="[font-family:var(--font-mono)] text-[10px] text-[var(--ink-2)] ml-[4px]"
+                      >({{ t.external }})</span
+                    >
+                  </a>
+                  <span
+                    v-if="talk.coSpeakers.length > 0"
+                    class="text-[12px] [font-family:var(--font-mono)] text-[var(--ink-3)]"
+                  >
+                    w/
+                    <template v-for="(cn, ci) in talk.coSpeakers" :key="cn">
+                      <template v-if="ci > 0">, </template>
+                      <NuxtLink
+                        class="text-[var(--ink)] border-b border-[var(--rule-soft)] pb-[1px] no-underline hover:border-[var(--ink)]"
+                        :to="`/speakers/${encodeURIComponent(cn)}`"
+                        >{{ cn }}</NuxtLink
+                      >
+                    </template>
+                  </span>
+                </div>
               </li>
             </ol>
           </div>
