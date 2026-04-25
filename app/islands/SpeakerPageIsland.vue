@@ -31,6 +31,7 @@ const record = computed(() => {
       year: speaker.year,
       title: speaker.title,
       url: speaker.url,
+      format: speaker.format,
       coSpeakers: speaker.name.filter((name) => name !== props.speakerName),
     }))
     .sort((a, b) => compareLexicalJa(a.year, b.year));
@@ -48,7 +49,7 @@ const record = computed(() => {
         class="border-b border-[var(--rule)] pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-[var(--pad-x)]"
       >
         <h1
-          class="[font-family:var(--font-display)] text-[clamp(28px,4.5vw,72px)] font-bold tracking-[-0.04em] leading-[1] mb-[16px]"
+          class="[font-family:var(--font-display)] text-[clamp(28px,4.5vw,72px)] font-bold leading-[1] mb-[16px]"
           :lang="hasJapanese(record.name) ? 'ja' : 'en'"
         >
           <ruby v-if="record.nameRuby && lang === 'ja'">
@@ -59,9 +60,9 @@ const record = computed(() => {
             {{ lang === "en" && record.nameEn ? record.nameEn : record.name }}
           </template>
         </h1>
-        <div class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)]">
+        <div class="[font-family:var(--font-mono)] text-[var(--ink-3)]">
           <div>{{ t.appearance_count(record.talks.length) }}</div>
-          <div class="mt-[8px]">
+          <div class="mt-[8px] text-[12px] text-[var(--ink-2)]">
             {{ t.years_appeared }}:
             <template v-for="(year, index) in record.years" :key="year">
               <template v-if="index > 0">,</template>
@@ -74,53 +75,66 @@ const record = computed(() => {
       </header>
 
       <section class="px-[var(--pad-x)] py-[40px]">
-        <div
-          class="[font-family:var(--font-mono)] text-[10px] tracking-[0.1em] text-[var(--ink-3)] mb-[16px]"
-        >
+        <h2 class="[font-family:var(--font-mono)] tracking-[0.1em] text-[var(--ink-3)] mb-[16px]">
           {{ t.related_talks }}
-        </div>
-        <ol class="list-none p-0 m-0">
+        </h2>
+        <ul class="list-none p-0 m-0">
           <li
             v-for="(talk, index) in record.talks"
             :key="index"
-            class="grid grid-cols-[60px_1fr_auto] gap-x-[16px] items-baseline py-[14px] border-t border-[var(--rule-softer)]"
+            class="grid grid-cols-[40px_1fr] gap-x-[16px] border-t border-[var(--rule-softer)] py-[18px]"
           >
-            <span class="[font-family:var(--font-mono)] text-[11px] text-[var(--ink-3)]">
+            <span
+              class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)] text-center pt-[3px]"
+            >
               <a class="text-[var(--ink)] underline hover:no-underline" :href="`/${talk.year}`">
                 {{ talk.year }}
               </a>
             </span>
-            <a
-              class="text-[16px] text-[var(--ink)] no-underline flex items-baseline gap-[4px] hover:text-[var(--accent)]"
-              :href="talk.url"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span :lang="hasJapanese(talk.title || '') ? 'ja' : 'en'">
-                {{ talk.title || t.tbd }}
-              </span>
-              <span class="text-[11px] opacity-70" :aria-label="t.external">↗</span>
-            </a>
-            <span
-              v-if="talk.coSpeakers.length > 0"
-              class="text-[12px] [font-family:var(--font-mono)] text-[var(--ink-3)]"
-            >
-              w/
-              <template
-                v-for="(coSpeakerName, coSpeakerIndex) in talk.coSpeakers"
-                :key="coSpeakerName"
+            <div class="flex flex-col gap-y-[8px]">
+              <a
+                class="text-[16px] text-[var(--ink)] no-underline group flex flex-wrap items-baseline gap-[8px]"
+                :href="talk.url"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <template v-if="coSpeakerIndex > 0">,</template>
-                <a
-                  class="text-[var(--ink)] underline hover:no-underline"
-                  :href="`/speakers/${encodeURIComponent(coSpeakerName)}`"
+                <span
+                  v-if="talk.format === 'panel'"
+                  class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--ink)] text-[var(--ink)] px-[5px] py-[1px] leading-[1.15]"
                 >
-                  {{ coSpeakerName }}
-                </a>
-              </template>
-            </span>
+                  {{ t.session_format_panel }}
+                </span>
+                <span>
+                  <span
+                    :lang="hasJapanese(talk.title || '') ? 'ja' : 'en'"
+                    class="group-hover:underline"
+                  >
+                    {{ talk.title || t.tbd }}
+                  </span>
+                  <span class="text-[10px] ml-[4px]">({{ t.external }})</span>
+                </span>
+              </a>
+              <span
+                v-if="talk.coSpeakers.length > 0"
+                class="text-[12px] [font-family:var(--font-mono)] text-[var(--ink-3)]"
+              >
+                w/
+                <template
+                  v-for="(coSpeakerName, coSpeakerIndex) in talk.coSpeakers"
+                  :key="coSpeakerName"
+                >
+                  <template v-if="coSpeakerIndex > 0">,</template>
+                  <a
+                    class="text-[var(--ink)] underline hover:no-underline"
+                    :href="`/speakers/${encodeURIComponent(coSpeakerName)}`"
+                  >
+                    {{ coSpeakerName }}
+                  </a>
+                </template>
+              </span>
+            </div>
           </li>
-        </ol>
+        </ul>
       </section>
     </template>
 

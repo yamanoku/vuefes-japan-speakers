@@ -27,6 +27,9 @@ export interface VfjsTranslations {
   back_top: string;
   official_site: string;
   related_talks: string;
+  all_speakers: string;
+  not_found_title: string;
+  not_found_description: string;
   year_total_talks: (n: number) => string;
   appearance_count: (n: number) => string;
 }
@@ -53,13 +56,16 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     color_scheme_system: "システム",
     empty: "該当するスピーカーが見つかりません。",
     tbd: "タイトル未定",
-    external: "外部リンク",
+    external: "外部サイトへ移動",
     session_format_panel: "パネル",
     speaker_profile: "スピーカー",
     years_appeared: "登壇年",
     back_top: "TOPページに戻る",
     official_site: "公式サイト",
     related_talks: "発表一覧",
+    all_speakers: "発表者一覧",
+    not_found_title: "ページが見つかりません",
+    not_found_description: "指定されたページは存在しないか、移動した可能性があります。",
     year_total_talks: (n: number) => `全 ${n} 発表`,
     appearance_count: (n: number) => `${n}回登壇`,
   },
@@ -84,13 +90,16 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     color_scheme_system: "System",
     empty: "No speakers match the current filters.",
     tbd: "TBD",
-    external: "External",
+    external: "External Site",
     session_format_panel: "Panel",
     speaker_profile: "Speaker",
     years_appeared: "Appeared in",
     back_top: "Back to top page",
     official_site: "Official site",
     related_talks: "Talks",
+    all_speakers: "Speakers",
+    not_found_title: "Page Not Found",
+    not_found_description: "The page you requested does not exist or may have moved.",
     year_total_talks: (n: number) => `${n} talks total`,
     appearance_count: (n: number) => `${n} appearance${n > 1 ? "s" : ""}`,
   },

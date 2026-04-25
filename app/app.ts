@@ -5,6 +5,7 @@ import { YEARS } from "../types";
 import { getSpeakerNames, getSpeakerTalks } from "./composables/speaker";
 import { isValidYear } from "./utils/years";
 import HomeRoute from "./routes/HomeRoute.vue";
+import NotFoundRoute from "./routes/NotFoundRoute.vue";
 import SpeakerRoute from "./routes/SpeakerRoute.vue";
 import YearRoute from "./routes/YearRoute.vue";
 
@@ -75,6 +76,14 @@ export default defineApp({
       },
       head: {
         title: siteTitle,
+      },
+      render: { strategy: "ssg" },
+    }),
+    defineRoute({
+      path: "/404.html",
+      component: NotFoundRoute,
+      head: {
+        title: "Page Not Found",
       },
       render: { strategy: "ssg" },
     }),

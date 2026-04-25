@@ -41,7 +41,11 @@ const stats = computed(() => {
   for (const speaker of props.allSpeakers) {
     speaker.name.forEach((name) => speakerSet.add(name));
   }
-  return { speakers: speakerSet.size, talks: props.allSpeakers.length, years: YEARS.length };
+  return {
+    speakers: speakerSet.size,
+    talks: props.allSpeakers.length,
+    years: YEARS.length,
+  };
 });
 </script>
 
