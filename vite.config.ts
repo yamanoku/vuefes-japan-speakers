@@ -12,7 +12,7 @@ import { fileURLToPath, URL } from "node:url";
 import tailwindcss from "@tailwindcss/vite";
 import vize from "@vizejs/vite-plugin";
 import { vuerend } from "@vuerend/core/vite";
-import type { Plugin } from "vite";
+import type { Plugin, PluginOption, UserConfig } from "vite-plus";
 import { defineConfig } from "vite-plus";
 import { playwright } from "vite-plus/test/browser-playwright";
 
@@ -80,7 +80,7 @@ const lint = {
     defineExpose: "readonly",
     defineProps: "readonly",
     withDefaults: "readonly",
-  },
+  } as const,
 };
 
 const fmt = {
@@ -201,15 +201,21 @@ function cloudflarePages404(): Plugin {
   }
 }
 
-export default defineConfig({
-  plugins: [tailwindcss(), vuerend({
-    app: "./app/app.ts",
-    islands: "./app/islands.ts",
-    vuePlugin: vize({
-      scanPatterns: ["app/**/*.vue"],
-      ignorePatterns: ["node_modules/**", "dist/**", ".cache/**"],
-    }),
-  }), staticHtmlPreview(), cloudflarePages404(), cloudflare()],
+const config: UserConfig = {
+  plugins: [
+    tailwindcss(),
+    vuerend({
+      app: "./app/app.ts",
+      islands: "./app/islands.ts",
+      vuePlugin: vize({
+        scanPatterns: ["app/**/*.vue"],
+        ignorePatterns: ["node_modules/**", "dist/**", ".cache/**"],
+      }),
+    }) as unknown as PluginOption,
+    staticHtmlPreview(),
+    cloudflarePages404(),
+    cloudflare(),
+  ],
   resolve: {
     alias: {
       // Vize SSR imports the package root; Vite's module runner needs the ESM build.
@@ -243,4 +249,6 @@ export default defineConfig({
   },
   fmt,
   lint,
-});
+};
+
+export default defineConfig(config);
