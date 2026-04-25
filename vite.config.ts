@@ -96,6 +96,26 @@ const fmt = {
 
 export { fmt, lint };
 
+function cloudflareVuerendRuntime(): Plugin {
+  return {
+    name: "vfjs:cloudflare-vuerend-runtime",
+    enforce: "pre",
+    resolveId(id) {
+      if (id !== "@vuerend/core") return;
+      // Cloudflare Worker environments are not named 'server' or 'client'.
+      // vuerend's resolve hook redirects @vuerend/core to virtual:vuerend/client-runtime
+      // for non-server environments, which lacks defineApp/defineRoute.
+      // Bypass vuerend's virtual module for Worker environments and use the runtime directly.
+      const { name } = this.environment;
+      if (name !== "server" && name !== "client") {
+        return fileURLToPath(
+          new URL("./node_modules/@vuerend/core/dist/runtime.mjs", import.meta.url),
+        );
+      }
+    },
+  };
+}
+
 function staticHtmlPreview(): Plugin {
   return {
     name: "vfjs:static-html-preview",
@@ -203,6 +223,7 @@ function cloudflarePages404(): Plugin {
 
 const config: UserConfig = {
   plugins: [
+    cloudflareVuerendRuntime(),
     tailwindcss(),
     vuerend({
       app: "./app/app.ts",
