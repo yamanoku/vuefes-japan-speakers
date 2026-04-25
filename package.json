@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "prepare": "vp config",
-    "deploy": "pnpm vite build && wrangler deploy",
-    "preview": "pnpm vite build && wrangler dev"
+    "deploy": "vp build && wrangler deploy",
+    "preview": "vp build && vp preview --outDir dist/client"
   },
   "dependencies": {
     "@tailwindcss/vite": "catalog:css",
