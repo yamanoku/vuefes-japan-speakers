@@ -16,6 +16,8 @@ import type { Plugin } from "vite";
 import { defineConfig } from "vite-plus";
 import { playwright } from "vite-plus/test/browser-playwright";
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 const ignorePatterns = [
   "**/.cache/**",
   "**/.data/**",
@@ -200,19 +202,14 @@ function cloudflarePages404(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [
-    tailwindcss(),
-    vuerend({
-      app: "./app/app.ts",
-      islands: "./app/islands.ts",
-      vuePlugin: vize({
-        scanPatterns: ["app/**/*.vue"],
-        ignorePatterns: ["node_modules/**", "dist/**", ".cache/**"],
-      }),
+  plugins: [tailwindcss(), vuerend({
+    app: "./app/app.ts",
+    islands: "./app/islands.ts",
+    vuePlugin: vize({
+      scanPatterns: ["app/**/*.vue"],
+      ignorePatterns: ["node_modules/**", "dist/**", ".cache/**"],
     }),
-    staticHtmlPreview(),
-    cloudflarePages404(),
-  ],
+  }), staticHtmlPreview(), cloudflarePages404(), cloudflare()],
   resolve: {
     alias: {
       // Vize SSR imports the package root; Vite's module runner needs the ESM build.

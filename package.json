@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prepare": "vp config"
+    "prepare": "vp config",
+    "deploy": "pnpm vite build && wrangler deploy",
+    "preview": "pnpm vite build && wrangler dev"
   },
   "dependencies": {
     "@tailwindcss/vite": "catalog:css",
@@ -13,6 +15,7 @@
     "vue": "catalog:vue"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.33.2",
     "@types/node": "catalog:typescript",
     "@vizejs/vite-plugin": "catalog:vize",
     "@vue/test-utils": "catalog:test",
@@ -23,7 +26,8 @@
     "vite": "catalog:vite",
     "vite-plus": "catalog:vp",
     "vitest": "catalog:vp",
-    "vize": "catalog:vize"
+    "vize": "catalog:vize",
+    "wrangler": "^4.85.0"
   },
   "packageManager": "pnpm@10.33.2"
 }
