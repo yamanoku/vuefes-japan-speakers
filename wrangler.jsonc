@@ -3,12 +3,15 @@
   "name": "vuefes-japan-speakers",
   "compatibility_date": "2026-04-25",
   "compatibility_flags": ["nodejs_compat"],
-  "main": "./.output/server/index.mjs",
+  "main": "./dist/server/index.js",
   "assets": {
-    "directory": "./.output/public",
+    "directory": "./dist/client",
     "binding": "ASSETS"
   },
   "observability": {
     "enabled": true
+  },
+  "alias": {
+    "@vuerend/core": "./node_modules/@vuerend/core/dist/runtime.mjs"
   }
 }
