@@ -11,4 +11,7 @@
   "observability": {
     "enabled": true,
   },
+  "alias": {
+    "@vuerend/core": "./node_modules/@vuerend/core/dist/runtime.mjs"
+  },
 }

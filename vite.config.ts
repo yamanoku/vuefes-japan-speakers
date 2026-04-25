@@ -223,7 +223,7 @@ function cloudflarePages404(): Plugin {
 
 const config: UserConfig = {
   plugins: [
-    cloudflareVuerendRuntime(),
+    // cloudflareVuerendRuntime(),
     tailwindcss(),
     vuerend({
       app: "./app/app.ts",
