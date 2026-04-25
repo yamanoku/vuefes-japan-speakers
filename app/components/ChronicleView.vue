@@ -120,7 +120,7 @@ const grouped = computed(() => {
                 <span>{{ String(i + 1).padStart(2, '0') }}</span>
               </div>
               <div
-                class="grid grid-cols-[minmax(0,300px)_minmax(0,1fr)] gap-[clamp(16px,2vw,32px)] items-baseline max-[700px]:grid-cols-1 max-[700px]:gap-[6px]"
+                class="grid grid-cols-[minmax(0,200px)_minmax(0,1fr)] gap-[clamp(16px,2vw,32px)] items-baseline max-[700px]:grid-cols-1 max-[700px]:gap-[6px]"
               >
                 <!-- Speaker names -->
                 <div
@@ -152,7 +152,7 @@ const grouped = computed(() => {
                   >
                     <span
                       v-if="s.format === 'panel'"
-                      class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--accent)] text-[var(--accent)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
+                      class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--ink)] text-[var(--ink)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
                       >{{ t.session_format_panel }}</span
                     >
                     <span class="hover:underline">{{ s.title }}</span>

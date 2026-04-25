@@ -18,7 +18,7 @@ const { t } = useVfjsI18n();
           class="w-[clamp(42px,5vw,72px)] h-auto text-[var(--ink)] mb-[0.08em] max-[560px]:mb-0"
         />
         <h1
-          class="m-0 [font-family:var(--font-display)] font-[500] text-[clamp(38px,6.2vw,104px)] leading-[0.96] text-[var(--ink)] word-break-keep-all"
+          class="m-0 [font-family:var(--font-display)] font-[500] text-[clamp(38px,6.2vw,104px)] leading-[0.96] text-[var(--ink)] break-keep"
         >
           <span>Vue Fes Japan Speakers</span>
         </h1>

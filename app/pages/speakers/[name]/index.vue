@@ -87,7 +87,7 @@ useHead({ title: `${speakerName} 発表一覧` });
         <li
           v-for="(talk, i) in record.talks"
           :key="i"
-          class="grid grid-cols-[60px_1fr_auto] gap-x-[16px] items-baseline py-[14px] border-t border-[var(--rule-softer)]"
+          class="grid grid-cols-[60px_1fr] gap-x-[16px] items-baseline py-[14px] border-t border-[var(--rule-softer)]"
         >
           <span class="[font-family:var(--font-mono)] text-[11px] text-[var(--ink-3)]">
             <NuxtLink
@@ -96,36 +96,38 @@ useHead({ title: `${speakerName} 発表一覧` });
               >{{ talk.year }}</NuxtLink
             >
           </span>
-          <a
-            class="text-[16px] text-[var(--ink)] no-underline flex items-baseline gap-[4px] hover:text-[var(--accent)]"
-            :href="talk.url"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span :lang="hasJapanese(talk.title || '') ? 'ja' : 'en'">{{
-              talk.title || t.tbd
-            }}</span>
-            <span
-              v-if="talk.format === 'panel'"
-              class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--accent)] text-[var(--accent)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
-              >{{ t.session_format_panel }}</span
+          <div class="flex flex-col gap-y-[8px]">
+            <a
+              class="text-[16px] text-[var(--ink)] no-underline flex items-baseline gap-[4px]"
+              :href="talk.url"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-            <span class="text-[11px] opacity-70" :aria-label="t.external">↗</span>
-          </a>
-          <span
-            v-if="talk.coSpeakers.length > 0"
-            class="text-[12px] [font-family:var(--font-mono)] text-[var(--ink-3)]"
-          >
-            w/
-            <template v-for="(cn, ci) in talk.coSpeakers" :key="cn">
-              <template v-if="ci > 0">, </template>
-              <NuxtLink
-                class="text-[var(--ink)] underline hover:no-underline"
-                :to="`/speakers/${encodeURIComponent(cn)}`"
-                >{{ cn }}</NuxtLink
+              <span
+                v-if="talk.format === 'panel'"
+                class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--ink)] text-[var(--ink)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
+                >{{ t.session_format_panel }}</span
               >
-            </template>
-          </span>
+              <span :lang="hasJapanese(talk.title || '') ? 'ja' : 'en'">{{
+                talk.title || t.tbd
+              }}</span>
+              <span class="text-[11px] opacity-70" :aria-label="t.external">↗</span>
+            </a>
+            <span
+              v-if="talk.coSpeakers.length > 0"
+              class="text-[12px] [font-family:var(--font-mono)] text-[var(--ink-3)]"
+            >
+              w/
+              <template v-for="(cn, ci) in talk.coSpeakers" :key="cn">
+                <template v-if="ci > 0">, </template>
+                <NuxtLink
+                  class="text-[var(--ink)] underline hover:no-underline"
+                  :to="`/speakers/${encodeURIComponent(cn)}`"
+                  >{{ cn }}</NuxtLink
+                >
+              </template>
+            </span>
+          </div>
         </li>
       </ol>
     </section>

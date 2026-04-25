@@ -63,7 +63,7 @@ useHead({ title: `Vue Fes Japan ${year}` });
                   <span>{{ String(i + 1).padStart(2, '0') }}</span>
                 </div>
                 <div class="pr-[24px]">
-                  <div class="flex flex-wrap gap-x-[8px] gap-y-[4px] mb-[6px] \items-center">
+                  <div class="flex flex-wrap gap-x-[8px] gap-y-[4px] mb-[6px] items-center">
                     <template v-for="(n, ni) in s.name" :key="n">
                       <span
                         v-if="ni > 0"
@@ -93,10 +93,10 @@ useHead({ title: `Vue Fes Japan ${year}` });
                     >
                       <span
                         v-if="s.format === 'panel'"
-                        class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--accent)] text-[var(--accent)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
+                        class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--ink)] text-[var(--ink)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
                         >{{ t.session_format_panel }}</span
                       >
-                      <span class="hover:underline">{{ s.title }}</span>
+                      <span>{{ s.title }}</span>
                       <span class="text-[12px]" :aria-label="t.external">↗</span>
                     </a>
                     <span v-else class="italic text-[var(--ink-2)] no-underline">{{ t.tbd }}</span>
