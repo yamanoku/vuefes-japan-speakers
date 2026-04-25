@@ -38,7 +38,7 @@ useHead({ title: `Vue Fes Japan ${year}` });
               :href="`https://vuefes.jp/${year}/`"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-[var(--ink-2)] no-underline group flex items-baseline gap-[4px]"
+              class="inline-block text-[var(--ink-2)] no-underline group flex items-baseline gap-[4px]"
             >
               <span class="group-hover:underline">{{ t.official_site }}</span
               ><span class="text-[10px]">({{ t.external }})</span>

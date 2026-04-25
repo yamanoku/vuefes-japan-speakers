@@ -83,9 +83,11 @@ useHead({ title: `${speakerName} 発表一覧` });
         <li
           v-for="(talk, i) in record.talks"
           :key="i"
-          class="grid grid-cols-[40px_1fr] gap-x-[16px] items-baseline py-[14px] border-t border-[var(--rule-softer)]"
+          class="grid grid-cols-[40px_1fr] gap-x-[16px] border-t border-[var(--rule-softer)] py-[18px]"
         >
-          <span class="[font-family:var(--font-mono)] text-[11px] text-[var(--ink-3)]">
+          <span
+            class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)] text-center pt-[3px]"
+          >
             <NuxtLink
               class="text-[var(--ink)] underline hover:no-underline"
               :to="`/${talk.year}`"
@@ -94,7 +96,7 @@ useHead({ title: `${speakerName} 発表一覧` });
           </span>
           <div class="flex flex-col gap-y-[8px]">
             <a
-              class="text-[16px] text-[var(--ink)] no-underline group flex flex-wrap items-baseline gap-[4px]"
+              class="text-[16px] text-[var(--ink)] no-underline group flex flex-wrap items-baseline gap-[8px]"
               :href="talk.url"
               target="_blank"
               rel="noopener noreferrer"
