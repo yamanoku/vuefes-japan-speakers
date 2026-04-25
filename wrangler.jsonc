@@ -6,12 +6,12 @@
   "main": "./dist/server/index.js",
   "assets": {
     "directory": "./dist/client",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
   },
   "observability": {
-    "enabled": true
+    "enabled": true,
   },
   "alias": {
-    "@vuerend/core": "./node_modules/@vuerend/core/dist/runtime.mjs"
-  }
+    "@vuerend/core": "./node_modules/@vuerend/core/dist/runtime.mjs",
+  },
 }
