@@ -102,17 +102,6 @@ function toggleRow(name: string) {
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           :class="
-            sort === 'name'
-              ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
-              : 'border-[var(--rule-soft)] text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-[var(--ink)]'
-          "
-          @click="sort = 'name'"
-        >
-          Name A→Z
-        </button>
-        <button
-          class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
-          :class="
             sort === 'appearances'
               ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
               : 'border-[var(--rule-soft)] text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-[var(--ink)]'
@@ -120,6 +109,17 @@ function toggleRow(name: string) {
           @click="sort = 'appearances'"
         >
           Appearances ↓
+        </button>
+        <button
+          class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
+          :class="
+            sort === 'name'
+              ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
+              : 'border-[var(--rule-soft)] text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-[var(--ink)]'
+          "
+          @click="sort = 'name'"
+        >
+          Name A→Z
         </button>
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
