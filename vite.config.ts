@@ -12,9 +12,11 @@ import { fileURLToPath, URL } from "node:url";
 import tailwindcss from "@tailwindcss/vite";
 import vize from "@vizejs/vite-plugin";
 import { vuerend } from "@vuerend/core/vite";
-import type { Plugin } from "vite";
+import type { Plugin, PluginOption, UserConfig } from "vite-plus";
 import { defineConfig } from "vite-plus";
 import { playwright } from "vite-plus/test/browser-playwright";
+
+import { cloudflare } from "@cloudflare/vite-plugin";
 
 const ignorePatterns = [
   "**/.cache/**",
@@ -78,7 +80,7 @@ const lint = {
     defineExpose: "readonly",
     defineProps: "readonly",
     withDefaults: "readonly",
-  },
+  } as const,
 };
 
 const fmt = {
@@ -93,6 +95,26 @@ const fmt = {
 };
 
 export { fmt, lint };
+
+function cloudflareVuerendRuntime(): Plugin {
+  return {
+    name: "vfjs:cloudflare-vuerend-runtime",
+    enforce: "pre",
+    resolveId(id) {
+      if (id !== "@vuerend/core") return;
+      // Cloudflare Worker environments are not named 'server' or 'client'.
+      // vuerend's resolve hook redirects @vuerend/core to virtual:vuerend/client-runtime
+      // for non-server environments, which lacks defineApp/defineRoute.
+      // Bypass vuerend's virtual module for Worker environments and use the runtime directly.
+      const { name } = this.environment;
+      if (name !== "server" && name !== "client") {
+        return fileURLToPath(
+          new URL("./node_modules/@vuerend/core/dist/runtime.mjs", import.meta.url),
+        );
+      }
+    },
+  };
+}
 
 function staticHtmlPreview(): Plugin {
   return {
@@ -199,8 +221,9 @@ function cloudflarePages404(): Plugin {
   }
 }
 
-export default defineConfig({
+const config: UserConfig = {
   plugins: [
+    // cloudflareVuerendRuntime(),
     tailwindcss(),
     vuerend({
       app: "./app/app.ts",
@@ -209,9 +232,10 @@ export default defineConfig({
         scanPatterns: ["app/**/*.vue"],
         ignorePatterns: ["node_modules/**", "dist/**", ".cache/**"],
       }),
-    }),
+    }) as unknown as PluginOption,
     staticHtmlPreview(),
     cloudflarePages404(),
+    cloudflare(),
   ],
   resolve: {
     alias: {
@@ -246,4 +270,6 @@ export default defineConfig({
   },
   fmt,
   lint,
-});
+};
+
+export default defineConfig(config);
