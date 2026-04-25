@@ -25,6 +25,7 @@ export interface VfjsTranslations {
   back_top: string;
   official_site: string;
   related_talks: string;
+  all_speakers: string;
   year_total_talks: (n: number) => string;
   appearance_count: (n: number) => string;
 }
@@ -58,6 +59,7 @@ const translations: Record<'ja' | 'en', VfjsTranslations> = {
     back_top: 'TOPページに戻る',
     official_site: '公式サイト',
     related_talks: '発表一覧',
+    all_speakers: '発表者一覧',
     year_total_talks: (n: number) => `全 ${n} 発表`,
     appearance_count: (n: number) => `${n}回登壇`,
   },
@@ -89,6 +91,7 @@ const translations: Record<'ja' | 'en', VfjsTranslations> = {
     back_top: 'Back to top page',
     official_site: 'Official site',
     related_talks: 'Talks',
+    all_speakers: 'Speakers',
     year_total_talks: (n: number) => `${n} talks total`,
     appearance_count: (n: number) => `${n} appearance${n > 1 ? 's' : ''}`,
   },

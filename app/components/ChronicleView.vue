@@ -90,7 +90,7 @@ const grouped = computed(() => {
             :id="`year-${year}`"
           >
             <span
-              class="[font-family:var(--font-display)] font-[500] text-[clamp(72px,8vw,120px)] leading-[0.85] tracking-[-0.04em] tabular-nums text-[var(--ink)]"
+              class="[font-family:var(--font-display)] font-[500] text-[clamp(72px,8vw,120px)] leading-[0.85] tabular-nums text-[var(--ink)]"
               aria-hidden="true"
               >{{ year }}</span
             >
@@ -107,7 +107,7 @@ const grouped = computed(() => {
           </div>
 
           <!-- Rows -->
-          <ul class="list-none p-0 m-0 border-t border-[var(--rule-soft)]">
+          <ol class="list-none p-0 m-0 border-t border-[var(--rule-soft)]">
             <li
               v-for="(s, i) in arr"
               :key="`${year}-${i}`"
@@ -148,14 +148,14 @@ const grouped = computed(() => {
                     :href="s.url"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-[var(--ink-2)] no-underline hover:text-[var(--ink)]"
+                    class="text-[var(--ink-2)] no-underline group hover:text-[var(--ink)]"
                   >
                     <span
                       v-if="s.format === 'panel'"
                       class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--ink)] text-[var(--ink)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
                       >{{ t.session_format_panel }}</span
                     >
-                    <span class="hover:underline">{{ s.title }}</span>
+                    <span class="group-hover:underline">{{ s.title }}</span>
                     <span
                       class="[font-family:var(--font-mono)] text-[10px] text-[var(--ink-2)] ml-[4px]"
                       >({{ t.external }})</span
@@ -169,7 +169,7 @@ const grouped = computed(() => {
                 </div>
               </div>
             </li>
-          </ul>
+          </ol>
         </li>
       </ol>
     </section>

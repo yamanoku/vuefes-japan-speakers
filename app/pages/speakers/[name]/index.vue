@@ -53,7 +53,7 @@ useHead({ title: `${speakerName} 発表一覧` });
       class="border-b border-[var(--rule)] pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-[var(--pad-x)]"
     >
       <h1
-        class="[font-family:var(--font-display)] text-[clamp(28px,4.5vw,72px)] font-bold tracking-[-0.04em] leading-[1] mb-[16px]"
+        class="[font-family:var(--font-display)] text-[clamp(28px,4.5vw,72px)] font-bold leading-[1] mb-[16px]"
         :lang="hasJapanese(record.name) ? 'ja' : 'en'"
       >
         <ruby v-if="record.nameRuby && lang === 'ja'"
@@ -63,31 +63,27 @@ useHead({ title: `${speakerName} 発表一覧` });
           lang === 'en' && record.nameEn ? record.nameEn : record.name
         }}</template>
       </h1>
-      <div class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)]">
+      <div class="[font-family:var(--font-mono)] text-[var(--ink-3)]">
         <div>{{ t.appearance_count(record.talks.length) }}</div>
-        <div class="mt-[8px]">
+        <div class="mt-[8px] text-[12px] text-[var(--ink-2)]">
           {{ t.years_appeared }}:
           <template v-for="(year, i) in record.years" :key="year">
             <template v-if="i > 0">, </template>
-            <NuxtLink :to="`/${year}`" class="text-[var(--ink)] underline hover:no-underline">{{
-              year
-            }}</NuxtLink>
+            <NuxtLink :to="`/${year}`" class="underline hover:no-underline">{{ year }}</NuxtLink>
           </template>
         </div>
       </div>
     </header>
 
     <section class="px-[var(--pad-x)] py-[40px]">
-      <div
-        class="[font-family:var(--font-mono)] text-[10px] tracking-[0.1em] text-[var(--ink-3)] mb-[16px]"
-      >
+      <h2 class="[font-family:var(--font-mono)] tracking-[0.1em] text-[var(--ink-3)] mb-[16px]">
         {{ t.related_talks }}
-      </div>
-      <ol class="list-none p-0 m-0">
+      </h2>
+      <ul class="list-none p-0 m-0">
         <li
           v-for="(talk, i) in record.talks"
           :key="i"
-          class="grid grid-cols-[60px_1fr] gap-x-[16px] items-baseline py-[14px] border-t border-[var(--rule-softer)]"
+          class="grid grid-cols-[40px_1fr] gap-x-[16px] items-baseline py-[14px] border-t border-[var(--rule-softer)]"
         >
           <span class="[font-family:var(--font-mono)] text-[11px] text-[var(--ink-3)]">
             <NuxtLink
@@ -98,7 +94,7 @@ useHead({ title: `${speakerName} 発表一覧` });
           </span>
           <div class="flex flex-col gap-y-[8px]">
             <a
-              class="text-[16px] text-[var(--ink)] no-underline flex flex-wrap items-baseline gap-[4px]"
+              class="text-[16px] text-[var(--ink)] no-underline group flex flex-wrap items-baseline gap-[4px]"
               :href="talk.url"
               target="_blank"
               rel="noopener noreferrer"
@@ -109,9 +105,11 @@ useHead({ title: `${speakerName} 発表一覧` });
                 >{{ t.session_format_panel }}</span
               >
               <span>
-                <span :lang="hasJapanese(talk.title || '') ? 'ja' : 'en'">{{
-                  talk.title || t.tbd
-                }}</span>
+                <span
+                  :lang="hasJapanese(talk.title || '') ? 'ja' : 'en'"
+                  class="group-hover:underline"
+                  >{{ talk.title || t.tbd }}</span
+                >
                 <span class="text-[10px] ml-[4px]">({{ t.external }})</span>
               </span>
             </a>
@@ -131,7 +129,7 @@ useHead({ title: `${speakerName} 発表一覧` });
             </span>
           </div>
         </li>
-      </ol>
+      </ul>
     </section>
 
     <AppFooter />
