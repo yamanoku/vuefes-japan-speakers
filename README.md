@@ -1,6 +1,6 @@
 # Vue Fes Japan Speakers
 
-歴代のVue Fes Japanのスピーカーを一覧できるサイトです（イベントスピーカーは含めておりません）。
+歴代のVue Fes Japanのスピーカー（セッション・パネルディスカッションの登壇者）を一覧できるサイトです。
 
 ![Vue Fes Japan Speakersのサイトスクリーンショット](./public/og-image.png)
 
