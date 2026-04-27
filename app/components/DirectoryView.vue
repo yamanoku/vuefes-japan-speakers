@@ -134,7 +134,7 @@ function toggleRow(name: string) {
           "
           @click="sort = sort === 'name-asc' ? 'name-desc' : 'name-asc'"
         >
-          Name {{ sort === 'name-desc' ? 'Z→A' : 'A→Z' }}
+          Name {{ sort === "name-desc" ? "Z→A" : "A→Z" }}
         </button>
         <!-- 最新登壇年の新しい順でソートするボタン -->
         <button
