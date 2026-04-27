@@ -33,7 +33,7 @@ const { scheme, setScheme } = useColorScheme();
         >
           <option value="light">{{ t.color_scheme_light }}</option>
           <option value="dark">{{ t.color_scheme_dark }}</option>
-          <option value="system">{{ t.color_scheme_system }}</option>
+          <option value="system" selected>{{ t.color_scheme_system }}</option>
         </select>
         <div
           class="inline-flex border border-[var(--rule)] [font-family:var(--font-mono)] text-[12px] tracking-[0.08em]"
