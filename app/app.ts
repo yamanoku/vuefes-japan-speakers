@@ -10,6 +10,9 @@ import SpeakerRoute from "./routes/SpeakerRoute.vue";
 import YearRoute from "./routes/YearRoute.vue";
 
 const siteTitle = "Vue Fes Japan Speakers";
+const siteDescription = "Vue Fes Japan歴代スピーカーまとめページ";
+const siteUrl = "https://vuefes-japan-speakers.yamanoku.net/";
+const ogImageUrl = new URL("/og-image.png", siteUrl).toString();
 
 type YearRouteProps = {
   found: boolean;
@@ -42,15 +45,63 @@ export default defineApp({
     meta: [
       {
         name: "description",
-        content: "Vue Fes Japan歴代スピーカーまとめページ",
+        content: siteDescription,
+      },
+      {
+        property: "og:type",
+        content: "website",
+      },
+      {
+        property: "og:url",
+        content: siteUrl,
+      },
+      {
+        property: "og:title",
+        content: siteTitle,
+      },
+      {
+        property: "og:description",
+        content: siteDescription,
       },
       {
         property: "og:image",
-        content: "/og-image.png",
+        content: ogImageUrl,
+      },
+      {
+        property: "og:image:secure_url",
+        content: ogImageUrl,
+      },
+      {
+        property: "og:image:type",
+        content: "image/png",
+      },
+      {
+        property: "og:image:width",
+        content: "1200",
+      },
+      {
+        property: "og:image:height",
+        content: "630",
       },
       {
         name: "twitter:card",
         content: "summary_large_image",
+      },
+      {
+        name: "twitter:title",
+        content: siteTitle,
+      },
+      {
+        name: "twitter:description",
+        content: siteDescription,
+      },
+      {
+        name: "twitter:image",
+        content: ogImageUrl,
+      },
+      {
+        name: "twitter:image:alt",
+        content: siteTitle,
       },
       {
         name: "theme-color",
