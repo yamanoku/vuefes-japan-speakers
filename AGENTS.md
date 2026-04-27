@@ -7,7 +7,7 @@
 - フレームワーク: vuerend（Vue 3 / Vite）
 - 目的: 歴代の Vue Fes Japan スピーカーと発表タイトルを一覧できる非公式アーカイブ
 - UI/スタイル: Tailwind CSS 4 + カスタムコンポーネント
-- ツールチェーン: Vize 0.65.0 系（Vue SFC compiler / lint / type check）+ Vite+
+- ツールチェーン: Vize 0.72.0 系（Vue SFC compiler / lint / type check）+ Vite+
 - データ供給: `server/data` の静的データを vuerend ルートの props として渡す
 
 ## 前提・セットアップ
