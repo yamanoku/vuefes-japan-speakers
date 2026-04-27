@@ -58,7 +58,7 @@ const stats = computed(() => {
 
     <!-- ビュー切り替えタブバー（Chronicle／Directory） -->
     <div
-      class="flex gap-0 px-[var(--pad-x)] border-b border-[var(--rule)] bg-[var(--paper)]"
+      class="flex gap-0 px-pad-x border-b border-rule bg-paper"
       role="tablist"
       aria-label="View mode"
     >
@@ -66,17 +66,17 @@ const stats = computed(() => {
       <button
         role="tab"
         :aria-selected="view === 'chronicle'"
-        class="px-[22px] py-[16px] [font-family:var(--font-body)] font-[500] text-[14px] tracking-[-0.005em] border-r border-[var(--rule-soft)] cursor-pointer"
+        class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
         :class="
           view === 'chronicle'
-            ? 'text-[var(--ink)] [box-shadow:inset_0_-4px_0_var(--accent)]'
-            : 'text-[var(--ink-3)] hover:text-[var(--ink)]'
+            ? 'text-ink [box-shadow:inset_0_-4px_0_var(--accent)]'
+            : 'text-ink-3 hover:text-ink'
         "
         @click="view = 'chronicle'"
       >
         {{ t.view_timeline }}
         <span
-          class="[font-family:var(--font-mono)] text-[var(--ink-4)] text-[12px] tracking-[0.02em] ml-[4px]"
+          class="font-mono text-[12px] tracking-[0.02em] ml-1"
         >
           Chronicle
         </span>
@@ -85,17 +85,17 @@ const stats = computed(() => {
       <button
         role="tab"
         :aria-selected="view === 'index'"
-        class="px-[22px] py-[16px] [font-family:var(--font-body)] font-[500] text-[14px] tracking-[-0.005em] border-r border-[var(--rule-soft)] cursor-pointer"
+        class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
         :class="
           view === 'index'
-            ? 'text-[var(--ink)] [box-shadow:inset_0_-4px_0_var(--accent)]'
-            : 'text-[var(--ink-3)] hover:text-[var(--ink)]'
+            ? 'text-ink [box-shadow:inset_0_-4px_0_var(--accent)]'
+            : 'text-ink-3 hover:text-ink'
         "
         @click="view = 'index'"
       >
         {{ t.view_index }}
         <span
-          class="[font-family:var(--font-mono)] text-[var(--ink-4)] text-[12px] tracking-[0.02em] ml-[4px]"
+          class="font-mono text-[12px] tracking-[0.02em] ml-1"
         >
           Directory
         </span>

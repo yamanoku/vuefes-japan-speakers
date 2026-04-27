@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss" layer(theme);
 
 :root {
   --font-display: "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -57,6 +57,24 @@
   --accent: #007f62;
   --accent-ink: #ffffff;
 }
+
+@theme {
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-rule: var(--rule);
+  --color-rule-soft: var(--rule-soft);
+  --color-rule-softer: var(--rule-softer);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --spacing-pad-x: var(--pad-x);
+}
+
 
 * {
   box-sizing: border-box;

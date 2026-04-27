@@ -63,7 +63,7 @@ const grouped = computed(() => {
 
 <template>
   <main>
-    <section :style="{ '--rowgap': '18px' }">
+    <section>
       <!-- スピーカー名・キーワードによるフィルターバー -->
       <SpeakerFilterBar
         :query="query"
@@ -83,7 +83,7 @@ const grouped = computed(() => {
       <!-- フィルター結果が0件のとき -->
       <div
         v-if="grouped.length === 0"
-        class="px-[var(--pad-x)] py-[80px] text-center [font-family:var(--font-mono)] text-[13px] tracking-[0.05em] uppercase text-[var(--ink-3)]"
+        class="px-pad-x py-20 text-center font-mono text-[13px] tracking-[0.05em] uppercase text-ink-3"
       >
         {{ t.empty }}
       </div>
@@ -94,7 +94,7 @@ const grouped = computed(() => {
         <li
           v-for="[year, arr] in grouped"
           :key="year"
-          class="grid grid-cols-[minmax(200px,260px)_1fr] gap-[clamp(24px,4vw,64px)] border-b border-[var(--rule)] items-start px-[var(--pad-x)] py-[clamp(32px,5vw,72px)] max-[800px]:grid-cols-1 max-[800px]:gap-8"
+          class="grid grid-cols-[minmax(200px,260px)_1fr] gap-[clamp(24px,4vw,64px)] border-b border-rule items-start px-pad-x py-[clamp(32px,5vw,72px)] max-[800px]:grid-cols-1 max-[800px]:gap-8"
         >
           <!-- 年度ラベル（スクロール時に上部に固定） -->
           <div
@@ -103,20 +103,20 @@ const grouped = computed(() => {
           >
             <!-- 年度テキスト（表示専用） -->
             <span
-              class="[font-family:var(--font-display)] font-[500] text-[clamp(72px,8vw,120px)] leading-[0.85] tabular-nums text-[var(--ink)]"
+              class="font-display font-[500] text-[clamp(72px,8vw,120px)] leading-[0.85] tabular-nums text-ink"
               aria-hidden="true"
             >
               {{ year }}
             </span>
             <!-- その年のトーク総数 -->
             <span
-              class="[font-family:var(--font-mono)] text-[12px] tracking-[0.08em] uppercase text-[var(--ink-3)] mt-[10px]"
+              class="font-mono text-[12px] tracking-[0.08em] uppercase text-ink-3 mt-2.5"
             >
               {{ t.year_total_talks(arr.length) }}
             </span>
             <!-- 年度別ページへの矢印リンク -->
             <a
-              class="[font-family:var(--font-mono)] text-[24px] tracking-[0.08em] uppercase text-[var(--ink)] hover:text-[var(--accent)] transition-colors border-b border-current pb-[2px] no-underline mt-[14px]"
+              class="font-mono text-[24px] tracking-[0.08em] uppercase text-ink hover:text-accent transition-colors border-b border-current pb-0.5 no-underline mt-3.5"
               :href="`/${year}`"
               :aria-label="`${year} speakers`"
             >
@@ -125,16 +125,16 @@ const grouped = computed(() => {
           </div>
 
           <!-- その年のスピーカー行リスト -->
-          <ol class="list-none p-0 m-0 border-t border-[var(--rule-soft)]">
+          <ol class="list-none p-0 m-0 border-t border-rule-soft">
             <!-- 各スピーカー行 -->
             <li
               v-for="(s, i) in arr"
               :key="`${year}-${i}`"
-              class="grid grid-cols-[56px_1fr] gap-[16px] py-[var(--rowgap)] border-b border-[var(--rule-softer)] items-start"
+              class="grid grid-cols-[56px_1fr] gap-4 py-[18px] border-b border-rule-soft items-start"
             >
               <!-- 行番号（表示専用） -->
               <div
-                class="[font-family:var(--font-mono)] text-[14px] text-[var(--ink-2)] pt-[3px]"
+                class="font-mono text-[14px] text-ink-2 pt-[3px]"
                 aria-hidden="true"
               >
                 <span>{{ String(i + 1).padStart(2, "0") }}</span>
@@ -144,14 +144,14 @@ const grouped = computed(() => {
               >
                 <!-- スピーカー名（複数名対応・振り仮名・英語名対応、プロフィールページへのリンク） -->
                 <div
-                  class="[font-family:var(--font-display)] font-[500] text-[clamp(17px,1.5vw,22px)] tracking-[-0.01em] leading-[1.25]"
+                  class="font-display font-[500] text-[clamp(17px,1.5vw,22px)] tracking-[-0.01em] leading-[1.25]"
                 >
                   <template v-for="(n, ni) in s.name" :key="n">
-                    <span v-if="ni > 0" class="text-[var(--ink-2)] font-normal" aria-hidden="true">
+                    <span v-if="ni > 0" class="text-ink-2 font-normal" aria-hidden="true">
                       ×
                     </span>
                     <a
-                      class="text-[var(--ink)] border-b border-[var(--rule-soft)] pb-[1px] no-underline transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                      class="text-ink border-b border-rule-soft pb-[1px] no-underline transition-colors hover:border-accent hover:text-accent"
                       :href="`/speakers/${encodeURIComponent(n)}`"
                     >
                       <ruby v-if="s.nameRuby?.[ni] && lang === 'ja'" lang="ja">
@@ -163,32 +163,30 @@ const grouped = computed(() => {
                   </template>
                 </div>
                 <!-- トークタイトル（外部リンク、未決定の場合は TBD 表示） -->
-                <div class="text-[clamp(14px,1.1vw,16px)] text-[var(--ink-2)] leading-[1.5]">
+                <div class="text-[clamp(14px,1.1vw,16px)] text-ink-2 leading-[1.5]">
                   <a
                     v-if="s.title"
                     :href="s.url"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-[var(--ink-2)] no-underline group hover:text-[var(--ink)]"
+                    class="text-ink-2 no-underline group hover:text-ink"
                   >
                     <!-- パネルセッションのフォーマットバッジ -->
                     <span
                       v-if="s.format === 'panel'"
-                      class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--ink)] text-[var(--ink)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
+                      class="relative top-[-1px] inline-flex items-center self-center align-middle font-mono text-[10px] uppercase tracking-[0.06em] border border-ink text-ink px-[5px] py-[1px] leading-[1.15] mr-2"
                     >
                       {{ t.session_format_panel }}
                     </span>
                     <span class="group-hover:underline">{{ s.title }}</span>
-                    <span
-                      class="[font-family:var(--font-mono)] text-[10px] text-[var(--ink-2)] ml-[4px]"
-                    >
+                    <span class="font-mono text-[10px] text-ink-2 ml-1">
                       ({{ t.external }})
                     </span>
                   </a>
                   <!-- タイトル未決定時のプレースホルダー -->
                   <span
                     v-else
-                    class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] uppercase tracking-[0.06em]"
+                    class="font-mono text-[12px] text-ink-2 uppercase tracking-[0.06em]"
                   >
                     {{ t.tbd }}
                   </span>

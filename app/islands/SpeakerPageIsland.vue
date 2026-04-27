@@ -48,11 +48,11 @@ const record = computed(() => {
     <template v-if="found">
       <!-- スピーカーページのヘッダー（名前・登壇回数・登壇年度） -->
       <header
-        class="border-b border-[var(--rule)] pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-[var(--pad-x)]"
+        class="border-b border-rule pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-pad-x"
       >
         <!-- スピーカー名 -->
         <h1
-          class="[font-family:var(--font-display)] text-[clamp(28px,4.5vw,72px)] font-bold leading-[1] mb-[16px]"
+          class="font-display text-[clamp(28px,4.5vw,72px)] font-bold leading-[1] mb-4"
           :lang="hasJapanese(record.name) ? 'ja' : 'en'"
         >
           <ruby v-if="record.nameRuby && lang === 'ja'">
@@ -63,15 +63,15 @@ const record = computed(() => {
             {{ lang === "en" && record.nameEn ? record.nameEn : record.name }}
           </template>
         </h1>
-        <div class="[font-family:var(--font-mono)] text-[var(--ink-3)]">
+        <div class="font-mono text-ink-3">
           <!-- 総登壇回数 -->
           <div>{{ t.appearance_count(record.talks.length) }}</div>
           <!-- 登壇年度のリスト（各年度ページへのリンク） -->
-          <div class="mt-[8px] text-[12px] text-[var(--ink-2)]">
+          <div class="mt-2 text-[12px] text-ink-2">
             {{ t.years_appeared }}:
             <template v-for="(year, index) in record.years" :key="year">
               <template v-if="index > 0">,</template>
-              <a :href="`/${year}`" class="text-[var(--ink)] underline hover:no-underline">
+              <a :href="`/${year}`" class="text-ink underline hover:no-underline">
                 {{ year }}
               </a>
             </template>
@@ -80,28 +80,28 @@ const record = computed(() => {
       </header>
 
       <!-- 関連トーク一覧セクション -->
-      <section class="px-[var(--pad-x)] py-[40px]">
-        <h2 class="[font-family:var(--font-mono)] tracking-[0.1em] text-[var(--ink-3)] mb-[16px]">
+      <section class="px-pad-x py-10">
+        <h2 class="font-mono tracking-[0.1em] text-ink-3 mb-4">
           {{ t.related_talks }}
         </h2>
         <ul class="list-none p-0 m-0">
           <li
             v-for="(talk, index) in record.talks"
             :key="index"
-            class="grid grid-cols-[40px_1fr] gap-x-[16px] border-t border-[var(--rule-softer)] py-[18px]"
+            class="grid grid-cols-[40px_1fr] gap-x-4 border-t border-rule-softer py-4.5"
           >
             <!-- 開催年リンク（年度別ページへ） -->
             <span
-              class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)] text-center pt-[3px]"
+              class="font-mono text-[12px] text-ink-3 text-center pt-[3px]"
             >
-              <a class="text-[var(--ink)] underline hover:no-underline" :href="`/${talk.year}`">
+              <a class="text-ink underline hover:no-underline" :href="`/${talk.year}`">
                 {{ talk.year }}
               </a>
             </span>
-            <div class="flex flex-col gap-y-[8px]">
+            <div class="flex flex-col gap-y-2">
               <!-- トークタイトル（外部リンク） -->
               <a
-                class="text-[16px] text-[var(--ink)] no-underline group flex flex-wrap items-baseline gap-[8px]"
+                class="text-[16px] text-ink no-underline group flex flex-wrap items-baseline gap-2"
                 :href="talk.url"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -109,7 +109,7 @@ const record = computed(() => {
                 <!-- パネルセッションのフォーマットバッジ -->
                 <span
                   v-if="talk.format === 'panel'"
-                  class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--ink)] text-[var(--ink)] px-[5px] py-[1px] leading-[1.15]"
+                  class="relative top-[-1px] inline-flex items-center self-center align-middle font-mono text-[10px] uppercase tracking-[0.06em] border border-ink text-ink px-[5px] py-[1px] leading-[1.15]"
                 >
                   {{ t.session_format_panel }}
                 </span>
@@ -120,13 +120,13 @@ const record = computed(() => {
                   >
                     {{ talk.title || t.tbd }}
                   </span>
-                  <span class="text-[10px] ml-[4px]">({{ t.external }})</span>
+                  <span class="text-[10px] ml-1">({{ t.external }})</span>
                 </span>
               </a>
               <!-- 共同登壇者のリスト（各スピーカープロフィールへのリンク） -->
               <span
                 v-if="talk.coSpeakers.length > 0"
-                class="text-[12px] [font-family:var(--font-mono)] text-[var(--ink-3)]"
+                class="text-[12px] font-mono text-ink-3"
               >
                 w/
                 <template
@@ -135,7 +135,7 @@ const record = computed(() => {
                 >
                   <template v-if="coSpeakerIndex > 0">,</template>
                   <a
-                    class="text-[var(--ink)] underline hover:no-underline"
+                    class="text-ink underline hover:no-underline"
                     :href="`/speakers/${encodeURIComponent(coSpeakerName)}`"
                   >
                     {{ coSpeakerName }}
@@ -151,9 +151,9 @@ const record = computed(() => {
     <!-- スピーカーが存在しない場合 -->
     <main
       v-else
-      class="px-[var(--pad-x)] py-[80px] [font-family:var(--font-mono)] text-[14px] text-[var(--ink-2)]"
+      class="px-pad-x py-20 font-mono text-[14px] text-ink-2"
     >
-      <h1 class="[font-family:var(--font-display)] text-[40px] text-[var(--ink)] m-0">
+      <h1 class="font-display text-[40px] text-ink m-0">
         Speaker Not Found
       </h1>
       <p>{{ speakerName }}</p>

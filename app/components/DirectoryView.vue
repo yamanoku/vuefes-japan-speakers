@@ -90,7 +90,7 @@ function toggleRow(name: string) {
 <template>
   <!-- ディレクトリビュー：スピーカーを人物単位でまとめ、アコーディオンで登壇履歴を表示するビュー -->
   <main>
-    <section :style="{ '--idxpad': '14px' }">
+    <section>
       <!-- スピーカー名・キーワードによるフィルターバー -->
       <SpeakerFilterBar
         :query="query"
@@ -110,15 +110,15 @@ function toggleRow(name: string) {
       <!-- Sort header -->
       <!-- ソートボタンヘッダー（登壇回数・名前順・最新年で並び替え） -->
       <div
-        class="flex items-center gap-[8px] px-[var(--pad-x)] pt-[18px] pb-[10px] border-b border-[var(--rule-soft)] [font-family:var(--font-mono)] overflow-x-auto"
+        class="flex items-center gap-2 px-pad-x pt-4.5 pb-2.5 border-b border-rule-soft font-mono overflow-x-auto"
       >
         <!-- 登壇回数の多い順でソートするボタン -->
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           :class="
             sort === 'appearances'
-              ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
-              : 'border-[var(--rule-soft)] text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-[var(--ink)]'
+              ? 'bg-ink text-paper border-ink'
+              : 'border-rule-soft text-ink-3 hover:text-ink hover:border-ink'
           "
           @click="sort = 'appearances'"
         >
@@ -129,8 +129,8 @@ function toggleRow(name: string) {
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           :class="
             sort === 'name-asc' || sort === 'name-desc'
-              ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
-              : 'border-[var(--rule-soft)] text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-[var(--ink)]'
+              ? 'bg-ink text-paper border-ink'
+              : 'border-rule-soft text-ink-3 hover:text-ink hover:border-ink'
           "
           @click="sort = sort === 'name-asc' ? 'name-desc' : 'name-asc'"
         >
@@ -141,15 +141,15 @@ function toggleRow(name: string) {
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           :class="
             sort === 'latest'
-              ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
-              : 'border-[var(--rule-soft)] text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-[var(--ink)]'
+              ? 'bg-ink text-paper border-ink'
+              : 'border-rule-soft text-ink-3 hover:text-ink hover:border-ink'
           "
           @click="sort = 'latest'"
         >
           Latest year ↓
         </button>
         <!-- フィルター済み件数 / 全体件数の表示 -->
-        <span class="ml-auto text-[12px] tracking-[0.06em] text-[var(--ink-3)] whitespace-nowrap">
+        <span class="ml-auto text-[12px] tracking-[0.06em] text-ink-3 whitespace-nowrap">
           {{ String(filtered.length).padStart(3, "0") }} /
           {{ String(allRecords.length).padStart(3, "0") }}
         </span>
@@ -158,7 +158,7 @@ function toggleRow(name: string) {
       <!-- フィルター結果が0件のときの空状態メッセージ -->
       <div
         v-if="filtered.length === 0"
-        class="px-[var(--pad-x)] py-[80px] text-center [font-family:var(--font-mono)] text-[13px] tracking-[0.05em] uppercase text-[var(--ink-3)]"
+        class="px-pad-x py-20 text-center font-mono text-[13px] tracking-[0.05em] uppercase text-ink-3"
       >
         {{ t.empty }}
       </div>
@@ -168,29 +168,29 @@ function toggleRow(name: string) {
         <li
           v-for="(rec, i) in filtered"
           :key="rec.name"
-          class="border-b border-[var(--rule-softer)]"
+          class="border-b border-rule-softer"
           :data-open="openRows.has(rec.name) ? 'true' : 'false'"
         >
           <!-- スピーカー行の展開/折りたたみボタン -->
           <button
-            class="w-full flex flex-wrap items-center gap-x-[12px] px-[var(--pad-x)] py-[var(--idxpad)] cursor-pointer text-left"
-            :class="openRows.has(rec.name) ? 'bg-[var(--paper-2)]' : ''"
+            class="w-full flex flex-wrap items-center gap-x-[12px] px-pad-x py-3.5 cursor-pointer text-left"
+            :class="openRows.has(rec.name) ? 'bg-paper-2' : ''"
             :aria-expanded="openRows.has(rec.name)"
             @click="toggleRow(rec.name)"
           >
             <span
-              class="basis-0 grow-999 min-inline-[50%] flex flex-wrap gap-[8px] justify-start items-center"
+              class="basis-0 grow-999 min-inline-[50%] flex flex-wrap gap-2 justify-start items-center"
             >
               <!-- 行番号（表示専用） -->
               <span
-                class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] tabular-nums"
+                class="font-mono text-[12px] text-ink-2 tabular-nums"
                 aria-hidden="true"
               >
                 {{ String(i + 1).padStart(3, "0") }}
               </span>
               <!-- スピーカー名（振り仮名・英語名対応） -->
               <span
-                class="[font-family:var(--font-display)] text-[clamp(15px,1.2vw,18px)] font-[500] tracking-[-0.005em] text-[var(--ink)]"
+                class="font-display text-[clamp(15px,1.2vw,18px)] font-[500] tracking-[-0.005em] text-ink"
                 :lang="hasJapanese(rec.name) ? 'ja' : 'en'"
               >
                 <ruby v-if="rec.nameRuby && lang === 'ja'">
@@ -203,7 +203,7 @@ function toggleRow(name: string) {
                 <!-- 複数回登壇バッジ（登壇回数を ×N 形式で表示） -->
                 <span
                   v-if="rec.talks.length > 1"
-                  class="[font-family:var(--font-mono)] bg-[var(--accent)] text-[12px] text-[var(--accent-ink)] ml-[8px] font-normal tracking-[0.02em] align-[2px] border border-[var(--accent)] px-[5px] py-[1px]"
+                  class="font-mono bg-accent text-[12px] text-accent-ink ml-2 font-normal tracking-[0.02em] align-[2px] border border-accent px-1.25 py-[1px]"
                   :aria-label="t.appearance_count(rec.talks.length)"
                 >
                   <span>×{{ rec.talks.length }}</span>
@@ -218,13 +218,13 @@ function toggleRow(name: string) {
                 <span
                   v-for="y in YEARS"
                   :key="y"
-                  class="w-[28px] h-[22px] flex items-center justify-center [font-family:var(--font-mono)] text-[12px] tracking-[0]"
+                  class="w-7 h-[22px] flex items-center justify-center font-mono text-[12px] tracking-[0]"
                   :class="[
                     rec.years.includes(y) && selectedYear === y
-                      ? 'bg-[var(--accent)] border border-[var(--accent)] text-white'
+                      ? 'bg-accent border border-accent text-white'
                       : rec.years.includes(y)
-                        ? 'bg-[var(--ink)] border border-[var(--ink)] text-[var(--paper)]'
-                        : 'border border-[var(--ink)] text-[var(--ink)]',
+                        ? 'bg-ink border border-ink text-paper'
+                        : 'border border-ink text-ink',
                   ]"
                   :title="y"
                 >
@@ -234,7 +234,7 @@ function toggleRow(name: string) {
             </span>
             <!-- 展開/折りたたみアイコン（+/−） -->
             <span
-              class="basis-[24px] grow-1 [font-family:var(--font-mono)] text-[16px] text-[var(--ink-3)] text-center"
+              class="basis-6 grow-1 font-mono text-[16px] text-ink-3 text-center"
               aria-hidden="true"
             >
               {{ openRows.has(rec.name) ? "−" : "+" }}
@@ -243,11 +243,11 @@ function toggleRow(name: string) {
           <!-- 展開時の詳細エリア（プロフィールリンクと登壇一覧） -->
           <div
             v-if="openRows.has(rec.name)"
-            class="bg-[var(--paper-2)] border-t border-[var(--rule-softer)] pt-[8px] pb-[22px] px-[var(--pad-x)]"
+            class="bg-paper-2 border-t border-rule-softer pt-2 pb-[22px] px-pad-x"
           >
             <!-- スピーカープロフィールページへのリンク -->
             <a
-              class="[font-family:var(--font-mono)] text-[12px] tracking-[0.06em] text-[var(--ink)] underline hover:no-underline"
+              class="font-mono text-[12px] tracking-[0.06em] text-ink underline hover:no-underline"
               :href="`/speakers/${encodeURIComponent(rec.name)}`"
             >
               {{ t.speaker_profile }}: {{ rec.name }}
@@ -258,20 +258,20 @@ function toggleRow(name: string) {
               <li
                 v-for="(talk, k) in rec.talks"
                 :key="k"
-                class="grid grid-cols-[30px_1fr] gap-[16px] items-baseline py-[6px] border-t border-[var(--rule-softer)]"
+                class="grid grid-cols-[30px_1fr] gap-4 items-baseline py-1.5 border-t border-rule-softer"
                 :class="k === 0 ? 'border-t-0' : ''"
               >
                 <!-- 開催年リンク（年度別ページへ） -->
                 <a
                   :href="`/${talk.year}`"
-                  class="underline hover:no-underline [font-family:var(--font-mono)] text-[12px] text-[var(--ink)] tabular-nums"
+                  class="underline hover:no-underline font-mono text-[12px] text-ink tabular-nums"
                 >
                   {{ talk.year }}
                 </a>
                 <div class="flex flex-col gap-y-[8px]">
                   <!-- トークタイトル（外部リンク） -->
                   <a
-                    class="text-[14px] text-[var(--ink)] pb-[1px] leading-[1.45] no-underline group"
+                    class="text-[14px] text-ink pb-[1px] leading-[1.45] no-underline group"
                     :href="talk.url"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -279,27 +279,25 @@ function toggleRow(name: string) {
                     <!-- パネルセッションのフォーマットバッジ -->
                     <span
                       v-if="talk.format === 'panel'"
-                      class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--ink)] text-[var(--ink)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
+                      class="relative top-[-1px] inline-flex items-center self-center align-middle font-mono text-[10px] uppercase tracking-[0.06em] border border-ink text-ink px-[5px] py-[1px] leading-[1.15] mr-2"
                     >
                       {{ t.session_format_panel }}
                     </span>
                     <span class="group-hover:underline">{{ talk.title || t.tbd }}</span>
-                    <span
-                      class="[font-family:var(--font-mono)] text-[10px] text-[var(--ink-2)] ml-[4px]"
-                    >
+                    <span class="font-mono text-[10px] text-ink-2 ml-1">
                       ({{ t.external }})
                     </span>
                   </a>
                   <!-- 共同登壇者のリスト（各スピーカープロフィールへのリンク） -->
                   <span
                     v-if="talk.coSpeakers.length > 0"
-                    class="text-[12px] [font-family:var(--font-mono)] text-[var(--ink-3)]"
+                    class="text-[12px] font-mono text-ink-3"
                   >
                     w/
                     <template v-for="(cn, ci) in talk.coSpeakers" :key="cn">
                       <template v-if="ci > 0">,</template>
                       <a
-                        class="text-[var(--ink)] border-b border-[var(--rule-soft)] pb-[1px] no-underline hover:border-[var(--ink)]"
+                        class="text-ink border-b border-rule-soft pb-[1px] no-underline hover:border-ink"
                         :href="`/speakers/${encodeURIComponent(cn)}`"
                       >
                         {{ cn }}
