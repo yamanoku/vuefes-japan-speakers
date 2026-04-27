@@ -33,7 +33,7 @@ const speakerOptions = computed(() =>
   })),
 );
 
-const sort = ref<"name" | "appearances" | "latest">("appearances");
+const sort = ref<"name-asc" | "name-desc" | "appearances" | "latest">("appearances");
 
 const counts = computed(() => {
   const c: Record<string, number> = { all: allRecords.value.length };
@@ -63,8 +63,10 @@ const filtered = computed<SpeakerRecord[]>(() => {
         compareLexicalJa(a.years[0] || "", b.years[0] || "") ||
         compareLexicalJa(a.name, b.name),
     );
-  } else if (sort.value === "name") {
+  } else if (sort.value === "name-asc") {
     list = [...list].sort((a, b) => compareLexicalJa(a.name, b.name));
+  } else if (sort.value === "name-desc") {
+    list = [...list].sort((a, b) => compareLexicalJa(b.name, a.name));
   } else if (sort.value === "latest") {
     list = [...list].sort(
       (a, b) =>
@@ -122,17 +124,17 @@ function toggleRow(name: string) {
         >
           Appearances ↓
         </button>
-        <!-- 名前の昇順でソートするボタン -->
+        <!-- 名前の昇順/降順でソートするボタン -->
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           :class="
-            sort === 'name'
+            sort === 'name-asc' || sort === 'name-desc'
               ? 'bg-[var(--ink)] text-[var(--paper)] border-[var(--ink)]'
               : 'border-[var(--rule-soft)] text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-[var(--ink)]'
           "
-          @click="sort = 'name'"
+          @click="sort = sort === 'name-asc' ? 'name-desc' : 'name-asc'"
         >
-          Name A→Z
+          Name {{ sort === "name-desc" ? "Z→A" : "A→Z" }}
         </button>
         <!-- 最新登壇年の新しい順でソートするボタン -->
         <button
