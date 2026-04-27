@@ -24,9 +24,7 @@ const { t, lang } = useVfjsI18n();
         class="border-b border-rule pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-pad-x"
       >
         <!-- 年度タイトル（2022年はオンライン開催のサブ表記付き） -->
-        <h1
-          class="font-display text-[clamp(28px,4.5vw,72px)] font-[500] leading-[1] mb-4"
-        >
+        <h1 class="font-display text-[clamp(28px,4.5vw,72px)] font-[500] leading-[1] mb-4">
           Vue Fes Japan
           <span v-if="year === '2022'">Online</span>
           <em class="not-italic text-accent">{{ year }}</em>
@@ -62,21 +60,14 @@ const { t, lang } = useVfjsI18n();
             class="grid grid-cols-[40px_1fr] border-t border-rule-softer py-4.5"
           >
             <!-- 行番号（表示専用） -->
-            <div
-              class="font-mono text-[12px] text-ink-2 pt-[5px] text-center"
-              aria-hidden="true"
-            >
+            <div class="font-mono text-[12px] text-ink-2 pt-[5px] text-center" aria-hidden="true">
               <span>{{ String(index + 1).padStart(2, "0") }}</span>
             </div>
             <div class="pr-6">
               <!-- スピーカー名（複数名対応・振り仮名・英語名対応、プロフィールページへのリンク） -->
               <div class="flex flex-wrap gap-x-2 gap-y-1 mb-1.5 items-center">
                 <template v-for="(name, nameIndex) in speaker.name" :key="name">
-                  <span
-                    v-if="nameIndex > 0"
-                    class="text-ink-2 text-[12px]"
-                    aria-hidden="true"
-                  >
+                  <span v-if="nameIndex > 0" class="text-ink-2 text-[12px]" aria-hidden="true">
                     ×
                   </span>
                   <a
@@ -126,13 +117,8 @@ const { t, lang } = useVfjsI18n();
     </main>
 
     <!-- 年度が存在しない場合 -->
-    <main
-      v-else
-      class="px-pad-x py-20 font-mono text-[14px] text-ink-2"
-    >
-      <h1 class="font-display text-[40px] text-ink m-0">
-        Year Not Found
-      </h1>
+    <main v-else class="px-pad-x py-20 font-mono text-[14px] text-ink-2">
+      <h1 class="font-display text-[40px] text-ink m-0">Year Not Found</h1>
       <p>{{ year }}</p>
     </main>
 

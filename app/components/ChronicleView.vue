@@ -109,9 +109,7 @@ const grouped = computed(() => {
               {{ year }}
             </span>
             <!-- その年のトーク総数 -->
-            <span
-              class="font-mono text-[12px] tracking-[0.08em] uppercase text-ink-3 mt-2.5"
-            >
+            <span class="font-mono text-[12px] tracking-[0.08em] uppercase text-ink-3 mt-2.5">
               {{ t.year_total_talks(arr.length) }}
             </span>
             <!-- 年度別ページへの矢印リンク -->
@@ -133,23 +131,16 @@ const grouped = computed(() => {
               class="grid grid-cols-[56px_1fr] gap-4 py-[18px] border-b border-rule-soft items-start"
             >
               <!-- 行番号（表示専用） -->
-              <div
-                class="font-mono text-[14px] text-ink-2 pt-[3px]"
-                aria-hidden="true"
-              >
+              <div class="font-mono text-[14px] text-ink-2 pt-[3px]" aria-hidden="true">
                 <span>{{ String(i + 1).padStart(2, "0") }}</span>
               </div>
-              <div
-                class="grid grid-cols-[minmax(0,200px)_minmax(0,1fr)] gap-[clamp(16px,2vw,32px)] items-baseline max-[700px]:grid-cols-1 max-[700px]:gap-[6px]"
-              >
+              <div class="flex flex-wrap gap-[clamp(16px,2vw,32px)] items-baseline">
                 <!-- スピーカー名（複数名対応・振り仮名・英語名対応、プロフィールページへのリンク） -->
                 <div
-                  class="font-display font-[500] text-[clamp(17px,1.5vw,22px)] tracking-[-0.01em] leading-[1.25]"
+                  class="basis-30 grow-1 font-display font-[500] text-[clamp(17px,1.5vw,22px)] tracking-[-0.01em] leading-[1.25]"
                 >
                   <template v-for="(n, ni) in s.name" :key="n">
-                    <span v-if="ni > 0" class="text-ink-2 font-normal" aria-hidden="true">
-                      ×
-                    </span>
+                    <span v-if="ni > 0" class="text-ink-2 font-normal" aria-hidden="true">×</span>
                     <a
                       class="text-ink border-b border-rule-soft pb-[1px] no-underline transition-colors hover:border-accent hover:text-accent"
                       :href="`/speakers/${encodeURIComponent(n)}`"
@@ -163,7 +154,9 @@ const grouped = computed(() => {
                   </template>
                 </div>
                 <!-- トークタイトル（外部リンク、未決定の場合は TBD 表示） -->
-                <div class="text-[clamp(14px,1.1vw,16px)] text-ink-2 leading-[1.5]">
+                <div
+                  class="basis-0 grow-999 min-inline-[70%] text-[clamp(14px,1.1vw,16px)] text-ink-2 leading-[1.5]"
+                >
                   <a
                     v-if="s.title"
                     :href="s.url"
@@ -179,15 +172,10 @@ const grouped = computed(() => {
                       {{ t.session_format_panel }}
                     </span>
                     <span class="group-hover:underline">{{ s.title }}</span>
-                    <span class="font-mono text-[10px] text-ink-2 ml-1">
-                      ({{ t.external }})
-                    </span>
+                    <span class="font-mono text-[10px] text-ink-2 ml-1">({{ t.external }})</span>
                   </a>
                   <!-- タイトル未決定時のプレースホルダー -->
-                  <span
-                    v-else
-                    class="font-mono text-[12px] text-ink-2 uppercase tracking-[0.06em]"
-                  >
+                  <span v-else class="font-mono text-[12px] text-ink-2 uppercase tracking-[0.06em]">
                     {{ t.tbd }}
                   </span>
                 </div>

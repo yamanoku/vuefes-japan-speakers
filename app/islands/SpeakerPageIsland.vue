@@ -91,9 +91,7 @@ const record = computed(() => {
             class="grid grid-cols-[40px_1fr] gap-x-4 border-t border-rule-softer py-4.5"
           >
             <!-- 開催年リンク（年度別ページへ） -->
-            <span
-              class="font-mono text-[12px] text-ink-3 text-center pt-[3px]"
-            >
+            <span class="font-mono text-[12px] text-ink-3 text-center pt-[3px]">
               <a class="text-ink underline hover:no-underline" :href="`/${talk.year}`">
                 {{ talk.year }}
               </a>
@@ -124,10 +122,7 @@ const record = computed(() => {
                 </span>
               </a>
               <!-- 共同登壇者のリスト（各スピーカープロフィールへのリンク） -->
-              <span
-                v-if="talk.coSpeakers.length > 0"
-                class="text-[12px] font-mono text-ink-3"
-              >
+              <span v-if="talk.coSpeakers.length > 0" class="text-[12px] font-mono text-ink-3">
                 w/
                 <template
                   v-for="(coSpeakerName, coSpeakerIndex) in talk.coSpeakers"
@@ -149,13 +144,8 @@ const record = computed(() => {
     </template>
 
     <!-- スピーカーが存在しない場合 -->
-    <main
-      v-else
-      class="px-pad-x py-20 font-mono text-[14px] text-ink-2"
-    >
-      <h1 class="font-display text-[40px] text-ink m-0">
-        Speaker Not Found
-      </h1>
+    <main v-else class="px-pad-x py-20 font-mono text-[14px] text-ink-2">
+      <h1 class="font-display text-[40px] text-ink m-0">Speaker Not Found</h1>
       <p>{{ speakerName }}</p>
     </main>
 

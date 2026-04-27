@@ -19,11 +19,11 @@ const speakerId = "speaker-filter-speaker";
 </script>
 
 <template>
-  <div
-    class="grid grid-cols-2 gap-6 px-pad-x py-5 border-b border-rule-soft items-center max-[700px]:grid-cols-1"
-  >
+  <div class="flex flex-wrap gap-6 px-pad-x py-5 border-b border-rule-soft items-center">
     <!-- テキスト検索フィールド -->
-    <div class="grid grid-cols-[auto_1fr] gap-3 items-center">
+    <div
+      class="grow-1 basis-[calc((50% - 100%) * 999)] grid grid-cols-[auto_1fr] gap-3 items-center"
+    >
       <label
         class="font-mono text-[12px] tracking-[0.1em] text-ink whitespace-nowrap"
         :for="searchId"
@@ -40,7 +40,9 @@ const speakerId = "speaker-filter-speaker";
       />
     </div>
     <!-- スピーカー絞り込みフィールド -->
-    <div class="grid grid-cols-[auto_1fr] gap-[12px] items-center">
+    <div
+      class="grow-1 basis-[calc((50% - 100%) * 999)] grid grid-cols-[auto_1fr] gap-[12px] items-center"
+    >
       <label
         class="font-mono text-[12px] tracking-[0.1em] text-ink whitespace-nowrap"
         :for="speakerId"

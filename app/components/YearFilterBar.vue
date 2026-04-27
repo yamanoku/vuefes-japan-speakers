@@ -16,16 +16,10 @@ const { t } = useVfjsI18n();
 </script>
 
 <template>
-  <div
-    class="px-pad-x py-3.5 border-b border-rule-soft"
-    role="region"
-    :aria-label="t.filter_year"
-  >
+  <div class="px-pad-x py-3.5 border-b border-rule-soft" role="region" :aria-label="t.filter_year">
     <!-- 年度選択ボタングループ -->
     <div class="flex items-center flex-wrap gap-1.5">
-      <span
-        class="font-mono text-[12px] tracking-[0.1em] text-ink mr-3"
-      >
+      <span class="font-mono text-[12px] tracking-[0.1em] text-ink mr-3">
         {{ t.filter_year }}
       </span>
       <div class="flex gap-1.5 flex-wrap" role="group" :aria-label="t.filter_year">

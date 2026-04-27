@@ -75,11 +75,7 @@ const stats = computed(() => {
         @click="view = 'chronicle'"
       >
         {{ t.view_timeline }}
-        <span
-          class="font-mono text-[12px] tracking-[0.02em] ml-1"
-        >
-          Chronicle
-        </span>
+        <span class="font-mono text-[12px] tracking-[0.02em] ml-1">Chronicle</span>
       </button>
       <!-- スピーカー名索引ディレクトリビュータブ -->
       <button
@@ -94,11 +90,7 @@ const stats = computed(() => {
         @click="view = 'index'"
       >
         {{ t.view_index }}
-        <span
-          class="font-mono text-[12px] tracking-[0.02em] ml-1"
-        >
-          Directory
-        </span>
+        <span class="font-mono text-[12px] tracking-[0.02em] ml-1">Directory</span>
       </button>
     </div>
 

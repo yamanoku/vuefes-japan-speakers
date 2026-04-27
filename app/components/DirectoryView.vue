@@ -182,10 +182,7 @@ function toggleRow(name: string) {
               class="basis-0 grow-999 min-inline-[50%] flex flex-wrap gap-2 justify-start items-center"
             >
               <!-- 行番号（表示専用） -->
-              <span
-                class="font-mono text-[12px] text-ink-2 tabular-nums"
-                aria-hidden="true"
-              >
+              <span class="font-mono text-[12px] text-ink-2 tabular-nums" aria-hidden="true">
                 {{ String(i + 1).padStart(3, "0") }}
               </span>
               <!-- スピーカー名（振り仮名・英語名対応） -->
@@ -284,15 +281,10 @@ function toggleRow(name: string) {
                       {{ t.session_format_panel }}
                     </span>
                     <span class="group-hover:underline">{{ talk.title || t.tbd }}</span>
-                    <span class="font-mono text-[10px] text-ink-2 ml-1">
-                      ({{ t.external }})
-                    </span>
+                    <span class="font-mono text-[10px] text-ink-2 ml-1">({{ t.external }})</span>
                   </a>
                   <!-- 共同登壇者のリスト（各スピーカープロフィールへのリンク） -->
-                  <span
-                    v-if="talk.coSpeakers.length > 0"
-                    class="text-[12px] font-mono text-ink-3"
-                  >
+                  <span v-if="talk.coSpeakers.length > 0" class="text-[12px] font-mono text-ink-3">
                     w/
                     <template v-for="(cn, ci) in talk.coSpeakers" :key="cn">
                       <template v-if="ci > 0">,</template>
