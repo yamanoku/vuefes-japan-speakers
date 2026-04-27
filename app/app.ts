@@ -115,6 +115,11 @@ export default defineApp({
       },
     ],
     stylesheets: import.meta.env.DEV ? ["/app/assets/css/main.css"] : [],
+    scripts: [
+      {
+        children: `(function(){try{var s=localStorage.getItem('vfjs:color-scheme');if(s==='dark'||s==='light'){document.documentElement.setAttribute('data-color-scheme',s)}}catch(e){}})();`,
+      },
+    ],
   },
   routes: [
     defineRoute({
