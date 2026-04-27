@@ -137,7 +137,7 @@ const grouped = computed(() => {
               <div class="flex flex-wrap gap-[clamp(16px,2vw,32px)] items-baseline">
                 <!-- スピーカー名（複数名対応・振り仮名・英語名対応、プロフィールページへのリンク） -->
                 <div
-                  class="basis-30 grow-1 font-display font-[500] text-[clamp(17px,1.5vw,22px)] tracking-[-0.01em] leading-[1.25]"
+                  class="flex flex-wrap gap-x-2 gap-y-1 basis-50 grow-1 font-display font-[500] text-[clamp(17px,1.5vw,22px)] tracking-[-0.01em] leading-[1.25]"
                 >
                   <template v-for="(n, ni) in s.name" :key="n">
                     <span v-if="ni > 0" class="text-ink-2 font-normal" aria-hidden="true">×</span>
@@ -155,7 +155,7 @@ const grouped = computed(() => {
                 </div>
                 <!-- トークタイトル（外部リンク、未決定の場合は TBD 表示） -->
                 <div
-                  class="basis-0 grow-999 min-inline-[70%] text-[clamp(14px,1.1vw,16px)] text-ink-2 leading-[1.5]"
+                  class="basis-0 grow-999 min-inline-[60%] text-[clamp(14px,1.1vw,16px)] text-ink-2 leading-[1.5]"
                 >
                   <a
                     v-if="s.title"
