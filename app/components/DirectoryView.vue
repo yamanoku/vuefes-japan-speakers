@@ -204,7 +204,7 @@ function toggleRow(name: string) {
                   class="[font-family:var(--font-mono)] bg-[var(--accent)] text-[12px] text-[var(--accent-ink)] ml-[8px] font-normal tracking-[0.02em] align-[2px] border border-[var(--accent)] px-[5px] py-[1px]"
                   :aria-label="t.appearance_count(rec.talks.length)"
                 >
-                  ×{{ rec.talks.length }}
+                  <span>×{{ rec.talks.length }}</span>
                 </span>
               </span>
               <!-- 登壇年度グリッド（各年のマスを塗りつぶして登壇済みかを可視化） -->
