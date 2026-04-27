@@ -14,8 +14,8 @@ catalogs:
       version: 4.2.4
   test:
     '@vue/test-utils':
-      specifier: 2.4.6
-      version: 2.4.6
+      specifier: 2.4.8
+      version: 2.4.8
     playwright:
       specifier: 1.59.1
       version: 1.59.1
@@ -90,7 +90,7 @@ importers:
         version: 0.72.0(vite@8.0.10(@types/node@24.12.2)(jiti@2.6.1))
       '@vue/test-utils':
         specifier: catalog:test
-        version: 2.4.6
+        version: 2.4.8(@vue/compiler-dom@3.5.33)(@vue/server-renderer@3.5.33(vue@3.5.33(typescript@5.9.3)))(vue@3.5.33(typescript@5.9.3))
       oxlint:
         specifier: catalog:vize
         version: 1.61.0(oxlint-tsgolint@0.21.1)
@@ -1223,8 +1223,15 @@ packages:
   '@vue/shared@3.5.33':
     resolution: {integrity: sha512-5vR2QIlmaLG77Ygd4pMP6+SGQ5yox9VhtnbDWTy9DzMzdmeLxZ1QqxrywEZ9sa1AVubfIJyaCG3ytyWU81ufcQ==}
 
-  '@vue/test-utils@2.4.6':
-    resolution: {integrity: sha512-FMxEjOpYNYiFe0GkaHsnJPXFHxQ6m4t8vI/ElPGpMWxZKpmRvQ33OIrvRXemy6yha03RxhOlQuy+gZMC3CQSow==}
+  '@vue/test-utils@2.4.8':
+    resolution: {integrity: sha512-cjAKFbSXFhtZ9Cj+ug60b21lW/BN737e+Syu2LPACIW6R0zVtj65Fnfe649KjfHor3Etx3ZavDFFBrZ+p21YNw==}
+    peerDependencies:
+      '@vue/compiler-dom': 3.x
+      '@vue/server-renderer': 3.x
+      vue: 3.x
+    peerDependenciesMeta:
+      '@vue/server-renderer':
+        optional: true
 
   '@vuerend/core@0.1.1-alpha.3':
     resolution: {integrity: sha512-CULQtlH7MRnGu84ivII7yWt+/yYErw7/uZ+aQ6SL7xRuKyH3yYxpPlRL2QfZn3BvXO+PeXTn0DplS56BW1JcUA==}
@@ -1778,8 +1785,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  vue-component-type-helpers@2.2.12:
-    resolution: {integrity: sha512-YbGqHZ5/eW4SnkPNR44mKVc6ZKQoRs/Rux1sxC6rdwXb4qpbOSYfDr9DsTHolOTGmIKgM9j141mZbBeg05R1pw==}
+  vue-component-type-helpers@3.2.7:
+    resolution: {integrity: sha512-+gPp5YGmhfsj1IN+xUo7y0fb4clfnOiiUA39y07yW1VzCRjzVgwLbtmdWlghh7mXrPsEaYc7rrIir/HT6C8vYQ==}
 
   vue@3.5.33:
     resolution: {integrity: sha512-1AgChhx5w3ALgT4oK3acm2Es/7jyZhWSVUfs3rOBlGQC0rjEDkS7G4lWlJJGGNQD+BV3reCwbQrOe1mPNwKHBQ==}
@@ -2639,10 +2646,14 @@ snapshots:
 
   '@vue/shared@3.5.33': {}
 
-  '@vue/test-utils@2.4.6':
+  '@vue/test-utils@2.4.8(@vue/compiler-dom@3.5.33)(@vue/server-renderer@3.5.33(vue@3.5.33(typescript@5.9.3)))(vue@3.5.33(typescript@5.9.3))':
     dependencies:
+      '@vue/compiler-dom': 3.5.33
       js-beautify: 1.15.4
-      vue-component-type-helpers: 2.2.12
+      vue: 3.5.33(typescript@5.9.3)
+      vue-component-type-helpers: 3.2.7
+    optionalDependencies:
+      '@vue/server-renderer': 3.5.33(vue@3.5.33(typescript@5.9.3))
 
   '@vuerend/core@0.1.1-alpha.3(vite@8.0.10(@types/node@24.12.2)(jiti@2.6.1))(vue@3.5.33(typescript@5.9.3))':
     dependencies:
@@ -3197,7 +3208,7 @@ snapshots:
       '@vizejs/native-win32-arm64-msvc': 0.72.0
       '@vizejs/native-win32-x64-msvc': 0.72.0
 
-  vue-component-type-helpers@2.2.12: {}
+  vue-component-type-helpers@3.2.7: {}
 
   vue@3.5.33(typescript@5.9.3):
     dependencies:
