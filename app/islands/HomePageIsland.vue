@@ -52,13 +52,17 @@ const stats = computed(() => {
 <template>
   <div>
     <AppHeader />
+
+    <!-- タイトル・統計情報 -->
     <AppMasthead :stats="stats" />
 
+    <!-- ビュー切り替えタブバー（Chronicle／Directory） -->
     <div
       class="flex gap-0 px-[var(--pad-x)] border-b border-[var(--rule)] bg-[var(--paper)]"
       role="tablist"
       aria-label="View mode"
     >
+      <!-- 年度別クロニクルビュータブ -->
       <button
         role="tab"
         :aria-selected="view === 'chronicle'"
@@ -80,6 +84,7 @@ const stats = computed(() => {
           - Chronicle
         </span>
       </button>
+      <!-- スピーカー名索引ディレクトリビュータブ -->
       <button
         role="tab"
         :aria-selected="view === 'index'"
@@ -103,6 +108,8 @@ const stats = computed(() => {
       </button>
     </div>
 
+    <!-- 選択中のビューに応じてコンポーネントを切り替え -->
+    <!-- 年度別クロニクルビュー -->
     <ChronicleView
       v-if="view === 'chronicle'"
       :all-speakers="allSpeakers"
@@ -114,6 +121,7 @@ const stats = computed(() => {
       @update:selected-speaker="selectedSpeaker = $event"
       @update:query="query = $event"
     />
+    <!-- スピーカー索引ディレクトリビュー -->
     <DirectoryView
       v-else
       :all-speakers="allSpeakers"

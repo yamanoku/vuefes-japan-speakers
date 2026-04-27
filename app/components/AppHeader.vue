@@ -8,12 +8,14 @@ const { scheme, setScheme } = useColorScheme();
 </script>
 
 <template>
+  <!-- サイト全体のヘッダー（スクロール時にページ上部へ固定） -->
   <header
     class="border-b border-[var(--rule)] bg-[var(--paper)] sticky top-0 z-20"
     style="backdrop-filter: saturate(1.1)"
     role="banner"
   >
     <div class="flex flex-wrap justify-between items-center gap-2 py-[14px] px-[var(--pad-x)]">
+      <!-- ロゴマーク＋サイト名（トップページへのリンク） -->
       <a
         href="/"
         class="flex items-center gap-[10px] [font-family:var(--font-display)] font-semibold text-[15px] whitespace-nowrap leading-[1.15] text-[var(--ink)] no-underline hover:text-[var(--accent)] transition-colors"
@@ -22,7 +24,9 @@ const { scheme, setScheme } = useColorScheme();
         <span>Vue Fes Japan Speakers</span>
       </a>
 
+      <!-- ヘッダー右側のコントロール群 -->
       <div class="flex items-center gap-2">
+        <!-- カラースキーム切り替えセレクト（ライト／ダーク／システム） -->
         <select
           class="border border-[var(--rule)] bg-[var(--paper)] text-[var(--ink-2)] [font-family:var(--font-mono)] text-[12px] tracking-[0.08em] px-[8px] py-[5px] cursor-pointer"
           :aria-label="t.color_scheme"
@@ -35,11 +39,13 @@ const { scheme, setScheme } = useColorScheme();
           <option value="dark">{{ t.color_scheme_dark }}</option>
           <option value="system" selected>{{ t.color_scheme_system }}</option>
         </select>
+        <!-- 言語切り替えボタングループ（JA／EN） -->
         <div
           class="inline-flex border border-[var(--rule)] [font-family:var(--font-mono)] text-[12px] tracking-[0.08em]"
           role="group"
           :aria-label="t.language"
         >
+          <!-- 日本語切り替えボタン -->
           <button
             type="button"
             class="px-[10px] py-[5px] cursor-pointer"
@@ -49,6 +55,7 @@ const { scheme, setScheme } = useColorScheme();
           >
             JA
           </button>
+          <!-- 英語切り替えボタン -->
           <button
             type="button"
             class="px-[10px] py-[5px] cursor-pointer border-l border-[var(--rule)]"

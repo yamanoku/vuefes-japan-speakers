@@ -44,10 +44,13 @@ const record = computed(() => {
   <div>
     <AppHeader />
 
+    <!-- スピーカーページのメインコンテンツ（該当スピーカーが存在する場合） -->
     <template v-if="found">
+      <!-- スピーカーページのヘッダー（名前・登壇回数・登壇年度） -->
       <header
         class="border-b border-[var(--rule)] pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-[var(--pad-x)]"
       >
+        <!-- スピーカー名 -->
         <h1
           class="[font-family:var(--font-display)] text-[clamp(28px,4.5vw,72px)] font-bold leading-[1] mb-[16px]"
           :lang="hasJapanese(record.name) ? 'ja' : 'en'"
@@ -61,7 +64,9 @@ const record = computed(() => {
           </template>
         </h1>
         <div class="[font-family:var(--font-mono)] text-[var(--ink-3)]">
+          <!-- 総登壇回数 -->
           <div>{{ t.appearance_count(record.talks.length) }}</div>
+          <!-- 登壇年度のリスト（各年度ページへのリンク） -->
           <div class="mt-[8px] text-[12px] text-[var(--ink-2)]">
             {{ t.years_appeared }}:
             <template v-for="(year, index) in record.years" :key="year">
@@ -74,6 +79,7 @@ const record = computed(() => {
         </div>
       </header>
 
+      <!-- 関連トーク一覧セクション -->
       <section class="px-[var(--pad-x)] py-[40px]">
         <h2 class="[font-family:var(--font-mono)] tracking-[0.1em] text-[var(--ink-3)] mb-[16px]">
           {{ t.related_talks }}
@@ -84,6 +90,7 @@ const record = computed(() => {
             :key="index"
             class="grid grid-cols-[40px_1fr] gap-x-[16px] border-t border-[var(--rule-softer)] py-[18px]"
           >
+            <!-- 開催年リンク（年度別ページへ） -->
             <span
               class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-3)] text-center pt-[3px]"
             >
@@ -92,12 +99,14 @@ const record = computed(() => {
               </a>
             </span>
             <div class="flex flex-col gap-y-[8px]">
+              <!-- トークタイトル（外部リンク） -->
               <a
                 class="text-[16px] text-[var(--ink)] no-underline group flex flex-wrap items-baseline gap-[8px]"
                 :href="talk.url"
                 target="_blank"
                 rel="noopener noreferrer"
               >
+                <!-- パネルセッションのフォーマットバッジ -->
                 <span
                   v-if="talk.format === 'panel'"
                   class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--ink)] text-[var(--ink)] px-[5px] py-[1px] leading-[1.15]"
@@ -114,6 +123,7 @@ const record = computed(() => {
                   <span class="text-[10px] ml-[4px]">({{ t.external }})</span>
                 </span>
               </a>
+              <!-- 共同登壇者のリスト（各スピーカープロフィールへのリンク） -->
               <span
                 v-if="talk.coSpeakers.length > 0"
                 class="text-[12px] [font-family:var(--font-mono)] text-[var(--ink-3)]"
@@ -138,6 +148,7 @@ const record = computed(() => {
       </section>
     </template>
 
+    <!-- スピーカーが存在しない場合 -->
     <main
       v-else
       class="px-[var(--pad-x)] py-[80px] [font-family:var(--font-mono)] text-[14px] text-[var(--ink-2)]"

@@ -86,8 +86,10 @@ function toggleRow(name: string) {
 </script>
 
 <template>
+  <!-- ディレクトリビュー：スピーカーを人物単位でまとめ、アコーディオンで登壇履歴を表示するビュー -->
   <main>
     <section :style="{ '--idxpad': '14px' }">
+      <!-- スピーカー名・キーワードによるフィルターバー -->
       <SpeakerFilterBar
         :query="query"
         :selected-speaker="selectedSpeaker"
@@ -96,6 +98,7 @@ function toggleRow(name: string) {
         @update:selected-speaker="emit('update:selectedSpeaker', $event)"
       />
 
+      <!-- 開催年度によるフィルターバー -->
       <YearFilterBar
         :selected-year="selectedYear"
         :counts="counts"
@@ -103,9 +106,11 @@ function toggleRow(name: string) {
       />
 
       <!-- Sort header -->
+      <!-- ソートボタンヘッダー（登壇回数・名前順・最新年で並び替え） -->
       <div
         class="flex items-center gap-[8px] px-[var(--pad-x)] pt-[18px] pb-[10px] border-b border-[var(--rule-soft)] [font-family:var(--font-mono)] overflow-x-auto"
       >
+        <!-- 登壇回数の多い順でソートするボタン -->
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           :class="
@@ -117,6 +122,7 @@ function toggleRow(name: string) {
         >
           Appearances ↓
         </button>
+        <!-- 名前の昇順でソートするボタン -->
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           :class="
@@ -128,6 +134,7 @@ function toggleRow(name: string) {
         >
           Name A→Z
         </button>
+        <!-- 最新登壇年の新しい順でソートするボタン -->
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           :class="
@@ -139,12 +146,14 @@ function toggleRow(name: string) {
         >
           Latest year ↓
         </button>
+        <!-- フィルター済み件数 / 全体件数の表示 -->
         <span class="ml-auto text-[12px] tracking-[0.06em] text-[var(--ink-3)] whitespace-nowrap">
           {{ String(filtered.length).padStart(3, "0") }} /
           {{ String(allRecords.length).padStart(3, "0") }}
         </span>
       </div>
 
+      <!-- フィルター結果が0件のときの空状態メッセージ -->
       <div
         v-if="filtered.length === 0"
         class="px-[var(--pad-x)] py-[80px] text-center [font-family:var(--font-mono)] text-[13px] tracking-[0.05em] uppercase text-[var(--ink-3)]"
@@ -152,6 +161,7 @@ function toggleRow(name: string) {
         {{ t.empty }}
       </div>
 
+      <!-- スピーカー一覧リスト -->
       <ol class="list-none p-0 m-0">
         <li
           v-for="(rec, i) in filtered"
@@ -159,6 +169,7 @@ function toggleRow(name: string) {
           class="border-b border-[var(--rule-softer)]"
           :data-open="openRows.has(rec.name) ? 'true' : 'false'"
         >
+          <!-- スピーカー行の展開/折りたたみボタン -->
           <button
             class="w-full flex flex-wrap items-center gap-x-[12px] px-[var(--pad-x)] py-[var(--idxpad)] cursor-pointer text-left"
             :class="openRows.has(rec.name) ? 'bg-[var(--paper-2)]' : ''"
@@ -168,12 +179,14 @@ function toggleRow(name: string) {
             <span
               class="basis-0 grow-999 min-inline-[50%] flex flex-wrap gap-[8px] justify-start items-center"
             >
+              <!-- 行番号（表示専用） -->
               <span
                 class="[font-family:var(--font-mono)] text-[12px] text-[var(--ink-2)] tabular-nums"
                 aria-hidden="true"
               >
                 {{ String(i + 1).padStart(3, "0") }}
               </span>
+              <!-- スピーカー名（振り仮名・英語名対応） -->
               <span
                 class="[font-family:var(--font-display)] text-[clamp(15px,1.2vw,18px)] font-[500] tracking-[-0.005em] text-[var(--ink)]"
                 :lang="hasJapanese(rec.name) ? 'ja' : 'en'"
@@ -185,6 +198,7 @@ function toggleRow(name: string) {
                 <template v-else>
                   {{ lang === "en" && rec.nameEn ? rec.nameEn : rec.name }}
                 </template>
+                <!-- 複数回登壇バッジ（登壇回数を ×N 形式で表示） -->
                 <span
                   v-if="rec.talks.length > 1"
                   class="[font-family:var(--font-mono)] bg-[var(--accent)] text-[12px] text-[var(--accent-ink)] ml-[8px] font-normal tracking-[0.02em] align-[2px] border border-[var(--accent)] px-[5px] py-[1px]"
@@ -193,6 +207,7 @@ function toggleRow(name: string) {
                   ×{{ rec.talks.length }}
                 </span>
               </span>
+              <!-- 登壇年度グリッド（各年のマスを塗りつぶして登壇済みかを可視化） -->
               <span
                 class="inline-grid gap-[3px] grow-999 justify-end"
                 style="grid-template-columns: repeat(6, 28px)"
@@ -215,6 +230,7 @@ function toggleRow(name: string) {
                 </span>
               </span>
             </span>
+            <!-- 展開/折りたたみアイコン（+/−） -->
             <span
               class="basis-[24px] grow-1 [font-family:var(--font-mono)] text-[16px] text-[var(--ink-3)] text-center"
               aria-hidden="true"
@@ -222,23 +238,28 @@ function toggleRow(name: string) {
               {{ openRows.has(rec.name) ? "−" : "+" }}
             </span>
           </button>
+          <!-- 展開時の詳細エリア（プロフィールリンクと登壇一覧） -->
           <div
             v-if="openRows.has(rec.name)"
             class="bg-[var(--paper-2)] border-t border-[var(--rule-softer)] pt-[8px] pb-[22px] px-[var(--pad-x)]"
           >
+            <!-- スピーカープロフィールページへのリンク -->
             <a
               class="[font-family:var(--font-mono)] text-[12px] tracking-[0.06em] text-[var(--ink)] underline hover:no-underline"
               :href="`/speakers/${encodeURIComponent(rec.name)}`"
             >
               {{ t.speaker_profile }}: {{ rec.name }}
             </a>
+            <!-- 登壇一覧リスト -->
             <ol class="list-none p-0 m-0 mt-[14px]">
+              <!-- 各登壇情報（開催年・タイトル・共同登壇者） -->
               <li
                 v-for="(talk, k) in rec.talks"
                 :key="k"
                 class="grid grid-cols-[30px_1fr] gap-[16px] items-baseline py-[6px] border-t border-[var(--rule-softer)]"
                 :class="k === 0 ? 'border-t-0' : ''"
               >
+                <!-- 開催年リンク（年度別ページへ） -->
                 <a
                   :href="`/${talk.year}`"
                   class="underline hover:no-underline [font-family:var(--font-mono)] text-[12px] text-[var(--ink)] tabular-nums"
@@ -246,12 +267,14 @@ function toggleRow(name: string) {
                   {{ talk.year }}
                 </a>
                 <div class="flex flex-col gap-y-[8px]">
+                  <!-- トークタイトル（外部リンク） -->
                   <a
                     class="text-[14px] text-[var(--ink)] pb-[1px] leading-[1.45] no-underline group"
                     :href="talk.url"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
+                    <!-- パネルセッションのフォーマットバッジ -->
                     <span
                       v-if="talk.format === 'panel'"
                       class="relative top-[-1px] inline-flex items-center self-center align-middle [font-family:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] border border-[var(--ink)] text-[var(--ink)] px-[5px] py-[1px] leading-[1.15] mr-[8px]"
@@ -265,6 +288,7 @@ function toggleRow(name: string) {
                       ({{ t.external }})
                     </span>
                   </a>
+                  <!-- 共同登壇者のリスト（各スピーカープロフィールへのリンク） -->
                   <span
                     v-if="talk.coSpeakers.length > 0"
                     class="text-[12px] [font-family:var(--font-mono)] text-[var(--ink-3)]"
