@@ -1,26 +1,26 @@
 <script setup vapor lang="ts">
-import { toRefs } from "vue";
 import type { SpeakerInfo } from "../../types";
 import AppFooter from "../components/AppFooter.vue";
 import AppHeader from "../components/AppHeader.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-const props = defineProps<{
+const { found, speakers, year } = defineProps<{
   found: boolean;
   speakers: SpeakerInfo[];
   year: string;
 }>();
 
-const { found, speakers, year } = toRefs(props);
 const { t, lang } = useVfjsI18n();
 </script>
 
 <template>
   <div>
-    <AppHeader />
+    <div class="contents">
+      <AppHeader />
+    </div>
 
     <!-- 年度ページのメインコンテンツ（該当年度が存在する場合） -->
-    <main v-if="found">
+    <main v-if="$props.found">
       <!-- 年度ページのヘッダー（タイトル・トーク数・公式サイトリンク） -->
       <header
         class="border-b border-rule pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-pad-x"
@@ -28,16 +28,16 @@ const { t, lang } = useVfjsI18n();
         <!-- 年度タイトル（2022年はオンライン開催のサブ表記付き） -->
         <h1 class="font-display text-[clamp(28px,4.5vw,72px)] font-[500] leading-[1] mb-4">
           Vue Fes Japan
-          <span v-if="year === '2022'">Online</span>
-          <em class="not-italic text-accent">{{ year }}</em>
+          <span v-if="$props.year === '2022'">Online</span>
+          <em class="not-italic text-accent">{{ $props.year }}</em>
         </h1>
         <div class="font-mono text-ink-3">
           <!-- その年のトーク総数 -->
-          <div>{{ t.year_total_talks(speakers.length) }}</div>
+          <div>{{ t.year_total_talks($props.speakers.length) }}</div>
           <!-- 公式サイトへの外部リンク -->
           <div class="mt-2 text-[12px]">
             <a
-              :href="`https://vuefes.jp/${year}/`"
+              :href="`https://vuefes.jp/${$props.year}/`"
               target="_blank"
               rel="noopener noreferrer"
               class="inline-block text-ink-2 no-underline group flex items-baseline gap-1"
@@ -57,7 +57,7 @@ const { t, lang } = useVfjsI18n();
         <ol class="list-none p-0 m-0">
           <!-- 各スピーカーの行 -->
           <li
-            v-for="(speaker, index) in speakers"
+            v-for="(speaker, index) in $props.speakers"
             :key="index"
             class="grid grid-cols-[40px_1fr] border-t border-rule-softer py-4.5"
           >
@@ -77,7 +77,7 @@ const { t, lang } = useVfjsI18n();
                     :href="`/speakers/${encodeURIComponent(name)}`"
                   >
                     <ruby v-if="speaker.nameRuby?.[nameIndex] && lang === 'ja'" lang="ja">
-                      {{ name }}
+                      <span>{{ name }}</span>
                       <rt>{{ speaker.nameRuby[nameIndex] }}</rt>
                     </ruby>
                     <span v-else>
@@ -121,10 +121,12 @@ const { t, lang } = useVfjsI18n();
     <!-- 年度が存在しない場合 -->
     <main v-else class="px-pad-x py-20 font-mono text-[14px] text-ink-2">
       <h1 class="font-display text-[40px] text-ink m-0">Year Not Found</h1>
-      <p>{{ year }}</p>
+      <p>{{ $props.year }}</p>
     </main>
 
     <!-- サイトフッター -->
-    <AppFooter />
+    <div class="contents">
+      <AppFooter />
+    </div>
   </div>
 </template>

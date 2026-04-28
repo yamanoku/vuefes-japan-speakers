@@ -95,12 +95,87 @@ const fmt = {
 export { fmt, lint };
 
 const vaporMode = process.env.VFJS_VAPOR !== "0";
+const vueServerRendererPath = fileURLToPath(
+  new URL(
+    "./node_modules/@vue/server-renderer/dist/server-renderer.esm-bundler.js",
+    import.meta.url,
+  ),
+);
+const vuerendVaporRuntimePath = fileURLToPath(
+  new URL("./app/runtime/vuerend-vapor-runtime.ts", import.meta.url),
+);
+
+function vuerendVaporRuntimeAlias(): Plugin {
+  return {
+    name: "vfjs:vuerend-vapor-runtime-alias",
+    enforce: "pre",
+    resolveId(id) {
+      if (
+        id === "./runtime-vapor.esm-bundler-82sqnWQL.mjs" ||
+        id.endsWith("/runtime-vapor.esm-bundler-82sqnWQL.mjs")
+      ) {
+        return vuerendVaporRuntimePath;
+      }
+    },
+  };
+}
 
 function staticHtmlPreview(): Plugin {
   return {
     name: "vfjs:static-html-preview",
     configurePreviewServer(server) {
-      const previewOutDir = resolve(server.config.root, server.config.build.outDir);
+      const configuredOutDir = resolve(server.config.root, server.config.build.outDir);
+      const clientOutDir = resolve(server.config.root, "dist/client");
+      const previewOutDir = existsSync(resolve(configuredOutDir, "index.html"))
+        ? configuredOutDir
+        : existsSync(resolve(clientOutDir, "index.html"))
+          ? clientOutDir
+          : configuredOutDir;
+
+      const contentTypes: Record<string, string> = {
+        ".css": "text/css;charset=utf-8",
+        ".html": "text/html;charset=utf-8",
+        ".ico": "image/x-icon",
+        ".js": "text/javascript;charset=utf-8",
+        ".json": "application/json;charset=utf-8",
+        ".png": "image/png",
+        ".svg": "image/svg+xml;charset=utf-8",
+        ".txt": "text/plain;charset=utf-8",
+        ".webp": "image/webp",
+        ".woff2": "font/woff2",
+      };
+
+      const isSafePath = (file: string) => {
+        const relativeFile = relative(previewOutDir, file);
+        return (
+          relativeFile !== "" && !relativeFile.startsWith("..") && !relativeFile.startsWith(sep)
+        );
+      };
+
+      const sendFile = (
+        request: IncomingMessage,
+        response: ServerResponse,
+        file: string,
+        statusCode: number,
+        contentType = contentTypes[extname(file)] ?? "application/octet-stream",
+      ) => {
+        const fileStat = statSync(file);
+        if (!fileStat.isFile()) {
+          return false;
+        }
+
+        response.statusCode = statusCode;
+        response.setHeader("Content-Type", contentType);
+        response.setHeader("Content-Length", fileStat.size);
+
+        if (request.method === "HEAD") {
+          response.end();
+        } else {
+          createReadStream(file).pipe(response);
+        }
+
+        return true;
+      };
 
       const sendHtml = (
         request: IncomingMessage,
@@ -108,22 +183,7 @@ function staticHtmlPreview(): Plugin {
         htmlFile: string,
         statusCode: number,
       ) => {
-        const htmlStat = statSync(htmlFile);
-        if (!htmlStat.isFile()) {
-          return false;
-        }
-
-        response.statusCode = statusCode;
-        response.setHeader("Content-Type", "text/html;charset=utf-8");
-        response.setHeader("Content-Length", htmlStat.size);
-
-        if (request.method === "HEAD") {
-          response.end();
-        } else {
-          createReadStream(htmlFile).pipe(response);
-        }
-
-        return true;
+        return sendFile(request, response, htmlFile, statusCode, "text/html;charset=utf-8");
       };
 
       server.middlewares.use((request, response, next) => {
@@ -139,6 +199,15 @@ function staticHtmlPreview(): Plugin {
 
         const url = new URL(request.url, "http://localhost");
         if (extname(url.pathname) !== "") {
+          const staticFile = resolve(previewOutDir, `.${url.pathname}`);
+          if (
+            isSafePath(staticFile) &&
+            existsSync(staticFile) &&
+            sendFile(request, response, staticFile, 200)
+          ) {
+            return;
+          }
+
           next();
           return;
         }
@@ -147,12 +216,9 @@ function staticHtmlPreview(): Plugin {
         const htmlPathname = pathname === "" ? "/index.html" : `${pathname}/index.html`;
         const htmlFile = resolve(previewOutDir, `.${htmlPathname}`);
         const notFoundFile = resolve(previewOutDir, "404.html");
-        const relativeHtmlFile = relative(previewOutDir, htmlFile);
 
         if (
-          relativeHtmlFile !== "" &&
-          !relativeHtmlFile.startsWith("..") &&
-          !relativeHtmlFile.startsWith(sep) &&
+          isSafePath(htmlFile) &&
           existsSync(htmlFile) &&
           sendHtml(request, response, htmlFile, 200)
         ) {
@@ -203,6 +269,7 @@ function cloudflarePages404(): Plugin {
 
 export default defineConfig({
   plugins: [
+    ...(vaporMode ? [vuerendVaporRuntimeAlias()] : []),
     tailwindcss(),
     vuerend({
       app: "./app/app.ts",
@@ -218,18 +285,32 @@ export default defineConfig({
     cloudflarePages404(),
   ],
   resolve: {
-    alias: {
+    alias: [
       // Vize SSR imports the package root; Vite's module runner needs the ESM build.
-      "@vue/server-renderer": fileURLToPath(
-        new URL(
-          "./node_modules/@vue/server-renderer/dist/server-renderer.esm-bundler.js",
-          import.meta.url,
-        ),
-      ),
-      "./runtime-vapor.esm-bundler-82sqnWQL.mjs": fileURLToPath(
-        new URL("./app/runtime/vuerend-vapor-runtime.ts", import.meta.url),
-      ),
-    },
+      {
+        find: "@vue/server-renderer",
+        replacement: vueServerRendererPath,
+      },
+      ...(vaporMode
+        ? [
+            {
+              find: "./runtime-vapor.esm-bundler-82sqnWQL.mjs",
+              replacement: vuerendVaporRuntimePath,
+            },
+          ]
+        : []),
+    ],
+  },
+  ...(vaporMode
+    ? {
+        optimizeDeps: {
+          exclude: ["@vuerend/core", "@vuerend/core/client/vapor-hydrate"],
+        },
+      }
+    : {}),
+  build: {
+    modulePreload: false,
+    target: "esnext",
   },
   environments: {
     server: {

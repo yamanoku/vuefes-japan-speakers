@@ -1,14 +1,12 @@
 <script setup vapor lang="ts">
-import { toRefs } from "vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-const props = defineProps<{
+const { query, selectedSpeaker, speakerOptions } = defineProps<{
   query: string;
   selectedSpeaker: string;
   speakerOptions: Array<{ label: string; value: string }>;
 }>();
 
-const { query, selectedSpeaker, speakerOptions } = toRefs(props);
 const emit = defineEmits<{
   "update:query": [string];
   "update:selectedSpeaker": [string];
@@ -37,7 +35,7 @@ const speakerId = "speaker-filter-speaker";
         type="search"
         class="bg-transparent border-0 border-b border-rule-soft px-0 py-[8px] font-body text-[15px] text-ink outline-none focus:border-accent w-full"
         :placeholder="t.filter_search_ph"
-        :value="query"
+        :value="$props.query"
         @input="emit('update:query', ($event.target as HTMLInputElement).value)"
       />
     </div>
@@ -54,11 +52,11 @@ const speakerId = "speaker-filter-speaker";
       <select
         :id="speakerId"
         class="bg-transparent border-0 border-b border-rule-soft px-0 pr-6 py-2 font-body text-[15px] text-ink cursor-pointer outline-none w-full focus:border-accent"
-        :value="selectedSpeaker"
+        :value="$props.selectedSpeaker"
         @change="emit('update:selectedSpeaker', ($event.target as HTMLSelectElement).value)"
       >
         <option value="all">{{ t.filter_all_speakers }}</option>
-        <option v-for="option in speakerOptions" :key="option.value" :value="option.value">
+        <option v-for="option in $props.speakerOptions" :key="option.value" :value="option.value">
           {{ option.label }}
         </option>
       </select>

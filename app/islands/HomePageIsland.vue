@@ -1,5 +1,5 @@
 <script setup vapor lang="ts">
-import { computed, onMounted, ref, toRefs, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import type { AcceptedYear, SpeakerWithYear } from "../../types";
 import { YEARS } from "../../types";
 import AppFooter from "../components/AppFooter.vue";
@@ -9,11 +9,10 @@ import ChronicleView from "../components/ChronicleView.vue";
 import DirectoryView from "../components/DirectoryView.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-const props = defineProps<{
+const { allSpeakers } = defineProps<{
   allSpeakers: SpeakerWithYear[];
 }>();
 
-const { allSpeakers } = toRefs(props);
 const { t } = useVfjsI18n();
 
 const view = ref<"chronicle" | "index">("chronicle");
@@ -31,14 +30,26 @@ const selectedYear = ref<AcceptedYear | "all">("all");
 const selectedSpeaker = ref<string>("all");
 const query = ref("");
 
+function updateSelectedYear(value: AcceptedYear | "all") {
+  selectedYear.value = value;
+}
+
+function updateSelectedSpeaker(value: string) {
+  selectedSpeaker.value = value;
+}
+
+function updateQuery(value: string) {
+  query.value = value;
+}
+
 const stats = computed(() => {
   const speakerSet = new Set<string>();
-  for (const speaker of props.allSpeakers) {
+  for (const speaker of allSpeakers) {
     speaker.name.forEach((name) => speakerSet.add(name));
   }
   return {
     speakers: speakerSet.size,
-    talks: props.allSpeakers.length,
+    talks: allSpeakers.length,
     years: YEARS.length,
   };
 });
@@ -46,10 +57,14 @@ const stats = computed(() => {
 
 <template>
   <div>
-    <AppHeader />
+    <div class="contents">
+      <AppHeader />
+    </div>
 
     <!-- タイトル・統計情報 -->
-    <AppMasthead :stats="stats" />
+    <div class="contents">
+      <AppMasthead :stats="stats" />
+    </div>
 
     <!-- ビュー切り替えタブバー（Chronicle／Directory） -->
     <div
@@ -91,28 +106,32 @@ const stats = computed(() => {
 
     <!-- 選択中のビューに応じてコンポーネントを切り替え -->
     <!-- 年度別クロニクルビュー -->
-    <ChronicleView
-      v-if="view === 'chronicle'"
-      :all-speakers="allSpeakers"
-      :selected-year="selectedYear"
-      :selected-speaker="selectedSpeaker"
-      :query="query"
-      @update:selected-year="selectedYear = $event"
-      @update:selected-speaker="selectedSpeaker = $event"
-      @update:query="query = $event"
-    />
+    <div v-if="view === 'chronicle'" class="contents">
+      <ChronicleView
+        :all-speakers="$props.allSpeakers"
+        :selected-year="selectedYear"
+        :selected-speaker="selectedSpeaker"
+        :query="query"
+        @update:selected-year="updateSelectedYear"
+        @update:selected-speaker="updateSelectedSpeaker"
+        @update:query="updateQuery"
+      />
+    </div>
     <!-- スピーカー索引ディレクトリビュー -->
-    <DirectoryView
-      v-else
-      :all-speakers="allSpeakers"
-      :selected-year="selectedYear"
-      :selected-speaker="selectedSpeaker"
-      :query="query"
-      @update:selected-year="selectedYear = $event"
-      @update:selected-speaker="selectedSpeaker = $event"
-      @update:query="query = $event"
-    />
+    <div v-else class="contents">
+      <DirectoryView
+        :all-speakers="$props.allSpeakers"
+        :selected-year="selectedYear"
+        :selected-speaker="selectedSpeaker"
+        :query="query"
+        @update:selected-year="updateSelectedYear"
+        @update:selected-speaker="updateSelectedSpeaker"
+        @update:query="updateQuery"
+      />
+    </div>
 
-    <AppFooter />
+    <div class="contents">
+      <AppFooter />
+    </div>
   </div>
 </template>

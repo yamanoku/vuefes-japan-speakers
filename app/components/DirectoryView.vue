@@ -1,5 +1,5 @@
 <script setup vapor lang="ts">
-import { computed, ref, toRefs } from "vue";
+import { computed, ref } from "vue";
 import type { SpeakerWithYear, AcceptedYear } from "../../types";
 import { compareLexicalJa } from "../utils/stringCollate";
 import { buildSpeakerMap, hasJapanese } from "../utils/speakerMap";
@@ -9,23 +9,34 @@ import SpeakerFilterBar from "./SpeakerFilterBar.vue";
 import YearFilterBar from "./YearFilterBar.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-const props = defineProps<{
+const { allSpeakers, query, selectedSpeaker, selectedYear } = defineProps<{
   allSpeakers: SpeakerWithYear[];
   selectedYear: AcceptedYear | "all";
   selectedSpeaker: string;
   query: string;
 }>();
 
-const { allSpeakers, query, selectedSpeaker, selectedYear } = toRefs(props);
 const emit = defineEmits<{
   "update:selectedYear": [AcceptedYear | "all"];
   "update:selectedSpeaker": [string];
   "update:query": [string];
 }>();
 
+function updateSelectedYear(value: AcceptedYear | "all") {
+  emit("update:selectedYear", value);
+}
+
+function updateSelectedSpeaker(value: string) {
+  emit("update:selectedSpeaker", value);
+}
+
+function updateQuery(value: string) {
+  emit("update:query", value);
+}
+
 const { t, lang } = useVfjsI18n();
 
-const speakerMap = computed(() => buildSpeakerMap(props.allSpeakers));
+const speakerMap = computed(() => buildSpeakerMap(allSpeakers));
 const allRecords = computed(() => Array.from(speakerMap.value.values()));
 const speakerOptions = computed(() =>
   allRecords.value.map((record) => ({
@@ -39,16 +50,16 @@ const sort = ref<"name-asc" | "name-desc" | "appearances" | "latest">("appearanc
 const counts = computed(() => {
   const c: Record<string, number> = { all: allRecords.value.length };
   for (const y of YEARS) {
-    c[y] = props.allSpeakers.filter((s) => s.year === y).length;
+    c[y] = allSpeakers.filter((s) => s.year === y).length;
   }
   return c;
 });
 
 const filtered = computed<SpeakerRecord[]>(() => {
-  const q = props.query.trim().toLowerCase();
+  const q = query.trim().toLowerCase();
   let list = allRecords.value.filter((rec) => {
-    if (props.selectedYear !== "all" && !rec.years.includes(props.selectedYear)) return false;
-    if (props.selectedSpeaker !== "all" && rec.name !== props.selectedSpeaker) return false;
+    if (selectedYear !== "all" && !rec.years.includes(selectedYear)) return false;
+    if (selectedSpeaker !== "all" && rec.name !== selectedSpeaker) return false;
     if (q) {
       const titles = rec.talks.map((tk) => tk.title || "").join(" ");
       const hay = (rec.name + " " + titles).toLowerCase();
@@ -93,20 +104,24 @@ function toggleRow(name: string) {
   <main>
     <section>
       <!-- スピーカー名・キーワードによるフィルターバー -->
-      <SpeakerFilterBar
-        :query="query"
-        :selected-speaker="selectedSpeaker"
-        :speaker-options="speakerOptions"
-        @update:query="emit('update:query', $event)"
-        @update:selected-speaker="emit('update:selectedSpeaker', $event)"
-      />
+      <div class="contents">
+        <SpeakerFilterBar
+          :query="$props.query"
+          :selected-speaker="$props.selectedSpeaker"
+          :speaker-options="speakerOptions"
+          @update:query="updateQuery"
+          @update:selected-speaker="updateSelectedSpeaker"
+        />
+      </div>
 
       <!-- 開催年度によるフィルターバー -->
-      <YearFilterBar
-        :selected-year="selectedYear"
-        :counts="counts"
-        @update:selected-year="emit('update:selectedYear', $event)"
-      />
+      <div class="contents">
+        <YearFilterBar
+          :selected-year="$props.selectedYear"
+          :counts="counts"
+          @update:selected-year="updateSelectedYear"
+        />
+      </div>
 
       <!-- Sort header -->
       <!-- ソートボタンヘッダー（登壇回数・名前順・最新年で並び替え） -->
@@ -192,7 +207,7 @@ function toggleRow(name: string) {
                 :lang="hasJapanese(rec.name) ? 'ja' : 'en'"
               >
                 <ruby v-if="rec.nameRuby && lang === 'ja'">
-                  {{ rec.name }}
+                  <span>{{ rec.name }}</span>
                   <rt>{{ rec.nameRuby }}</rt>
                 </ruby>
                 <template v-else>
@@ -218,7 +233,7 @@ function toggleRow(name: string) {
                   :key="y"
                   class="w-7 h-[22px] flex items-center justify-center font-mono text-[12px] tracking-[0]"
                   :class="[
-                    rec.years.includes(y) && selectedYear === y
+                    rec.years.includes(y) && $props.selectedYear === y
                       ? 'bg-accent border border-accent text-white'
                       : rec.years.includes(y)
                         ? 'bg-ink border border-ink text-paper'

@@ -1,5 +1,5 @@
 <script setup vapor lang="ts">
-import { computed, toRefs } from "vue";
+import { computed } from "vue";
 import type { SpeakerWithYear, AcceptedYear } from "../../types";
 import { compareLexicalJa } from "../utils/stringCollate";
 import { YEARS } from "../../types";
@@ -7,25 +7,36 @@ import SpeakerFilterBar from "./SpeakerFilterBar.vue";
 import YearFilterBar from "./YearFilterBar.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-const props = defineProps<{
+const { allSpeakers, query, selectedSpeaker, selectedYear } = defineProps<{
   allSpeakers: SpeakerWithYear[];
   selectedYear: AcceptedYear | "all";
   selectedSpeaker: string;
   query: string;
 }>();
 
-const { allSpeakers, query, selectedSpeaker, selectedYear } = toRefs(props);
 const emit = defineEmits<{
   "update:selectedYear": [AcceptedYear | "all"];
   "update:selectedSpeaker": [string];
   "update:query": [string];
 }>();
 
+function updateSelectedYear(value: AcceptedYear | "all") {
+  emit("update:selectedYear", value);
+}
+
+function updateSelectedSpeaker(value: string) {
+  emit("update:selectedSpeaker", value);
+}
+
+function updateQuery(value: string) {
+  emit("update:query", value);
+}
+
 const { t, lang } = useVfjsI18n();
 
 const uniqueNames = computed(() => {
   const set = new Set<string>();
-  props.allSpeakers.forEach((s) => s.name.forEach((n) => set.add(n)));
+  allSpeakers.forEach((s) => s.name.forEach((n) => set.add(n)));
   return Array.from(set).sort(compareLexicalJa);
 });
 
@@ -34,18 +45,18 @@ const speakerOptions = computed(() =>
 );
 
 const counts = computed(() => {
-  const c: Record<string, number> = { all: props.allSpeakers.length };
+  const c: Record<string, number> = { all: allSpeakers.length };
   for (const y of YEARS) {
-    c[y] = props.allSpeakers.filter((s) => s.year === y).length;
+    c[y] = allSpeakers.filter((s) => s.year === y).length;
   }
   return c;
 });
 
 const filtered = computed(() => {
-  const q = props.query.trim().toLowerCase();
-  return props.allSpeakers.filter((s) => {
-    if (props.selectedYear !== "all" && s.year !== props.selectedYear) return false;
-    if (props.selectedSpeaker !== "all" && !s.name.includes(props.selectedSpeaker)) return false;
+  const q = query.trim().toLowerCase();
+  return allSpeakers.filter((s) => {
+    if (selectedYear !== "all" && s.year !== selectedYear) return false;
+    if (selectedSpeaker !== "all" && !s.name.includes(selectedSpeaker)) return false;
     if (q) {
       const hay = (s.title || "") + " " + s.name.join(" ");
       if (!hay.toLowerCase().includes(q)) return false;
@@ -58,7 +69,9 @@ const grouped = computed(() => {
   const map = new Map<string, SpeakerWithYear[]>();
   for (const y of YEARS) map.set(y, []);
   for (const s of filtered.value) map.get(s.year)?.push(s);
-  return Array.from(map.entries()).filter(([, arr]) => arr.length > 0);
+  return Array.from(map.entries())
+    .filter(([, talks]) => talks.length > 0)
+    .map(([year, talks]) => ({ year, talks }));
 });
 </script>
 
@@ -66,20 +79,24 @@ const grouped = computed(() => {
   <main>
     <section>
       <!-- スピーカー名・キーワードによるフィルターバー -->
-      <SpeakerFilterBar
-        :query="query"
-        :selected-speaker="selectedSpeaker"
-        :speaker-options="speakerOptions"
-        @update:query="emit('update:query', $event)"
-        @update:selected-speaker="emit('update:selectedSpeaker', $event)"
-      />
+      <div class="contents">
+        <SpeakerFilterBar
+          :query="$props.query"
+          :selected-speaker="$props.selectedSpeaker"
+          :speaker-options="speakerOptions"
+          @update:query="updateQuery"
+          @update:selected-speaker="updateSelectedSpeaker"
+        />
+      </div>
 
       <!-- 開催年度によるフィルターバー -->
-      <YearFilterBar
-        :selected-year="selectedYear"
-        :counts="counts"
-        @update:selected-year="emit('update:selectedYear', $event)"
-      />
+      <div class="contents">
+        <YearFilterBar
+          :selected-year="$props.selectedYear"
+          :counts="counts"
+          @update:selected-year="updateSelectedYear"
+        />
+      </div>
 
       <!-- フィルター結果が0件のとき -->
       <div
@@ -93,31 +110,31 @@ const grouped = computed(() => {
       <ol class="list-none p-0 m-0" :aria-label="t.nav_all_label">
         <!-- 各年度グループ -->
         <li
-          v-for="[year, arr] in grouped"
-          :key="year"
+          v-for="group in grouped"
+          :key="group.year"
           class="grid grid-cols-[minmax(200px,260px)_1fr] gap-[clamp(24px,4vw,64px)] border-b border-rule items-start px-pad-x py-[clamp(32px,5vw,72px)] max-[800px]:grid-cols-1 max-[800px]:gap-8"
         >
           <!-- 年度ラベル（スクロール時に上部に固定） -->
           <div
             class="flex flex-col items-start sticky top-[72px] max-[800px]:static"
-            :id="`year-${year}`"
+            :id="`year-${group.year}`"
           >
             <!-- 年度テキスト（表示専用） -->
             <span
               class="font-display font-[500] text-[clamp(72px,8vw,120px)] leading-[0.85] tabular-nums text-ink"
               aria-hidden="true"
             >
-              {{ year }}
+              {{ group.year }}
             </span>
             <!-- その年のトーク総数 -->
             <span class="font-mono text-[12px] tracking-[0.08em] uppercase text-ink-3 mt-2.5">
-              {{ t.year_total_talks(arr.length) }}
+              {{ t.year_total_talks(group.talks.length) }}
             </span>
             <!-- 年度別ページへの矢印リンク -->
             <a
               class="font-mono text-[24px] tracking-[0.08em] uppercase text-ink hover:text-accent transition-colors border-b border-current pb-0.5 no-underline mt-3.5"
-              :href="`/${year}`"
-              :aria-label="`${year} speakers`"
+              :href="`/${group.year}`"
+              :aria-label="`${group.year} speakers`"
             >
               →
             </a>
@@ -127,8 +144,8 @@ const grouped = computed(() => {
           <ol class="list-none p-0 m-0 border-t border-rule-soft">
             <!-- 各スピーカー行 -->
             <li
-              v-for="(s, i) in arr"
-              :key="`${year}-${i}`"
+              v-for="(s, i) in group.talks"
+              :key="`${group.year}-${i}`"
               class="grid grid-cols-[56px_1fr] gap-4 py-[18px] border-b border-rule-soft items-start"
             >
               <!-- 行番号（表示専用） -->
@@ -147,7 +164,7 @@ const grouped = computed(() => {
                       :href="`/speakers/${encodeURIComponent(n)}`"
                     >
                       <ruby v-if="s.nameRuby?.[ni] && lang === 'ja'" lang="ja">
-                        {{ n }}
+                        <span>{{ n }}</span>
                         <rt>{{ s.nameRuby[ni] }}</rt>
                       </ruby>
                       <span v-else>{{ lang === "en" && s.nameEn?.[ni] ? s.nameEn[ni] : n }}</span>
