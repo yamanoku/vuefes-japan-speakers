@@ -1,10 +1,17 @@
 import { describe, expect, it } from "vite-plus/test";
 import { mount } from "@vue/test-utils";
+import { vaporInteropPlugin } from "@vue/runtime-vapor";
 import YearPageIsland from "./YearPageIsland.vue";
 
 describe("YearPageIsland", () => {
   it("年タイトルとスピーカーリストをレンダリングする", () => {
-    const wrapper = mount(YearPageIsland, {
+    const host = document.createElement("div");
+    document.body.append(host);
+    mount(YearPageIsland, {
+      attachTo: host,
+      global: {
+        plugins: [vaporInteropPlugin],
+      },
       props: {
         found: true,
         year: "2024",
@@ -18,9 +25,13 @@ describe("YearPageIsland", () => {
       },
     });
 
-    expect(wrapper.html()).toContain("Vue Fes Japan");
-    expect(wrapper.html()).toContain("2024");
-    expect(wrapper.html()).toContain("John Doe");
-    expect(wrapper.html()).toContain("Vue.js Advanced");
+    try {
+      expect(host.innerHTML).toContain("Vue Fes Japan");
+      expect(host.innerHTML).toContain("2024");
+      expect(host.innerHTML).toContain("John Doe");
+      expect(host.innerHTML).toContain("Vue.js Advanced");
+    } finally {
+      host.remove();
+    }
   });
 });

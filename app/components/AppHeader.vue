@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import AppLogoMark from "./AppLogoMark.vue";
 import { useColorScheme } from "../composables/useColorScheme";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
@@ -20,7 +20,9 @@ const { scheme, setScheme } = useColorScheme();
         href="/"
         class="flex items-center gap-[10px] font-display font-semibold text-[15px] whitespace-nowrap leading-[1.15] text-ink no-underline hover:text-accent transition-colors"
       >
-        <AppLogoMark class="w-4 h-auto text-ink" />
+        <span class="contents">
+          <AppLogoMark class="w-4 h-auto text-ink" />
+        </span>
         <span>Vue Fes Japan Speakers</span>
       </a>
 

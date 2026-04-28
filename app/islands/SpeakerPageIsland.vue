@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import { computed } from "vue";
 import type { SpeakerWithYear } from "../../types";
 import AppFooter from "../components/AppFooter.vue";
@@ -7,7 +7,7 @@ import { useVfjsI18n } from "../composables/useVfjsI18n";
 import { compareLexicalJa } from "../utils/stringCollate";
 import { hasJapanese } from "../utils/speakerMap";
 
-const props = defineProps<{
+const { found, speakerName, speakers } = defineProps<{
   found: boolean;
   speakerName: string;
   speakers: SpeakerWithYear[];
@@ -18,34 +18,36 @@ const { t, lang } = useVfjsI18n();
 const record = computed(() => {
   let nameRuby: string | undefined;
   let nameEn: string | undefined;
-  for (const speaker of props.speakers) {
-    const index = speaker.name.indexOf(props.speakerName);
+  for (const speaker of speakers) {
+    const index = speaker.name.indexOf(speakerName);
     if (index >= 0) {
       if (!nameRuby && speaker.nameRuby?.[index]) nameRuby = speaker.nameRuby[index];
       if (!nameEn && speaker.nameEn?.[index]) nameEn = speaker.nameEn[index];
       if (nameRuby && nameEn) break;
     }
   }
-  const talks = props.speakers
+  const talks = speakers
     .map((speaker) => ({
       year: speaker.year,
       title: speaker.title,
       url: speaker.url,
       format: speaker.format,
-      coSpeakers: speaker.name.filter((name) => name !== props.speakerName),
+      coSpeakers: speaker.name.filter((name) => name !== speakerName),
     }))
     .sort((a, b) => compareLexicalJa(a.year, b.year));
   const years = [...new Set(talks.map((talk) => talk.year))].sort();
-  return { name: props.speakerName, nameRuby, nameEn, years, talks };
+  return { name: speakerName, nameRuby, nameEn, years, talks };
 });
 </script>
 
 <template>
   <div>
-    <AppHeader />
+    <div class="contents">
+      <AppHeader />
+    </div>
 
     <!-- スピーカーページのメインコンテンツ（該当スピーカーが存在する場合） -->
-    <template v-if="found">
+    <template v-if="$props.found">
       <!-- スピーカーページのヘッダー（名前・登壇回数・登壇年度） -->
       <header
         class="border-b border-rule pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-pad-x"
@@ -56,7 +58,7 @@ const record = computed(() => {
           :lang="hasJapanese(record.name) ? 'ja' : 'en'"
         >
           <ruby v-if="record.nameRuby && lang === 'ja'">
-            {{ record.name }}
+            <span>{{ record.name }}</span>
             <rt>{{ record.nameRuby }}</rt>
           </ruby>
           <template v-else>
@@ -146,9 +148,11 @@ const record = computed(() => {
     <!-- スピーカーが存在しない場合 -->
     <main v-else class="px-pad-x py-20 font-mono text-[14px] text-ink-2">
       <h1 class="font-display text-[40px] text-ink m-0">Speaker Not Found</h1>
-      <p>{{ speakerName }}</p>
+      <p>{{ $props.speakerName }}</p>
     </main>
 
-    <AppFooter />
+    <div class="contents">
+      <AppFooter />
+    </div>
   </div>
 </template>

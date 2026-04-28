@@ -1,8 +1,8 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import AppLogoMark from "./AppLogoMark.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-defineProps<{
+const { stats } = defineProps<{
   stats: { speakers: number; talks: number; years: number };
 }>();
 
@@ -18,7 +18,9 @@ const { t } = useVfjsI18n();
       <div
         class="basis-0 grow-999 min-inline-[60%] flex flex-wrap items-center gap-[clamp(18px,2.4vw,34px)]"
       >
-        <AppLogoMark class="basis-15 grow-1 max-w-[60px] h-auto text-ink" />
+        <span class="contents">
+          <AppLogoMark class="basis-15 grow-1 max-w-[60px] h-auto text-ink" />
+        </span>
         <!-- ページタイトル -->
         <h1
           class="basis-0 grow-999 min-inline-[80%] m-0 font-display font-[500] text-[clamp(38px,6.2vw,104px)] leading-[0.96] text-ink break-keep"
@@ -33,23 +35,23 @@ const { t } = useVfjsI18n();
         <!-- 総スピーカー数 -->
         <div>
           <b class="text-ink font-[500] not-italic">
-            {{ stats.speakers }}
+            {{ $props.stats.speakers }}
           </b>
-          {{ t.meta_speakers }}
+          <span>{{ t.meta_speakers }}</span>
         </div>
         <!-- 総トーク数 -->
         <div>
           <b class="text-ink font-[500] not-italic">
-            {{ stats.talks }}
+            {{ $props.stats.talks }}
           </b>
-          {{ t.meta_talks }}
+          <span>{{ t.meta_talks }}</span>
         </div>
         <!-- 開催年数 -->
         <div>
           <b class="text-ink font-[500] not-italic">
-            {{ stats.years }}
+            {{ $props.stats.years }}
           </b>
-          {{ t.meta_years }}
+          <span>{{ t.meta_years }}</span>
         </div>
       </aside>
     </div>
