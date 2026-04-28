@@ -16,20 +16,14 @@ const props = defineProps<{
 const { t } = useVfjsI18n();
 
 const view = ref<"chronicle" | "index">("chronicle");
-const density = ref<"compact" | "cozy" | "airy">("airy");
 
 onMounted(() => {
   const storedView = localStorage.getItem("vfjs:view") as "chronicle" | "index" | null;
   if (storedView === "chronicle" || storedView === "index") view.value = storedView;
-  const storedDensity = localStorage.getItem("vfjs:density") as "compact" | "cozy" | "airy" | null;
-  if (storedDensity) density.value = storedDensity;
 });
 
 watch(view, (value) => {
   if (typeof window !== "undefined") localStorage.setItem("vfjs:view", value);
-});
-watch(density, (value) => {
-  if (typeof window !== "undefined") localStorage.setItem("vfjs:density", value);
 });
 
 const selectedYear = ref<AcceptedYear | "all">("all");
@@ -102,7 +96,6 @@ const stats = computed(() => {
       :selected-year="selectedYear"
       :selected-speaker="selectedSpeaker"
       :query="query"
-      :density="density"
       @update:selected-year="selectedYear = $event"
       @update:selected-speaker="selectedSpeaker = $event"
       @update:query="query = $event"
@@ -114,7 +107,6 @@ const stats = computed(() => {
       :selected-year="selectedYear"
       :selected-speaker="selectedSpeaker"
       :query="query"
-      :density="density"
       @update:selected-year="selectedYear = $event"
       @update:selected-speaker="selectedSpeaker = $event"
       @update:query="query = $event"
