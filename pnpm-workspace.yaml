@@ -32,7 +32,6 @@ catalogs:
     vite: npm:@voidzero-dev/vite-plus-core@0.1.19
     vite-plus: 0.1.19
     vitest: npm:@voidzero-dev/vite-plus-test@0.1.19
-
 peerDependencyRules:
   allowAny:
     - vite
@@ -40,3 +39,4 @@ peerDependencyRules:
   allowedVersions:
     vite: "*"
     vitest: "*"
+autoInstallPeers: false
