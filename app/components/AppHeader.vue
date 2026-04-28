@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import AppLogoMark from "./AppLogoMark.vue";
 import { useColorScheme } from "../composables/useColorScheme";
 import { useVfjsI18n } from "../composables/useVfjsI18n";

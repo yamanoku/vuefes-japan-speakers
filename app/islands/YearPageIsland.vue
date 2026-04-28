@@ -1,15 +1,17 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
+import { toRefs } from "vue";
 import type { SpeakerInfo } from "../../types";
 import AppFooter from "../components/AppFooter.vue";
 import AppHeader from "../components/AppHeader.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-defineProps<{
+const props = defineProps<{
   found: boolean;
   speakers: SpeakerInfo[];
   year: string;
 }>();
 
+const { found, speakers, year } = toRefs(props);
 const { t, lang } = useVfjsI18n();
 </script>
 

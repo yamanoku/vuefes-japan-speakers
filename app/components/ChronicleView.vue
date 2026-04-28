@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import { computed } from "vue";
+<script setup vapor lang="ts">
+import { computed, toRefs } from "vue";
 import type { SpeakerWithYear, AcceptedYear } from "../../types";
 import { compareLexicalJa } from "../utils/stringCollate";
 import { YEARS } from "../../types";
@@ -14,6 +14,7 @@ const props = defineProps<{
   query: string;
 }>();
 
+const { allSpeakers, query, selectedSpeaker, selectedYear } = toRefs(props);
 const emit = defineEmits<{
   "update:selectedYear": [AcceptedYear | "all"];
   "update:selectedSpeaker": [string];

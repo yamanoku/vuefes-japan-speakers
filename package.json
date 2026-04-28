@@ -7,8 +7,10 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "catalog:css",
+    "@vue/runtime-vapor": "catalog:vue",
     "@vue/server-renderer": "catalog:vue",
     "@vuerend/core": "catalog:vuerend",
+    "srvx": "catalog:vuerend",
     "tailwindcss": "catalog:css",
     "vue": "catalog:vue"
   },

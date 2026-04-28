@@ -1,12 +1,14 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
+import { toRefs } from "vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-defineProps<{
+const props = defineProps<{
   query: string;
   selectedSpeaker: string;
   speakerOptions: Array<{ label: string; value: string }>;
 }>();
 
+const { query, selectedSpeaker, speakerOptions } = toRefs(props);
 const emit = defineEmits<{
   "update:query": [string];
   "update:selectedSpeaker": [string];

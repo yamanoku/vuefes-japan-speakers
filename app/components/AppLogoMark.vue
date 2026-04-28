@@ -1,3 +1,5 @@
+<script setup vapor lang="ts"></script>
+
 <template>
   <svg
     aria-hidden="true"

@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import { computed } from "vue";
+<script setup vapor lang="ts">
+import { computed, toRefs } from "vue";
 import type { SpeakerWithYear } from "../../types";
 import AppFooter from "../components/AppFooter.vue";
 import AppHeader from "../components/AppHeader.vue";
@@ -13,6 +13,7 @@ const props = defineProps<{
   speakers: SpeakerWithYear[];
 }>();
 
+const { found, speakerName, speakers } = toRefs(props);
 const { t, lang } = useVfjsI18n();
 
 const record = computed(() => {

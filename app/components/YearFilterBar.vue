@@ -1,13 +1,15 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
+import { toRefs } from "vue";
 import { YEARS } from "../../types";
 import type { AcceptedYear } from "../../types";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-defineProps<{
+const props = defineProps<{
   selectedYear: AcceptedYear | "all";
   counts: Record<string, number>;
 }>();
 
+const { counts, selectedYear } = toRefs(props);
 const emit = defineEmits<{
   "update:selectedYear": [AcceptedYear | "all"];
 }>();

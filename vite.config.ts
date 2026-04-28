@@ -94,6 +94,8 @@ const fmt = {
 
 export { fmt, lint };
 
+const vaporMode = process.env.VFJS_VAPOR !== "0";
+
 function staticHtmlPreview(): Plugin {
   return {
     name: "vfjs:static-html-preview",
@@ -205,7 +207,9 @@ export default defineConfig({
     vuerend({
       app: "./app/app.ts",
       islands: "./app/islands.ts",
+      vapor: vaporMode,
       vuePlugin: vize({
+        vapor: vaporMode,
         scanPatterns: ["app/**/*.vue"],
         ignorePatterns: ["node_modules/**", "dist/**", ".cache/**"],
       }),
@@ -222,6 +226,16 @@ export default defineConfig({
           import.meta.url,
         ),
       ),
+      "./runtime-vapor.esm-bundler-82sqnWQL.mjs": fileURLToPath(
+        new URL("./app/runtime/vuerend-vapor-runtime.ts", import.meta.url),
+      ),
+    },
+  },
+  environments: {
+    server: {
+      resolve: {
+        noExternal: ["@vuerend/core"],
+      },
     },
   },
   staged: {

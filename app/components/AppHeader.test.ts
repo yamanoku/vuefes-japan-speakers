@@ -1,6 +1,6 @@
-import { renderToString } from "@vue/server-renderer";
+import { vaporInteropPlugin } from "@vue/runtime-vapor";
 import { mount } from "@vue/test-utils";
-import { createSSRApp, nextTick } from "vue";
+import { nextTick } from "vue";
 import { afterEach, describe, expect, it } from "vite-plus/test";
 import AppHeader from "./AppHeader.vue";
 
@@ -13,23 +13,44 @@ describe("AppHeader", () => {
   });
 
   it("初回表示の配色セレクターでシステム設定を選択する", async () => {
-    const html = await renderToString(createSSRApp(AppHeader));
+    const host = document.createElement("div");
+    document.body.append(host);
+    mount(AppHeader, {
+      attachTo: host,
+      global: {
+        plugins: [vaporInteropPlugin],
+      },
+    });
+    await nextTick();
 
-    expect(html).toContain('<option value="system" selected>');
-    expect(html).not.toContain('<option value="light" selected>');
+    try {
+      const select = host.querySelector("select");
+      expect(select?.value).toBe("system");
+      expect(host.innerHTML).not.toContain('<option value="light" selected>');
+    } finally {
+      host.remove();
+    }
   });
 
   it("保存済みの配色設定をマウント後に反映する", async () => {
     localStorage.setItem(STORAGE_KEY, "light");
 
-    const wrapper = mount(AppHeader);
+    const host = document.createElement("div");
+    document.body.append(host);
+    mount(AppHeader, {
+      attachTo: host,
+      global: {
+        plugins: [vaporInteropPlugin],
+      },
+    });
     await nextTick();
 
-    const select = wrapper.find("select").element as HTMLSelectElement;
+    const select = host.querySelector("select") as HTMLSelectElement;
     expect(select.value).toBe("light");
     expect(document.documentElement.getAttribute("data-color-scheme")).toBe("light");
 
-    await wrapper.find("select").setValue("system");
-    wrapper.unmount();
+    select.value = "system";
+    select.dispatchEvent(new Event("change"));
+    host.remove();
   });
 });

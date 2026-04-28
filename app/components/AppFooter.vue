@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
 const { t } = useVfjsI18n();

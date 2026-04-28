@@ -1,11 +1,13 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
+import { toRefs } from "vue";
 import AppLogoMark from "./AppLogoMark.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-defineProps<{
+const props = defineProps<{
   stats: { speakers: number; talks: number; years: number };
 }>();
 
+const { stats } = toRefs(props);
 const { t } = useVfjsI18n();
 </script>
 

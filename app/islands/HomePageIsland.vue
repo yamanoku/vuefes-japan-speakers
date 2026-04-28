@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import { computed, onMounted, ref, watch } from "vue";
+<script setup vapor lang="ts">
+import { computed, onMounted, ref, toRefs, watch } from "vue";
 import type { AcceptedYear, SpeakerWithYear } from "../../types";
 import { YEARS } from "../../types";
 import AppFooter from "../components/AppFooter.vue";
@@ -13,6 +13,7 @@ const props = defineProps<{
   allSpeakers: SpeakerWithYear[];
 }>();
 
+const { allSpeakers } = toRefs(props);
 const { t } = useVfjsI18n();
 
 const view = ref<"chronicle" | "index">("chronicle");
