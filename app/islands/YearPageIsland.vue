@@ -29,7 +29,7 @@ const { t, lang } = useVfjsI18n();
           <span v-if="year === '2022'">Online</span>
           <em class="not-italic text-accent">{{ year }}</em>
         </h1>
-        <div class="font-mono text-ink-3">
+        <div class="font-mono text-ink-2">
           <!-- その年のトーク総数 -->
           <div>{{ t.year_total_talks(speakers.length) }}</div>
           <!-- 公式サイトへの外部リンク -->
@@ -49,7 +49,7 @@ const { t, lang } = useVfjsI18n();
 
       <!-- その年のスピーカー一覧セクション -->
       <section class="px-pad-x py-10 border-b border-rule-softer">
-        <h2 class="font-mono tracking-[0.1em] text-ink-3 mb-4">
+        <h2 class="font-mono tracking-[0.1em] text-ink-2 mb-4">
           {{ t.all_speakers }}
         </h2>
         <ol class="list-none p-0 m-0">

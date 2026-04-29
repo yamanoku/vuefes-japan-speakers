@@ -25,7 +25,7 @@ const { t } = useVfjsI18n();
       <div class="flex gap-1.5 flex-wrap" role="group" :aria-label="t.filter_year">
         <!-- 全年度選択ボタン（スピーカー総数を表示） -->
         <button
-          class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] font-mono text-[12px] tracking-[0.02em] border border-rule-soft cursor-pointer transition-colors"
+          class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] font-mono text-[12px] tracking-[0.02em] border border-rule cursor-pointer transition-colors"
           type="button"
           :class="
             selectedYear === 'all'
@@ -41,7 +41,7 @@ const { t } = useVfjsI18n();
         <button
           v-for="y in YEARS"
           :key="y"
-          class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] font-mono text-[12px] tracking-[0.02em] border border-rule-soft cursor-pointer transition-colors"
+          class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] font-mono text-[12px] tracking-[0.02em] border border-rule cursor-pointer transition-colors"
           type="button"
           :class="
             selectedYear === y

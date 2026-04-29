@@ -63,7 +63,7 @@ const record = computed(() => {
             {{ lang === "en" && record.nameEn ? record.nameEn : record.name }}
           </template>
         </h1>
-        <div class="font-mono text-ink-3">
+        <div class="font-mono text-ink-2">
           <!-- 総登壇回数 -->
           <div>{{ t.appearance_count(record.talks.length) }}</div>
           <!-- 登壇年度のリスト（各年度ページへのリンク） -->
@@ -81,7 +81,7 @@ const record = computed(() => {
 
       <!-- 関連トーク一覧セクション -->
       <section class="px-pad-x py-10">
-        <h2 class="font-mono tracking-[0.1em] text-ink-3 mb-4">
+        <h2 class="font-mono tracking-[0.1em] text-ink-2 mb-4">
           {{ t.related_talks }}
         </h2>
         <ul class="list-none p-0 m-0">
@@ -91,7 +91,7 @@ const record = computed(() => {
             class="grid grid-cols-[40px_1fr] gap-x-4 border-t border-rule-softer py-4.5"
           >
             <!-- 開催年リンク（年度別ページへ） -->
-            <span class="font-mono text-[12px] text-ink-3 text-center pt-[3px]">
+            <span class="font-mono text-[12px] text-center pt-[3px]">
               <a class="text-ink underline hover:no-underline" :href="`/${talk.year}`">
                 {{ talk.year }}
               </a>
@@ -122,7 +122,7 @@ const record = computed(() => {
                 </span>
               </a>
               <!-- 共同登壇者のリスト（各スピーカープロフィールへのリンク） -->
-              <span v-if="talk.coSpeakers.length > 0" class="text-[12px] font-mono text-ink-3">
+              <span v-if="talk.coSpeakers.length > 0" class="text-[12px] font-mono text-ink-2">
                 w/
                 <template
                   v-for="(coSpeakerName, coSpeakerIndex) in talk.coSpeakers"

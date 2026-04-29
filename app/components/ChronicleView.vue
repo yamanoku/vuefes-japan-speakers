@@ -83,7 +83,7 @@ const grouped = computed(() => {
       <!-- フィルター結果が0件のとき -->
       <div
         v-if="grouped.length === 0"
-        class="px-pad-x py-20 text-center font-mono text-[13px] tracking-[0.05em] uppercase text-ink-3"
+        class="px-pad-x py-20 text-center font-mono text-[13px] tracking-[0.05em] uppercase text-ink-2"
       >
         {{ t.empty }}
       </div>
@@ -109,12 +109,12 @@ const grouped = computed(() => {
               {{ year }}
             </span>
             <!-- その年のトーク総数 -->
-            <span class="font-mono text-[12px] tracking-[0.08em] uppercase text-ink-3 mt-2.5">
+            <span class="font-mono text-[14px] tracking-[0.08em] uppercase text-ink-2 mt-2.5">
               {{ t.year_total_talks(arr.length) }}
             </span>
             <!-- 年度別ページへの矢印リンク -->
             <a
-              class="font-mono text-[24px] tracking-[0.08em] uppercase text-ink hover:text-accent transition-colors border-b border-current pb-0.5 no-underline mt-3.5"
+              class="font-mono text-[24px] tracking-[0.08em] uppercase text-ink-2 hover:text-accent transition-colors border-b border-current pb-0.5 no-underline mt-3.5"
               :href="`/${year}`"
               :aria-label="`${year} speakers`"
             >
