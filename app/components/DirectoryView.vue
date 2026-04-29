@@ -118,7 +118,7 @@ function toggleRow(name: string) {
           :class="
             sort === 'appearances'
               ? 'bg-ink text-paper border-ink'
-              : 'border-rule-soft text-ink-2 hover:text-ink hover:border-ink'
+              : 'border-rule text-ink-2 hover:text-ink hover:border-ink'
           "
           @click="sort = 'appearances'"
         >
@@ -130,7 +130,7 @@ function toggleRow(name: string) {
           :class="
             sort === 'name-asc' || sort === 'name-desc'
               ? 'bg-ink text-paper border-ink'
-              : 'border-rule-soft text-ink-2 hover:text-ink hover:border-ink'
+              : 'border-rule text-ink-2 hover:text-ink hover:border-ink'
           "
           @click="sort = sort === 'name-asc' ? 'name-desc' : 'name-asc'"
         >
@@ -142,7 +142,7 @@ function toggleRow(name: string) {
           :class="
             sort === 'latest'
               ? 'bg-ink text-paper border-ink'
-              : 'border-rule-soft text-ink-2 hover:text-ink hover:border-ink'
+              : 'border-rule text-ink-2 hover:text-ink hover:border-ink'
           "
           @click="sort = 'latest'"
         >
