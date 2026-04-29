@@ -59,8 +59,8 @@ catalogs:
       version: 3.5.33
   vuerend:
     '@vuerend/core':
-      specifier: 0.1.1-alpha.3
-      version: 0.1.1-alpha.3
+      specifier: 0.2.0
+      version: 0.2.0
 
 importers:
 
@@ -74,7 +74,7 @@ importers:
         version: 3.5.33(vue@3.5.33(typescript@6.0.3))
       '@vuerend/core':
         specifier: catalog:vuerend
-        version: 0.1.1-alpha.3(vite@8.0.10(@types/node@24.12.2)(jiti@2.6.1))(vue@3.5.33(typescript@6.0.3))
+        version: 0.2.0(vite@8.0.10(@types/node@24.12.2)(jiti@2.6.1))(vue@3.5.33(typescript@6.0.3))
       tailwindcss:
         specifier: catalog:css
         version: 4.2.4
@@ -857,9 +857,6 @@ packages:
   '@rolldown/pluginutils@1.0.0-rc.17':
     resolution: {integrity: sha512-n8iosDOt6Ig1UhJ2AYqoIhHWh/isz0xpicHTzpKBeotdVsTEcxsSA/i3EVM7gQAj0rU27OLAxCjzlj15IWY7bg==}
 
-  '@rolldown/pluginutils@1.0.0-rc.3':
-    resolution: {integrity: sha512-eybk3TjzzzV97Dlj5c+XrBFW57eTNhzod66y9HrBlzJ6NsCrWCp/2kaPS3K9wJmurBC0Tdw4yPjXKZqlznim3Q==}
-
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
@@ -1233,12 +1230,16 @@ packages:
       '@vue/server-renderer':
         optional: true
 
-  '@vuerend/core@0.1.1-alpha.3':
-    resolution: {integrity: sha512-CULQtlH7MRnGu84ivII7yWt+/yYErw7/uZ+aQ6SL7xRuKyH3yYxpPlRL2QfZn3BvXO+PeXTn0DplS56BW1JcUA==}
+  '@vuerend/core@0.2.0':
+    resolution: {integrity: sha512-2Pyn+GeIJtGii2jgVrI/En/yaBja7NEUj+gK5L1QAGCisft407VmSUOO/zg7BwuZ2cR/BBZlh7Ud1Pjf6N+0zQ==}
     engines: {node: '>=24.0.0'}
     peerDependencies:
+      '@vue/runtime-vapor': ^3.6.0-beta.10
       vite: ^8.0.3
-      vue: ^3.5.31
+      vue: ^3.5.31 || ^3.6.0-beta.10
+    peerDependenciesMeta:
+      '@vue/runtime-vapor':
+        optional: true
 
   abbrev@2.0.0:
     resolution: {integrity: sha512-6/mh1E2u2YgEsCHdY0Yx5oW+61gZU+1vXaoiHHrpKeuRNNgFvS+/jrwHiQhB5apAf5oB7UB7E19ol2R2LKH8hQ==}
@@ -2340,8 +2341,6 @@ snapshots:
 
   '@rolldown/pluginutils@1.0.0-rc.17': {}
 
-  '@rolldown/pluginutils@1.0.0-rc.3': {}
-
   '@standard-schema/spec@1.1.0': {}
 
   '@tailwindcss/node@4.2.4':
@@ -2433,7 +2432,7 @@ snapshots:
       '@babel/core': 7.29.0
       '@babel/plugin-syntax-typescript': 7.28.6(@babel/core@7.29.0)
       '@babel/plugin-transform-typescript': 7.28.6(@babel/core@7.29.0)
-      '@rolldown/pluginutils': 1.0.0-rc.3
+      '@rolldown/pluginutils': 1.0.0-rc.17
       '@vue/babel-plugin-jsx': 2.0.1(@babel/core@7.29.0)
       vite: 8.0.10(@types/node@24.12.2)(jiti@2.6.1)
       vue: 3.5.33(typescript@6.0.3)
@@ -2655,7 +2654,7 @@ snapshots:
     optionalDependencies:
       '@vue/server-renderer': 3.5.33(vue@3.5.33(typescript@6.0.3))
 
-  '@vuerend/core@0.1.1-alpha.3(vite@8.0.10(@types/node@24.12.2)(jiti@2.6.1))(vue@3.5.33(typescript@6.0.3))':
+  '@vuerend/core@0.2.0(vite@8.0.10(@types/node@24.12.2)(jiti@2.6.1))(vue@3.5.33(typescript@6.0.3))':
     dependencies:
       '@vitejs/plugin-vue': 6.0.6(vite@8.0.10(@types/node@24.12.2)(jiti@2.6.1))(vue@3.5.33(typescript@6.0.3))
       '@vitejs/plugin-vue-jsx': 5.1.5(vite@8.0.10(@types/node@24.12.2)(jiti@2.6.1))(vue@3.5.33(typescript@6.0.3))
