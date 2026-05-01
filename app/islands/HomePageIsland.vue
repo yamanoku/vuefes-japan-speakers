@@ -38,7 +38,8 @@ const stats = computed(() => {
   return {
     speakers: speakerSet.size,
     talks: props.allSpeakers.length,
-    years: YEARS.length,
+    // 2019年は開催中止のためカウントから除外
+    years: YEARS.filter((y) => y !== "2019").length,
   };
 });
 </script>
