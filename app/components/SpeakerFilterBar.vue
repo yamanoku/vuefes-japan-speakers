@@ -8,8 +8,8 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
-  "update:query": [string];
-  "update:selectedSpeaker": [string];
+  (e: "update:query", value: string): void;
+  (e: "update:selectedSpeaker", value: string): void;
 }>();
 
 const { t } = useVfjsI18n();

@@ -17,9 +17,9 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  "update:selectedYear": [AcceptedYear | "all"];
-  "update:selectedSpeaker": [string];
-  "update:query": [string];
+  (e: "update:selectedYear", value: AcceptedYear | "all"): void;
+  (e: "update:selectedSpeaker", value: string): void;
+  (e: "update:query", value: string): void;
 }>();
 
 const { t, lang } = useVfjsI18n();

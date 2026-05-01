@@ -9,7 +9,7 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
-  "update:selectedYear": [AcceptedYear | "all"];
+  (e: "update:selectedYear", value: AcceptedYear | "all"): void;
 }>();
 
 const { t } = useVfjsI18n();
