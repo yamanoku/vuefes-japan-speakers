@@ -38,7 +38,7 @@ const sort = ref<"name-asc" | "name-desc" | "appearances" | "latest">("appearanc
 const counts = computed(() => {
   const c: Record<string, number> = { all: allRecords.value.length };
   for (const y of YEARS) {
-    c[y] = props.allSpeakers.filter((s) => s.year === y).length;
+    c[y] = allRecords.value.filter((rec) => rec.years.includes(y)).length;
   }
   return c;
 });
