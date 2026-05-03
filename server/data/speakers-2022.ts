@@ -125,6 +125,12 @@ export const speakers2022: SpeakerInfo[] = [
     url: "https://vuefes.jp/2022/sessions/Akryum",
   },
   {
+    name: ["miyaoka", "うしろのこ", "takanorip", "やまのく", "kazupon"],
+    title: "なるほどVueコンポーネント",
+    url: "https://vuefes.jp/2022/#naruhodo-vue-component",
+    format: "panel",
+  },
+  {
     name: ["田中 弘治"],
     title: "Nuxt モジュールの作り方を知って 開発した機能を再利用しよう",
     url: "https://vuefes.jp/2022/sessions/monsat",
@@ -180,5 +186,10 @@ export const speakers2022: SpeakerInfo[] = [
     name: ["Anthony Fu"],
     title: "Patterns of VueUse",
     url: "https://vuefes.jp/2022/sessions/anfu",
+  },
+  {
+    name: ["Eduardo San Martin Morote", "Anthony Fu", "Yaël Guilloux"],
+    title: "Peephole",
+    url: "https://vuefes.jp/2022/#peephole",
   },
 ];
