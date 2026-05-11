@@ -25,5 +25,5 @@
     "vitest": "catalog:vp",
     "vize": "catalog:vize"
   },
-  "packageManager": "pnpm@11.0.8"
+  "packageManager": "pnpm@11.0.9"
 }
