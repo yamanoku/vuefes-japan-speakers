@@ -25,7 +25,7 @@ catalogs:
     "@vuerend/core": 0.2.0
   vize:
     "@vizejs/vite-plugin": 0.76.0
-    oxlint: 1.63.0
+    oxlint: 1.64.0
     oxlint-plugin-vize: 0.76.0
     vize: 0.76.0
   vp:
