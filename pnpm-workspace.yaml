@@ -11,7 +11,7 @@ catalogs:
     tailwindcss: 4.3.0
   test:
     "@vue/test-utils": 2.4.10
-    playwright: 1.59.1
+    playwright: 1.60.0
     vitest: 4.1.6
   typescript:
     "@types/node": 24.12.4
