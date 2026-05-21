@@ -59,8 +59,8 @@ catalogs:
       version: 3.5.34
   vuerend:
     '@vuerend/core':
-      specifier: 0.2.1
-      version: 0.2.1
+      specifier: 0.3.0
+      version: 0.3.0
 
 importers:
 
@@ -74,7 +74,7 @@ importers:
         version: 3.5.34(vue@3.5.34(typescript@6.0.3))
       '@vuerend/core':
         specifier: catalog:vuerend
-        version: 0.2.1(vite@8.0.13(@types/node@24.12.4)(jiti@2.6.1))(vue@3.5.34(typescript@6.0.3))
+        version: 0.3.0(vite@8.0.13(@types/node@24.12.4)(jiti@2.6.1))(vue@3.5.34(typescript@6.0.3))
       tailwindcss:
         specifier: catalog:css
         version: 4.3.0
@@ -90,7 +90,7 @@ importers:
         version: 0.78.0(vite@8.0.13(@types/node@24.12.4)(jiti@2.6.1))
       '@vue/test-utils':
         specifier: catalog:test
-        version: 2.4.10(@vue/compiler-dom@3.5.34)(@vue/server-renderer@3.5.34(vue@3.5.34(typescript@6.0.3)))(vue@3.5.34(typescript@6.0.3))
+        version: 2.4.10(@vue/compiler-dom@3.6.0-beta.12)(@vue/server-renderer@3.5.34(vue@3.5.34(typescript@6.0.3)))(vue@3.5.34(typescript@6.0.3))
       oxlint:
         specifier: catalog:vize
         version: 1.64.0(oxlint-tsgolint@0.22.1)
@@ -1197,14 +1197,23 @@ packages:
   '@vue/compiler-core@3.5.34':
     resolution: {integrity: sha512-s9cLyK5mLcvZ4Agva5QgRsQyLKvts9WbU9DB6NqiZkkGEdwmcEiylj5Jbwkp680drF/NNCV8OlAJSe+yMLxaJw==}
 
+  '@vue/compiler-core@3.6.0-beta.12':
+    resolution: {integrity: sha512-SrmembMU15mawXHGq4VlQzcFKH8Y6AyD2qGaXDgcSpVYUdC5jVQZqXn1DBd4xanWVUGb3Tj1b/8lqGD7UkV+Xw==}
+
   '@vue/compiler-dom@3.5.34':
     resolution: {integrity: sha512-EbF/T++k0e2MMZlJsBhzK8Sgwt0HcIPOhzn1CTB/lv6sQcyk+OWf8YeiLxZp3ro7MbbLcAfAJ6sEvjFWuNgUCw==}
+
+  '@vue/compiler-dom@3.6.0-beta.12':
+    resolution: {integrity: sha512-t43TXnDvrpPQam9XIG8FImTDryYSvZ1bk0SPvkp3PaJ4Qz5mJT/X4OUcdaR9ihhyaF+xOuVH/OFvwlO6ZM1NUA==}
 
   '@vue/compiler-sfc@3.5.34':
     resolution: {integrity: sha512-D/ihr6uZeIt6r+pVZf46RWT1fAsLFMbUP7k8G1VkiiWexriED9GrX3echHd4Abbt17zjlfiFJ8z7a3BxZOPNjg==}
 
   '@vue/compiler-ssr@3.5.34':
     resolution: {integrity: sha512-cDtTHKibkThKGHH1SP+WdccquNRYQDFH6rRjQCqT9G2ltFAfoR5pUftpab/z+aM5mW9HLLVQW7hfKKQe/1GBeQ==}
+
+  '@vue/compiler-ssr@3.6.0-beta.12':
+    resolution: {integrity: sha512-jtpElHVq/KD9cKM+eze35bCTY/A5/tCjbMinMbJtqpl6ElHPN9jMJofImeojuzdowdDcpgoE+hDpiS8syg3fzA==}
 
   '@vue/reactivity@3.5.34':
     resolution: {integrity: sha512-y9XDjCEuBp+98k+UL5dbYkh57AHU4o6cxZedOPXw3bmrZZYLQsVHguGurq7hVrPCSrQtrnz1f9dssyFr+dMXfQ==}
@@ -1220,8 +1229,16 @@ packages:
     peerDependencies:
       vue: 3.5.34
 
+  '@vue/server-renderer@3.6.0-beta.12':
+    resolution: {integrity: sha512-vvxrc68syjO7bhwTgvyAErm3nLFB97p01y0VI2qMIJtj25Q6md2FNP0K4Mr53VXD4FaV8MupwlcrcXGTK/Ch9A==}
+    peerDependencies:
+      vue: 3.6.0-beta.12
+
   '@vue/shared@3.5.34':
     resolution: {integrity: sha512-24uqU4OIiX29ryC3MeWid/Xf2fa2EFRUVLb77nRhk+UrTVrh/XiGtFAFmJBAtBRbjwNdsPRP+jj/OL27Eg1NDA==}
+
+  '@vue/shared@3.6.0-beta.12':
+    resolution: {integrity: sha512-vPxq7puT/X3+VZtKFb1FkAdkytZrb30r6ezkS+wFi8nlUo3AnqGGWKlRAfDGX1a4EUqpvbeqVrU9WtEipaf9NQ==}
 
   '@vue/test-utils@2.4.10':
     resolution: {integrity: sha512-SmoZ5EA1kYiAFs9NkYdiFFQF+cSnUwnvlYEbY+DogWQZUiqOm/Y29eSbc5T6yi75SgSF9863SBeXniIEoPajCA==}
@@ -1233,8 +1250,8 @@ packages:
       '@vue/server-renderer':
         optional: true
 
-  '@vuerend/core@0.2.1':
-    resolution: {integrity: sha512-i/bqxPkf1UGSM7pUhRPKw0BIXL4vTwkyNpIln3iFx1kb6IUuGTrbjfjAujzu69pl9xCNOFfcydOFBk5NfkYGXg==}
+  '@vuerend/core@0.3.0':
+    resolution: {integrity: sha512-evXu/SC7Lhsovf1yCEX1zZWzkOtYdDv6ejKWQ3qYc6wFMajbAxdPioeGVZv0kyIc9TuOLzOTt2wGlC0f2KOxSA==}
     engines: {node: '>=24.0.0'}
     peerDependencies:
       '@vue/runtime-vapor': ^3.6.0-beta.10
@@ -2599,10 +2616,23 @@ snapshots:
       estree-walker: 2.0.2
       source-map-js: 1.2.1
 
+  '@vue/compiler-core@3.6.0-beta.12':
+    dependencies:
+      '@babel/parser': 7.29.3
+      '@vue/shared': 3.6.0-beta.12
+      entities: 7.0.1
+      estree-walker: 2.0.2
+      source-map-js: 1.2.1
+
   '@vue/compiler-dom@3.5.34':
     dependencies:
       '@vue/compiler-core': 3.5.34
       '@vue/shared': 3.5.34
+
+  '@vue/compiler-dom@3.6.0-beta.12':
+    dependencies:
+      '@vue/compiler-core': 3.6.0-beta.12
+      '@vue/shared': 3.6.0-beta.12
 
   '@vue/compiler-sfc@3.5.34':
     dependencies:
@@ -2620,6 +2650,11 @@ snapshots:
     dependencies:
       '@vue/compiler-dom': 3.5.34
       '@vue/shared': 3.5.34
+
+  '@vue/compiler-ssr@3.6.0-beta.12':
+    dependencies:
+      '@vue/compiler-dom': 3.6.0-beta.12
+      '@vue/shared': 3.6.0-beta.12
 
   '@vue/reactivity@3.5.34':
     dependencies:
@@ -2643,22 +2678,30 @@ snapshots:
       '@vue/shared': 3.5.34
       vue: 3.5.34(typescript@6.0.3)
 
+  '@vue/server-renderer@3.6.0-beta.12(vue@3.5.34(typescript@6.0.3))':
+    dependencies:
+      '@vue/compiler-ssr': 3.6.0-beta.12
+      '@vue/shared': 3.6.0-beta.12
+      vue: 3.5.34(typescript@6.0.3)
+
   '@vue/shared@3.5.34': {}
 
-  '@vue/test-utils@2.4.10(@vue/compiler-dom@3.5.34)(@vue/server-renderer@3.5.34(vue@3.5.34(typescript@6.0.3)))(vue@3.5.34(typescript@6.0.3))':
+  '@vue/shared@3.6.0-beta.12': {}
+
+  '@vue/test-utils@2.4.10(@vue/compiler-dom@3.6.0-beta.12)(@vue/server-renderer@3.5.34(vue@3.5.34(typescript@6.0.3)))(vue@3.5.34(typescript@6.0.3))':
     dependencies:
-      '@vue/compiler-dom': 3.5.34
+      '@vue/compiler-dom': 3.6.0-beta.12
       js-beautify: 1.15.4
       vue: 3.5.34(typescript@6.0.3)
       vue-component-type-helpers: 3.2.7
     optionalDependencies:
       '@vue/server-renderer': 3.5.34(vue@3.5.34(typescript@6.0.3))
 
-  '@vuerend/core@0.2.1(vite@8.0.13(@types/node@24.12.4)(jiti@2.6.1))(vue@3.5.34(typescript@6.0.3))':
+  '@vuerend/core@0.3.0(vite@8.0.13(@types/node@24.12.4)(jiti@2.6.1))(vue@3.5.34(typescript@6.0.3))':
     dependencies:
       '@vitejs/plugin-vue': 6.0.6(vite@8.0.13(@types/node@24.12.4)(jiti@2.6.1))(vue@3.5.34(typescript@6.0.3))
       '@vitejs/plugin-vue-jsx': 5.1.5(vite@8.0.13(@types/node@24.12.4)(jiti@2.6.1))(vue@3.5.34(typescript@6.0.3))
-      '@vue/server-renderer': 3.5.34(vue@3.5.34(typescript@6.0.3))
+      '@vue/server-renderer': 3.6.0-beta.12(vue@3.5.34(typescript@6.0.3))
       srvx: 0.11.15
       vite: 8.0.13(@types/node@24.12.4)(jiti@2.6.1)
       vue: 3.5.34(typescript@6.0.3)
