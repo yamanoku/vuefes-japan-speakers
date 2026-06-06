@@ -45,9 +45,9 @@ peerDependencyRules:
 autoInstallPeers: false
 
 minimumReleaseAgeExclude:
-  - "npm:@voidzero-dev/*"
-  - "vize"
+  - "@voidzero-dev/*"
+  - vize
   - "@vizejs/vite-plugin"
-  - "oxlint"
-  - "oxlint-plugin-vize"
+  - oxlint
+  - oxlint-plugin-vize
   - "@vuerend/core"
