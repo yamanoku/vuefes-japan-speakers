@@ -14,8 +14,8 @@ catalogs:
       version: 4.3.0
   test:
     '@vue/test-utils':
-      specifier: 2.4.10
-      version: 2.4.10
+      specifier: 2.4.11
+      version: 2.4.11
     playwright:
       specifier: 1.60.0
       version: 1.60.0
@@ -90,7 +90,7 @@ importers:
         version: 0.114.0(vite@8.0.16(@types/node@24.12.4)(jiti@2.6.1))
       '@vue/test-utils':
         specifier: catalog:test
-        version: 2.4.10(@vue/compiler-dom@3.6.0-beta.12)(@vue/server-renderer@3.5.35(vue@3.5.35(typescript@6.0.3)))(vue@3.5.35(typescript@6.0.3))
+        version: 2.4.11(@vue/compiler-dom@3.6.0-beta.12)(@vue/server-renderer@3.5.35(vue@3.5.35(typescript@6.0.3)))(vue@3.5.35(typescript@6.0.3))
       oxlint:
         specifier: catalog:vize
         version: 1.66.0(oxlint-tsgolint@0.23.0)
@@ -1327,8 +1327,8 @@ packages:
   '@vue/shared@3.6.0-beta.12':
     resolution: {integrity: sha512-vPxq7puT/X3+VZtKFb1FkAdkytZrb30r6ezkS+wFi8nlUo3AnqGGWKlRAfDGX1a4EUqpvbeqVrU9WtEipaf9NQ==}
 
-  '@vue/test-utils@2.4.10':
-    resolution: {integrity: sha512-SmoZ5EA1kYiAFs9NkYdiFFQF+cSnUwnvlYEbY+DogWQZUiqOm/Y29eSbc5T6yi75SgSF9863SBeXniIEoPajCA==}
+  '@vue/test-utils@2.4.11':
+    resolution: {integrity: sha512-GDqaqZsA6m2E5vNzej0aYiIb6BX8xV9pNSbbbXKOfEYwg7ZNblVX8suyqmUBThq8VIrgAJNxn+z72hVtUeiWHA==}
     peerDependencies:
       '@vue/compiler-dom': 3.x
       '@vue/server-renderer': 3.x
@@ -2854,7 +2854,7 @@ snapshots:
 
   '@vue/shared@3.6.0-beta.12': {}
 
-  '@vue/test-utils@2.4.10(@vue/compiler-dom@3.6.0-beta.12)(@vue/server-renderer@3.5.35(vue@3.5.35(typescript@6.0.3)))(vue@3.5.35(typescript@6.0.3))':
+  '@vue/test-utils@2.4.11(@vue/compiler-dom@3.6.0-beta.12)(@vue/server-renderer@3.5.35(vue@3.5.35(typescript@6.0.3)))(vue@3.5.35(typescript@6.0.3))':
     dependencies:
       '@vue/compiler-dom': 3.6.0-beta.12
       js-beautify: 1.15.4
