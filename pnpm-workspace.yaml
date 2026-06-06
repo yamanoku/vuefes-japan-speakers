@@ -5,6 +5,7 @@ allowBuilds:
   unrs-resolver: true
   vue-demi: true
   workerd: true
+
 catalogs:
   css:
     "@tailwindcss/vite": 4.3.0
@@ -32,6 +33,7 @@ catalogs:
     vite: npm:@voidzero-dev/vite-plus-core@0.1.24
     vite-plus: 0.1.24
     vitest: npm:@voidzero-dev/vite-plus-test@0.1.24
+
 peerDependencyRules:
   allowAny:
     - vite
@@ -39,4 +41,13 @@ peerDependencyRules:
   allowedVersions:
     vite: "*"
     vitest: "*"
+
 autoInstallPeers: false
+
+minimumReleaseAgeExclude:
+  - "@voidzero-dev/*"
+  - vize
+  - "@vizejs/vite-plugin"
+  - oxlint
+  - oxlint-plugin-vize
+  - "@vuerend/core"
