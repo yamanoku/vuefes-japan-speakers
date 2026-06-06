@@ -47,7 +47,7 @@ autoInstallPeers: false
 minimumReleaseAgeExclude:
   - "@voidzero-dev/*"
   - vize
-  - "@vizejs/vite-plugin"
+  - "@vizejs/*"
   - oxlint
   - oxlint-plugin-vize
-  - "@vuerend/core"
+  - "@vuerend/*"
