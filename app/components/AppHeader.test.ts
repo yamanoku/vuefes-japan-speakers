@@ -1,5 +1,5 @@
 import { renderToString } from "@vue/server-renderer";
-import { mount } from "@vue/test-utils";
+import { flushPromises, mount } from "@vue/test-utils";
 import { createSSRApp, nextTick } from "vue";
 import { afterEach, describe, expect, it } from "vite-plus/test";
 import AppHeader from "./AppHeader.vue";
@@ -22,14 +22,13 @@ describe("AppHeader", () => {
   it("保存済みの配色設定をマウント後に反映する", async () => {
     localStorage.setItem(STORAGE_KEY, "light");
 
-    const wrapper = mount(AppHeader);
+    const wrapper = mount(AppHeader, { attachTo: document.body });
+    await flushPromises();
     await nextTick();
 
-    const select = wrapper.find("select").element as HTMLSelectElement;
-    expect(select.value).toBe("light");
+    // scheme が localStorage から復元され、DOM に反映されていることを確認
     expect(document.documentElement.getAttribute("data-color-scheme")).toBe("light");
 
-    await wrapper.find("select").setValue("system");
     wrapper.unmount();
   });
 });

@@ -12,7 +12,9 @@ import { fileURLToPath, URL } from "node:url";
 import tailwindcss from "@tailwindcss/vite";
 import vize from "@vizejs/vite-plugin";
 import { vuerend } from "@vuerend/core/vite";
+import type { OxlintConfig } from "oxlint";
 import type { Plugin } from "vite";
+import type { PluginOption } from "vite-plus";
 import { defineConfig } from "vite-plus";
 import { playwright } from "vite-plus/test/browser-playwright";
 
@@ -27,8 +29,7 @@ const ignorePatterns = [
   "**/public/**",
 ];
 
-const lint = {
-  $schema: "./node_modules/oxlint/configuration_schema.json",
+const lint: OxlintConfig = {
   plugins: ["typescript", "oxc", "import", "unicorn", "vue"] as [
     "typescript",
     "oxc",
@@ -212,7 +213,7 @@ export default defineConfig({
     }),
     staticHtmlPreview(),
     cloudflarePages404(),
-  ],
+  ] as PluginOption[],
   resolve: {
     alias: {
       // Vize SSR imports the package root; Vite's module runner needs the ESM build.
