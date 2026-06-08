@@ -25,10 +25,10 @@ catalogs:
   vuerend:
     "@vuerend/core": 0.3.0
   vize:
-    "@vizejs/vite-plugin": 0.114.0
-    oxlint: 1.66.0
-    oxlint-plugin-vize: 0.114.0
-    vize: 0.114.0
+    "@vizejs/vite-plugin": 0.182.0
+    oxlint: 1.68.0
+    oxlint-plugin-vize: 0.182.0
+    vize: 0.182.0
   vp:
     vite: npm:@voidzero-dev/vite-plus-core@0.1.24
     vite-plus: 0.1.24
@@ -47,7 +47,7 @@ autoInstallPeers: false
 minimumReleaseAgeExclude:
   - "@voidzero-dev/*"
   - vize
-  - "@vizejs/vite-plugin"
+  - "@vizejs/*"
   - oxlint
   - oxlint-plugin-vize
-  - "@vuerend/core"
+  - "@vuerend/*"

@@ -85,6 +85,10 @@ function toggleRow(name: string) {
   else next.add(name);
   openRows.value = next;
 }
+
+function toggleNameSort() {
+  sort.value = sort.value === "name-asc" ? "name-desc" : "name-asc";
+}
 </script>
 
 <template>
@@ -132,7 +136,7 @@ function toggleRow(name: string) {
               ? 'bg-ink text-paper border-ink'
               : 'border-rule text-ink-2 hover:text-ink hover:border-ink'
           "
-          @click="sort = sort === 'name-asc' ? 'name-desc' : 'name-asc'"
+          @click="toggleNameSort()"
         >
           Name {{ sort === "name-desc" ? "Z→A" : "A→Z" }}
         </button>
