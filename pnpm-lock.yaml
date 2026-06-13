@@ -21,8 +21,8 @@ catalogs:
       version: 1.60.0
   typescript:
     '@types/node':
-      specifier: 24.13.1
-      version: 24.13.1
+      specifier: 24.13.2
+      version: 24.13.2
     typescript:
       specifier: 6.0.3
       version: 6.0.3
@@ -68,13 +68,13 @@ importers:
     dependencies:
       '@tailwindcss/vite':
         specifier: catalog:css
-        version: 4.3.0(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))
+        version: 4.3.0(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))
       '@vue/server-renderer':
         specifier: catalog:vue
         version: 3.5.35(vue@3.5.35(typescript@6.0.3))
       '@vuerend/core':
         specifier: catalog:vuerend
-        version: 0.3.0(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))
+        version: 0.3.0(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))
       tailwindcss:
         specifier: catalog:css
         version: 4.3.0
@@ -84,16 +84,16 @@ importers:
     devDependencies:
       '@types/node':
         specifier: catalog:typescript
-        version: 24.13.1
+        version: 24.13.2
       '@vizejs/vite-plugin':
         specifier: catalog:vize
-        version: 0.195.0(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))
+        version: 0.195.0(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))
       '@vue/test-utils':
         specifier: catalog:test
         version: 2.4.11(@vue/compiler-dom@3.6.0-beta.12)(@vue/server-renderer@3.5.35(vue@3.5.35(typescript@6.0.3)))(vue@3.5.35(typescript@6.0.3))
       oxlint:
         specifier: catalog:vize
-        version: 1.69.0(oxlint-tsgolint@0.23.0)(vite-plus@0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1)))
+        version: 1.69.0(oxlint-tsgolint@0.23.0)(vite-plus@0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1)))
       oxlint-plugin-vize:
         specifier: catalog:vize
         version: 0.195.0
@@ -105,13 +105,13 @@ importers:
         version: 6.0.3
       vite:
         specifier: catalog:vite
-        version: 8.0.16(@types/node@24.13.1)(jiti@2.6.1)
+        version: 8.0.16(@types/node@24.13.2)(jiti@2.6.1)
       vite-plus:
         specifier: catalog:vp
-        version: 0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))
+        version: 0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))
       vitest:
         specifier: catalog:vp
-        version: '@voidzero-dev/vite-plus-test@0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))'
+        version: '@voidzero-dev/vite-plus-test@0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))'
       vize:
         specifier: catalog:vize
         version: 0.195.0(typescript@6.0.3)
@@ -1025,8 +1025,8 @@ packages:
   '@types/deep-eql@4.0.2':
     resolution: {integrity: sha512-c9h9dVVMigMPc4bwTvC5dxqtqJZwQPePsWjPlpSOnojbor6pGqdk541lfA7AqFQr5pB1BRdq0juY9db81BwyFw==}
 
-  '@types/node@24.13.1':
-    resolution: {integrity: sha512-RSpUJGmvsJ1ZeBehQZFhIdpsz+bIpES0nIQXko4Ybq+N+kX6XvOq3Jo+iJ82FWLdblFq85AsMikd3m35jgezYg==}
+  '@types/node@24.13.2':
+    resolution: {integrity: sha512-fRa09kZTgu8o71KFcDjUFuc7F+dEbZYZmkI0mg5YBTRs0yMKjYHsq/c0urDKeDb+D5qVgXOdFcuu+DZPKOITwA==}
 
   '@typescript/native-preview-darwin-arm64@7.0.0-dev.20260602.1':
     resolution: {integrity: sha512-eSPHtC/iz2jp6H4qVXg2f8C03/dbtZCBVTNg6v8iajGRgD/V23kcOArVk4IQAR0VyqKRCkzQK+TLqKGwrQxP1Q==}
@@ -2624,12 +2624,12 @@ snapshots:
       '@tailwindcss/oxide-win32-arm64-msvc': 4.3.0
       '@tailwindcss/oxide-win32-x64-msvc': 4.3.0
 
-  '@tailwindcss/vite@4.3.0(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))':
+  '@tailwindcss/vite@4.3.0(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))':
     dependencies:
       '@tailwindcss/node': 4.3.0
       '@tailwindcss/oxide': 4.3.0
       tailwindcss: 4.3.0
-      vite: 8.0.16(@types/node@24.13.1)(jiti@2.6.1)
+      vite: 8.0.16(@types/node@24.13.2)(jiti@2.6.1)
 
   '@tybys/wasm-util@0.10.1':
     dependencies:
@@ -2643,7 +2643,7 @@ snapshots:
 
   '@types/deep-eql@4.0.2': {}
 
-  '@types/node@24.13.1':
+  '@types/node@24.13.2':
     dependencies:
       undici-types: 7.18.2
 
@@ -2679,22 +2679,22 @@ snapshots:
       '@typescript/native-preview-win32-x64': 7.0.0-dev.20260602.1
     optional: true
 
-  '@vitejs/plugin-vue-jsx@5.1.5(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))':
+  '@vitejs/plugin-vue-jsx@5.1.5(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))':
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-syntax-typescript': 7.28.6(@babel/core@7.29.0)
       '@babel/plugin-transform-typescript': 7.28.6(@babel/core@7.29.0)
       '@rolldown/pluginutils': 1.0.0
       '@vue/babel-plugin-jsx': 2.0.1(@babel/core@7.29.0)
-      vite: 8.0.16(@types/node@24.13.1)(jiti@2.6.1)
+      vite: 8.0.16(@types/node@24.13.2)(jiti@2.6.1)
       vue: 3.5.35(typescript@6.0.3)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-vue@6.0.6(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))':
+  '@vitejs/plugin-vue@6.0.6(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))':
     dependencies:
       '@rolldown/pluginutils': 1.0.0-rc.13
-      vite: 8.0.16(@types/node@24.13.1)(jiti@2.6.1)
+      vite: 8.0.16(@types/node@24.13.2)(jiti@2.6.1)
       vue: 3.5.35(typescript@6.0.3)
 
   '@vizejs/native-darwin-arm64@0.195.0':
@@ -2732,24 +2732,24 @@ snapshots:
       '@vizejs/native-win32-arm64-msvc': 0.195.0
       '@vizejs/native-win32-x64-msvc': 0.195.0
 
-  '@vizejs/vite-plugin@0.195.0(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))':
+  '@vizejs/vite-plugin@0.195.0(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))':
     dependencies:
       '@vizejs/native': 0.195.0
       tinyglobby: 0.2.16
-      vite: 8.0.16(@types/node@24.13.1)(jiti@2.6.1)
+      vite: 8.0.16(@types/node@24.13.2)(jiti@2.6.1)
       vize: 0.195.0(typescript@6.0.3)
     transitivePeerDependencies:
       - '@pkl-community/pkl'
       - typescript
 
-  '@voidzero-dev/vite-plus-core@0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)':
+  '@voidzero-dev/vite-plus-core@0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)':
     dependencies:
       '@oxc-project/runtime': 0.133.0
       '@oxc-project/types': 0.133.0
       lightningcss: 1.32.0
       postcss: 8.5.15
     optionalDependencies:
-      '@types/node': 24.13.1
+      '@types/node': 24.13.2
       fsevents: 2.3.3
       jiti: 2.6.1
       typescript: 6.0.3
@@ -2772,11 +2772,11 @@ snapshots:
   '@voidzero-dev/vite-plus-linux-x64-musl@0.1.24':
     optional: true
 
-  '@voidzero-dev/vite-plus-test@0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))':
+  '@voidzero-dev/vite-plus-test@0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))':
     dependencies:
       '@standard-schema/spec': 1.1.0
       '@types/chai': 5.2.3
-      '@voidzero-dev/vite-plus-core': 0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)
+      '@voidzero-dev/vite-plus-core': 0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)
       es-module-lexer: 1.7.0
       obug: 2.1.1
       pixelmatch: 7.1.0
@@ -2786,10 +2786,10 @@ snapshots:
       tinybench: 2.9.0
       tinyexec: 1.1.1
       tinyglobby: 0.2.16
-      vite: 8.0.16(@types/node@24.13.1)(jiti@2.6.1)
+      vite: 8.0.16(@types/node@24.13.2)(jiti@2.6.1)
       ws: 8.19.0
     optionalDependencies:
-      '@types/node': 24.13.1
+      '@types/node': 24.13.2
     transitivePeerDependencies:
       - '@arethetypeswrong/core'
       - '@tsdown/css'
@@ -2990,13 +2990,13 @@ snapshots:
     optionalDependencies:
       '@vue/server-renderer': 3.5.35(vue@3.5.35(typescript@6.0.3))
 
-  '@vuerend/core@0.3.0(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))':
+  '@vuerend/core@0.3.0(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))':
     dependencies:
-      '@vitejs/plugin-vue': 6.0.6(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))
-      '@vitejs/plugin-vue-jsx': 5.1.5(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))
+      '@vitejs/plugin-vue': 6.0.6(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))
+      '@vitejs/plugin-vue-jsx': 5.1.5(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))
       '@vue/server-renderer': 3.6.0-beta.12(vue@3.5.35(typescript@6.0.3))
       srvx: 0.11.15
-      vite: 8.0.16(@types/node@24.13.1)(jiti@2.6.1)
+      vite: 8.0.16(@types/node@24.13.2)(jiti@2.6.1)
       vue: 3.5.35(typescript@6.0.3)
     transitivePeerDependencies:
       - supports-color
@@ -3254,7 +3254,7 @@ snapshots:
       '@oxc-transform/binding-win32-ia32-msvc': 0.130.0
       '@oxc-transform/binding-win32-x64-msvc': 0.130.0
 
-  oxfmt@0.52.0(vite-plus@0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))):
+  oxfmt@0.52.0(vite-plus@0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))):
     dependencies:
       tinypool: 2.1.0
     optionalDependencies:
@@ -3277,7 +3277,7 @@ snapshots:
       '@oxfmt/binding-win32-arm64-msvc': 0.52.0
       '@oxfmt/binding-win32-ia32-msvc': 0.52.0
       '@oxfmt/binding-win32-x64-msvc': 0.52.0
-      vite-plus: 0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))
+      vite-plus: 0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))
 
   oxlint-plugin-vize@0.195.0:
     dependencies:
@@ -3301,7 +3301,7 @@ snapshots:
       '@oxlint-tsgolint/win32-arm64': 0.23.0
       '@oxlint-tsgolint/win32-x64': 0.23.0
 
-  oxlint@1.67.0(oxlint-tsgolint@0.23.0)(vite-plus@0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))):
+  oxlint@1.67.0(oxlint-tsgolint@0.23.0)(vite-plus@0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))):
     optionalDependencies:
       '@oxlint/binding-android-arm-eabi': 1.67.0
       '@oxlint/binding-android-arm64': 1.67.0
@@ -3323,9 +3323,9 @@ snapshots:
       '@oxlint/binding-win32-ia32-msvc': 1.67.0
       '@oxlint/binding-win32-x64-msvc': 1.67.0
       oxlint-tsgolint: 0.23.0
-      vite-plus: 0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))
+      vite-plus: 0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))
 
-  oxlint@1.69.0(oxlint-tsgolint@0.23.0)(vite-plus@0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))):
+  oxlint@1.69.0(oxlint-tsgolint@0.23.0)(vite-plus@0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))):
     optionalDependencies:
       '@oxlint/binding-android-arm-eabi': 1.69.0
       '@oxlint/binding-android-arm64': 1.69.0
@@ -3347,7 +3347,7 @@ snapshots:
       '@oxlint/binding-win32-ia32-msvc': 1.69.0
       '@oxlint/binding-win32-x64-msvc': 1.69.0
       oxlint-tsgolint: 0.23.0
-      vite-plus: 0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))
+      vite-plus: 0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))
 
   package-json-from-dist@1.0.1: {}
 
@@ -3484,14 +3484,14 @@ snapshots:
       escalade: 3.2.0
       picocolors: 1.1.1
 
-  vite-plus@0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1)):
+  vite-plus@0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1)):
     dependencies:
       '@oxc-project/types': 0.133.0
       '@oxlint/plugins': 1.61.0
-      '@voidzero-dev/vite-plus-core': 0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)
-      '@voidzero-dev/vite-plus-test': 0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1))
-      oxfmt: 0.52.0(vite-plus@0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1)))
-      oxlint: 1.67.0(oxlint-tsgolint@0.23.0)(vite-plus@0.1.24(@types/node@24.13.1)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1)))
+      '@voidzero-dev/vite-plus-core': 0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)
+      '@voidzero-dev/vite-plus-test': 0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))
+      oxfmt: 0.52.0(vite-plus@0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1)))
+      oxlint: 1.67.0(oxlint-tsgolint@0.23.0)(vite-plus@0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1)))
       oxlint-tsgolint: 0.23.0
     optionalDependencies:
       '@voidzero-dev/vite-plus-darwin-arm64': 0.1.24
@@ -3534,7 +3534,7 @@ snapshots:
       - vite
       - yaml
 
-  vite@8.0.16(@types/node@24.13.1)(jiti@2.6.1):
+  vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
@@ -3542,7 +3542,7 @@ snapshots:
       rolldown: 1.0.3
       tinyglobby: 0.2.17
     optionalDependencies:
-      '@types/node': 24.13.1
+      '@types/node': 24.13.2
       fsevents: 2.3.3
       jiti: 2.6.1
 
