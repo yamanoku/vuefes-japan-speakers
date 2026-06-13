@@ -6,12 +6,14 @@
   "main": "./dist/server/index.js",
   "assets": {
     "directory": "./dist/client",
-    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash",
+    "binding": "ASSETS"
   },
   "observability": {
-    "enabled": true,
+    "enabled": true
   },
   "alias": {
-    "@vuerend/core": "./node_modules/@vuerend/core/dist/runtime.mjs",
-  },
+    "@vuerend/core": "./node_modules/@vuerend/core/dist/runtime.mjs"
+  }
 }
