@@ -7,12 +7,12 @@
   "assets": {
     "directory": "./dist/client",
     "not_found_handling": "404-page",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
   },
   "observability": {
-    "enabled": true
+    "enabled": true,
   },
   "alias": {
-    "@vuerend/core": "./node_modules/@vuerend/core/dist/runtime.mjs"
-  }
+    "@vuerend/core": "./node_modules/@vuerend/core/dist/runtime.mjs",
+  },
 }
