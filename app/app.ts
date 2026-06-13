@@ -161,7 +161,7 @@ export default defineApp({
         };
       },
       prerender() {
-        return getSpeakerNames().map((name) => `/speakers/${encodeURIComponent(name)}`);
+        return getSpeakerNames().map((name) => `/speakers/${name}`);
       },
       render: { strategy: "ssg" },
       status(_context, props: SpeakerRouteProps) {

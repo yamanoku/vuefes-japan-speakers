@@ -6,6 +6,7 @@
   "main": "./dist/server/index.js",
   "assets": {
     "directory": "./dist/client",
+    "not_found_handling": "404-page",
     "binding": "ASSETS",
   },
   "observability": {
