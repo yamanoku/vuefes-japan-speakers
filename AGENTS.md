@@ -29,6 +29,7 @@ vp config
 | 用途          | 推奨コマンド                      |
 | ------------- | --------------------------------- |
 | 開発サーバ    | `vp dev`                          |
+| Musea Gallery | `vp dev` 後に `/__musea__`        |
 | ビルド        | `vp build`                        |
 | 静的生成      | `vp build`                        |
 | プレビュー    | `vp preview --outDir dist/client` |
@@ -50,6 +51,7 @@ vp config
   - `island-definitions.ts`: island 定義
   - `islands.ts`: クライアント island レジストリ
   - `components/`: ヘッダー、フッター、マストヘッド、一覧・タイムライン、フィルタ UI
+    - `*.art.vue`: Musea の component gallery 用 art ファイル
   - `composables/`: コンポーザブル関数集
   - `utils/`: 年判定、文字列ソート、スピーカー集約などのユーティリティ関数集
   - `assets/css/main.css`: Tailwind 読み込み、フォント、カラートークン、デフォルトスタイル
@@ -110,6 +112,7 @@ vp config
 - Lint: `vite.config.ts` の `lint` 設定を `vp lint .` で読み込み、TS/JS の Oxlint ルールと Vize の Vue 診断をまとめて実行します。
 - Format: `vp run format` で oxfmt と Vize formatter を組み合わせて実行します。
 - 型チェック: `vize check --tsconfig tsconfig.vize.json` を `vp run typecheck` 経由で実行します。
+- Musea: `@vizejs/vite-plugin-musea` を Vite plugin として有効化し、`app/**/*.art.vue` を `/__musea__` に表示します。
 - Vize 関連 package は `pnpm-workspace.yaml` の `vize` catalog にまとめます。
 
 ## テスト

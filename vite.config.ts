@@ -1,3 +1,4 @@
+import { Buffer } from "node:buffer";
 import {
   createReadStream,
   existsSync,
@@ -10,6 +11,7 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 import { extname, relative, resolve, sep } from "node:path";
 import { fileURLToPath, URL } from "node:url";
 import tailwindcss from "@tailwindcss/vite";
+import { musea } from "@vizejs/vite-plugin-musea";
 import { vuerend } from "@vuerend/core/vite";
 import type { OxlintConfig } from "oxlint";
 import type { Plugin } from "vite";
@@ -94,6 +96,47 @@ const fmt = {
 };
 
 export { fmt, lint };
+
+const museaGalleryFrameCss = `
+
+/* Vue Fes Japan: keep Musea previews close to app desktop rendering. */
+.variant-preview {
+  aspect-ratio: auto !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  min-height: 720px !important;
+  overflow: auto !important;
+  padding: 24px !important;
+}
+
+.variant-preview iframe {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: 672px !important;
+  max-height: none !important;
+  border-radius: var(--musea-radius-md);
+  flex-shrink: 0;
+}
+
+.variants-view {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+.variant-preview-area,
+.variant-section,
+.variant-card {
+  width: 100% !important;
+}
+
+.variant-toc-column {
+  display: none !important;
+}
+
+.content-inner {
+  max-width: 1720px;
+}
+`;
 
 function staticHtmlPreview(): Plugin {
   return {
@@ -200,9 +243,115 @@ function cloudflarePages404(): Plugin {
   }
 }
 
+function museaGalleryFrameLayout(): Plugin {
+  return {
+    name: "vfjs:musea-gallery-frame-layout",
+    enforce: "pre",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use((request, response, next) => {
+        if (!isMuseaGalleryCssRequest(request)) {
+          next();
+          return;
+        }
+
+        delete request.headers["if-none-match"];
+        delete request.headers["if-modified-since"];
+
+        const chunks: Buffer[] = [];
+        const originalEnd = response.end.bind(response) as (
+          chunk?: string | Uint8Array,
+          encodingOrCallback?: BufferEncoding | (() => void),
+          callback?: () => void,
+        ) => ServerResponse;
+
+        response.write = ((chunk: unknown, encoding?: BufferEncoding) => {
+          chunks.push(toBuffer(chunk, encoding));
+          return true;
+        }) as ServerResponse["write"];
+
+        response.end = ((chunk?: unknown, encodingOrCallback?: BufferEncoding | (() => void)) => {
+          if (chunk !== undefined) {
+            chunks.push(
+              toBuffer(
+                chunk,
+                typeof encodingOrCallback === "string" ? encodingOrCallback : undefined,
+              ),
+            );
+          }
+
+          const css = Buffer.concat(chunks).toString("utf8");
+          if (!css || response.statusCode >= 300) {
+            return originalEnd();
+          }
+
+          const body = `${css}${museaGalleryFrameCss}`;
+          response.setHeader("Cache-Control", "no-store");
+          response.setHeader("Content-Length", Buffer.byteLength(body));
+
+          if (typeof encodingOrCallback === "function") {
+            return originalEnd(body, encodingOrCallback);
+          }
+          return originalEnd(body, "utf8");
+        }) as ServerResponse["end"];
+
+        next();
+      });
+    },
+  };
+}
+
+function isMuseaGalleryCssRequest(request: IncomingMessage) {
+  const pathname = request.url?.split("?")[0] ?? "";
+  return pathname.startsWith("/__musea__/assets/index-") && pathname.endsWith(".css");
+}
+
+function toBuffer(chunk: unknown, encoding?: BufferEncoding) {
+  if (Buffer.isBuffer(chunk)) {
+    return chunk;
+  }
+  if (chunk instanceof Uint8Array) {
+    return Buffer.from(chunk);
+  }
+  return Buffer.from(String(chunk), encoding);
+}
+
+function museaGallery(): Plugin[] {
+  return musea({
+    include: ["app/**/*.art.vue"],
+    exclude: ["node_modules/**", "dist/**", ".cache/**"],
+    basePath: "/__musea__",
+    inlineArt: false,
+    previewCss: ["app/assets/css/main.css", "app/assets/css/musea.css"],
+    theme: "system",
+    vrt: {
+      viewports: [
+        { name: "mobile", width: 390, height: 844 },
+        { name: "desktop", width: 1280, height: 720 },
+      ],
+    },
+  }).map((plugin) => ({
+    ...plugin,
+    apply(config, env) {
+      if (env.mode === "test") {
+        return false;
+      }
+      if (typeof plugin.apply === "function") {
+        return plugin.apply(config, env);
+      }
+      if (plugin.apply) {
+        return plugin.apply === env.command;
+      }
+      return env.command === "serve";
+    },
+  }));
+}
+
 export default defineConfig({
   plugins: [
     tailwindcss(),
+    museaGalleryFrameLayout(),
+    ...museaGallery(),
     vuerend({
       app: "./app/app.ts",
       islands: "./app/islands.ts",
@@ -237,10 +386,12 @@ export default defineConfig({
         command: "vp lint . && vp run format:check && vp run typecheck",
       },
       format: {
-        command: 'vp fmt . --write && vize fmt --write "app/**/*.vue"',
+        command:
+          "vp fmt . --write && vize fmt --write $(find app -name '*.vue' ! -name '*.art.vue')",
       },
       "format:check": {
-        command: 'vp fmt . --check && vize fmt --check "app/**/*.vue"',
+        command:
+          "vp fmt . --check && vize fmt --check $(find app -name '*.vue' ! -name '*.art.vue')",
       },
       typecheck: {
         command: "vize check --tsconfig tsconfig.vize.json",

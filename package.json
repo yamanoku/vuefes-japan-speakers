@@ -15,7 +15,10 @@
   "devDependencies": {
     "@types/node": "catalog:typescript",
     "@vizejs/vite-plugin": "catalog:vize",
+    "@vizejs/vite-plugin-musea": "catalog:musea",
     "@vue/test-utils": "catalog:test",
+    "axe-core": "catalog:musea",
+    "esbuild": "catalog:musea",
     "oxlint": "catalog:vize",
     "oxlint-plugin-vize": "catalog:vize",
     "playwright": "catalog:test",
