@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { museaStats } from "../../musea/sample-data";
+import { museaDarkSurfaceStyle } from "../../musea/theme";
 
 defineArt("./AppMasthead.vue", {
   title: "AppMasthead",
@@ -10,12 +11,12 @@ defineArt("./AppMasthead.vue", {
 
 <art>
   <variant name="Default" default>
-    <div class="musea-preview-wide bg-paper text-ink">
+    <div class="bg-paper text-ink">
       <Self :stats="museaStats" />
     </div>
   </variant>
   <variant name="Dark surface">
-    <div class="musea-dark-surface musea-preview-wide bg-paper text-ink">
+    <div :style="museaDarkSurfaceStyle" class="bg-paper text-ink">
       <Self :stats="museaStats" />
     </div>
   </variant>

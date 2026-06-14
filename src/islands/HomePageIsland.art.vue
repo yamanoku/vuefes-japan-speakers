@@ -10,7 +10,7 @@ defineArt("./HomePageIsland.vue", {
 
 <art>
   <variant name="Default" default>
-    <div class="musea-preview-page bg-paper text-ink">
+    <div class="min-h-[680px] bg-paper text-ink">
       <Self :all-speakers="museaSpeakers" />
     </div>
   </variant>

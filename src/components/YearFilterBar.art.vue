@@ -14,7 +14,7 @@ const selectedYear2025 = ref("2025");
 
 <art>
   <variant name="All years" default>
-    <div class="musea-preview-compact bg-paper text-ink">
+    <div class="bg-paper text-ink">
       <Self
         :counts="museaYearCounts"
         :selected-year="selectedYear"
@@ -23,7 +23,7 @@ const selectedYear2025 = ref("2025");
     </div>
   </variant>
   <variant name="Selected year">
-    <div class="musea-preview-compact bg-paper text-ink">
+    <div class="bg-paper text-ink">
       <Self
         :counts="museaYearCounts"
         :selected-year="selectedYear2025"

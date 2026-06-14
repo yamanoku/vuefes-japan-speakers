@@ -7,6 +7,7 @@ on:
     paths:
       - "src/**"
       - "musea/**"
+      - "config/**"
       - "README.md"
       - "types/**"
       - "package.json"

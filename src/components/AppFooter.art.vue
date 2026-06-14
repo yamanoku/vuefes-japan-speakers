@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { museaDarkSurfaceStyle } from "../../musea/theme";
+
 defineArt("./AppFooter.vue", {
   title: "AppFooter",
   category: "Layout",
@@ -8,12 +10,12 @@ defineArt("./AppFooter.vue", {
 
 <art>
   <variant name="Default" default>
-    <div class="musea-preview-wide bg-paper text-ink">
+    <div class="bg-paper text-ink">
       <Self />
     </div>
   </variant>
   <variant name="Dark surface">
-    <div class="musea-dark-surface musea-preview-wide bg-paper text-ink">
+    <div :style="museaDarkSurfaceStyle" class="bg-paper text-ink">
       <Self />
     </div>
   </variant>

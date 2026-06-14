@@ -1,4 +1,4 @@
-import { defineConfig } from "vize";
+import { defineConfig } from "vize/config";
 
 export default defineConfig({
   compiler: {

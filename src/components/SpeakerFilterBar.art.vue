@@ -15,7 +15,7 @@ const filledQuery = ref("Vue");
 
 <art>
   <variant name="Default" default>
-    <div class="musea-preview-compact bg-paper text-ink">
+    <div class="bg-paper text-ink">
       <Self
         :query="query"
         :selected-speaker="selectedSpeaker"
@@ -26,7 +26,7 @@ const filledQuery = ref("Vue");
     </div>
   </variant>
   <variant name="With query">
-    <div class="musea-preview-compact bg-paper text-ink">
+    <div class="bg-paper text-ink">
       <Self
         :query="filledQuery"
         selected-speaker="Evan You"

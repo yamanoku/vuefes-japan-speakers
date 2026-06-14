@@ -57,10 +57,11 @@ vp config
   - `data/`: 年別スピーカーデータ（`speakers-YYYY.ts`）と集約ロジック
   - `assets/css/main.css`: Tailwind 読み込み、フォント、カラートークン、デフォルトスタイル
 - `musea/`: Musea 専用の preview CSS と art 用サンプルデータ
+- `config/vite/`: Vite custom plugin と Vite Plus lint/format/task 設定
 - `types/`: `SpeakerInfo`、`SpeakerWithYear`、`YEARS` などの共有型
 - `public/`: ロゴ、favicon、OG 画像などの静的ファイル
 - `pnpm-workspace.yaml`: catalog と依存バージョンの定義
-- `vite.config.ts`: Vite / vuerend / Vite Plus / Vize lint / Vitest Browser Mode / `vp run` task 設定
+- `vite.config.ts`: Vite / vuerend / Musea / Vite Plus の配線
 - `tsconfig.json`, `tsconfig.vize.json`: TypeScript と Vize 型チェック設定
 
 ## ルートとデータ
@@ -109,7 +110,7 @@ vp config
 ## Vize / Lint / 型チェック
 
 - Vue SFC compiler は vuerend の標準 Vue plugin を使います。
-- Lint: `vite.config.ts` の `lint` 設定を `vp lint .` で読み込み、TS/JS の Oxlint ルールと Vize の Vue 診断をまとめて実行します。
+- Lint: `config/vite/tooling.ts` の `lint` 設定を `vp lint .` で読み込み、TS/JS の Oxlint ルールと Vize の Vue 診断をまとめて実行します。
 - Format: `vp run format` で oxfmt と Vize formatter を組み合わせて実行します。
 - 型チェック: `vize check --tsconfig tsconfig.vize.json` を `vp run typecheck` 経由で実行します。
 - Musea: `@vizejs/vite-plugin-musea` を Vite plugin として有効化し、`src/**/*.art.vue` を `/__musea__` に表示します。
@@ -177,7 +178,7 @@ GitHub Actions は Vite Plus セットアップ後に以下を実行します。
 - `vp run typecheck`
 - `vp test run`
 
-Browser Mode の test job では、テスト前に `vp exec playwright install --with-deps chromium` で Chromium を導入します。CI の対象 path は `src/**`、`musea/**`、`types/**`、各種設定ファイル、lockfile などです。ドキュメントのみの変更では一部の workflow が走らない場合があります。
+Browser Mode の test job では、テスト前に `vp exec playwright install --with-deps chromium` で Chromium を導入します。CI の対象 path は `src/**`、`musea/**`、`config/**`、`types/**`、各種設定ファイル、lockfile などです。ドキュメントのみの変更では一部の workflow が走らない場合があります。
 
 ## デプロイ
 

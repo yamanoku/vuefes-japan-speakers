@@ -10,12 +10,12 @@ defineArt("./SpeakerPageIsland.vue", {
 
 <art>
   <variant name="Found" default>
-    <div class="musea-preview-page bg-paper text-ink">
+    <div class="min-h-[680px] bg-paper text-ink">
       <Self found :speaker-name="museaSpeakerName" :speakers="museaSpeakerTalks" />
     </div>
   </variant>
   <variant name="Not found">
-    <div class="musea-preview-page bg-paper text-ink">
+    <div class="min-h-[680px] bg-paper text-ink">
       <Self :found="false" speaker-name="Unknown Speaker" :speakers="[]" />
     </div>
   </variant>

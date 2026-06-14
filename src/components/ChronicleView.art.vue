@@ -17,7 +17,7 @@ const emptyQuery = ref("not-found");
 
 <art>
   <variant name="Default" default>
-    <div class="musea-preview-page bg-paper text-ink">
+    <div class="min-h-[680px] bg-paper text-ink">
       <Self
         :all-speakers="museaSpeakers"
         :query="query"
@@ -30,7 +30,7 @@ const emptyQuery = ref("not-found");
     </div>
   </variant>
   <variant name="Filtered">
-    <div class="musea-preview-page bg-paper text-ink">
+    <div class="min-h-[680px] bg-paper text-ink">
       <Self
         :all-speakers="museaSpeakers"
         :query="filteredQuery"
@@ -41,7 +41,7 @@ const emptyQuery = ref("not-found");
     </div>
   </variant>
   <variant name="Empty">
-    <div class="musea-preview-page bg-paper text-ink">
+    <div class="min-h-[680px] bg-paper text-ink">
       <Self
         :all-speakers="museaSpeakers"
         :query="emptyQuery"

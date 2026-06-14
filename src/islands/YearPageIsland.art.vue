@@ -10,12 +10,12 @@ defineArt("./YearPageIsland.vue", {
 
 <art>
   <variant name="Found" default>
-    <div class="musea-preview-page bg-paper text-ink">
+    <div class="min-h-[680px] bg-paper text-ink">
       <Self found year="2025" :speakers="museaYearSpeakers" />
     </div>
   </variant>
   <variant name="Not found">
-    <div class="musea-preview-page bg-paper text-ink">
+    <div class="min-h-[680px] bg-paper text-ink">
       <Self :found="false" year="2020" :speakers="[]" />
     </div>
   </variant>
