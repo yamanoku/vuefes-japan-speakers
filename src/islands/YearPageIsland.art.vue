@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { museaYearSpeakers } from "../musea/sample-data";
+import { museaYearSpeakers } from "../../musea/sample-data";
 
 defineArt("./YearPageIsland.vue", {
   title: "YearPageIsland",

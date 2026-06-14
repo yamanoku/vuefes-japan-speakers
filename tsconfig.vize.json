@@ -4,10 +4,17 @@
     "./env.d.ts",
     "./vize.config.ts",
     "./vite.config.ts",
-    "./app/**/*.ts",
-    "./app/**/*.vue",
-    "./server/**/*.ts",
+    "./src/**/*.ts",
+    "./src/**/*.vue",
+    "./src/data/**/*.ts",
+    "./musea/**/*.ts",
     "./types/**/*.ts"
   ],
-  "exclude": ["./app/**/*.test.ts", "./server/**/*.test.ts", "./node_modules", "./.cache", "./dist"]
+  "exclude": [
+    "./src/**/*.test.ts",
+    "./src/data/**/*.test.ts",
+    "./node_modules",
+    "./.cache",
+    "./dist"
+  ]
 }

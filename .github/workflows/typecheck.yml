@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - "app/**"
-      - "server/**"
+      - "src/**"
+      - "musea/**"
       - "types/**"
       - "package.json"
       - "pnpm-workspace.yaml"

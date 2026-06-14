@@ -14,9 +14,9 @@
     "types": ["node", "vite/client"]
   },
   "include": [
-    "app/**/*.ts",
-    "app/**/*.vue",
-    "server/**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "musea/**/*.ts",
     "types/**/*.ts",
     "env.d.ts",
     "vize.config.ts",

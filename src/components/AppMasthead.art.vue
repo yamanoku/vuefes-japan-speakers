@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { museaStats } from "../musea/sample-data";
+import { museaStats } from "../../musea/sample-data";
 
 defineArt("./AppMasthead.vue", {
   title: "AppMasthead",

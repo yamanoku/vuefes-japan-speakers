@@ -1,5 +1,5 @@
 import { computed, type Ref } from "vue";
-import { getAllSpeakersWithYear, getSpeakersByYear } from "../../server/data";
+import { getAllSpeakersWithYear, getSpeakersByYear } from "../data";
 import type { AcceptedYear, SpeakerWithYear } from "../../types";
 import { compareLexicalJa } from "../utils/stringCollate";
 

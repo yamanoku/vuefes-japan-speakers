@@ -1,6 +1,6 @@
 import { defineApp, defineRoute } from "@vuerend/core";
 import type { RouteContext } from "@vuerend/core";
-import { getAllSpeakersWithYear, getSpeakersByYear } from "../server/data";
+import { getAllSpeakersWithYear, getSpeakersByYear } from "./data";
 import { YEARS } from "../types";
 import { getSpeakerNames, getSpeakerTalks } from "./composables/speaker";
 import { isValidYear } from "./utils/years";
@@ -114,7 +114,7 @@ export default defineApp({
         media: "(prefers-color-scheme: dark)",
       },
     ],
-    stylesheets: import.meta.env.DEV ? ["/app/assets/css/main.css"] : [],
+    stylesheets: import.meta.env.DEV ? ["/src/assets/css/main.css"] : [],
     scripts: [
       {
         children: `(function(){try{var s=localStorage.getItem('vfjs:color-scheme');if(s==='dark'||s==='light'){document.documentElement.setAttribute('data-color-scheme',s)}}catch(e){}})();`,

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { museaYearCounts } from "../musea/sample-data";
+import { museaYearCounts } from "../../musea/sample-data";
 
 defineArt("./YearFilterBar.vue", {
   title: "YearFilterBar",

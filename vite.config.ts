@@ -318,11 +318,11 @@ function toBuffer(chunk: unknown, encoding?: BufferEncoding) {
 
 function museaGallery(): Plugin[] {
   return musea({
-    include: ["app/**/*.art.vue"],
+    include: ["src/**/*.art.vue"],
     exclude: ["node_modules/**", "dist/**", ".cache/**"],
     basePath: "/__musea__",
     inlineArt: false,
-    previewCss: ["app/assets/css/main.css", "app/assets/css/musea.css"],
+    previewCss: ["src/assets/css/main.css", "musea/preview.css"],
     theme: "system",
     vrt: {
       viewports: [
@@ -353,8 +353,8 @@ export default defineConfig({
     museaGalleryFrameLayout(),
     ...museaGallery(),
     vuerend({
-      app: "./app/app.ts",
-      islands: "./app/islands.ts",
+      app: "./src/app.ts",
+      islands: "./src/islands.ts",
     }),
     staticHtmlPreview(),
     cloudflarePages404(),
@@ -387,11 +387,11 @@ export default defineConfig({
       },
       format: {
         command:
-          "vp fmt . --write && vize fmt --write $(find app -name '*.vue' ! -name '*.art.vue')",
+          "vp fmt . --write && vize fmt --write $(find src -name '*.vue' ! -name '*.art.vue')",
       },
       "format:check": {
         command:
-          "vp fmt . --check && vize fmt --check $(find app -name '*.vue' ! -name '*.art.vue')",
+          "vp fmt . --check && vize fmt --check $(find src -name '*.vue' ! -name '*.art.vue')",
       },
       typecheck: {
         command: "vize check --tsconfig tsconfig.vize.json",

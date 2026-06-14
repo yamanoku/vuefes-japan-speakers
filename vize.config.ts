@@ -15,7 +15,7 @@ export default defineConfig({
     trailingComma: "all",
   },
   musea: {
-    include: ["app/**/*.art.vue"],
+    include: ["src/**/*.art.vue"],
     exclude: ["node_modules/**", "dist/**", ".cache/**"],
     basePath: "/__musea__",
     inlineArt: false,

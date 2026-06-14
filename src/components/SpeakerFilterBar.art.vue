@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { museaSpeakerOptions } from "../musea/sample-data";
+import { museaSpeakerOptions } from "../../musea/sample-data";
 
 defineArt("./SpeakerFilterBar.vue", {
   title: "SpeakerFilterBar",

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { museaSpeakers } from "../musea/sample-data";
+import { museaSpeakers } from "../../musea/sample-data";
 
-defineArt("./ChronicleView.vue", {
-  title: "ChronicleView",
+defineArt("./DirectoryView.vue", {
+  title: "DirectoryView",
   category: "Views",
   status: "ready",
 });
@@ -34,8 +34,8 @@ const emptyQuery = ref("not-found");
       <Self
         :all-speakers="museaSpeakers"
         :query="filteredQuery"
-        :selected-speaker="selectedSpeaker"
-        :selected-year="selectedYear"
+        selected-speaker="all"
+        selected-year="2025"
         @update:query="filteredQuery = $event"
       />
     </div>
@@ -45,8 +45,8 @@ const emptyQuery = ref("not-found");
       <Self
         :all-speakers="museaSpeakers"
         :query="emptyQuery"
-        :selected-speaker="selectedSpeaker"
-        :selected-year="selectedYear"
+        selected-speaker="all"
+        selected-year="all"
         @update:query="emptyQuery = $event"
       />
     </div>

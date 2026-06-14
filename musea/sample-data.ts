@@ -1,4 +1,4 @@
-import type { SpeakerInfo, SpeakerWithYear } from "../../types";
+import type { SpeakerInfo, SpeakerWithYear } from "../types";
 
 export const museaSpeakers = [
   {
