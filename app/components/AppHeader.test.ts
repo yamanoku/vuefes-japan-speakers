@@ -15,8 +15,8 @@ describe("AppHeader", () => {
   it("初回表示の配色セレクターでシステム設定を選択する", async () => {
     const html = await renderToString(createSSRApp(AppHeader));
 
-    expect(html).toContain('<option value="system" selected>');
-    expect(html).not.toContain('<option value="light" selected>');
+    expect(html).toMatch(/<option(?=[^>]*\bvalue="system")(?=[^>]*\bselected)[^>]*>/);
+    expect(html).not.toMatch(/<option(?=[^>]*\bvalue="light")(?=[^>]*\bselected)[^>]*>/);
   });
 
   it("保存済みの配色設定をマウント後に反映する", async () => {

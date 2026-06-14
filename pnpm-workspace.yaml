@@ -23,12 +23,12 @@ catalogs:
     "@vue/server-renderer": 3.5.35
     vue: 3.5.35
   vuerend:
-    "@vuerend/core": 0.3.0
+    "@vuerend/core": 1.0.0-rc.2
   vize:
-    "@vizejs/vite-plugin": 0.212.0
+    "@vizejs/vite-plugin": 0.213.0
     oxlint: 1.69.0
-    oxlint-plugin-vize: 0.212.0
-    vize: 0.212.0
+    oxlint-plugin-vize: 0.213.0
+    vize: 0.213.0
   vp:
     vite: npm:@voidzero-dev/vite-plus-core@0.1.24
     vite-plus: 0.1.24
@@ -40,6 +40,7 @@ peerDependencyRules:
     - vitest
   allowedVersions:
     vite: "*"
+    vue: ">=3.5.31"
     vitest: "*"
 
 autoInstallPeers: false

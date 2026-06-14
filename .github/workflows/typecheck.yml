@@ -11,6 +11,7 @@ on:
       - "package.json"
       - "pnpm-workspace.yaml"
       - "pnpm-lock.yaml"
+      - "vize.config.ts"
       - "vite.config.ts"
       - "tsconfig.json"
       - "tsconfig.vize.json"

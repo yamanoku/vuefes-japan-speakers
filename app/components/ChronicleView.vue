@@ -69,17 +69,15 @@ const grouped = computed(() => {
         :query="query"
         :selected-speaker="selectedSpeaker"
         :speaker-options="speakerOptions"
-        @update:query="emit('update:query', $event)"
-        @update:selected-speaker="emit('update:selectedSpeaker', $event)"
+        @update:query='emit("update:query", $event)'
+        @update:selected-speaker='emit("update:selectedSpeaker", $event)'
       />
-
       <!-- 開催年度によるフィルターバー -->
       <YearFilterBar
-        :selected-year="selectedYear"
         :counts="counts"
-        @update:selected-year="emit('update:selectedYear', $event)"
+        :selected-year="selectedYear"
+        @update:selected-year='emit("update:selectedYear", $event)'
       />
-
       <!-- フィルター結果が0件のとき -->
       <div
         v-if="grouped.length === 0"
@@ -87,7 +85,6 @@ const grouped = computed(() => {
       >
         {{ t.empty }}
       </div>
-
       <!-- 年度グループリスト -->
       <ol class="list-none p-0 m-0" :aria-label="t.nav_all_label">
         <!-- 各年度グループ -->
@@ -103,8 +100,8 @@ const grouped = computed(() => {
           >
             <!-- 年度テキスト（表示専用） -->
             <span
-              class="font-display font-[500] text-[clamp(72px,8vw,120px)] leading-[0.85] tabular-nums text-ink"
               aria-hidden="true"
+              class="font-display font-[500] text-[clamp(72px,8vw,120px)] leading-[0.85] tabular-nums text-ink"
             >
               {{ year }}
             </span>
@@ -115,13 +112,12 @@ const grouped = computed(() => {
             <!-- 年度別ページへの矢印リンク -->
             <a
               class="font-mono text-[24px] tracking-[0.08em] uppercase text-ink-2 hover:text-accent transition-colors border-b border-current pb-0.5 no-underline mt-3.5"
-              :href="`/${year}`"
               :aria-label="`${year} speakers`"
+              :href="`/${year}`"
             >
               →
             </a>
           </div>
-
           <!-- その年のスピーカー行リスト -->
           <ol class="list-none p-0 m-0 border-t border-rule-soft">
             <!-- 各スピーカー行 -->
@@ -131,48 +127,56 @@ const grouped = computed(() => {
               class="grid grid-cols-[56px_1fr] gap-4 py-[18px] border-b border-rule-soft items-start"
             >
               <!-- 行番号（表示専用） -->
-              <div class="font-mono text-[14px] text-ink-2 pt-[3px]" aria-hidden="true">
-                <span>{{ String(i + 1).padStart(2, "0") }}</span>
+              <div aria-hidden="true" class="font-mono text-[14px] text-ink-2 pt-[3px]">
+                <span>
+                  {{ String(i + 1).padStart(2, "0") }}
+                </span>
               </div>
               <div class="flex flex-wrap gap-[clamp(16px,2vw,32px)] items-baseline">
                 <!-- スピーカー名（複数名対応・振り仮名・英語名対応、プロフィールページへのリンク） -->
-                <div
-                  class="flex flex-wrap gap-x-2 gap-y-1 basis-50 grow-1 font-display font-[500] text-[clamp(17px,1.5vw,22px)] tracking-[-0.01em] leading-[1.25]"
-                >
+                <div class="flex flex-wrap gap-x-2 gap-y-1 basis-50 grow-1 font-display font-[500] text-[clamp(17px,1.5vw,22px)] tracking-[-0.01em] leading-[1.25]">
                   <template v-for="(n, ni) in s.name" :key="n">
-                    <span v-if="ni > 0" class="text-ink-2 font-normal" aria-hidden="true">×</span>
+                    <span v-if="ni > 0" aria-hidden="true" class="text-ink-2 font-normal">
+                      ×
+                    </span>
                     <a
                       class="text-ink border-b border-rule-soft pb-[1px] no-underline transition-colors hover:border-accent hover:text-accent"
                       :href="`/speakers/${encodeURIComponent(n)}`"
                     >
-                      <ruby v-if="s.nameRuby?.[ni] && lang === 'ja'" lang="ja">
+                      <ruby v-if='s.nameRuby?.[ni] && lang === "ja"' lang="ja">
                         {{ n }}
-                        <rt>{{ s.nameRuby[ni] }}</rt>
+                        <rt>
+                          {{ s.nameRuby[ni] }}
+                        </rt>
                       </ruby>
-                      <span v-else>{{ lang === "en" && s.nameEn?.[ni] ? s.nameEn[ni] : n }}</span>
+                      <span v-else>
+                        {{ lang === "en" && s.nameEn?.[ni] ? s.nameEn[ni] : n }}
+                      </span>
                     </a>
                   </template>
                 </div>
                 <!-- トークタイトル（外部リンク、未決定の場合は TBD 表示） -->
-                <div
-                  class="basis-0 grow-999 min-inline-[60%] text-[clamp(14px,1.1vw,16px)] text-ink-2 leading-[1.5]"
-                >
+                <div class="basis-0 grow-999 min-inline-[60%] text-[clamp(14px,1.1vw,16px)] text-ink-2 leading-[1.5]">
                   <a
                     v-if="s.title"
-                    :href="s.url"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     class="text-ink-2 no-underline group hover:text-ink"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    :href="s.url"
                   >
                     <!-- パネルセッションのフォーマットバッジ -->
                     <span
-                      v-if="s.format === 'panel'"
+                      v-if='s.format === "panel"'
                       class="relative top-[-1px] inline-flex items-center self-center align-middle font-mono text-[10px] uppercase tracking-[0.06em] border border-ink text-ink px-[5px] py-[1px] leading-[1.15] mr-2"
                     >
                       {{ t.session_format_panel }}
                     </span>
-                    <span class="group-hover:underline">{{ s.title }}</span>
-                    <span class="font-mono text-[10px] text-ink-2 ml-1">({{ t.external }})</span>
+                    <span class="group-hover:underline">
+                      {{ s.title }}
+                    </span>
+                    <span class="font-mono text-[10px] text-ink-2 ml-1">
+                      ({{ t.external }})
+                    </span>
                   </a>
                   <!-- タイトル未決定時のプレースホルダー -->
                   <span v-else class="font-mono text-[12px] text-ink-2 uppercase tracking-[0.06em]">

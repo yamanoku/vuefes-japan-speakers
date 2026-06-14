@@ -7,7 +7,7 @@
 - 目的: 歴代の Vue Fes Japan スピーカーと発表タイトルを一覧できるアーカイブサイト
 - フレームワーク: [vuerend](https://www.npmjs.com/package/@vuerend/core)（Vue 3 / Vite）
 - UI/スタイル: Tailwind CSS 4 + Vue コンポーネント
-- ツールチェーン: Vize（Vue SFC compiler / lint / type check）+ Vite Plus
+- ツールチェーン: Vize（lint / format / type check）+ Vite Plus
 - データ供給: `server/data` の静的データを vuerend ルートの props として渡す
 
 ## 前提・セットアップ
@@ -33,13 +33,13 @@ vp config
 | 静的生成      | `vp build`                        |
 | プレビュー    | `vp preview --outDir dist/client` |
 | Lint          | `vp lint .`                       |
-| Format        | `vp fmt .`                        |
-| Format 確認   | `vp fmt . --check`                |
+| Format        | `vp run format`                   |
+| Format 確認   | `vp run format:check`             |
 | Type Check    | `vp run typecheck`                |
 | Test          | `vp test run`                     |
 | Test（watch） | `vp test watch`                   |
 
-作業前後の検証は、変更内容に応じて `vp lint .`、`vp fmt . --check`、`vp run typecheck`、`vp test run` を組み合わせます。
+作業前後の検証は、変更内容に応じて `vp lint .`、`vp run format:check`、`vp run typecheck`、`vp test run` を組み合わせます。
 
 ## ディレクトリ構成（要点）
 
@@ -106,8 +106,9 @@ vp config
 
 ## Vize / Lint / 型チェック
 
-- Compiler: `@vizejs/vite-plugin` を `vite.config.ts` で vuerend の `vuePlugin` として渡します。
+- Vue SFC compiler は vuerend の標準 Vue plugin を使います。
 - Lint: `vite.config.ts` の `lint` 設定を `vp lint .` で読み込み、TS/JS の Oxlint ルールと Vize の Vue 診断をまとめて実行します。
+- Format: `vp run format` で oxfmt と Vize formatter を組み合わせて実行します。
 - 型チェック: `vize check --tsconfig tsconfig.vize.json` を `vp run typecheck` 経由で実行します。
 - Vize 関連 package は `pnpm-workspace.yaml` の `vize` catalog にまとめます。
 
@@ -138,8 +139,8 @@ vp test run
 
 - 型チェック: `vp run typecheck`
 - Lint: `vp lint .`
-- Format: `vp fmt .`
-- Format 確認: `vp fmt . --check`
+- Format: `vp run format`
+- Format 確認: `vp run format:check`
 
 型エラーを隠すための型削除や過度な型アサーションは避け、原因を直してください。
 
@@ -170,7 +171,7 @@ vp test run
 GitHub Actions は Vite Plus セットアップ後に以下を実行します。
 
 - `vp lint .`
-- `vp fmt . --check`
+- `vp run format:check`
 - `vp run typecheck`
 - `vp test run`
 
@@ -185,7 +186,7 @@ Browser Mode の test job では、テスト前に `vp exec playwright install -
 - ブランチ: `feat/*`、`fix/*`、`chore/*`、`docs/*` など用途別に作成する。
 - コミット: Conventional Commits を使う。例: `docs: update agents guide`
 - 実装: 小さめの差分で進め、関連テストやドキュメントも合わせて更新する。
-- 検証: 変更内容に応じて `vp lint . && vp fmt . --check && vp run typecheck && vp test run` を実行する。
+- 検証: 変更内容に応じて `vp lint . && vp run format:check && vp run typecheck && vp test run` を実行する。
 - レビュー: 変更点の要約、確認したコマンド、必要に応じてスクリーンショットや再現手順を添える。
 
 ## トラブルシュート

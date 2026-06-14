@@ -47,72 +47,68 @@ const stats = computed(() => {
 <template>
   <div>
     <AppHeader />
-
     <!-- タイトル・統計情報 -->
     <AppMasthead :stats="stats" />
-
     <!-- ビュー切り替えタブバー（Chronicle／Directory） -->
     <div
+      aria-label="View mode"
       class="flex gap-0 px-pad-x border-b border-rule bg-paper"
       role="tablist"
-      aria-label="View mode"
     >
       <!-- 年度別クロニクルビュータブ -->
       <button
-        role="tab"
-        :aria-selected="view === 'chronicle'"
         class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
-        :class="
-          view === 'chronicle'
-            ? 'text-ink [box-shadow:inset_0_-4px_0_var(--accent)]'
-            : 'text-ink-3 hover:text-ink'
-        "
-        @click="view = 'chronicle'"
+        role="tab"
+        :aria-selected='view === "chronicle"'
+        :class='view === "chronicle"
+  ? "text-ink [box-shadow:inset_0_-4px_0_var(--accent)]"
+  : "text-ink-3 hover:text-ink"'
+        @click='view = "chronicle"'
       >
         {{ t.view_timeline }}
-        <span lang="en" class="font-mono text-[12px] tracking-[0.02em] ml-1">Chronicle</span>
+        <span class="font-mono text-[12px] tracking-[0.02em] ml-1" lang="en">
+          Chronicle
+        </span>
       </button>
       <!-- スピーカー名索引ディレクトリビュータブ -->
       <button
-        role="tab"
-        :aria-selected="view === 'index'"
         class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
-        :class="
-          view === 'index'
-            ? 'text-ink [box-shadow:inset_0_-4px_0_var(--accent)]'
-            : 'text-ink-3 hover:text-ink'
-        "
-        @click="view = 'index'"
+        role="tab"
+        :aria-selected='view === "index"'
+        :class='view === "index"
+  ? "text-ink [box-shadow:inset_0_-4px_0_var(--accent)]"
+  : "text-ink-3 hover:text-ink"'
+        @click='view = "index"'
       >
         {{ t.view_index }}
-        <span lang="en" class="font-mono text-[12px] tracking-[0.02em] ml-1">Directory</span>
+        <span class="font-mono text-[12px] tracking-[0.02em] ml-1" lang="en">
+          Directory
+        </span>
       </button>
     </div>
-
     <!-- 選択中のビューに応じてコンポーネントを切り替え -->
     <!-- 年度別クロニクルビュー -->
     <ChronicleView
-      v-if="view === 'chronicle'"
+      v-if='view === "chronicle"'
       :all-speakers="allSpeakers"
-      :selected-year="selectedYear"
-      :selected-speaker="selectedSpeaker"
       :query="query"
-      @update:selected-year="selectedYear = $event"
-      @update:selected-speaker="selectedSpeaker = $event"
+      :selected-speaker="selectedSpeaker"
+      :selected-year="selectedYear"
       @update:query="query = $event"
+      @update:selected-speaker="selectedSpeaker = $event"
+      @update:selected-year="selectedYear = $event"
     />
     <!-- スピーカー索引ディレクトリビュー -->
     <DirectoryView
       v-else
       :all-speakers="allSpeakers"
-      :selected-year="selectedYear"
-      :selected-speaker="selectedSpeaker"
       :query="query"
-      @update:selected-year="selectedYear = $event"
-      @update:selected-speaker="selectedSpeaker = $event"
+      :selected-speaker="selectedSpeaker"
+      :selected-year="selectedYear"
       @update:query="query = $event"
+      @update:selected-speaker="selectedSpeaker = $event"
+      @update:selected-year="selectedYear = $event"
     />
-
     <AppFooter />
   </div>
 </template>

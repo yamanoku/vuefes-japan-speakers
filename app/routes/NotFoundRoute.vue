@@ -9,9 +9,10 @@ const { t } = useVfjsI18n();
 <template>
   <div>
     <AppHeader />
-
     <main class="min-h-[60vh] px-pad-x py-[clamp(64px,10vw,140px)] border-b border-rule">
-      <p class="font-mono text-[12px] tracking-[0.12em] uppercase text-ink-3 mb-4.5">404</p>
+      <p class="font-mono text-[12px] tracking-[0.12em] uppercase text-ink-3 mb-4.5">
+        404
+      </p>
       <h1 class="font-display text-[clamp(40px,7vw,96px)] font-[500] leading-[0.98] text-ink m-0">
         {{ t.not_found_title }}
       </h1>
@@ -19,13 +20,12 @@ const { t } = useVfjsI18n();
         {{ t.not_found_description }}
       </p>
       <a
-        href="/"
         class="inline-block mt-8 font-mono text-[13px] text-ink underline hover:no-underline"
+        href="/"
       >
         {{ t.back_top }}
       </a>
     </main>
-
     <AppFooter />
   </div>
 </template>

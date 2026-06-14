@@ -27,13 +27,11 @@ const { t } = useVfjsI18n();
         <button
           class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] font-mono text-[12px] tracking-[0.02em] border border-rule cursor-pointer transition-colors"
           type="button"
-          :class="
-            selectedYear === 'all'
-              ? 'bg-ink text-paper border-ink'
-              : 'text-ink-2 hover:border-ink hover:text-ink'
-          "
-          :data-active="selectedYear === 'all' ? 'true' : 'false'"
-          @click="emit('update:selectedYear', 'all')"
+          :class='selectedYear === "all"
+  ? "bg-ink text-paper border-ink"
+  : "text-ink-2 hover:border-ink hover:text-ink"'
+          :data-active='selectedYear === "all" ? "true" : "false"'
+          @click='emit("update:selectedYear", "all")'
         >
           ALL · {{ counts.all }}
         </button>
@@ -43,13 +41,11 @@ const { t } = useVfjsI18n();
           :key="y"
           class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] font-mono text-[12px] tracking-[0.02em] border border-rule cursor-pointer transition-colors"
           type="button"
-          :class="
-            selectedYear === y
-              ? 'bg-ink text-paper border-ink'
-              : 'text-ink-2 hover:border-ink hover:text-ink'
-          "
-          :data-active="selectedYear === y ? 'true' : 'false'"
-          @click="emit('update:selectedYear', y)"
+          :class='selectedYear === y
+  ? "bg-ink text-paper border-ink"
+  : "text-ink-2 hover:border-ink hover:text-ink"'
+          :data-active='selectedYear === y ? "true" : "false"'
+          @click='emit("update:selectedYear", y)'
         >
           {{ y }} · {{ counts[y] }}
         </button>

@@ -100,42 +100,34 @@ function toggleNameSort() {
         :query="query"
         :selected-speaker="selectedSpeaker"
         :speaker-options="speakerOptions"
-        @update:query="emit('update:query', $event)"
-        @update:selected-speaker="emit('update:selectedSpeaker', $event)"
+        @update:query='emit("update:query", $event)'
+        @update:selected-speaker='emit("update:selectedSpeaker", $event)'
       />
-
       <!-- 開催年度によるフィルターバー -->
       <YearFilterBar
-        :selected-year="selectedYear"
         :counts="counts"
-        @update:selected-year="emit('update:selectedYear', $event)"
+        :selected-year="selectedYear"
+        @update:selected-year='emit("update:selectedYear", $event)'
       />
-
       <!-- Sort header -->
       <!-- ソートボタンヘッダー（登壇回数・名前順・最新年で並び替え） -->
-      <div
-        class="flex items-center gap-2 px-pad-x pt-4.5 pb-2.5 border-b border-rule-soft font-mono overflow-x-auto"
-      >
+      <div class="flex items-center gap-2 px-pad-x pt-4.5 pb-2.5 border-b border-rule-soft font-mono overflow-x-auto">
         <!-- 登壇回数の多い順でソートするボタン -->
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
-          :class="
-            sort === 'appearances'
-              ? 'bg-ink text-paper border-ink'
-              : 'border-rule text-ink-2 hover:text-ink hover:border-ink'
-          "
-          @click="sort = 'appearances'"
+          :class='sort === "appearances"
+  ? "bg-ink text-paper border-ink"
+  : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
+          @click='sort = "appearances"'
         >
           Appearances ↓
         </button>
         <!-- 名前の昇順/降順でソートするボタン -->
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
-          :class="
-            sort === 'name-asc' || sort === 'name-desc'
-              ? 'bg-ink text-paper border-ink'
-              : 'border-rule text-ink-2 hover:text-ink hover:border-ink'
-          "
+          :class='sort === "name-asc" || sort === "name-desc"
+  ? "bg-ink text-paper border-ink"
+  : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
           @click="toggleNameSort()"
         >
           Name {{ sort === "name-desc" ? "Z→A" : "A→Z" }}
@@ -143,12 +135,10 @@ function toggleNameSort() {
         <!-- 最新登壇年の新しい順でソートするボタン -->
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
-          :class="
-            sort === 'latest'
-              ? 'bg-ink text-paper border-ink'
-              : 'border-rule text-ink-2 hover:text-ink hover:border-ink'
-          "
-          @click="sort = 'latest'"
+          :class='sort === "latest"
+  ? "bg-ink text-paper border-ink"
+  : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
+          @click='sort = "latest"'
         >
           Latest year ↓
         </button>
@@ -158,7 +148,6 @@ function toggleNameSort() {
           {{ String(allRecords.length).padStart(3, "0") }}
         </span>
       </div>
-
       <!-- フィルター結果が0件のときの空状態メッセージ -->
       <div
         v-if="filtered.length === 0"
@@ -166,37 +155,36 @@ function toggleNameSort() {
       >
         {{ t.empty }}
       </div>
-
       <!-- スピーカー一覧リスト -->
       <ol class="list-none p-0 m-0">
         <li
           v-for="(rec, i) in filtered"
           :key="rec.name"
           class="border-b border-rule-softer"
-          :data-open="openRows.has(rec.name) ? 'true' : 'false'"
+          :data-open='openRows.has(rec.name) ? "true" : "false"'
         >
           <!-- スピーカー行の展開/折りたたみボタン -->
           <button
             class="w-full flex flex-wrap items-center gap-x-[12px] px-pad-x py-3.5 cursor-pointer text-left"
-            :class="openRows.has(rec.name) ? 'bg-paper-2' : ''"
             :aria-expanded="openRows.has(rec.name)"
+            :class='openRows.has(rec.name) ? "bg-paper-2" : ""'
             @click="toggleRow(rec.name)"
           >
-            <span
-              class="basis-0 grow-999 min-inline-[50%] flex flex-wrap gap-2 justify-start items-center"
-            >
+            <span class="basis-0 grow-999 min-inline-[50%] flex flex-wrap gap-2 justify-start items-center">
               <!-- 行番号（表示専用） -->
-              <span class="font-mono text-[12px] text-ink-2 tabular-nums" aria-hidden="true">
+              <span aria-hidden="true" class="font-mono text-[12px] text-ink-2 tabular-nums">
                 {{ String(i + 1).padStart(3, "0") }}
               </span>
               <!-- スピーカー名（振り仮名・英語名対応） -->
               <span
                 class="font-display text-[clamp(15px,1.2vw,18px)] font-[500] tracking-[-0.005em] text-ink"
-                :lang="hasJapanese(rec.name) ? 'ja' : 'en'"
+                :lang='hasJapanese(rec.name) ? "ja" : "en"'
               >
-                <ruby v-if="rec.nameRuby && lang === 'ja'">
+                <ruby v-if='rec.nameRuby && lang === "ja"'>
                   {{ rec.name }}
-                  <rt>{{ rec.nameRuby }}</rt>
+                  <rt>
+                    {{ rec.nameRuby }}
+                  </rt>
                 </ruby>
                 <template v-else>
                   {{ lang === "en" && rec.nameEn ? rec.nameEn : rec.name }}
@@ -207,26 +195,28 @@ function toggleNameSort() {
                   class="font-mono bg-accent text-[12px] text-accent-ink ml-2 font-normal tracking-[0.02em] align-[2px] border border-accent px-1.25 py-[1px]"
                   :aria-label="t.appearance_count(rec.talks.length)"
                 >
-                  <span>×{{ rec.talks.length }}</span>
+                  <span>
+                    ×{{ rec.talks.length }}
+                  </span>
                 </span>
               </span>
               <!-- 登壇年度グリッド（各年のマスを塗りつぶして登壇済みかを可視化） -->
               <span
                 class="inline-grid gap-[3px] grow-999 justify-end"
                 style="grid-template-columns: repeat(6, 28px)"
-                :aria-label="t.years_appeared + ': ' + rec.years.join(', ')"
+                :aria-label='t.years_appeared + ": " + rec.years.join(", ")'
               >
                 <span
                   v-for="y in YEARS"
                   :key="y"
                   class="w-7 h-[22px] flex items-center justify-center font-mono text-[12px] tracking-[0]"
-                  :class="[
-                    rec.years.includes(y) && selectedYear === y
-                      ? 'bg-accent border border-accent text-accent-ink'
-                      : rec.years.includes(y)
-                        ? 'bg-ink border border-ink text-paper'
-                        : 'border border-ink text-ink',
-                  ]"
+                  :class='[
+  rec.years.includes(y) && selectedYear === y
+    ? "bg-accent border border-accent text-accent-ink"
+    : rec.years.includes(y)
+      ? "bg-ink border border-ink text-paper"
+      : "border border-ink text-ink",
+]'
                   :title="y"
                 >
                   {{ y.slice(-2) }}
@@ -235,8 +225,8 @@ function toggleNameSort() {
             </span>
             <!-- 展開/折りたたみアイコン（+/−） -->
             <span
-              class="basis-6 grow-1 font-mono text-[16px] text-ink-3 text-center"
               aria-hidden="true"
+              class="basis-6 grow-1 font-mono text-[16px] text-ink-3 text-center"
             >
               {{ openRows.has(rec.name) ? "−" : "+" }}
             </span>
@@ -260,12 +250,12 @@ function toggleNameSort() {
                 v-for="(talk, k) in rec.talks"
                 :key="k"
                 class="grid grid-cols-[30px_1fr] gap-4 items-baseline py-1.5 border-t border-rule-softer"
-                :class="k === 0 ? 'border-t-0' : ''"
+                :class='k === 0 ? "border-t-0" : ""'
               >
                 <!-- 開催年リンク（年度別ページへ） -->
                 <a
-                  :href="`/${talk.year}`"
                   class="underline hover:no-underline font-mono text-[12px] text-ink tabular-nums"
+                  :href="`/${talk.year}`"
                 >
                   {{ talk.year }}
                 </a>
@@ -273,25 +263,31 @@ function toggleNameSort() {
                   <!-- トークタイトル（外部リンク） -->
                   <a
                     class="text-[14px] text-ink pb-[1px] leading-[1.45] no-underline group"
-                    :href="talk.url"
-                    target="_blank"
                     rel="noopener noreferrer"
+                    target="_blank"
+                    :href="talk.url"
                   >
                     <!-- パネルセッションのフォーマットバッジ -->
                     <span
-                      v-if="talk.format === 'panel'"
+                      v-if='talk.format === "panel"'
                       class="relative top-[-1px] inline-flex items-center self-center align-middle font-mono text-[10px] uppercase tracking-[0.06em] border border-ink text-ink px-[5px] py-[1px] leading-[1.15] mr-2"
                     >
                       {{ t.session_format_panel }}
                     </span>
-                    <span class="group-hover:underline">{{ talk.title || t.tbd }}</span>
-                    <span class="font-mono text-[10px] text-ink-2 ml-1">({{ t.external }})</span>
+                    <span class="group-hover:underline">
+                      {{ talk.title || t.tbd }}
+                    </span>
+                    <span class="font-mono text-[10px] text-ink-2 ml-1">
+                      ({{ t.external }})
+                    </span>
                   </a>
                   <!-- 共同登壇者のリスト（各スピーカープロフィールへのリンク） -->
                   <span v-if="talk.coSpeakers.length > 0" class="text-[12px] font-mono text-ink-2">
                     w/
                     <template v-for="(cn, ci) in talk.coSpeakers" :key="cn">
-                      <template v-if="ci > 0">,</template>
+                      <template v-if="ci > 0">
+                        ,
+                      </template>
                       <a
                         class="text-ink border-b border-rule-soft pb-[1px] no-underline hover:border-ink"
                         :href="`/speakers/${encodeURIComponent(cn)}`"

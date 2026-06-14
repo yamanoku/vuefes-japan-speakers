@@ -10,7 +10,6 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 import { extname, relative, resolve, sep } from "node:path";
 import { fileURLToPath, URL } from "node:url";
 import tailwindcss from "@tailwindcss/vite";
-import vize from "@vizejs/vite-plugin";
 import { vuerend } from "@vuerend/core/vite";
 import type { OxlintConfig } from "oxlint";
 import type { Plugin } from "vite";
@@ -28,6 +27,7 @@ const ignorePatterns = [
   "**/node_modules/**",
   "**/public/**",
 ];
+const fmtIgnorePatterns = [...ignorePatterns, "**/*.vue"];
 
 const lint: OxlintConfig = {
   plugins: ["typescript", "oxc", "import", "unicorn", "vue"] as [
@@ -90,7 +90,7 @@ const fmt = {
   trailingComma: "all" as const,
   htmlWhitespaceSensitivity: "ignore" as const,
   sortPackageJson: true,
-  ignorePatterns,
+  ignorePatterns: fmtIgnorePatterns,
 };
 
 export { fmt, lint };
@@ -206,17 +206,13 @@ export default defineConfig({
     vuerend({
       app: "./app/app.ts",
       islands: "./app/islands.ts",
-      vuePlugin: vize({
-        scanPatterns: ["app/**/*.vue"],
-        ignorePatterns: ["node_modules/**", "dist/**", ".cache/**"],
-      }),
     }),
     staticHtmlPreview(),
     cloudflarePages404(),
   ] as PluginOption[],
   resolve: {
     alias: {
-      // Vize SSR imports the package root; Vite's module runner needs the ESM build.
+      // Keep the SSR renderer on the ESM entry for Vite's module runner.
       "@vue/server-renderer": fileURLToPath(
         new URL(
           "./node_modules/@vue/server-renderer/dist/server-renderer.esm-bundler.js",
@@ -238,10 +234,16 @@ export default defineConfig({
   run: {
     tasks: {
       check: {
-        command: "vp lint . && vp run typecheck",
+        command: "vp lint . && vp run format:check && vp run typecheck",
+      },
+      format: {
+        command: 'vp fmt . --write && vize fmt --write "app/**/*.vue"',
+      },
+      "format:check": {
+        command: 'vp fmt . --check && vize fmt --check "app/**/*.vue"',
       },
       typecheck: {
-        command: "vize check --servers 1 --tsconfig tsconfig.vize.json",
+        command: "vize check --tsconfig tsconfig.vize.json",
       },
     },
   },

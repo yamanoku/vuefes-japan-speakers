@@ -19,6 +19,7 @@
     "server/**/*.ts",
     "types/**/*.ts",
     "env.d.ts",
+    "vize.config.ts",
     "vite.config.ts"
   ]
 }

@@ -2,6 +2,7 @@
   "extends": "./tsconfig.json",
   "include": [
     "./env.d.ts",
+    "./vize.config.ts",
     "./vite.config.ts",
     "./app/**/*.ts",
     "./app/**/*.vue",

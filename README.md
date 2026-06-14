@@ -30,7 +30,7 @@ vp config
 
 ## Commands
 
-Vuerend / Vite のアプリとして動きます。Vue SFC compiler、lint、type check には Vize 0.72.0 系を使い、日常コマンドは Vite+（`vp`）経由で実行します。
+Vuerend / Vite のアプリとして動きます。lint、format、type check には Vize を使い、日常コマンドは Vite+（`vp`）経由で実行します。
 
 | 用途          | コマンド                          |
 | ------------- | --------------------------------- |
@@ -39,8 +39,8 @@ Vuerend / Vite のアプリとして動きます。Vue SFC compiler、lint、typ
 | 静的生成      | `vp build`                        |
 | プレビュー    | `vp preview --outDir dist/client` |
 | Lint          | `vp lint .`                       |
-| Format        | `vp fmt .`                        |
-| Format Check  | `vp fmt . --check`                |
+| Format        | `vp run format`                   |
+| Format Check  | `vp run format:check`             |
 | Type Check    | `vp run typecheck`                |
 | Test          | `vp test run`                     |
 | Test（watch） | `vp test watch`                   |
@@ -50,7 +50,7 @@ Vuerend / Vite のアプリとして動きます。Vue SFC compiler、lint、typ
 GitHub Actions でも同じ Vite+ コマンドを実行します。
 
 - `vp lint .`
-- `vp fmt . --check`
+- `vp run format:check`
 - `vp run typecheck`
 - `vp test run`
 

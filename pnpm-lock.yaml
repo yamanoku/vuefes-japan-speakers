@@ -32,17 +32,17 @@ catalogs:
       version: 8.0.16
   vize:
     '@vizejs/vite-plugin':
-      specifier: 0.212.0
-      version: 0.212.0
+      specifier: 0.213.0
+      version: 0.213.0
     oxlint:
       specifier: 1.69.0
       version: 1.69.0
     oxlint-plugin-vize:
-      specifier: 0.212.0
-      version: 0.212.0
+      specifier: 0.213.0
+      version: 0.213.0
     vize:
-      specifier: 0.212.0
-      version: 0.212.0
+      specifier: 0.213.0
+      version: 0.213.0
   vp:
     vite-plus:
       specifier: 0.1.24
@@ -59,8 +59,8 @@ catalogs:
       version: 3.5.35
   vuerend:
     '@vuerend/core':
-      specifier: 0.3.0
-      version: 0.3.0
+      specifier: 1.0.0-rc.2
+      version: 1.0.0-rc.2
 
 importers:
 
@@ -74,7 +74,7 @@ importers:
         version: 3.5.35(vue@3.5.35(typescript@6.0.3))
       '@vuerend/core':
         specifier: catalog:vuerend
-        version: 0.3.0(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))
+        version: 1.0.0-rc.2(@vizejs/vite-plugin@0.213.0(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3)))(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))
       tailwindcss:
         specifier: catalog:css
         version: 4.3.0
@@ -87,16 +87,16 @@ importers:
         version: 24.13.2
       '@vizejs/vite-plugin':
         specifier: catalog:vize
-        version: 0.212.0(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))
+        version: 0.213.0(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))
       '@vue/test-utils':
         specifier: catalog:test
-        version: 2.4.11(@vue/compiler-dom@3.6.0-beta.12)(@vue/server-renderer@3.5.35(vue@3.5.35(typescript@6.0.3)))(vue@3.5.35(typescript@6.0.3))
+        version: 2.4.11(@vue/compiler-dom@3.6.0-beta.15)(@vue/server-renderer@3.5.35(vue@3.5.35(typescript@6.0.3)))(vue@3.5.35(typescript@6.0.3))
       oxlint:
         specifier: catalog:vize
         version: 1.69.0(oxlint-tsgolint@0.23.0)(vite-plus@0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1)))
       oxlint-plugin-vize:
         specifier: catalog:vize
-        version: 0.212.0
+        version: 0.213.0
       playwright:
         specifier: catalog:test
         version: 1.60.0
@@ -114,7 +114,7 @@ importers:
         version: '@voidzero-dev/vite-plus-test@0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))'
       vize:
         specifier: catalog:vize
-        version: 0.212.0(vue@3.5.35(typescript@6.0.3))
+        version: 0.213.0(vue@3.5.35(typescript@6.0.3))
 
 packages:
 
@@ -188,8 +188,16 @@ packages:
     resolution: {integrity: sha512-qMlSxKbpRlAridDExk92nSobyDdpPijUq2DW6oDnUqd0iOGxmQjyqhMIihI9+zv4LPyZdRje2cavWPbCbWm3eA==}
     engines: {node: '>=6.9.0'}
 
+  '@babel/helper-string-parser@7.29.7':
+    resolution: {integrity: sha512-Pb5ijPrZ89GDH8223L4UP8i6QApWxs04RbPQJTeWDV0/keR2E36MeKnyr6LYmUUvqRRI+Iv87SuF1W6ErINzYw==}
+    engines: {node: '>=6.9.0'}
+
   '@babel/helper-validator-identifier@7.28.5':
     resolution: {integrity: sha512-qSs4ifwzKJSV39ucNjsvc6WVHs6b7S03sOh2OcHF9UHfVPqWWALUsNUVzhSBiItjRZoLHx7nIarVjqKVusUZ1Q==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/helper-validator-identifier@7.29.7':
+    resolution: {integrity: sha512-qehxGkRj55h/ff8EMaJ+cYhyaKlHIxqYDn682wQD7RNp9UujOQsHog2uS0r2vzr4pW+sXf90NeeayjcNaX3fFg==}
     engines: {node: '>=6.9.0'}
 
   '@babel/helper-validator-option@7.27.1':
@@ -202,6 +210,11 @@ packages:
 
   '@babel/parser@7.29.3':
     resolution: {integrity: sha512-b3ctpQwp+PROvU/cttc4OYl4MzfJUWy6FZg+PMXfzmt/+39iHVF0sDfqay8TQM3JA2EUOyKcFZt75jWriQijsA==}
+    engines: {node: '>=6.0.0'}
+    hasBin: true
+
+  '@babel/parser@7.29.7':
+    resolution: {integrity: sha512-hnORnjP/1P/zFEndoeX+n+t1RwWRJiJpM/jO7FW32Kn9r5+sJB2JWOdYo4L6k78j15eCwY3Gm/7364B1EMwtNg==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -233,6 +246,10 @@ packages:
 
   '@babel/types@7.29.0':
     resolution: {integrity: sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/types@7.29.7':
+    resolution: {integrity: sha512-4zBIxpPzowiZpusoFkyGVwakdRJUyuH5PxQ/PrqghfdFWWasvnCdPfQXHrenDai+gyLARulZjZowCOj6fjT4pA==}
     engines: {node: '>=6.9.0'}
 
   '@emnapi/core@1.10.0':
@@ -1089,52 +1106,52 @@ packages:
       vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
       vue: ^3.2.25
 
-  '@vizejs/native-darwin-arm64@0.212.0':
-    resolution: {integrity: sha512-gvc+GdevIz4KSG4z2Po6MBEmrqCDghpuB3KfSLQ8Ax3fsFolxRRaSEAeYCVxRVEU10ke7inykOmEl16fqgTobQ==}
+  '@vizejs/native-darwin-arm64@0.213.0':
+    resolution: {integrity: sha512-KMPTOF6modm7gwYjGWiXmwYAkjhTm1OtiwdC93B7Y1OxAhZ3usp17lDj1aroV4NyufcCt0egW+Qo6DpojcULmQ==}
     engines: {node: '>=22'}
     cpu: [arm64]
     os: [darwin]
 
-  '@vizejs/native-linux-arm64-gnu@0.212.0':
-    resolution: {integrity: sha512-jITvzJeA/JaZMe54VwDlgxi/Gxr6Ofq9zi2XrOhhnui1HdehnG7rlXgsuGU1v1X8zehfHVYrJR3uOQM81VorwQ==}
+  '@vizejs/native-linux-arm64-gnu@0.213.0':
+    resolution: {integrity: sha512-NMAS//YGAU2wq/xuDvNNpxQgcrqQM67EFmFeA65Cizi5GTNtR7HJ4BHf8n4GzAIcDEJ0pf8OSfM2Y1yh6RorAw==}
     engines: {node: '>=22'}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
 
-  '@vizejs/native-linux-arm64-musl@0.212.0':
-    resolution: {integrity: sha512-FV1RhGjaXHZQZPeZBvNwtmf8ihiQlEh1ZQMaanohCmLyo57XvF6PjQMwp8anioP5Q0rcVKoBMlr5T4TJqrQOrQ==}
+  '@vizejs/native-linux-arm64-musl@0.213.0':
+    resolution: {integrity: sha512-bDvTsPDj3VAYL4mzroetg3v4kycRNYyheRx/nadQ6KAwG8GmDK8lLufWwahs/xRl6NYcsMDcjW8s69m8kcFxDg==}
     engines: {node: '>=22'}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
 
-  '@vizejs/native-linux-x64-gnu@0.212.0':
-    resolution: {integrity: sha512-qPGIxo0mfTDeyy+YzZ/DfRkkLCnA0lKCgFzw+B4CCVzZcITJ/PrsieGOqOeYHJnI7Ve+Q+FHS/Apd6cKBe7/dg==}
+  '@vizejs/native-linux-x64-gnu@0.213.0':
+    resolution: {integrity: sha512-i+JUmrHyV1j6yOEYKSb6JYZ3kD9jrfxDUcdWh2OpJHDOev3fqphdaSVzIcAPWhUlvohHhSxNXzELCaZa2NiXBA==}
     engines: {node: '>=22'}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
 
-  '@vizejs/native-linux-x64-musl@0.212.0':
-    resolution: {integrity: sha512-HAucvM9K6Oa4SsWHpMS5XvAwXYM7nBkA+1da4Qwh8CA70VK5RWwKsgTOKfJgXZL7kWc2/Z8zmRaFeeLN888bTQ==}
+  '@vizejs/native-linux-x64-musl@0.213.0':
+    resolution: {integrity: sha512-oXGxoa2iYmpdgVt0UKtHQh4+MSo+yfAld0S3PxiFcgi/rYL1YLvvdwan3Uah690YHPC810XvOg7al0LWFbQRSg==}
     engines: {node: '>=22'}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@vizejs/native-win32-x64-msvc@0.212.0':
-    resolution: {integrity: sha512-6XxLv0keQwdVq1gClcywXj5/k38eS/cv+NIMLXYayWl9Ug9SGOE2bWuE3q9b/We9HkyD+S0hg/1Rggl6iQwgJQ==}
+  '@vizejs/native-win32-x64-msvc@0.213.0':
+    resolution: {integrity: sha512-oFCM3wXwJzowA2p/peiPRreMxzJz39OQ0W7B0wjgm8bpxkaKvmnJF6gNGwMcDO8qxcKaHjMngyu/KmUeaWAvOA==}
     engines: {node: '>=22'}
     cpu: [x64]
     os: [win32]
 
-  '@vizejs/native@0.212.0':
-    resolution: {integrity: sha512-MuLcnAfMz+5aUXK+XCDn3MWuSo6yCceIf8fpIlWQE3QWbXh67UMPwhB9tmEwS7f4DwRQAqw/OeHdTbp9Q0pGoA==}
+  '@vizejs/native@0.213.0':
+    resolution: {integrity: sha512-MmiUpF3zAnb8Bk7lzmtu7WhjF3uZQB+uKQGkMOvVd8BKGIf765m2RgMW2SuUpyPD1D4mCMwVaAgwY+5Ck/gxng==}
     engines: {node: '>=22'}
 
-  '@vizejs/vite-plugin@0.212.0':
-    resolution: {integrity: sha512-GMVYGqbgvFxFzLWmsKbaGVRCmUWmAWSe3vh1pAql/eMX2eegQvurvIL9/7x68Pos91sH7xOVDuBPQaAgtZoVuw==}
+  '@vizejs/vite-plugin@0.213.0':
+    resolution: {integrity: sha512-TAtB3LUP/Sio2cB9LdEItzTIqtdvYs0s6ie3al5Tqsn2BL3T5dpSu5hX8Vgyf2qEBgCDmLVnLDkirQRoM8mbLg==}
     engines: {node: '>=22'}
     peerDependencies:
       vite: ^8.0.0
@@ -1304,14 +1321,14 @@ packages:
   '@vue/compiler-core@3.5.35':
     resolution: {integrity: sha512-BUmHaR1J+O+CKZ9uJucdVTEr1LHsdyvv7vG3eNRhK3CczEHeMd/LtsHAuD7PbrxvI2envCY2v7HI1vC1aBRzKw==}
 
-  '@vue/compiler-core@3.6.0-beta.12':
-    resolution: {integrity: sha512-SrmembMU15mawXHGq4VlQzcFKH8Y6AyD2qGaXDgcSpVYUdC5jVQZqXn1DBd4xanWVUGb3Tj1b/8lqGD7UkV+Xw==}
+  '@vue/compiler-core@3.6.0-beta.15':
+    resolution: {integrity: sha512-TtzIgaBexYK1CAtZZBPQunaXtXx2sf3TS/F1LT9m+tnqtvuAi9SBt3Sa+aWb8/0cnon0H5UQrOenQZgiTQdCYw==}
 
   '@vue/compiler-dom@3.5.35':
     resolution: {integrity: sha512-k+bprkXxuqhVajgTx5mUHuir7TwQzUKOWR40ng1ncAqQRPnrLngGGgqVEEhOnTMlc8btHYVKmrP8s5Qyg0hvYA==}
 
-  '@vue/compiler-dom@3.6.0-beta.12':
-    resolution: {integrity: sha512-t43TXnDvrpPQam9XIG8FImTDryYSvZ1bk0SPvkp3PaJ4Qz5mJT/X4OUcdaR9ihhyaF+xOuVH/OFvwlO6ZM1NUA==}
+  '@vue/compiler-dom@3.6.0-beta.15':
+    resolution: {integrity: sha512-RG1pNFEvFTdUS6GjnkXnCD8wkTm6lmSCg0uimExYioYY6jBteU7uZGmW1UvweZ1FzgXTTOIzj0PGaXi2qDYeVQ==}
 
   '@vue/compiler-sfc@3.5.35':
     resolution: {integrity: sha512-G5VPMcXTSywXBgtFOZOnHKBxKSrwXUcvY1iaF5/hRcy7t0J6CH/d8ha9F4nzi00Fax1eLV0QHM7v4mQu68jydw==}
@@ -1319,8 +1336,8 @@ packages:
   '@vue/compiler-ssr@3.5.35':
     resolution: {integrity: sha512-rGhAeXgdM7/ffTJGXT69rCCdTmjDewnFuUZfBQQHTdcEBeWdT5HCGY60y2ytLJr9/Dsu7IntUi5z/w0h6Rjnzw==}
 
-  '@vue/compiler-ssr@3.6.0-beta.12':
-    resolution: {integrity: sha512-jtpElHVq/KD9cKM+eze35bCTY/A5/tCjbMinMbJtqpl6ElHPN9jMJofImeojuzdowdDcpgoE+hDpiS8syg3fzA==}
+  '@vue/compiler-ssr@3.6.0-beta.15':
+    resolution: {integrity: sha512-0/CLPSiIrbXjuBZzBxd9NvC4GTLHFWFseSEb4rhlY3qx7hyP6qdE0BHYnuobz/0ce+YdrSoL6M6rAqolZuC2fg==}
 
   '@vue/reactivity@3.5.35':
     resolution: {integrity: sha512-tVc+SsHConvh/Lz64qq1pP3rYArBmK42xonovEcxY74SQtvctZodG/zhq54P5dr38cVuw25d27cPNRdlMidpGQ==}
@@ -1336,16 +1353,16 @@ packages:
     peerDependencies:
       vue: 3.5.35
 
-  '@vue/server-renderer@3.6.0-beta.12':
-    resolution: {integrity: sha512-vvxrc68syjO7bhwTgvyAErm3nLFB97p01y0VI2qMIJtj25Q6md2FNP0K4Mr53VXD4FaV8MupwlcrcXGTK/Ch9A==}
+  '@vue/server-renderer@3.6.0-beta.15':
+    resolution: {integrity: sha512-jj5E0KsP7dPS+tJ3AAF/XRm4qtSrOGWhIYqXoe31DHJDswbRAS68p/hhkzaozezlnQld8w2xHntd0I4YbXb1KA==}
     peerDependencies:
-      vue: 3.6.0-beta.12
+      vue: 3.6.0-beta.15
 
   '@vue/shared@3.5.35':
     resolution: {integrity: sha512-zSbjL7gRXwks2ZQLRGCajBtBXEOXW9Ddhn/HvSdrGkE2dqGnumzW8XtusRrxrE9LvqtiqDXQ+A60Hp6mvdYxfA==}
 
-  '@vue/shared@3.6.0-beta.12':
-    resolution: {integrity: sha512-vPxq7puT/X3+VZtKFb1FkAdkytZrb30r6ezkS+wFi8nlUo3AnqGGWKlRAfDGX1a4EUqpvbeqVrU9WtEipaf9NQ==}
+  '@vue/shared@3.6.0-beta.15':
+    resolution: {integrity: sha512-wyjMjw2AmP6h9qNpVZAO77rgxd6+jcMu+2Wmg9729mmR+V5HPweBSKWggioSNR6NBazMMGY4ekb5U9DUp1KRFg==}
 
   '@vue/test-utils@2.4.11':
     resolution: {integrity: sha512-GDqaqZsA6m2E5vNzej0aYiIb6BX8xV9pNSbbbXKOfEYwg7ZNblVX8suyqmUBThq8VIrgAJNxn+z72hVtUeiWHA==}
@@ -1357,14 +1374,17 @@ packages:
       '@vue/server-renderer':
         optional: true
 
-  '@vuerend/core@0.3.0':
-    resolution: {integrity: sha512-evXu/SC7Lhsovf1yCEX1zZWzkOtYdDv6ejKWQ3qYc6wFMajbAxdPioeGVZv0kyIc9TuOLzOTt2wGlC0f2KOxSA==}
+  '@vuerend/core@1.0.0-rc.2':
+    resolution: {integrity: sha512-0FfyfGPCq+sNb9oiMcyC5EjwWiTkLZ7QSZ65e08klQhawc+6Dboi8jM7pfeh77w2UwPaZnsw3FZ4Y/P1yrYGYA==}
     engines: {node: '>=24.0.0'}
     peerDependencies:
-      '@vue/runtime-vapor': ^3.6.0-beta.10
+      '@vizejs/vite-plugin': ^0.213.0
+      '@vue/runtime-vapor': ^3.6.0-beta.15
       vite: ^8.0.13
-      vue: ^3.5.31 || ^3.6.0-beta.10
+      vue: ^3.5.31 || ^3.6.0-beta.15
     peerDependenciesMeta:
+      '@vizejs/vite-plugin':
+        optional: true
       '@vue/runtime-vapor':
         optional: true
 
@@ -1691,8 +1711,8 @@ packages:
       vite-plus:
         optional: true
 
-  oxlint-plugin-vize@0.212.0:
-    resolution: {integrity: sha512-S8+9p5lTA/gAuhSHUaic840VIl7DYoTnozlaP3bzIvKyF6wwtE21Zd9cvM0G/qwu17b7OjjM3g73hkGfvsqCqA==}
+  oxlint-plugin-vize@0.213.0:
+    resolution: {integrity: sha512-fdIHIML6vtVuQWJfzwsM/wTL2Jq+CsDSFhOEfKEmgWzbDgkxLC8jGRdsiSMvhE7XlCduShAIHmsNi7aA/ADJVg==}
     engines: {node: ^22 || >= 24}
     hasBin: true
 
@@ -1922,8 +1942,8 @@ packages:
       yaml:
         optional: true
 
-  vize@0.212.0:
-    resolution: {integrity: sha512-cJMu3mXop2DmjsJhBMTU55opB0DZ0EHy0skf3KN3eB/qUd3WYgUtYSCujTOe1Pymbljgez7CAc0R/sM2ZyxnUA==}
+  vize@0.213.0:
+    resolution: {integrity: sha512-5ztSt8YVxEQRGQG/FYbqJLDMflJJOa6fh0laO3MqgO4lBrNqjxcF5m8r6OtlKweUB2gSMCV1TVU+AWhbg3Q+vg==}
     engines: {node: '>=22'}
     hasBin: true
     peerDependencies:
@@ -2086,7 +2106,11 @@ snapshots:
 
   '@babel/helper-string-parser@7.27.1': {}
 
+  '@babel/helper-string-parser@7.29.7': {}
+
   '@babel/helper-validator-identifier@7.28.5': {}
+
+  '@babel/helper-validator-identifier@7.29.7': {}
 
   '@babel/helper-validator-option@7.27.1': {}
 
@@ -2098,6 +2122,10 @@ snapshots:
   '@babel/parser@7.29.3':
     dependencies:
       '@babel/types': 7.29.0
+
+  '@babel/parser@7.29.7':
+    dependencies:
+      '@babel/types': 7.29.7
 
   '@babel/plugin-syntax-jsx@7.27.1(@babel/core@7.29.0)':
     dependencies:
@@ -2142,6 +2170,11 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
+
+  '@babel/types@7.29.7':
+    dependencies:
+      '@babel/helper-string-parser': 7.29.7
+      '@babel/helper-validator-identifier': 7.29.7
 
   '@emnapi/core@1.10.0':
     dependencies:
@@ -2651,39 +2684,39 @@ snapshots:
       vite: 8.0.16(@types/node@24.13.2)(jiti@2.6.1)
       vue: 3.5.35(typescript@6.0.3)
 
-  '@vizejs/native-darwin-arm64@0.212.0':
+  '@vizejs/native-darwin-arm64@0.213.0':
     optional: true
 
-  '@vizejs/native-linux-arm64-gnu@0.212.0':
+  '@vizejs/native-linux-arm64-gnu@0.213.0':
     optional: true
 
-  '@vizejs/native-linux-arm64-musl@0.212.0':
+  '@vizejs/native-linux-arm64-musl@0.213.0':
     optional: true
 
-  '@vizejs/native-linux-x64-gnu@0.212.0':
+  '@vizejs/native-linux-x64-gnu@0.213.0':
     optional: true
 
-  '@vizejs/native-linux-x64-musl@0.212.0':
+  '@vizejs/native-linux-x64-musl@0.213.0':
     optional: true
 
-  '@vizejs/native-win32-x64-msvc@0.212.0':
+  '@vizejs/native-win32-x64-msvc@0.213.0':
     optional: true
 
-  '@vizejs/native@0.212.0':
+  '@vizejs/native@0.213.0':
     optionalDependencies:
-      '@vizejs/native-darwin-arm64': 0.212.0
-      '@vizejs/native-linux-arm64-gnu': 0.212.0
-      '@vizejs/native-linux-arm64-musl': 0.212.0
-      '@vizejs/native-linux-x64-gnu': 0.212.0
-      '@vizejs/native-linux-x64-musl': 0.212.0
-      '@vizejs/native-win32-x64-msvc': 0.212.0
+      '@vizejs/native-darwin-arm64': 0.213.0
+      '@vizejs/native-linux-arm64-gnu': 0.213.0
+      '@vizejs/native-linux-arm64-musl': 0.213.0
+      '@vizejs/native-linux-x64-gnu': 0.213.0
+      '@vizejs/native-linux-x64-musl': 0.213.0
+      '@vizejs/native-win32-x64-msvc': 0.213.0
 
-  '@vizejs/vite-plugin@0.212.0(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))':
+  '@vizejs/vite-plugin@0.213.0(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))':
     dependencies:
-      '@vizejs/native': 0.212.0
+      '@vizejs/native': 0.213.0
       tinyglobby: 0.2.16
       vite: 8.0.16(@types/node@24.13.2)(jiti@2.6.1)
-      vize: 0.212.0(vue@3.5.35(typescript@6.0.3))
+      vize: 0.213.0(vue@3.5.35(typescript@6.0.3))
     transitivePeerDependencies:
       - '@pkl-community/pkl'
       - vue
@@ -2801,10 +2834,10 @@ snapshots:
       estree-walker: 2.0.2
       source-map-js: 1.2.1
 
-  '@vue/compiler-core@3.6.0-beta.12':
+  '@vue/compiler-core@3.6.0-beta.15':
     dependencies:
-      '@babel/parser': 7.29.3
-      '@vue/shared': 3.6.0-beta.12
+      '@babel/parser': 7.29.7
+      '@vue/shared': 3.6.0-beta.15
       entities: 7.0.1
       estree-walker: 2.0.2
       source-map-js: 1.2.1
@@ -2814,10 +2847,10 @@ snapshots:
       '@vue/compiler-core': 3.5.35
       '@vue/shared': 3.5.35
 
-  '@vue/compiler-dom@3.6.0-beta.12':
+  '@vue/compiler-dom@3.6.0-beta.15':
     dependencies:
-      '@vue/compiler-core': 3.6.0-beta.12
-      '@vue/shared': 3.6.0-beta.12
+      '@vue/compiler-core': 3.6.0-beta.15
+      '@vue/shared': 3.6.0-beta.15
 
   '@vue/compiler-sfc@3.5.35':
     dependencies:
@@ -2836,10 +2869,10 @@ snapshots:
       '@vue/compiler-dom': 3.5.35
       '@vue/shared': 3.5.35
 
-  '@vue/compiler-ssr@3.6.0-beta.12':
+  '@vue/compiler-ssr@3.6.0-beta.15':
     dependencies:
-      '@vue/compiler-dom': 3.6.0-beta.12
-      '@vue/shared': 3.6.0-beta.12
+      '@vue/compiler-dom': 3.6.0-beta.15
+      '@vue/shared': 3.6.0-beta.15
 
   '@vue/reactivity@3.5.35':
     dependencies:
@@ -2863,33 +2896,35 @@ snapshots:
       '@vue/shared': 3.5.35
       vue: 3.5.35(typescript@6.0.3)
 
-  '@vue/server-renderer@3.6.0-beta.12(vue@3.5.35(typescript@6.0.3))':
+  '@vue/server-renderer@3.6.0-beta.15(vue@3.5.35(typescript@6.0.3))':
     dependencies:
-      '@vue/compiler-ssr': 3.6.0-beta.12
-      '@vue/shared': 3.6.0-beta.12
+      '@vue/compiler-ssr': 3.6.0-beta.15
+      '@vue/shared': 3.6.0-beta.15
       vue: 3.5.35(typescript@6.0.3)
 
   '@vue/shared@3.5.35': {}
 
-  '@vue/shared@3.6.0-beta.12': {}
+  '@vue/shared@3.6.0-beta.15': {}
 
-  '@vue/test-utils@2.4.11(@vue/compiler-dom@3.6.0-beta.12)(@vue/server-renderer@3.5.35(vue@3.5.35(typescript@6.0.3)))(vue@3.5.35(typescript@6.0.3))':
+  '@vue/test-utils@2.4.11(@vue/compiler-dom@3.6.0-beta.15)(@vue/server-renderer@3.5.35(vue@3.5.35(typescript@6.0.3)))(vue@3.5.35(typescript@6.0.3))':
     dependencies:
-      '@vue/compiler-dom': 3.6.0-beta.12
+      '@vue/compiler-dom': 3.6.0-beta.15
       js-beautify: 1.15.4
       vue: 3.5.35(typescript@6.0.3)
       vue-component-type-helpers: 3.2.7
     optionalDependencies:
       '@vue/server-renderer': 3.5.35(vue@3.5.35(typescript@6.0.3))
 
-  '@vuerend/core@0.3.0(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))':
+  '@vuerend/core@1.0.0-rc.2(@vizejs/vite-plugin@0.213.0(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3)))(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))':
     dependencies:
       '@vitejs/plugin-vue': 6.0.6(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))
       '@vitejs/plugin-vue-jsx': 5.1.5(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))
-      '@vue/server-renderer': 3.6.0-beta.12(vue@3.5.35(typescript@6.0.3))
+      '@vue/server-renderer': 3.6.0-beta.15(vue@3.5.35(typescript@6.0.3))
       srvx: 0.11.15
       vite: 8.0.16(@types/node@24.13.2)(jiti@2.6.1)
       vue: 3.5.35(typescript@6.0.3)
+    optionalDependencies:
+      '@vizejs/vite-plugin': 0.213.0(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))(vue@3.5.35(typescript@6.0.3))
     transitivePeerDependencies:
       - supports-color
 
@@ -3171,16 +3206,16 @@ snapshots:
       '@oxfmt/binding-win32-x64-msvc': 0.52.0
       vite-plus: 0.1.24(@types/node@24.13.2)(jiti@2.6.1)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1))
 
-  oxlint-plugin-vize@0.212.0:
+  oxlint-plugin-vize@0.213.0:
     dependencies:
       '@oxlint/plugins': 1.64.0
     optionalDependencies:
-      '@vizejs/native-darwin-arm64': 0.212.0
-      '@vizejs/native-linux-arm64-gnu': 0.212.0
-      '@vizejs/native-linux-arm64-musl': 0.212.0
-      '@vizejs/native-linux-x64-gnu': 0.212.0
-      '@vizejs/native-linux-x64-musl': 0.212.0
-      '@vizejs/native-win32-x64-msvc': 0.212.0
+      '@vizejs/native-darwin-arm64': 0.213.0
+      '@vizejs/native-linux-arm64-gnu': 0.213.0
+      '@vizejs/native-linux-arm64-musl': 0.213.0
+      '@vizejs/native-linux-x64-gnu': 0.213.0
+      '@vizejs/native-linux-x64-musl': 0.213.0
+      '@vizejs/native-win32-x64-msvc': 0.213.0
 
   oxlint-tsgolint@0.23.0:
     optionalDependencies:
@@ -3436,9 +3471,9 @@ snapshots:
       fsevents: 2.3.3
       jiti: 2.6.1
 
-  vize@0.212.0(vue@3.5.35(typescript@6.0.3)):
+  vize@0.213.0(vue@3.5.35(typescript@6.0.3)):
     dependencies:
-      '@vizejs/native': 0.212.0
+      '@vizejs/native': 0.213.0
       oxc-transform: 0.130.0
     optionalDependencies:
       '@typescript/native-preview': 7.0.0-dev.20260602.1
