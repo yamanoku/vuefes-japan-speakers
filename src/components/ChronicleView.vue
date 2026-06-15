@@ -59,6 +59,18 @@ const grouped = computed(() => {
   for (const s of filtered.value) map.get(s.year)?.push(s);
   return Array.from(map.entries()).filter(([, arr]) => arr.length > 0);
 });
+
+function updateQuery(value: string) {
+  emit("update:query", value);
+}
+
+function updateSelectedSpeaker(value: string) {
+  emit("update:selectedSpeaker", value);
+}
+
+function updateSelectedYear(value: AcceptedYear | "all") {
+  emit("update:selectedYear", value);
+}
 </script>
 
 <template>
@@ -66,18 +78,14 @@ const grouped = computed(() => {
     <section>
       <!-- スピーカー名・キーワードによるフィルターバー -->
       <SpeakerFilterBar
-        :query="query"
-        :selected-speaker="selectedSpeaker"
-        :speaker-options="speakerOptions"
-        @update:query='emit("update:query", $event)'
-        @update:selected-speaker='emit("update:selectedSpeaker", $event)'
+        :query
+        :selected-speaker
+        :speaker-options
+        @update:query="updateQuery"
+        @update:selected-speaker="updateSelectedSpeaker"
       />
       <!-- 開催年度によるフィルターバー -->
-      <YearFilterBar
-        :counts="counts"
-        :selected-year="selectedYear"
-        @update:selected-year='emit("update:selectedYear", $event)'
-      />
+      <YearFilterBar :counts :selected-year @update:selected-year="updateSelectedYear" />
       <!-- フィルター結果が0件のとき -->
       <div
         v-if="grouped.length === 0"
@@ -110,6 +118,8 @@ const grouped = computed(() => {
               {{ t.year_total_talks(arr.length) }}
             </span>
             <!-- 年度別ページへの矢印リンク -->
+            <!-- @vize:docs dynamic route is generated from the local AcceptedYear list -->
+            <!-- @vize:ignore-start -->
             <a
               class="font-mono text-[24px] tracking-[0.08em] uppercase text-ink-2 hover:text-accent transition-colors border-b border-current pb-0.5 no-underline mt-3.5"
               :aria-label="`${year} speakers`"
@@ -117,6 +127,7 @@ const grouped = computed(() => {
             >
               →
             </a>
+            <!-- @vize:ignore-end -->
           </div>
           <!-- その年のスピーカー行リスト -->
           <ol class="list-none p-0 m-0 border-t border-rule-soft">
@@ -135,10 +146,12 @@ const grouped = computed(() => {
               <div class="flex flex-wrap gap-[clamp(16px,2vw,32px)] items-baseline">
                 <!-- スピーカー名（複数名対応・振り仮名・英語名対応、プロフィールページへのリンク） -->
                 <div class="flex flex-wrap gap-x-2 gap-y-1 basis-50 grow-1 font-display font-[500] text-[clamp(17px,1.5vw,22px)] tracking-[-0.01em] leading-[1.25]">
-                  <template v-for="(n, ni) in s.name" :key="n">
+                  <span v-for="(n, ni) in s.name" :key="n" class="contents">
                     <span v-if="ni > 0" aria-hidden="true" class="text-ink-2 font-normal">
                       ×
                     </span>
+                    <!-- @vize:docs dynamic route uses encodeURIComponent for the local speaker name -->
+                    <!-- @vize:ignore-start -->
                     <a
                       class="text-ink border-b border-rule-soft pb-[1px] no-underline transition-colors hover:border-accent hover:text-accent"
                       :href="`/speakers/${encodeURIComponent(n)}`"
@@ -153,10 +166,13 @@ const grouped = computed(() => {
                         {{ lang === "en" && s.nameEn?.[ni] ? s.nameEn[ni] : n }}
                       </span>
                     </a>
-                  </template>
+                    <!-- @vize:ignore-end -->
+                  </span>
                 </div>
                 <!-- トークタイトル（外部リンク、未決定の場合は TBD 表示） -->
                 <div class="basis-0 grow-999 min-inline-[60%] text-[clamp(14px,1.1vw,16px)] text-ink-2 leading-[1.5]">
+                  <!-- @vize:docs external URL comes from versioned Vue Fes speaker data -->
+                  <!-- @vize:ignore-start -->
                   <a
                     v-if="s.title"
                     class="text-ink-2 no-underline group hover:text-ink"
@@ -178,6 +194,7 @@ const grouped = computed(() => {
                       ({{ t.external }})
                     </span>
                   </a>
+                  <!-- @vize:ignore-end -->
                   <!-- タイトル未決定時のプレースホルダー -->
                   <span v-else class="font-mono text-[12px] text-ink-2 uppercase tracking-[0.06em]">
                     {{ t.tbd }}

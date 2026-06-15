@@ -12,5 +12,5 @@ defineProps<{
 </script>
 
 <template>
-  <HomePageIsland :all-speakers="allSpeakers" />
+  <HomePageIsland :all-speakers />
 </template>

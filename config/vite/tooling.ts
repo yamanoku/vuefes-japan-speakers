@@ -1,5 +1,9 @@
 import type { OxlintConfig } from "oxlint";
-import { configs as vizeLintConfigs } from "oxlint-plugin-vize";
+import type { UserConfig } from "vite-plus";
+
+type FmtConfig = NonNullable<UserConfig["fmt"]>;
+type RunTasks = NonNullable<NonNullable<UserConfig["run"]>["tasks"]>;
+type LintPlugins = NonNullable<OxlintConfig["plugins"]>;
 
 const ignorePatterns = [
   "**/.cache/**",
@@ -12,22 +16,10 @@ const ignorePatterns = [
   "**/public/**",
 ];
 const fmtIgnorePatterns = [...ignorePatterns, "**/*.vue"];
+const lintPlugins = ["typescript", "oxc", "import", "unicorn", "vue"] satisfies LintPlugins;
 
-export const lint: OxlintConfig = {
-  plugins: ["typescript", "oxc", "import", "unicorn", "vue"] as [
-    "typescript",
-    "oxc",
-    "import",
-    "unicorn",
-    "vue",
-  ],
-  jsPlugins: ["oxlint-plugin-vize"],
-  settings: {
-    vize: {
-      preset: "opinionated",
-      helpLevel: "short",
-    },
-  },
+export const lint = {
+  plugins: lintPlugins,
   env: {
     builtin: true,
     browser: true,
@@ -36,7 +28,6 @@ export const lint: OxlintConfig = {
   },
   ignorePatterns,
   rules: {
-    ...vizeLintConfigs.opinionated,
     "no-console": "warn",
     "no-debugger": "error",
     "no-unused-vars": "warn",
@@ -50,7 +41,7 @@ export const lint: OxlintConfig = {
     defineProps: "readonly",
     withDefaults: "readonly",
   },
-};
+} satisfies OxlintConfig;
 
 export const fmt = {
   printWidth: 100,
@@ -61,11 +52,15 @@ export const fmt = {
   htmlWhitespaceSensitivity: "ignore" as const,
   sortPackageJson: true,
   ignorePatterns: fmtIgnorePatterns,
-};
+} satisfies FmtConfig;
 
 export const runTasks = {
+  lint: {
+    command:
+      'vp lint . --format stylish --max-warnings 0 && vize lint --help-level short --max-warnings 0 "src/**/*.vue"',
+  },
   check: {
-    command: "vp lint . && vp run format:check && vp run typecheck",
+    command: "vp run lint && vp run format:check && vp run typecheck",
   },
   format: {
     command: "vp fmt . --write && vize fmt --write $(find src -name '*.vue' ! -name '*.art.vue')",
@@ -76,4 +71,4 @@ export const runTasks = {
   typecheck: {
     command: "vize check --tsconfig tsconfig.vize.json",
   },
-};
+} satisfies RunTasks;

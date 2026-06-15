@@ -14,5 +14,5 @@ defineProps<{
 </script>
 
 <template>
-  <YearPageIsland :found="found" :speakers="speakers" :year="year" />
+  <YearPageIsland :found :speakers :year />
 </template>

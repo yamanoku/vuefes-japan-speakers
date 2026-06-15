@@ -16,6 +16,14 @@ const { t } = useVfjsI18n();
 
 const searchId = "speaker-filter-search";
 const speakerId = "speaker-filter-speaker";
+
+function updateQuery(event: Event) {
+  emit("update:query", (event.target as HTMLInputElement).value);
+}
+
+function updateSelectedSpeaker(event: Event) {
+  emit("update:selectedSpeaker", (event.target as HTMLSelectElement).value);
+}
 </script>
 
 <template>
@@ -34,7 +42,7 @@ const speakerId = "speaker-filter-speaker";
         :id="searchId"
         :placeholder="t.filter_search_ph"
         :value="query"
-        @input='emit("update:query", ($event.target as HTMLInputElement).value)'
+        @input="updateQuery"
       />
     </div>
     <!-- スピーカー絞り込みフィールド -->
@@ -49,7 +57,7 @@ const speakerId = "speaker-filter-speaker";
         class="bg-transparent border-0 border-b border-rule px-0 pr-6 py-2 font-body text-[15px] text-ink cursor-pointer outline-none w-full focus:border-accent"
         :id="speakerId"
         :value="selectedSpeaker"
-        @change='emit("update:selectedSpeaker", ($event.target as HTMLSelectElement).value)'
+        @change="updateSelectedSpeaker"
       >
         <option value="all">
           {{ t.filter_all_speakers }}

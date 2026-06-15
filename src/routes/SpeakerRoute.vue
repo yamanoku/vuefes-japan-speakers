@@ -14,5 +14,5 @@ defineProps<{
 </script>
 
 <template>
-  <SpeakerPageIsland :found="found" :speaker-name="speakerName" :speakers="speakers" />
+  <SpeakerPageIsland :found :speaker-name :speakers />
 </template>

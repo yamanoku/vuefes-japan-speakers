@@ -42,13 +42,33 @@ const stats = computed(() => {
     years: YEARS.filter((y) => y !== "2019").length,
   };
 });
+
+function showChronicle() {
+  view.value = "chronicle";
+}
+
+function showDirectory() {
+  view.value = "index";
+}
+
+function updateQuery(value: string) {
+  query.value = value;
+}
+
+function updateSelectedSpeaker(value: string) {
+  selectedSpeaker.value = value;
+}
+
+function updateSelectedYear(value: AcceptedYear | "all") {
+  selectedYear.value = value;
+}
 </script>
 
 <template>
   <div>
     <AppHeader />
     <!-- タイトル・統計情報 -->
-    <AppMasthead :stats="stats" />
+    <AppMasthead :stats />
     <!-- ビュー切り替えタブバー（Chronicle／Directory） -->
     <div
       aria-label="View mode"
@@ -59,11 +79,12 @@ const stats = computed(() => {
       <button
         class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
         role="tab"
+        type="button"
         :aria-selected='view === "chronicle"'
         :class='view === "chronicle"
-  ? "text-ink [box-shadow:inset_0_-4px_0_var(--accent)]"
-  : "text-ink-3 hover:text-ink"'
-        @click='view = "chronicle"'
+          ? "text-ink [box-shadow:inset_0_-4px_0_var(--accent)]"
+          : "text-ink-3 hover:text-ink"'
+        @click="showChronicle"
       >
         {{ t.view_timeline }}
         <span class="font-mono text-[12px] tracking-[0.02em] ml-1" lang="en">
@@ -74,11 +95,12 @@ const stats = computed(() => {
       <button
         class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
         role="tab"
+        type="button"
         :aria-selected='view === "index"'
         :class='view === "index"
-  ? "text-ink [box-shadow:inset_0_-4px_0_var(--accent)]"
-  : "text-ink-3 hover:text-ink"'
-        @click='view = "index"'
+          ? "text-ink [box-shadow:inset_0_-4px_0_var(--accent)]"
+          : "text-ink-3 hover:text-ink"'
+        @click="showDirectory"
       >
         {{ t.view_index }}
         <span class="font-mono text-[12px] tracking-[0.02em] ml-1" lang="en">
@@ -90,24 +112,24 @@ const stats = computed(() => {
     <!-- 年度別クロニクルビュー -->
     <ChronicleView
       v-if='view === "chronicle"'
-      :all-speakers="allSpeakers"
-      :query="query"
-      :selected-speaker="selectedSpeaker"
-      :selected-year="selectedYear"
-      @update:query="query = $event"
-      @update:selected-speaker="selectedSpeaker = $event"
-      @update:selected-year="selectedYear = $event"
+      :all-speakers
+      :query
+      :selected-speaker
+      :selected-year
+      @update:query="updateQuery"
+      @update:selected-speaker="updateSelectedSpeaker"
+      @update:selected-year="updateSelectedYear"
     />
     <!-- スピーカー索引ディレクトリビュー -->
     <DirectoryView
       v-else
-      :all-speakers="allSpeakers"
-      :query="query"
-      :selected-speaker="selectedSpeaker"
-      :selected-year="selectedYear"
-      @update:query="query = $event"
-      @update:selected-speaker="selectedSpeaker = $event"
-      @update:selected-year="selectedYear = $event"
+      :all-speakers
+      :query
+      :selected-speaker
+      :selected-year
+      @update:query="updateQuery"
+      @update:selected-speaker="updateSelectedSpeaker"
+      @update:selected-year="updateSelectedYear"
     />
     <AppFooter />
   </div>

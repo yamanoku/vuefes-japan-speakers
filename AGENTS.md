@@ -33,14 +33,14 @@ vp config
 | ビルド        | `vp build`                        |
 | 静的生成      | `vp build`                        |
 | プレビュー    | `vp preview --outDir dist/client` |
-| Lint          | `vp lint .`                       |
+| Lint          | `vp run lint`                     |
 | Format        | `vp run format`                   |
 | Format 確認   | `vp run format:check`             |
 | Type Check    | `vp run typecheck`                |
 | Test          | `vp test run`                     |
 | Test（watch） | `vp test watch`                   |
 
-作業前後の検証は、変更内容に応じて `vp lint .`、`vp run format:check`、`vp run typecheck`、`vp test run` を組み合わせます。
+作業前後の検証は、変更内容に応じて `vp run lint`、`vp run format:check`、`vp run typecheck`、`vp test run` を組み合わせます。
 
 ## ディレクトリ構成（要点）
 
@@ -110,7 +110,7 @@ vp config
 ## Vize / Lint / 型チェック
 
 - Vue SFC compiler は vuerend の標準 Vue plugin を使います。
-- Lint: `config/vite/tooling.ts` の `lint` 設定を `vp lint .` で読み込み、TS/JS の Oxlint ルールと Vize の Vue 診断をまとめて実行します。
+- Lint: `vp run lint` で Oxlint と Vize の Vue 診断をまとめて実行します。Oxlint 単体の設定は `config/vite/tooling.ts` の `lint`、Vize の preset は `vize.config.ts` を参照します。
 - Format: `vp run format` で oxfmt と Vize formatter を組み合わせて実行します。
 - 型チェック: `vize check --tsconfig tsconfig.vize.json` を `vp run typecheck` 経由で実行します。
 - Musea: `@vizejs/vite-plugin-musea` を Vite plugin として有効化し、`src/**/*.art.vue` を `/__musea__` に表示します。
@@ -141,7 +141,7 @@ vp test run
 ## 型チェックと lint
 
 - 型チェック: `vp run typecheck`
-- Lint: `vp lint .`
+- Lint: `vp run lint`
 - Format: `vp run format`
 - Format 確認: `vp run format:check`
 
@@ -173,7 +173,7 @@ vp test run
 
 GitHub Actions は Vite Plus セットアップ後に以下を実行します。
 
-- `vp lint .`
+- `vp run lint`
 - `vp run format:check`
 - `vp run typecheck`
 - `vp test run`
@@ -189,7 +189,7 @@ Browser Mode の test job では、テスト前に `vp exec playwright install -
 - ブランチ: `feat/*`、`fix/*`、`chore/*`、`docs/*` など用途別に作成する。
 - コミット: Conventional Commits を使う。例: `docs: update agents guide`
 - 実装: 小さめの差分で進め、関連テストやドキュメントも合わせて更新する。
-- 検証: 変更内容に応じて `vp lint . && vp run format:check && vp run typecheck && vp test run` を実行する。
+- 検証: 変更内容に応じて `vp run lint && vp run format:check && vp run typecheck && vp test run` を実行する。
 - レビュー: 変更点の要約、確認したコマンド、必要に応じてスクリーンショットや再現手順を添える。
 
 ## トラブルシュート

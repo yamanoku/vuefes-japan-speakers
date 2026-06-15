@@ -5,15 +5,23 @@ import { useVfjsI18n } from "../composables/useVfjsI18n";
 
 const { lang, setLang, t } = useVfjsI18n();
 const { scheme, setScheme } = useColorScheme();
+
+function onSchemeChange(event: Event) {
+  setScheme((event.target as HTMLSelectElement).value as "light" | "dark" | "system");
+}
+
+function setJapanese() {
+  setLang("ja");
+}
+
+function setEnglish() {
+  setLang("en");
+}
 </script>
 
 <template>
   <!-- サイト全体のヘッダー（スクロール時にページ上部へ固定） -->
-  <header
-    class="border-b border-rule bg-paper sticky top-0 z-20"
-    role="banner"
-    style="backdrop-filter: saturate(1.1)"
-  >
+  <header class="border-b border-rule bg-paper sticky top-0 z-20 [backdrop-filter:saturate(1.1)]">
     <div class="flex flex-wrap justify-between items-center gap-2 py-[14px] px-pad-x">
       <!-- ロゴマーク＋サイト名（トップページへのリンク） -->
       <a
@@ -32,7 +40,7 @@ const { scheme, setScheme } = useColorScheme();
           class="border border-rule bg-paper text-ink-2 font-mono text-[12px] tracking-[0.08em] px-2 py-[5px] cursor-pointer"
           :aria-label="t.color_scheme"
           :value="scheme"
-          @change='setScheme(($event.target as HTMLSelectElement).value as "light" | "dark" | "system")'
+          @change="onSchemeChange"
         >
           <option value="light">
             {{ t.color_scheme_light }}
@@ -56,7 +64,7 @@ const { scheme, setScheme } = useColorScheme();
             type="button"
             :aria-pressed='lang === "ja" ? "true" : "false"'
             :class='lang === "ja" ? "bg-ink text-paper" : "text-ink-2"'
-            @click='setLang("ja")'
+            @click="setJapanese"
           >
             JA
           </button>
@@ -66,7 +74,7 @@ const { scheme, setScheme } = useColorScheme();
             type="button"
             :aria-pressed='lang === "en" ? "true" : "false"'
             :class='lang === "en" ? "bg-ink text-paper" : "text-ink-2"'
-            @click='setLang("en")'
+            @click="setEnglish"
           >
             EN
           </button>

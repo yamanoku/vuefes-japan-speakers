@@ -70,14 +70,17 @@ const record = computed(() => {
           <!-- 登壇年度のリスト（各年度ページへのリンク） -->
           <div class="mt-2 text-[12px] text-ink-2">
             {{ t.years_appeared }}:
-            <template v-for="(year, index) in record.years" :key="year">
+            <span v-for="(year, index) in record.years" :key="year">
               <template v-if="index > 0">
                 ,
               </template>
+              <!-- @vize:docs dynamic route is generated from the speaker's local year list -->
+              <!-- @vize:ignore-start -->
               <a class="text-ink underline hover:no-underline" :href="`/${year}`">
                 {{ year }}
               </a>
-            </template>
+              <!-- @vize:ignore-end -->
+            </span>
           </div>
         </div>
       </header>
@@ -88,18 +91,23 @@ const record = computed(() => {
         </h2>
         <ul class="list-none p-0 m-0">
           <li
-            v-for="(talk, index) in record.talks"
-            :key="index"
+            v-for="talk in record.talks"
+            :key='`${talk.year}-${talk.title ?? talk.url}-${talk.coSpeakers.join("|")}`'
             class="grid grid-cols-[40px_1fr] gap-x-4 border-t border-rule-softer py-4.5"
           >
             <!-- 開催年リンク（年度別ページへ） -->
             <span class="font-mono text-[12px] text-center pt-[3px]">
+              <!-- @vize:docs dynamic route is generated from the speaker's local year list -->
+              <!-- @vize:ignore-start -->
               <a class="text-ink underline hover:no-underline" :href="`/${talk.year}`">
                 {{ talk.year }}
               </a>
+              <!-- @vize:ignore-end -->
             </span>
             <div class="flex flex-col gap-y-2">
               <!-- トークタイトル（外部リンク） -->
+              <!-- @vize:docs external URL comes from versioned Vue Fes speaker data -->
+              <!-- @vize:ignore-start -->
               <a
                 class="text-[16px] text-ink no-underline group flex flex-wrap items-baseline gap-2"
                 rel="noopener noreferrer"
@@ -125,23 +133,28 @@ const record = computed(() => {
                   </span>
                 </span>
               </a>
+              <!-- @vize:ignore-end -->
               <!-- 共同登壇者のリスト（各スピーカープロフィールへのリンク） -->
               <span v-if="talk.coSpeakers.length > 0" class="text-[12px] font-mono text-ink-2">
                 w/
-                <template
+                <span
                   v-for="(coSpeakerName, coSpeakerIndex) in talk.coSpeakers"
                   :key="coSpeakerName"
+                  class="contents"
                 >
                   <template v-if="coSpeakerIndex > 0">
                     ,
                   </template>
+                  <!-- @vize:docs dynamic route uses encodeURIComponent for the local speaker name -->
+                  <!-- @vize:ignore-start -->
                   <a
                     class="text-ink underline hover:no-underline"
                     :href="`/speakers/${encodeURIComponent(coSpeakerName)}`"
                   >
                     {{ coSpeakerName }}
                   </a>
-                </template>
+                  <!-- @vize:ignore-end -->
+                </span>
               </span>
             </div>
           </li>

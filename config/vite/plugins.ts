@@ -9,7 +9,8 @@ import {
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { extname, relative, resolve, sep } from "node:path";
 import { musea } from "@vizejs/vite-plugin-musea";
-import type { Plugin } from "vite";
+import type { MuseaOptions } from "@vizejs/vite-plugin-musea";
+import type { ConfigEnv, Plugin, UserConfig } from "vite";
 
 export function staticHtmlPreview(): Plugin {
   return {
@@ -116,33 +117,43 @@ export function cloudflarePages404(): Plugin {
   }
 }
 
+const museaOptions = {
+  include: ["src/**/*.art.vue"],
+  exclude: ["node_modules/**", "dist/**", ".cache/**"],
+  basePath: "/__musea__",
+  inlineArt: false,
+  previewCss: ["src/assets/css/main.css"],
+  theme: "system",
+  vrt: {
+    viewports: [
+      { name: "mobile", width: 390, height: 844 },
+      { name: "desktop", width: 1280, height: 720 },
+    ],
+  },
+} satisfies MuseaOptions;
+
 export function museaGallery(): Plugin[] {
-  return musea({
-    include: ["src/**/*.art.vue"],
-    exclude: ["node_modules/**", "dist/**", ".cache/**"],
-    basePath: "/__musea__",
-    inlineArt: false,
-    previewCss: ["src/assets/css/main.css"],
-    theme: "system",
-    vrt: {
-      viewports: [
-        { name: "mobile", width: 390, height: 844 },
-        { name: "desktop", width: 1280, height: 720 },
-      ],
-    },
-  }).map((plugin) => ({
+  return musea(museaOptions).map(applyMuseaInServeCommand);
+}
+
+function applyMuseaInServeCommand(plugin: Plugin): Plugin {
+  return {
     ...plugin,
     apply(config, env) {
-      if (env.mode === "test") {
+      if (env.command !== "serve") {
         return false;
       }
-      if (typeof plugin.apply === "function") {
-        return plugin.apply(config, env);
-      }
-      if (plugin.apply) {
-        return plugin.apply === env.command;
-      }
-      return env.command === "serve";
+      return shouldApplyPlugin(plugin, config, env);
     },
-  }));
+  };
+}
+
+function shouldApplyPlugin(plugin: Plugin, config: UserConfig, env: ConfigEnv): boolean {
+  if (typeof plugin.apply === "function") {
+    return plugin.apply(config, env);
+  }
+  if (plugin.apply) {
+    return plugin.apply === env.command;
+  }
+  return env.command === "serve";
 }

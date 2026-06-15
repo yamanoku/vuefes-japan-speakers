@@ -89,6 +89,26 @@ function toggleRow(name: string) {
 function toggleNameSort() {
   sort.value = sort.value === "name-asc" ? "name-desc" : "name-asc";
 }
+
+function sortByAppearances() {
+  sort.value = "appearances";
+}
+
+function sortByLatest() {
+  sort.value = "latest";
+}
+
+function updateQuery(value: string) {
+  emit("update:query", value);
+}
+
+function updateSelectedSpeaker(value: string) {
+  emit("update:selectedSpeaker", value);
+}
+
+function updateSelectedYear(value: AcceptedYear | "all") {
+  emit("update:selectedYear", value);
+}
 </script>
 
 <template>
@@ -97,48 +117,47 @@ function toggleNameSort() {
     <section>
       <!-- スピーカー名・キーワードによるフィルターバー -->
       <SpeakerFilterBar
-        :query="query"
-        :selected-speaker="selectedSpeaker"
-        :speaker-options="speakerOptions"
-        @update:query='emit("update:query", $event)'
-        @update:selected-speaker='emit("update:selectedSpeaker", $event)'
+        :query
+        :selected-speaker
+        :speaker-options
+        @update:query="updateQuery"
+        @update:selected-speaker="updateSelectedSpeaker"
       />
       <!-- 開催年度によるフィルターバー -->
-      <YearFilterBar
-        :counts="counts"
-        :selected-year="selectedYear"
-        @update:selected-year='emit("update:selectedYear", $event)'
-      />
+      <YearFilterBar :counts :selected-year @update:selected-year="updateSelectedYear" />
       <!-- Sort header -->
       <!-- ソートボタンヘッダー（登壇回数・名前順・最新年で並び替え） -->
       <div class="flex items-center gap-2 px-pad-x pt-4.5 pb-2.5 border-b border-rule-soft font-mono overflow-x-auto">
         <!-- 登壇回数の多い順でソートするボタン -->
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
+          type="button"
           :class='sort === "appearances"
-  ? "bg-ink text-paper border-ink"
-  : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
-          @click='sort = "appearances"'
+            ? "bg-ink text-paper border-ink"
+            : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
+          @click="sortByAppearances"
         >
           Appearances ↓
         </button>
         <!-- 名前の昇順/降順でソートするボタン -->
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
+          type="button"
           :class='sort === "name-asc" || sort === "name-desc"
-  ? "bg-ink text-paper border-ink"
-  : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
-          @click="toggleNameSort()"
+            ? "bg-ink text-paper border-ink"
+            : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
+          @click="toggleNameSort"
         >
           Name {{ sort === "name-desc" ? "Z→A" : "A→Z" }}
         </button>
         <!-- 最新登壇年の新しい順でソートするボタン -->
         <button
           class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
+          type="button"
           :class='sort === "latest"
-  ? "bg-ink text-paper border-ink"
-  : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
-          @click='sort = "latest"'
+            ? "bg-ink text-paper border-ink"
+            : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
+          @click="sortByLatest"
         >
           Latest year ↓
         </button>
@@ -166,9 +185,10 @@ function toggleNameSort() {
           <!-- スピーカー行の展開/折りたたみボタン -->
           <button
             class="w-full flex flex-wrap items-center gap-x-[12px] px-pad-x py-3.5 cursor-pointer text-left"
+            type="button"
             :aria-expanded="openRows.has(rec.name)"
             :class='openRows.has(rec.name) ? "bg-paper-2" : ""'
-            @click="toggleRow(rec.name)"
+            @click="() => toggleRow(rec.name)"
           >
             <span class="basis-0 grow-999 min-inline-[50%] flex flex-wrap gap-2 justify-start items-center">
               <!-- 行番号（表示専用） -->
@@ -202,8 +222,7 @@ function toggleNameSort() {
               </span>
               <!-- 登壇年度グリッド（各年のマスを塗りつぶして登壇済みかを可視化） -->
               <span
-                class="inline-grid gap-[3px] grow-999 justify-end"
-                style="grid-template-columns: repeat(6, 28px)"
+                class="inline-grid gap-[3px] grow-999 justify-end [grid-template-columns:repeat(6,28px)]"
                 :aria-label='t.years_appeared + ": " + rec.years.join(", ")'
               >
                 <span
@@ -211,12 +230,12 @@ function toggleNameSort() {
                   :key="y"
                   class="w-7 h-[22px] flex items-center justify-center font-mono text-[12px] tracking-[0]"
                   :class='[
-  rec.years.includes(y) && selectedYear === y
-    ? "bg-accent border border-accent text-accent-ink"
-    : rec.years.includes(y)
-      ? "bg-ink border border-ink text-paper"
-      : "border border-ink text-ink",
-]'
+                    rec.years.includes(y) && selectedYear === y
+                      ? "bg-accent border border-accent text-accent-ink"
+                      : rec.years.includes(y)
+                        ? "bg-ink border border-ink text-paper"
+                        : "border border-ink text-ink",
+                  ]'
                   :title="y"
                 >
                   {{ y.slice(-2) }}
@@ -237,30 +256,38 @@ function toggleNameSort() {
             class="bg-paper-2 border-t border-rule-softer pt-2 pb-[22px] px-pad-x"
           >
             <!-- スピーカープロフィールページへのリンク -->
+            <!-- @vize:docs dynamic route uses encodeURIComponent for the local speaker name -->
+            <!-- @vize:ignore-start -->
             <a
               class="font-mono text-[12px] tracking-[0.06em] text-ink underline hover:no-underline"
               :href="`/speakers/${encodeURIComponent(rec.name)}`"
             >
               {{ t.speaker_profile }}: {{ lang === "en" && rec.nameEn ? rec.nameEn : rec.name }}
             </a>
+            <!-- @vize:ignore-end -->
             <!-- 登壇一覧リスト -->
             <ol class="list-none p-0 m-0 mt-[14px]">
               <!-- 各登壇情報（開催年・タイトル・共同登壇者） -->
               <li
                 v-for="(talk, k) in rec.talks"
-                :key="k"
+                :key='`${talk.year}-${talk.title ?? talk.url}-${talk.coSpeakers.join("|")}`'
                 class="grid grid-cols-[30px_1fr] gap-4 items-baseline py-1.5 border-t border-rule-softer"
                 :class='k === 0 ? "border-t-0" : ""'
               >
                 <!-- 開催年リンク（年度別ページへ） -->
+                <!-- @vize:docs dynamic route is generated from the local AcceptedYear list -->
+                <!-- @vize:ignore-start -->
                 <a
                   class="underline hover:no-underline font-mono text-[12px] text-ink tabular-nums"
                   :href="`/${talk.year}`"
                 >
                   {{ talk.year }}
                 </a>
+                <!-- @vize:ignore-end -->
                 <div class="flex flex-col gap-y-[8px]">
                   <!-- トークタイトル（外部リンク） -->
+                  <!-- @vize:docs external URL comes from versioned Vue Fes speaker data -->
+                  <!-- @vize:ignore-start -->
                   <a
                     class="text-[14px] text-ink pb-[1px] leading-[1.45] no-underline group"
                     rel="noopener noreferrer"
@@ -281,20 +308,24 @@ function toggleNameSort() {
                       ({{ t.external }})
                     </span>
                   </a>
+                  <!-- @vize:ignore-end -->
                   <!-- 共同登壇者のリスト（各スピーカープロフィールへのリンク） -->
                   <span v-if="talk.coSpeakers.length > 0" class="text-[12px] font-mono text-ink-2">
                     w/
-                    <template v-for="(cn, ci) in talk.coSpeakers" :key="cn">
+                    <span v-for="(cn, ci) in talk.coSpeakers" :key="cn" class="contents">
                       <template v-if="ci > 0">
                         ,
                       </template>
+                      <!-- @vize:docs dynamic route uses encodeURIComponent for the local speaker name -->
+                      <!-- @vize:ignore-start -->
                       <a
                         class="text-ink border-b border-rule-soft pb-[1px] no-underline hover:border-ink"
                         :href="`/speakers/${encodeURIComponent(cn)}`"
                       >
                         {{ cn }}
                       </a>
-                    </template>
+                      <!-- @vize:ignore-end -->
+                    </span>
                   </span>
                 </div>
               </li>
