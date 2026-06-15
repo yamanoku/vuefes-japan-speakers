@@ -7,7 +7,7 @@ import SpeakerFilterBar from "./SpeakerFilterBar.vue";
 import YearFilterBar from "./YearFilterBar.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-const props = defineProps<{
+const { allSpeakers, selectedYear, selectedSpeaker, query } = defineProps<{
   allSpeakers: SpeakerWithYear[];
   selectedYear: AcceptedYear | "all";
   selectedSpeaker: string;
@@ -24,7 +24,7 @@ const { t, lang } = useVfjsI18n();
 
 const uniqueNames = computed(() => {
   const set = new Set<string>();
-  props.allSpeakers.forEach((s) => s.name.forEach((n) => set.add(n)));
+  allSpeakers.forEach((s) => s.name.forEach((n) => set.add(n)));
   return Array.from(set).sort(compareLexicalJa);
 });
 
@@ -33,18 +33,18 @@ const speakerOptions = computed(() =>
 );
 
 const counts = computed(() => {
-  const c: Record<string, number> = { all: props.allSpeakers.length };
+  const c: Record<string, number> = { all: allSpeakers.length };
   for (const y of YEARS) {
-    c[y] = props.allSpeakers.filter((s) => s.year === y).length;
+    c[y] = allSpeakers.filter((s) => s.year === y).length;
   }
   return c;
 });
 
 const filtered = computed(() => {
-  const q = props.query.trim().toLowerCase();
-  return props.allSpeakers.filter((s) => {
-    if (props.selectedYear !== "all" && s.year !== props.selectedYear) return false;
-    if (props.selectedSpeaker !== "all" && !s.name.includes(props.selectedSpeaker)) return false;
+  const q = query.trim().toLowerCase();
+  return allSpeakers.filter((s) => {
+    if (selectedYear !== "all" && s.year !== selectedYear) return false;
+    if (selectedSpeaker !== "all" && !s.name.includes(selectedSpeaker)) return false;
     if (q) {
       const hay = (s.title || "") + " " + s.name.join(" ");
       if (!hay.toLowerCase().includes(q)) return false;

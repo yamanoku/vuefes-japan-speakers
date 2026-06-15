@@ -9,7 +9,7 @@ import SpeakerFilterBar from "./SpeakerFilterBar.vue";
 import YearFilterBar from "./YearFilterBar.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-const props = defineProps<{
+const { allSpeakers, selectedYear, selectedSpeaker, query } = defineProps<{
   allSpeakers: SpeakerWithYear[];
   selectedYear: AcceptedYear | "all";
   selectedSpeaker: string;
@@ -24,7 +24,7 @@ const emit = defineEmits<{
 
 const { t, lang } = useVfjsI18n();
 
-const speakerMap = computed(() => buildSpeakerMap(props.allSpeakers));
+const speakerMap = computed(() => buildSpeakerMap(allSpeakers));
 const allRecords = computed(() => Array.from(speakerMap.value.values()));
 const speakerOptions = computed(() =>
   allRecords.value.map((record) => ({
@@ -44,10 +44,10 @@ const counts = computed(() => {
 });
 
 const filtered = computed<SpeakerRecord[]>(() => {
-  const q = props.query.trim().toLowerCase();
+  const q = query.trim().toLowerCase();
   let list = allRecords.value.filter((rec) => {
-    if (props.selectedYear !== "all" && !rec.years.includes(props.selectedYear)) return false;
-    if (props.selectedSpeaker !== "all" && rec.name !== props.selectedSpeaker) return false;
+    if (selectedYear !== "all" && !rec.years.includes(selectedYear)) return false;
+    if (selectedSpeaker !== "all" && rec.name !== selectedSpeaker) return false;
     if (q) {
       const titles = rec.talks.map((tk) => tk.title || "").join(" ");
       const hay = (rec.name + " " + titles).toLowerCase();

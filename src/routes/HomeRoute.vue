@@ -6,7 +6,7 @@ defineOptions({
   name: "HomeRoute",
 });
 
-defineProps<{
+const { allSpeakers } = defineProps<{
   allSpeakers: SpeakerWithYear[];
 }>();
 </script>

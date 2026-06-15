@@ -6,7 +6,7 @@ defineOptions({
   name: "SpeakerRoute",
 });
 
-defineProps<{
+const { found, speakerName, speakers } = defineProps<{
   found: boolean;
   speakerName: string;
   speakers: SpeakerWithYear[];

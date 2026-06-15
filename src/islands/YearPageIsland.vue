@@ -4,7 +4,7 @@ import AppFooter from "../components/AppFooter.vue";
 import AppHeader from "../components/AppHeader.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-defineProps<{
+const { found, speakers, year } = defineProps<{
   found: boolean;
   speakers: SpeakerInfo[];
   year: string;

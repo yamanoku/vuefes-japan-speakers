@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-defineProps<{
+const { query, selectedSpeaker, speakerOptions } = defineProps<{
   query: string;
   selectedSpeaker: string;
   speakerOptions: Array<{ label: string; value: string }>;

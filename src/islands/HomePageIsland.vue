@@ -9,7 +9,7 @@ import ChronicleView from "../components/ChronicleView.vue";
 import DirectoryView from "../components/DirectoryView.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-const props = defineProps<{
+const { allSpeakers } = defineProps<{
   allSpeakers: SpeakerWithYear[];
 }>();
 
@@ -32,12 +32,12 @@ const query = ref("");
 
 const stats = computed(() => {
   const speakerSet = new Set<string>();
-  for (const speaker of props.allSpeakers) {
+  for (const speaker of allSpeakers) {
     speaker.name.forEach((name) => speakerSet.add(name));
   }
   return {
     speakers: speakerSet.size,
-    talks: props.allSpeakers.length,
+    talks: allSpeakers.length,
     // 2019年は開催中止のためカウントから除外
     years: YEARS.filter((y) => y !== "2019").length,
   };

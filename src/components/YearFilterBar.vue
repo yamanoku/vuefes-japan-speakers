@@ -3,7 +3,7 @@ import { YEARS } from "../../types";
 import type { AcceptedYear } from "../../types";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-defineProps<{
+const { selectedYear, counts } = defineProps<{
   selectedYear: AcceptedYear | "all";
   counts: Record<string, number>;
 }>();

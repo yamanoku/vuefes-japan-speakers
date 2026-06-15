@@ -2,7 +2,7 @@
 import AppLogoMark from "./AppLogoMark.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
-defineProps<{
+const { stats } = defineProps<{
   stats: { speakers: number; talks: number; years: number };
 }>();
 
