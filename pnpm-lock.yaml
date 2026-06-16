@@ -17,8 +17,8 @@ catalogs:
       specifier: 2.4.11
       version: 2.4.11
     playwright:
-      specifier: 1.60.0
-      version: 1.60.0
+      specifier: 1.61.0
+      version: 1.61.0
   typescript:
     '@types/node':
       specifier: 24.13.2
@@ -99,7 +99,7 @@ importers:
         version: 0.212.0
       playwright:
         specifier: catalog:test
-        version: 1.60.0
+        version: 1.61.0
       typescript:
         specifier: catalog:typescript
         version: 6.0.3
@@ -1780,13 +1780,13 @@ packages:
     resolution: {integrity: sha512-1wrVzJ2STrpmONHKBy228LM1b84msXDUoAzVEl0R8Mz4Ce6EPr+IVtxm8+yvrqLYMHswREkjYFaMxnyGnaY3Ng==}
     hasBin: true
 
-  playwright-core@1.60.0:
-    resolution: {integrity: sha512-9bW6zvX/m0lEbgTKJ6YppOKx8H3VOPBMOCFh2irXFOT4BbHgrx5hPjwJYLT40Lu+4qtD36qKc/Hn56StUW57IA==}
+  playwright-core@1.61.0:
+    resolution: {integrity: sha512-caX7TrY3Ml6egyDX0WUcTHDxodl/b51y5wJOdCEA36QviK/s2g081hvmGs8eaE3DWb6NYZQ6BjO/QkNRPenoPA==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.60.0:
-    resolution: {integrity: sha512-hheHdokM8cdqCb0lcE3s+zT4t4W+vvjpGxsZlDnikarzx8tSzMebh3UiFtgqwFwnTnjYQcsyMF8ei2mCO/tpeA==}
+  playwright@1.61.0:
+    resolution: {integrity: sha512-Z+7BeeqQPRRzklHsVFP4KTGIyMxKUmfeRA4WisM6G3/XW6nwGeX6fX9qYaDa+CiUqpOkb2f6X3nar05R3kSuJQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -2856,7 +2856,7 @@ snapshots:
 
   '@vue/compiler-core@3.6.0-beta.12':
     dependencies:
-      '@babel/parser': 7.29.3
+      '@babel/parser': 7.29.7
       '@vue/shared': 3.6.0-beta.12
       entities: 7.0.1
       estree-walker: 2.0.2
@@ -3333,11 +3333,11 @@ snapshots:
     dependencies:
       pngjs: 7.0.0
 
-  playwright-core@1.60.0: {}
+  playwright-core@1.61.0: {}
 
-  playwright@1.60.0:
+  playwright@1.61.0:
     dependencies:
-      playwright-core: 1.60.0
+      playwright-core: 1.61.0
     optionalDependencies:
       fsevents: 2.3.2
 
