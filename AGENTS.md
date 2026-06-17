@@ -7,8 +7,8 @@
 - 目的: 歴代の Vue Fes Japan スピーカーと発表タイトルを一覧できるアーカイブサイト
 - フレームワーク: [vuerend](https://www.npmjs.com/package/@vuerend/core)（Vue 3 / Vite）
 - UI/スタイル: Tailwind CSS 4 + Vue コンポーネント
-- ツールチェーン: Vize（Vue SFC compiler / lint / type check）+ Vite Plus
-- データ供給: `server/data` の静的データを vuerend ルートの props として渡す
+- ツールチェーン: Vize（lint / format / type check）+ Vite Plus
+- データ供給: `src/data` の静的データを vuerend ルートの props として渡す
 
 ## 前提・セットアップ
 
@@ -29,45 +29,48 @@ vp config
 | 用途          | 推奨コマンド                      |
 | ------------- | --------------------------------- |
 | 開発サーバ    | `vp dev`                          |
+| Musea Gallery | `vp dev` 後に `/__musea__`        |
 | ビルド        | `vp build`                        |
 | 静的生成      | `vp build`                        |
 | プレビュー    | `vp preview --outDir dist/client` |
-| Lint          | `vp lint .`                       |
-| Format        | `vp fmt .`                        |
-| Format 確認   | `vp fmt . --check`                |
+| Lint          | `vp run lint`                     |
+| Format        | `vp run format`                   |
+| Format 確認   | `vp run format:check`             |
 | Type Check    | `vp run typecheck`                |
 | Test          | `vp test run`                     |
 | Test（watch） | `vp test watch`                   |
 
-作業前後の検証は、変更内容に応じて `vp lint .`、`vp fmt . --check`、`vp run typecheck`、`vp test run` を組み合わせます。
+作業前後の検証は、変更内容に応じて `vp run lint`、`vp run format:check`、`vp run typecheck`、`vp test run` を組み合わせます。
 
 ## ディレクトリ構成（要点）
 
-- `app/`
+- `src/`
   - `app.ts`: vuerend アプリとルート定義
   - `routes/`: ルートコンポーネント
   - `islands/`: クライアントで hydrate するページ island
   - `island-definitions.ts`: island 定義
   - `islands.ts`: クライアント island レジストリ
   - `components/`: ヘッダー、フッター、マストヘッド、一覧・タイムライン、フィルタ UI
+    - `*.art.vue`: Musea の component gallery 用 art ファイル
   - `composables/`: コンポーザブル関数集
   - `utils/`: 年判定、文字列ソート、スピーカー集約などのユーティリティ関数集
-  - `assets/css/main.css`: Tailwind 読み込み、フォント、カラートークン、デフォルトスタイル
-- `server/`
   - `data/`: 年別スピーカーデータ（`speakers-YYYY.ts`）と集約ロジック
+  - `assets/css/main.css`: Tailwind 読み込み、フォント、カラートークン、デフォルトスタイル
+- `musea/`: Musea 専用の preview CSS と art 用サンプルデータ
+- `config/vite/`: Vite custom plugin と Vite Plus lint/format/task 設定
 - `types/`: `SpeakerInfo`、`SpeakerWithYear`、`YEARS` などの共有型
 - `public/`: ロゴ、favicon、OG 画像などの静的ファイル
 - `pnpm-workspace.yaml`: catalog と依存バージョンの定義
-- `vite.config.ts`: Vite / vuerend / Vite Plus / Vize lint / Vitest Browser Mode / `vp run` task 設定
+- `vite.config.ts`: Vite / vuerend / Musea / Vite Plus の配線
 - `tsconfig.json`, `tsconfig.vize.json`: TypeScript と Vize 型チェック設定
 
 ## ルートとデータ
 
-- 全件: `app/app.ts` の `/` ルートで `getAllSpeakersWithYear()` を渡す
-- 年別: `app/app.ts` の `/:year` ルートで `getSpeakersByYear(year)` を渡す
-- スピーカー別: `app/app.ts` の `/speakers/:name` ルートで `getSpeakerTalks(name)` を渡す
-- データ源: `server/data/speakers-YYYY.ts`
-- 集約: `server/data/index.ts`
+- 全件: `src/app.ts` の `/` ルートで `getAllSpeakersWithYear()` を渡す
+- 年別: `src/app.ts` の `/:year` ルートで `getSpeakersByYear(year)` を渡す
+- スピーカー別: `src/app.ts` の `/speakers/:name` ルートで `getSpeakerTalks(name)` を渡す
+- データ源: `src/data/speakers-YYYY.ts`
+- 集約: `src/data/index.ts`
 - 有効年: `types/index.ts` の `YEARS`
 - パネルディスカッションは `SpeakerInfo` の `format: "panel"` で表現します。
 
@@ -75,19 +78,19 @@ vp config
 
 ### 新しい開催年を追加するとき
 
-- `server/data/speakers-YYYY.ts` を作成し、`SpeakerInfo[]` に沿ってデータを定義する。
-- `server/data/index.ts` に import と `speakersByYear` のエントリを追加する。
+- `src/data/speakers-YYYY.ts` を作成し、`SpeakerInfo[]` に沿ってデータを定義する。
+- `src/data/index.ts` に import と `speakersByYear` のエントリを追加する。
 - `types/index.ts` の `YEARS` に開催された年を追加する。UI の年表示はこの値を参照します。
-- `server/data/index.test.ts` や該当 island のテストで props と表示が期待通りか検証する。
+- `src/data/index.test.ts` や該当 island のテストで props と表示が期待通りか検証する。
 - 必要に応じて `README.md` の参考リンクも更新する。
 - `/`、`/[year]`、`/speakers/[name]` で表示とリンクを確認する。
 
 ## UI/ページの要点
 
 - ルーティング:
-  - `app/routes/HomeRoute.vue`: 全体一覧ページ
-  - `app/routes/YearRoute.vue`: 年別一覧ページ
-  - `app/routes/SpeakerRoute.vue`: スピーカー詳細ページ
+  - `src/routes/HomeRoute.vue`: 全体一覧ページ
+  - `src/routes/YearRoute.vue`: 年別一覧ページ
+  - `src/routes/SpeakerRoute.vue`: スピーカー詳細ページ
 - ページ island:
   - `HomePageIsland.vue`: 全体一覧のインタラクション
   - `YearPageIsland.vue`: 年別一覧のインタラクション
@@ -106,9 +109,11 @@ vp config
 
 ## Vize / Lint / 型チェック
 
-- Compiler: `@vizejs/vite-plugin` を `vite.config.ts` で vuerend の `vuePlugin` として渡します。
-- Lint: `vite.config.ts` の `lint` 設定を `vp lint .` で読み込み、TS/JS の Oxlint ルールと Vize の Vue 診断をまとめて実行します。
+- Vue SFC compiler は vuerend の標準 Vue plugin を使います。
+- Lint: `vp run lint` で Oxlint と Vize の Vue 診断をまとめて実行します。Oxlint 単体の設定は `config/vite/tooling.ts` の `lint`、Vize の preset は `vize.config.ts` を参照します。
+- Format: `vp run format` で oxfmt と Vize formatter を組み合わせて実行します。
 - 型チェック: `vize check --tsconfig tsconfig.vize.json` を `vp run typecheck` 経由で実行します。
+- Musea: `@vizejs/vite-plugin-musea` を Vite plugin として有効化し、`src/**/*.art.vue` を `/__musea__` に表示します。
 - Vize 関連 package は `pnpm-workspace.yaml` の `vize` catalog にまとめます。
 
 ## テスト
@@ -117,8 +122,7 @@ vp config
 - 実行環境: Vitest Browser Mode（Playwright / Chromium）
 - 設定: `vite.config.ts`
 - テスト位置:
-  - `app/**.test.ts`
-  - `server/**.test.ts`
+  - `src/**.test.ts`
 - 実行:
 
 ```bash
@@ -137,9 +141,9 @@ vp test run
 ## 型チェックと lint
 
 - 型チェック: `vp run typecheck`
-- Lint: `vp lint .`
-- Format: `vp fmt .`
-- Format 確認: `vp fmt . --check`
+- Lint: `vp run lint`
+- Format: `vp run format`
+- Format 確認: `vp run format:check`
 
 型エラーを隠すための型削除や過度な型アサーションは避け、原因を直してください。
 
@@ -148,20 +152,20 @@ vp test run
 ### スピーカー検索/フィルタを調整
 
 - `SpeakerFilterBar.vue`、`YearFilterBar.vue`、`DirectoryView.vue`、`ChronicleView.vue` を確認する。
-- 取得・絞り込みロジックが必要なら `app/composables/speaker.ts` を更新する。
-- スピーカー集約や日本語判定に関わる場合は `app/utils/speakerMap.ts`、`app/utils/stringCollate.ts` も確認する。
+- 取得・絞り込みロジックが必要なら `src/composables/speaker.ts` を更新する。
+- スピーカー集約や日本語判定に関わる場合は `src/utils/speakerMap.ts`、`src/utils/stringCollate.ts` も確認する。
 - 影響範囲のテストを更新する。
 
 ### コンポーネントを追加
 
-- `app/components/` に追加し、該当ページや island で利用する。
+- `src/components/` に追加し、該当ページや island で利用する。
 - 既存の CSS カスタムプロパティと Tailwind ユーティリティに合わせる。
-- グローバルな見た目やフォーカススタイルは `app/assets/css/main.css` を確認する。
+- グローバルな見た目やフォーカススタイルは `src/assets/css/main.css` を確認する。
 - UI の振る舞いは小さな単位でテストする。
 
 ### 表示文言や言語切替を変更
 
-- 文言は `app/composables/useVfjsI18n.ts` の `translations` を更新する。
+- 文言は `src/composables/useVfjsI18n.ts` の `translations` を更新する。
 - `ja` と `en` の両方を揃える。
 - スピーカー名の英語表記はデータ側の `nameEn` を確認する。
 
@@ -169,12 +173,12 @@ vp test run
 
 GitHub Actions は Vite Plus セットアップ後に以下を実行します。
 
-- `vp lint .`
-- `vp fmt . --check`
+- `vp run lint`
+- `vp run format:check`
 - `vp run typecheck`
 - `vp test run`
 
-Browser Mode の test job では、テスト前に `vp exec playwright install --with-deps chromium` で Chromium を導入します。CI の対象 path は `app/**`、`server/**`、`types/**`、各種設定ファイル、lockfile などです。ドキュメントのみの変更では一部の workflow が走らない場合があります。
+Browser Mode の test job では、テスト前に `vp exec playwright install --with-deps chromium` で Chromium を導入します。CI の対象 path は `src/**`、`musea/**`、`config/**`、`types/**`、各種設定ファイル、lockfile などです。ドキュメントのみの変更では一部の workflow が走らない場合があります。
 
 ## デプロイ
 
@@ -185,7 +189,7 @@ Browser Mode の test job では、テスト前に `vp exec playwright install -
 - ブランチ: `feat/*`、`fix/*`、`chore/*`、`docs/*` など用途別に作成する。
 - コミット: Conventional Commits を使う。例: `docs: update agents guide`
 - 実装: 小さめの差分で進め、関連テストやドキュメントも合わせて更新する。
-- 検証: 変更内容に応じて `vp lint . && vp fmt . --check && vp run typecheck && vp test run` を実行する。
+- 検証: 変更内容に応じて `vp run lint && vp run format:check && vp run typecheck && vp test run` を実行する。
 - レビュー: 変更点の要約、確認したコマンド、必要に応じてスクリーンショットや再現手順を添える。
 
 ## トラブルシュート

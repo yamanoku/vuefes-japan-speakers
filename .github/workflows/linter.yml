@@ -5,12 +5,14 @@ on:
     branches:
       - main
     paths:
-      - "app/**"
-      - "server/**"
+      - "src/**"
+      - "musea/**"
+      - "config/**"
       - "types/**"
       - "package.json"
       - "pnpm-workspace.yaml"
       - "pnpm-lock.yaml"
+      - "vize.config.ts"
       - "vite.config.ts"
       - "tsconfig.json"
       - "tsconfig.vize.json"
@@ -33,6 +35,6 @@ jobs:
       - name: Install dependencies
         run: vp install
       - name: Run lint
-        run: vp lint .
+        run: vp run lint
         env:
           CI: true

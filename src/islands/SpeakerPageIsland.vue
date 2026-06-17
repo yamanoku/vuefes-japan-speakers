@@ -1,0 +1,175 @@
+<script setup lang="ts">
+import { computed } from "vue";
+import type { SpeakerWithYear } from "../../types";
+import AppFooter from "../components/AppFooter.vue";
+import AppHeader from "../components/AppHeader.vue";
+import { useVfjsI18n } from "../composables/useVfjsI18n";
+import { compareLexicalJa } from "../utils/stringCollate";
+import { hasJapanese } from "../utils/speakerMap";
+
+const { found, speakerName, speakers } = defineProps<{
+  found: boolean;
+  speakerName: string;
+  speakers: SpeakerWithYear[];
+}>();
+
+const { t, lang } = useVfjsI18n();
+
+const record = computed(() => {
+  let nameRuby: string | undefined;
+  let nameEn: string | undefined;
+  for (const speaker of speakers) {
+    const index = speaker.name.indexOf(speakerName);
+    if (index >= 0) {
+      if (!nameRuby && speaker.nameRuby?.[index]) nameRuby = speaker.nameRuby[index];
+      if (!nameEn && speaker.nameEn?.[index]) nameEn = speaker.nameEn[index];
+      if (nameRuby && nameEn) break;
+    }
+  }
+  const talks = speakers
+    .map((speaker) => ({
+      year: speaker.year,
+      title: speaker.title,
+      url: speaker.url,
+      format: speaker.format,
+      coSpeakers: speaker.name.filter((name) => name !== speakerName),
+    }))
+    .sort((a, b) => compareLexicalJa(a.year, b.year));
+  const years = [...new Set(talks.map((talk) => talk.year))].sort();
+  return { name: speakerName, nameRuby, nameEn, years, talks };
+});
+</script>
+
+<template>
+  <div>
+    <AppHeader />
+    <!-- スピーカーページのメインコンテンツ（該当スピーカーが存在する場合） -->
+    <template v-if="found">
+      <!-- スピーカーページのヘッダー（名前・登壇回数・登壇年度） -->
+      <header class="border-b border-rule pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-pad-x">
+        <!-- スピーカー名 -->
+        <h1
+          class="font-display text-[clamp(28px,4.5vw,72px)] font-bold leading-[1] mb-4"
+          :lang='hasJapanese(record.name) ? "ja" : "en"'
+        >
+          <ruby v-if='record.nameRuby && lang === "ja"'>
+            {{ record.name }}
+            <rt>
+              {{ record.nameRuby }}
+            </rt>
+          </ruby>
+          <template v-else>
+            {{ lang === "en" && record.nameEn ? record.nameEn : record.name }}
+          </template>
+        </h1>
+        <div class="font-mono text-ink-2">
+          <!-- 総登壇回数 -->
+          <div>
+            {{ t.appearance_count(record.talks.length) }}
+          </div>
+          <!-- 登壇年度のリスト（各年度ページへのリンク） -->
+          <div class="mt-2 text-[12px] text-ink-2">
+            {{ t.years_appeared }}:
+            <span v-for="(year, index) in record.years" :key="year">
+              <template v-if="index > 0">
+                ,
+              </template>
+              <!-- @vize:docs dynamic route is generated from the speaker's local year list -->
+              <!-- @vize:ignore-start -->
+              <a class="text-ink underline hover:no-underline" :href="`/${year}`">
+                {{ year }}
+              </a>
+              <!-- @vize:ignore-end -->
+            </span>
+          </div>
+        </div>
+      </header>
+      <!-- 関連トーク一覧セクション -->
+      <section class="px-pad-x py-10">
+        <h2 class="font-mono tracking-[0.1em] text-ink-2 mb-4">
+          {{ t.related_talks }}
+        </h2>
+        <ul class="list-none p-0 m-0">
+          <li
+            v-for="talk in record.talks"
+            :key='`${talk.year}-${talk.title ?? talk.url}-${talk.coSpeakers.join("|")}`'
+            class="grid grid-cols-[40px_1fr] gap-x-4 border-t border-rule-softer py-4.5"
+          >
+            <!-- 開催年リンク（年度別ページへ） -->
+            <span class="font-mono text-[12px] text-center pt-[3px]">
+              <!-- @vize:docs dynamic route is generated from the speaker's local year list -->
+              <!-- @vize:ignore-start -->
+              <a class="text-ink underline hover:no-underline" :href="`/${talk.year}`">
+                {{ talk.year }}
+              </a>
+              <!-- @vize:ignore-end -->
+            </span>
+            <div class="flex flex-col gap-y-2">
+              <!-- トークタイトル（外部リンク） -->
+              <!-- @vize:docs external URL comes from versioned Vue Fes speaker data -->
+              <!-- @vize:ignore-start -->
+              <a
+                class="text-[16px] text-ink no-underline group flex flex-wrap items-baseline gap-2"
+                rel="noopener noreferrer"
+                target="_blank"
+                :href="talk.url"
+              >
+                <!-- パネルセッションのフォーマットバッジ -->
+                <span
+                  v-if='talk.format === "panel"'
+                  class="relative top-[-1px] inline-flex items-center self-center align-middle font-mono text-[10px] uppercase tracking-[0.06em] border border-ink text-ink px-[5px] py-[1px] leading-[1.15]"
+                >
+                  {{ t.session_format_panel }}
+                </span>
+                <span>
+                  <span
+                    class="group-hover:underline"
+                    :lang='hasJapanese(talk.title || "") ? "ja" : "en"'
+                  >
+                    {{ talk.title || t.tbd }}
+                  </span>
+                  <span class="text-[10px] ml-1">
+                    ({{ t.external }})
+                  </span>
+                </span>
+              </a>
+              <!-- @vize:ignore-end -->
+              <!-- 共同登壇者のリスト（各スピーカープロフィールへのリンク） -->
+              <span v-if="talk.coSpeakers.length > 0" class="text-[12px] font-mono text-ink-2">
+                w/
+                <span
+                  v-for="(coSpeakerName, coSpeakerIndex) in talk.coSpeakers"
+                  :key="coSpeakerName"
+                  class="contents"
+                >
+                  <template v-if="coSpeakerIndex > 0">
+                    ,
+                  </template>
+                  <!-- @vize:docs dynamic route uses encodeURIComponent for the local speaker name -->
+                  <!-- @vize:ignore-start -->
+                  <a
+                    class="text-ink underline hover:no-underline"
+                    :href="`/speakers/${encodeURIComponent(coSpeakerName)}`"
+                  >
+                    {{ coSpeakerName }}
+                  </a>
+                  <!-- @vize:ignore-end -->
+                </span>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </template>
+    <!-- スピーカーが存在しない場合 -->
+    <main v-else class="px-pad-x py-20 font-mono text-[14px] text-ink-2">
+      <h1 class="font-display text-[40px] text-ink m-0">
+        Speaker Not Found
+      </h1>
+      <p>
+        {{ speakerName }}
+      </p>
+    </main>
+    <AppFooter />
+  </div>
+</template>
