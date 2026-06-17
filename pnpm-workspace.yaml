@@ -25,10 +25,10 @@ catalogs:
   vuerend:
     "@vuerend/core": 0.3.0
   vize:
-    "@vizejs/vite-plugin": 0.212.0
-    oxlint: 1.69.0
-    oxlint-plugin-vize: 0.212.0
-    vize: 0.212.0
+    "@vizejs/vite-plugin": 0.230.0
+    oxlint: 1.70.0
+    oxlint-plugin-vize: 0.230.0
+    vize: 0.230.0
   vp:
     vite: npm:@voidzero-dev/vite-plus-core@0.1.24
     vite-plus: 0.1.24
