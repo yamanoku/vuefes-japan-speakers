@@ -25,14 +25,14 @@ catalogs:
   vuerend:
     "@vuerend/core": 1.0.0-rc.2
   musea:
-    "@vizejs/vite-plugin-musea": 0.230.0
+    "@vizejs/vite-plugin-musea": 0.235.0
     axe-core: 4.12.1
     esbuild: 0.28.1
   vize:
-    "@vizejs/vite-plugin": 0.230.0
+    "@vizejs/vite-plugin": 0.235.0
     oxlint: 1.70.0
-    oxlint-plugin-vize: 0.230.0
-    vize: 0.230.0
+    oxlint-plugin-vize: 0.235.0
+    vize: 0.235.0
   vp:
     vite: npm:@voidzero-dev/vite-plus-core@0.1.24
     vite-plus: 0.1.24
