@@ -27,8 +27,8 @@ catalogs:
       specifier: 2.4.11
       version: 2.4.11
     playwright:
-      specifier: 1.61.0
-      version: 1.61.0
+      specifier: 1.61.1
+      version: 1.61.1
   typescript:
     '@types/node':
       specifier: 24.13.2
@@ -100,7 +100,7 @@ importers:
         version: 0.250.0(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0))(vue@3.5.38(typescript@6.0.3))
       '@vizejs/vite-plugin-musea':
         specifier: catalog:musea
-        version: 0.250.0(@vizejs/vite-plugin@0.250.0(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0))(vue@3.5.38(typescript@6.0.3)))(axe-core@4.12.1)(playwright@1.61.0)(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0))
+        version: 0.250.0(@vizejs/vite-plugin@0.250.0(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0))(vue@3.5.38(typescript@6.0.3)))(axe-core@4.12.1)(playwright@1.61.1)(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0))
       '@vue/test-utils':
         specifier: catalog:test
         version: 2.4.11(@vue/compiler-dom@3.6.0-beta.15)(@vue/server-renderer@3.5.38(vue@3.5.38(typescript@6.0.3)))(vue@3.5.38(typescript@6.0.3))
@@ -118,7 +118,7 @@ importers:
         version: 0.260.0
       playwright:
         specifier: catalog:test
-        version: 1.61.0
+        version: 1.61.1
       typescript:
         specifier: catalog:typescript
         version: 6.0.3
@@ -2001,13 +2001,13 @@ packages:
     resolution: {integrity: sha512-xhcb4yHu9sM/G7foGzoLtXYcC0zHEaOXXjRKhGup0fw78Nf2Tkiapv4EQyMzrbcmQPsllAI7DbFY2UT7PlI9Pg==}
     hasBin: true
 
-  playwright-core@1.61.0:
-    resolution: {integrity: sha512-caX7TrY3Ml6egyDX0WUcTHDxodl/b51y5wJOdCEA36QviK/s2g081hvmGs8eaE3DWb6NYZQ6BjO/QkNRPenoPA==}
+  playwright-core@1.61.1:
+    resolution: {integrity: sha512-h7Qlt6m4REp25qvIdvbDtVmD4LqVXfpRxhORv9L0jzETM05p4fuPJ3dKyuSXQxDSbXnmS79HAgi9589lGSpLkg==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.61.0:
-    resolution: {integrity: sha512-Z+7BeeqQPRRzklHsVFP4KTGIyMxKUmfeRA4WisM6G3/XW6nwGeX6fX9qYaDa+CiUqpOkb2f6X3nar05R3kSuJQ==}
+  playwright@1.61.1:
+    resolution: {integrity: sha512-DWnY5o3YbLWK4GovuAVwpqL+1VwGNdUGrRr++8j8PtQQzvAVZUIMjKQ90fY689sEJZJBbZVw1rXaOKSTitkzPQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -3055,7 +3055,7 @@ snapshots:
       '@vizejs/native-win32-arm64-msvc': 0.260.0
       '@vizejs/native-win32-x64-msvc': 0.260.0
 
-  '@vizejs/vite-plugin-musea@0.250.0(@vizejs/vite-plugin@0.250.0(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0))(vue@3.5.38(typescript@6.0.3)))(axe-core@4.12.1)(playwright@1.61.0)(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0))':
+  '@vizejs/vite-plugin-musea@0.250.0(@vizejs/vite-plugin@0.250.0(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0))(vue@3.5.38(typescript@6.0.3)))(axe-core@4.12.1)(playwright@1.61.1)(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0))':
     dependencies:
       '@vizejs/native': 0.251.0
       '@vizejs/vite-plugin': 0.250.0(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0))(vue@3.5.38(typescript@6.0.3))
@@ -3063,7 +3063,7 @@ snapshots:
       vite: 8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)
     optionalDependencies:
       axe-core: 4.12.1
-      playwright: 1.61.0
+      playwright: 1.61.1
 
   '@vizejs/vite-plugin@0.250.0(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0))(vue@3.5.38(typescript@6.0.3))':
     dependencies:
@@ -3675,11 +3675,11 @@ snapshots:
     dependencies:
       pngjs: 7.0.0
 
-  playwright-core@1.61.0: {}
+  playwright-core@1.61.1: {}
 
-  playwright@1.61.0:
+  playwright@1.61.1:
     dependencies:
-      playwright-core: 1.61.0
+      playwright-core: 1.61.1
     optionalDependencies:
       fsevents: 2.3.2
 
