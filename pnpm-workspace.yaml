@@ -31,8 +31,8 @@ catalogs:
   vize:
     "@vizejs/vite-plugin": 0.250.0
     oxlint: 1.71.0
-    oxlint-plugin-vize: 0.260.0
-    vize: 0.260.0
+    oxlint-plugin-vize: 0.262.0
+    vize: 0.262.0
   vp:
     vite: npm:@voidzero-dev/vite-plus-core@0.1.24
     vite-plus: 0.1.24
