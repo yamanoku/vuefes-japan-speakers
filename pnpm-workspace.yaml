@@ -30,7 +30,7 @@ catalogs:
     esbuild: 0.28.1
   vize:
     "@vizejs/vite-plugin": 0.291.0
-    oxlint: 1.74.0
+    oxlint: 1.75.0
     oxlint-plugin-vize: 0.291.0
     vize: 0.291.0
   vp:
