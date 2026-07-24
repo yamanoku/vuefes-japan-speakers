@@ -8,7 +8,7 @@ allowBuilds:
 
 catalogs:
   css:
-    "@tailwindcss/vite": 4.3.1
+    "@tailwindcss/vite": 4.3.3
     tailwindcss: 4.3.3
   test:
     "@vue/test-utils": 2.4.11
@@ -18,7 +18,7 @@ catalogs:
     "@types/node": 24.13.3
     typescript: 6.0.3
   vite:
-    vite: 8.0.16
+    vite: 8.1.5
   vue:
     "@vue/server-renderer": 3.5.40
     vue: 3.5.40
@@ -34,8 +34,8 @@ catalogs:
     oxlint-plugin-vize: 0.291.0
     vize: 0.291.0
   vp:
-    vite: npm:@voidzero-dev/vite-plus-core@0.1.24
-    vite-plus: 0.1.24
+    vite: npm:@voidzero-dev/vite-plus-core@0.2.6
+    vite-plus: 0.2.6
     vitest: npm:@voidzero-dev/vite-plus-test@0.1.24
 
 peerDependencyRules:
