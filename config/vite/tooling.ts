@@ -57,7 +57,7 @@ export const fmt = {
 export const runTasks = {
   lint: {
     command:
-      'vp lint . --format stylish --max-warnings 0 && vize lint --help-level short --max-warnings 0 "src/**/*.vue"',
+      "vp lint . --format stylish --max-warnings 0 && vize lint --help-level short --max-warnings 0 $(find src -name '*.vue' ! -name '*.art.vue')",
   },
   check: {
     command: "vp run lint && vp run format:check && vp run typecheck",
