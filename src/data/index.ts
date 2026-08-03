@@ -6,6 +6,7 @@ import { speakers2022 } from "./speakers-2022";
 import { speakers2023 } from "./speakers-2023";
 import { speakers2024 } from "./speakers-2024";
 import { speakers2025 } from "./speakers-2025";
+import { speakers2026 } from "./speakers-2026";
 
 // Speakers organized by year
 const speakersByYear = {
@@ -15,6 +16,7 @@ const speakersByYear = {
   2023: speakers2023,
   2024: speakers2024,
   2025: speakers2025,
+  2026: speakers2026,
 } satisfies Record<AcceptedYear, SpeakerInfo[]>;
 
 // Helper function to get speakers by year
