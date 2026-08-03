@@ -4,7 +4,7 @@ import type { AcceptedYear } from "../../types";
 
 describe("isValidYear", () => {
   describe("有効な年", () => {
-    it.each([["2018"], ["2019"], ["2022"], ["2023"], ["2024"], ["2025"]])(
+    it.each([["2018"], ["2019"], ["2022"], ["2023"], ["2024"], ["2025"], ["2026"]])(
       "%sの場合trueを返す",
       (year) => {
         expect(isValidYear(year)).toBe(true);
