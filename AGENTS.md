@@ -200,3 +200,14 @@ Browser Mode の test job では、テスト前に `vp exec playwright install -
 - Vite Plus 設定の不整合: `vp config` を再実行する。
 - Browser Mode のブラウザ不足: `vp exec playwright install chromium` を実行する。Linux CI では `--with-deps` も付ける。
 - キャッシュ問題: Vite や生成物のキャッシュが怪しい場合は開発サーバを再起動する。
+
+## Cursor Cloud specific instructions
+
+このセクションは、依存インストール済みの Cloud Agent VM で作業する将来のエージェント向けの補足です。標準コマンドは上記の表（README / AGENTS）を参照してください。ここには非自明な注意点のみを記載します。
+
+- `vp` の PATH: `vp` は `~/.vite-plus` にインストールされ、対話シェルでは `~/.bashrc` 経由で読み込まれます。非対話シェル（スクリプトや `tmux send-keys` など）では `vp` が PATH に無いことがあるので、先に `. "$HOME/.vite-plus/env"` を読み込んでから `vp` を実行してください。
+- 開発サーバ: `vp dev` は `http://localhost:5173/`（Vite のデフォルトポート）で起動します。`server.port` の明示設定はありません。長時間走らせる場合は tmux セッションで起動してください。
+- テスト: `vp test run` は Vitest の Browser Mode（Playwright / Chromium）で動きます。Chromium は環境更新スクリプト（`vp exec playwright install chromium`）で導入済みです。ブラウザが見つからないエラーが出たら同コマンドを再実行してください。
+- Node: 既定の環境 Node（v22 系 LTS）で lint / typecheck / test / build / dev すべて動作します。CI は Node 24 です。
+- クライアント遷移の描画: dev サーバでスピーカー詳細（`/speakers/:name`）へクライアント遷移する際、一瞬ローディング表示（白いキューブ）を挟んでから描画されます。最終描画は正常です（`curl` でも各ルートは 200 を返します）。
+- ビルド確認: `vp build` は SSG で全ルート（現在 156 ルート）を `dist/client` に生成します。生成物の確認は `vp preview --outDir dist/client`。
