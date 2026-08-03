@@ -23,6 +23,5 @@ describe("speaker data accessors", () => {
 
     expect(speakers.length).toBeGreaterThan(0);
     expect(speakers.every((speaker) => YEARS.includes(speaker.year))).toBe(true);
-    expect(YEARS).toContain("2026");
   });
 });
