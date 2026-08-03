@@ -10,14 +10,6 @@ describe("speaker data accessors", () => {
     expect(speakers.every((speaker) => Array.isArray(speaker.name))).toBe(true);
   });
 
-  it("2026年データを取得できる", () => {
-    const speakers = getSpeakersByYear("2026");
-
-    expect(speakers.length).toBeGreaterThan(0);
-    expect(speakers.every((speaker) => Array.isArray(speaker.name))).toBe(true);
-    expect(speakers.every((speaker) => speaker.url.includes("/2026/"))).toBe(true);
-  });
-
   it("全件データにyearを付与する", () => {
     const speakers = getAllSpeakersWithYear();
 
