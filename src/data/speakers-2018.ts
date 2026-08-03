@@ -17,7 +17,7 @@ export const speakers2018: SpeakerInfo[] = [
     url: "https://vuefes.jp/2018/speakers/takanorip/",
   },
   {
-    name: ["katashin"],
+    name: ["Katashin"],
     title: "Vue Designer: デザインと実装の統合",
     url: "https://vuefes.jp/2018/speakers/ktsn/",
   },
