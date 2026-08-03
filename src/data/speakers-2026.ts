@@ -7,7 +7,7 @@ export const speakers2026: SpeakerInfo[] = [
     url: "https://vuefes.jp/2026/speaker/yyx990803",
   },
   {
-    name: ["Eduardo San Martin Morote (Posva)"],
+    name: ["Eduardo San Martin Morote"],
     url: "https://vuefes.jp/2026/speaker/posva",
   },
   {
