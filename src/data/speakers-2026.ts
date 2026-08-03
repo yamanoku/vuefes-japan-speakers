@@ -77,7 +77,8 @@ export const speakers2026: SpeakerInfo[] = [
   },
   {
     name: ["平沼 真吾"],
-    title: "Vue で書く 空間コンピューティング、TresJS と WebXR を使ったXR デバイスのフロントエンド開発",
+    title:
+      "Vue で書く 空間コンピューティング、TresJS と WebXR を使ったXR デバイスのフロントエンド開発",
     url: "https://vuefes.jp/2026/speaker/hiranuma",
   },
   {
