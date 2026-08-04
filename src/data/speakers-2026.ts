@@ -83,6 +83,7 @@ export const speakers2026: SpeakerInfo[] = [
   },
   {
     name: ["うしろのこ"],
+    nameEn: ["ushironoko"],
     title: "型なし、テストなし、1万行のドメインロジックがあるVuexをPiniaへ移行する",
     url: "https://vuefes.jp/2026/speaker/ushironoko",
   },
