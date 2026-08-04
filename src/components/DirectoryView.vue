@@ -209,16 +209,13 @@ function updateSelectedYear(value: AcceptedYear | "all") {
                 <template v-else>
                   {{ lang === "en" && rec.nameEn ? rec.nameEn : rec.name }}
                 </template>
-                <!-- 複数回登壇バッジ（登壇回数を ×N 形式で表示） -->
+                <!-- 複数回登壇バッジ（登壇回数を ×N 形式で表示。formatter の改行空白を避けるため data-count で描画） -->
                 <span
                   v-if="rec.talks.length > 1"
-                  class="font-mono bg-accent text-[12px] text-accent-ink ml-2 font-normal tracking-[0.02em] align-[2px] border border-accent px-1.25 py-[1px]"
+                  class="font-mono bg-accent text-[12px] text-accent-ink ml-2 font-normal tracking-[0.02em] align-[2px] border border-accent px-1.25 py-[1px] after:content-[attr(data-count)]"
                   :aria-label="t.appearance_count(rec.talks.length)"
-                >
-                  <span>
-                    ×{{ rec.talks.length }}
-                  </span>
-                </span>
+                  :data-count="`×${rec.talks.length}`"
+                ></span>
               </span>
               <!-- 登壇年度グリッド（各年のマスを塗りつぶして登壇済みかを可視化） -->
               <span
