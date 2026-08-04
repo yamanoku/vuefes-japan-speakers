@@ -154,6 +154,7 @@ export const speakers2023: SpeakerInfo[] = [
   },
   {
     name: ["takanorip", "miyaoka", "wattanx", "やまのく", "うしろのこ", "kazupon"],
+    nameEn: ["takanorip", "miyaoka", "wattanx", "やまのく", "ushironoko", "kazupon"],
     title: "なぜVueを選んだのか？",
     url: "https://vuefes.jp/2023/#events-panel",
     format: "panel",

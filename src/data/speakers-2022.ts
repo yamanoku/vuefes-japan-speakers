@@ -126,6 +126,7 @@ export const speakers2022: SpeakerInfo[] = [
   },
   {
     name: ["miyaoka", "うしろのこ", "takanorip", "やまのく", "kazupon"],
+    nameEn: ["miyaoka", "ushironoko", "takanorip", "やまのく", "kazupon"],
     title: "なるほどVueコンポーネント",
     url: "https://vuefes.jp/2022/#naruhodo-vue-component",
     format: "panel",
