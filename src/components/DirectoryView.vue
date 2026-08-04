@@ -215,7 +215,7 @@ function updateSelectedYear(value: AcceptedYear | "all") {
                   class="font-mono bg-accent text-[12px] text-accent-ink ml-2 font-normal tracking-[0.02em] align-[2px] border border-accent px-1.25 py-[1px] after:content-[attr(data-count)]"
                   :aria-label="t.appearance_count(rec.talks.length)"
                   :data-count="`×${rec.talks.length}`"
-                />
+                ></span>
               </span>
               <!-- 登壇年度グリッド（各年のマスを塗りつぶして登壇済みかを可視化） -->
               <span
