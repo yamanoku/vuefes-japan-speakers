@@ -1,3 +1,5 @@
+
+
 # Vue Fes Japan Speakers
 
 歴代のVue Fes Japanのスピーカー（セッション・パネルディスカッションの登壇者）を一覧できるサイトです。
@@ -25,6 +27,7 @@
 ## Setup
 
 ```bash
+curl -fsSL https://vite.plus | bash
 vp install
 vp config
 ```
