@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AppLogoMark from "./AppLogoMark.vue";
+import SkipLinks from "./SkipLinks.vue";
 import { useColorScheme } from "../composables/useColorScheme";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
@@ -20,6 +21,12 @@ function setEnglish() {
 </script>
 
 <template>
+  <!-- 本文・フッターへジャンプするスキップリンク（フォーカス時のみ表示） -->
+  <SkipLinks>
+    <a class="skip-link" href="#site-footer">
+      {{ t.skip_to_footer }}
+    </a>
+  </SkipLinks>
   <!-- サイト全体のヘッダー（スクロール時にページ上部へ固定） -->
   <header class="border-b border-rule bg-paper sticky top-0 z-20 [backdrop-filter:saturate(1.1)]">
     <div class="flex flex-wrap justify-between items-center gap-2 py-[14px] px-pad-x">

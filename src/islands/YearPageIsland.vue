@@ -17,7 +17,7 @@ const { t, lang } = useVfjsI18n();
   <div>
     <AppHeader />
     <!-- 年度ページのメインコンテンツ -->
-    <main>
+    <main id="main" tabindex="-1">
       <template v-if="found">
         <!-- 年度ページのヘッダー（タイトル・トーク数・公式サイトリンク） -->
         <header class="border-b border-rule pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-pad-x">
