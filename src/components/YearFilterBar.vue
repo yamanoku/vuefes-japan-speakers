@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useId } from "vue";
 import { YEARS } from "../../types";
 import type { AcceptedYear } from "../../types";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
@@ -13,6 +14,7 @@ const emit = defineEmits<{
 }>();
 
 const { t } = useVfjsI18n();
+const yearFilterLabelId = useId();
 
 function selectAllYears() {
   emit("update:selectedYear", "all");
@@ -27,10 +29,11 @@ function selectYear(year: AcceptedYear) {
   <div class="px-pad-x py-3.5 border-b border-rule-soft" role="region" :aria-label="t.filter_year">
     <!-- 年度選択ボタングループ -->
     <div class="flex items-center flex-wrap gap-1.5">
-      <span class="font-mono text-[12px] tracking-[0.1em] text-ink mr-3">
+      <span :id="yearFilterLabelId" class="font-mono text-[12px] tracking-[0.1em] text-ink mr-3">
         {{ t.filter_year }}
       </span>
-      <div class="flex gap-1.5 flex-wrap" role="group" :aria-label="t.filter_year">
+      <!-- group の名前は可視ラベルを参照する（region の aria-label と重複させない） -->
+      <div class="flex gap-1.5 flex-wrap" role="group" :aria-labelledby="yearFilterLabelId">
         <!-- 全年度選択ボタン（スピーカー総数を表示） -->
         <button
           class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] font-mono text-[12px] tracking-[0.02em] border border-rule cursor-pointer transition-colors"
