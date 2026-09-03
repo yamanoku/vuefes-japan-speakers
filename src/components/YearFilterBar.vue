@@ -35,6 +35,7 @@ function selectYear(year: AcceptedYear) {
         <button
           class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] font-mono text-[12px] tracking-[0.02em] border border-rule cursor-pointer transition-colors"
           type="button"
+          :aria-pressed='selectedYear === "all" ? "true" : "false"'
           :class='selectedYear === "all"
             ? "bg-ink text-paper border-ink"
             : "text-ink-2 hover:border-ink hover:text-ink"'
@@ -49,6 +50,7 @@ function selectYear(year: AcceptedYear) {
           :key="y"
           class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] font-mono text-[12px] tracking-[0.02em] border border-rule cursor-pointer transition-colors"
           type="button"
+          :aria-pressed='selectedYear === y ? "true" : "false"'
           :class='selectedYear === y
             ? "bg-ink text-paper border-ink"
             : "text-ink-2 hover:border-ink hover:text-ink"'

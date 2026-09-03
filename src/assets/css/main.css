@@ -26,7 +26,7 @@
     --rule-softer: rgba(232, 228, 220, 0.07);
     --ink: #e8e4dc;
     --ink-2: #b4b0a8;
-    --ink-3: #7a7a72;
+    --ink-3: #8d8d85;
     --accent: #2ed9a8;
     --accent-ink: #0d2820;
   }
@@ -40,7 +40,7 @@
   --rule-softer: rgba(232, 228, 220, 0.07);
   --ink: #e8e4dc;
   --ink-2: #b4b0a8;
-  --ink-3: #7a7a72;
+  --ink-3: #8d8d85;
   --accent: #2ed9a8;
   --accent-ink: #0d2820;
 }
@@ -91,6 +91,48 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   font-feature-settings: "ss01", "cv02", "cv11";
+}
+
+html {
+  scroll-padding-top: 72px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 50;
+  padding: 8px 16px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  position: fixed;
+  left: 16px;
+  top: 16px;
+  width: auto;
+  height: auto;
+  overflow: visible;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
