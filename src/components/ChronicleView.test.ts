@@ -23,6 +23,10 @@ describe("ChronicleView", () => {
     expect(wrapper.find('nav[aria-label="年度"]').exists()).toBe(true);
     expect(wrapper.find('a[href="#year-2018"]').exists()).toBe(true);
 
+    const yearLink = wrapper.get('a[href="/2018"]');
+    expect(yearLink.text()).toBe("2018 のスピーカー");
+    expect(yearLink.attributes("aria-label")).toBeUndefined();
+
     const status = wrapper.find('[role="status"]');
     expect(status.attributes("aria-live")).toBe("polite");
     expect(status.text()).toContain("件の発表を表示");
@@ -40,5 +44,21 @@ describe("ChronicleView", () => {
 
     expect(wrapper.find('[role="status"]').text()).toBe("該当するスピーカーが見つかりません。");
     expect(wrapper.findAll("h2")).toHaveLength(0);
+  });
+
+  it("英語名・ふりがなでも発表を絞り込める", () => {
+    const wrapper = mount(ChronicleView, {
+      props: {
+        allSpeakers: museaSpeakers,
+        query: "Taro Yamada",
+        selectedSpeaker: "all",
+        selectedYear: "all",
+      },
+    });
+
+    expect(wrapper.findAll("h2").map((heading) => heading.text())).toEqual(
+      expect.arrayContaining(["2025全 2 発表"]),
+    );
+    expect(wrapper.text()).toContain("山田 太郎");
   });
 });

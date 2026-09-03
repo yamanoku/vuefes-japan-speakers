@@ -83,6 +83,7 @@ export const speakers2023: SpeakerInfo[] = [
   },
   {
     name: ["やまのく"],
+    nameEn: ["yamanoku"],
     title: "画面遷移から考えるNuxtアプリケーションをアクセシブルにする方法",
     url: "https://vuefes.jp/2023/sessions/yamanoku",
   },
@@ -154,7 +155,7 @@ export const speakers2023: SpeakerInfo[] = [
   },
   {
     name: ["takanorip", "miyaoka", "wattanx", "やまのく", "うしろのこ", "kazupon"],
-    nameEn: ["takanorip", "miyaoka", "wattanx", "やまのく", "ushironoko", "kazupon"],
+    nameEn: ["takanorip", "miyaoka", "wattanx", "yamanoku", "ushironoko", "kazupon"],
     title: "なぜVueを選んだのか？",
     url: "https://vuefes.jp/2023/#events-panel",
     format: "panel",

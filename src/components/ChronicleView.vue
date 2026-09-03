@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import type { SpeakerWithYear, AcceptedYear } from "../../types";
+import { buildSearchHaystack, matchesSearchQuery, urlSearchToken } from "../utils/searchMatch";
 import { compareLexicalJa } from "../utils/stringCollate";
 import { YEARS } from "../../types";
 import SpeakerFilterBar from "./SpeakerFilterBar.vue";
@@ -46,8 +47,8 @@ const filtered = computed(() => {
     if (selectedYear !== "all" && s.year !== selectedYear) return false;
     if (selectedSpeaker !== "all" && !s.name.includes(selectedSpeaker)) return false;
     if (q) {
-      const hay = (s.title || "") + " " + s.name.join(" ");
-      if (!hay.toLowerCase().includes(q)) return false;
+      const hay = buildSearchHaystack(s.title, s.name, s.nameEn, s.nameRuby, urlSearchToken(s.url));
+      if (!matchesSearchQuery(hay, q)) return false;
     }
     return true;
   });
@@ -137,11 +138,10 @@ function updateSelectedYear(value: AcceptedYear | "all") {
           <!-- @vize:docs dynamic route is generated from the local AcceptedYear list -->
           <!-- @vize:ignore-start -->
           <a
-            class="font-mono text-[24px] tracking-[0.08em] uppercase text-ink-2 hover:text-accent transition-colors border-b border-current pb-0.5 no-underline mt-3.5"
-            :aria-label="`${year} speakers`"
+            class="font-mono text-[14px] tracking-[0.04em] text-ink-2 hover:text-accent transition-colors border-b border-current pb-0.5 no-underline mt-3.5"
             :href="`/${year}`"
           >
-            →
+            {{ t.year_speakers_link(year) }}
           </a>
           <!-- @vize:ignore-end -->
         </div>

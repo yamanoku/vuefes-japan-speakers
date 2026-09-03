@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, useId } from "vue";
 import type { SpeakerWithYear, AcceptedYear } from "../../types";
+import { buildSearchHaystack, matchesSearchQuery, urlSearchToken } from "../utils/searchMatch";
 import { compareLexicalJa } from "../utils/stringCollate";
 import { buildSpeakerMap, hasJapanese } from "../utils/speakerMap";
 import type { SpeakerRecord } from "../utils/speakerMap";
@@ -49,9 +50,14 @@ const filtered = computed<SpeakerRecord[]>(() => {
     if (selectedYear !== "all" && !rec.years.includes(selectedYear)) return false;
     if (selectedSpeaker !== "all" && rec.name !== selectedSpeaker) return false;
     if (q) {
-      const titles = rec.talks.map((tk) => tk.title || "").join(" ");
-      const hay = (rec.name + " " + titles).toLowerCase();
-      if (!hay.includes(q)) return false;
+      const hay = buildSearchHaystack(
+        rec.name,
+        rec.nameEn,
+        rec.nameRuby,
+        ...rec.talks.map((tk) => tk.title),
+        ...rec.talks.map((tk) => urlSearchToken(tk.url)),
+      );
+      if (!matchesSearchQuery(hay, q)) return false;
     }
     return true;
   });

@@ -26,13 +26,13 @@ function selectYear(year: AcceptedYear) {
 </script>
 
 <template>
-  <div class="px-pad-x py-3.5 border-b border-rule-soft" role="region" :aria-label="t.filter_year">
+  <div class="px-pad-x py-3.5 border-b border-rule-soft">
     <!-- 年度選択ボタングループ -->
     <div class="flex items-center flex-wrap gap-1.5">
       <span :id="yearFilterLabelId" class="font-mono text-[12px] tracking-[0.1em] text-ink mr-3">
         {{ t.filter_year }}
       </span>
-      <!-- group の名前は可視ラベルを参照する（region の aria-label と重複させない） -->
+      <!-- group の名前は可視ラベルを参照する -->
       <div class="flex gap-1.5 flex-wrap" role="group" :aria-labelledby="yearFilterLabelId">
         <!-- 全年度選択ボタン（スピーカー総数を表示） -->
         <button

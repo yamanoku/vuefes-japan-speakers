@@ -38,6 +38,7 @@ export const speakers2025: SpeakerInfo[] = [
   },
   {
     name: ["やまのく"],
+    nameEn: ["yamanoku"],
     title: "生成AI時代のWebアプリケーションアクセシビリティ改善",
     url: "https://vuefes.jp/2025/speaker/yamanoku",
   },
