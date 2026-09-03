@@ -8,6 +8,7 @@ export const speakers2026: SpeakerInfo[] = [
   },
   {
     name: ["Eduardo San Martin Morote"],
+    title: "Type-Safe URLs",
     url: "https://vuefes.jp/2026/speaker/posva",
   },
   {
@@ -16,7 +17,7 @@ export const speakers2026: SpeakerInfo[] = [
   },
   {
     name: ["Charles Wang"],
-    title: "Vite-plus (仮)",
+    title: "Vite Task’s Cache Magic",
     url: "https://vuefes.jp/2026/speaker/wan9chi",
   },
   {
@@ -26,6 +27,7 @@ export const speakers2026: SpeakerInfo[] = [
   },
   {
     name: ["中野 美咲"],
+    title: "ブランドのためのWebGLアニメーション（仮）",
     url: "https://vuefes.jp/2026/speaker/mnmxmx",
   },
   {
@@ -172,5 +174,11 @@ export const speakers2026: SpeakerInfo[] = [
     name: ["キナ"],
     title: "便利で危険なDeep Reactivityとの付き合い方",
     url: "https://vuefes.jp/2026/speaker/CrafterKina",
+  },
+  {
+    name: ["Evan You", "古川 陽介", "Alistair Smith", "Leo Kettmeir"],
+    title: "JavaScriptエコシステムの境界線を問い直す",
+    url: "https://vuefes.jp/2026/event?session=panel-discussion#panel-discussion",
+    format: "panel",
   },
 ];
