@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, nextTick, onMounted, ref, useId, watch } from "vue";
 import type { AcceptedYear, SpeakerWithYear } from "../../types";
 import { YEARS } from "../../types";
 import AppFooter from "../components/AppFooter.vue";
@@ -43,12 +43,47 @@ const stats = computed(() => {
   };
 });
 
+const tabOrder = ["chronicle", "index"] as const;
+type ViewMode = (typeof tabOrder)[number];
+
+const chronicleTabRef = ref<HTMLButtonElement | null>(null);
+const directoryTabRef = ref<HTMLButtonElement | null>(null);
+const tabChronicleId = useId();
+const tabDirectoryId = useId();
+const panelChronicleId = useId();
+const panelDirectoryId = useId();
+
 function showChronicle() {
   view.value = "chronicle";
 }
 
 function showDirectory() {
   view.value = "index";
+}
+
+function focusViewTab(next: ViewMode) {
+  nextTick(() => {
+    (next === "chronicle" ? chronicleTabRef.value : directoryTabRef.value)?.focus();
+  });
+}
+
+function onTabKeydown(event: KeyboardEvent) {
+  const keys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"];
+  if (!keys.includes(event.key)) return;
+  event.preventDefault();
+  const currentIndex = tabOrder.indexOf(view.value);
+  let next: ViewMode;
+  if (event.key === "Home") {
+    next = tabOrder[0];
+  } else if (event.key === "End") {
+    next = tabOrder[tabOrder.length - 1];
+  } else if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+    next = tabOrder[(currentIndex + 1) % tabOrder.length];
+  } else {
+    next = tabOrder[(currentIndex - 1 + tabOrder.length) % tabOrder.length];
+  }
+  view.value = next;
+  focusViewTab(next);
 }
 
 function updateQuery(value: string) {
@@ -71,20 +106,25 @@ function updateSelectedYear(value: AcceptedYear | "all") {
     <AppMasthead :stats />
     <!-- ビュー切り替えタブバー（Chronicle／Directory） -->
     <div
-      aria-label="View mode"
       class="flex gap-0 px-pad-x border-b border-rule bg-paper"
       role="tablist"
+      :aria-label="t.view_mode"
     >
       <!-- 年度別クロニクルビュータブ -->
       <button
+        ref="chronicleTabRef"
         class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
         role="tab"
         type="button"
+        :id="tabChronicleId"
+        :aria-controls="panelChronicleId"
         :aria-selected='view === "chronicle"'
+        :tabindex='view === "chronicle" ? 0 : -1'
         :class='view === "chronicle"
           ? "text-ink [box-shadow:inset_0_-4px_0_var(--accent)]"
           : "text-ink-3 hover:text-ink"'
         @click="showChronicle"
+        @keydown="onTabKeydown"
       >
         {{ t.view_timeline }}
         <span class="font-mono text-[12px] tracking-[0.02em] ml-1" lang="en">
@@ -93,14 +133,19 @@ function updateSelectedYear(value: AcceptedYear | "all") {
       </button>
       <!-- スピーカー名索引ディレクトリビュータブ -->
       <button
+        ref="directoryTabRef"
         class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
         role="tab"
         type="button"
+        :id="tabDirectoryId"
+        :aria-controls="panelDirectoryId"
         :aria-selected='view === "index"'
+        :tabindex='view === "index" ? 0 : -1'
         :class='view === "index"
           ? "text-ink [box-shadow:inset_0_-4px_0_var(--accent)]"
           : "text-ink-3 hover:text-ink"'
         @click="showDirectory"
+        @keydown="onTabKeydown"
       >
         {{ t.view_index }}
         <span class="font-mono text-[12px] tracking-[0.02em] ml-1" lang="en">
@@ -110,27 +155,35 @@ function updateSelectedYear(value: AcceptedYear | "all") {
     </div>
     <!-- 選択中のビューに応じてコンポーネントを切り替え -->
     <!-- 年度別クロニクルビュー -->
-    <ChronicleView
+    <div
       v-if='view === "chronicle"'
-      :all-speakers
-      :query
-      :selected-speaker
-      :selected-year
-      @update:query="updateQuery"
-      @update:selected-speaker="updateSelectedSpeaker"
-      @update:selected-year="updateSelectedYear"
-    />
+      role="tabpanel"
+      tabindex="0"
+      :id="panelChronicleId"
+      :aria-labelledby="tabChronicleId"
+    >
+      <ChronicleView
+        :all-speakers
+        :query
+        :selected-speaker
+        :selected-year
+        @update:query="updateQuery"
+        @update:selected-speaker="updateSelectedSpeaker"
+        @update:selected-year="updateSelectedYear"
+      />
+    </div>
     <!-- スピーカー索引ディレクトリビュー -->
-    <DirectoryView
-      v-else
-      :all-speakers
-      :query
-      :selected-speaker
-      :selected-year
-      @update:query="updateQuery"
-      @update:selected-speaker="updateSelectedSpeaker"
-      @update:selected-year="updateSelectedYear"
-    />
+    <div v-else role="tabpanel" tabindex="0" :id="panelDirectoryId" :aria-labelledby="tabDirectoryId">
+      <DirectoryView
+        :all-speakers
+        :query
+        :selected-speaker
+        :selected-year
+        @update:query="updateQuery"
+        @update:selected-speaker="updateSelectedSpeaker"
+        @update:selected-year="updateSelectedYear"
+      />
+    </div>
     <AppFooter />
   </div>
 </template>

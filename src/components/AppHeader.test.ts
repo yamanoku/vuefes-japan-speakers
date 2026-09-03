@@ -19,6 +19,15 @@ describe("AppHeader", () => {
     expect(html).not.toMatch(/<option(?=[^>]*\bvalue="light")(?=[^>]*\bselected)[^>]*>/);
   });
 
+  it("本文とフッターへのスキップリンクを先頭に置く", async () => {
+    const html = await renderToString(createSSRApp(AppHeader));
+
+    expect(html).toContain('href="#main"');
+    expect(html).toContain('href="#site-footer"');
+    expect(html).toContain("本文へ");
+    expect(html).toContain("フッターへ");
+  });
+
   it("保存済みの配色設定をマウント後に反映する", async () => {
     localStorage.setItem(STORAGE_KEY, "light");
 

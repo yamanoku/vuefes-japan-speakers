@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, useId } from "vue";
 import type { SpeakerWithYear, AcceptedYear } from "../../types";
 import { compareLexicalJa } from "../utils/stringCollate";
 import { buildSpeakerMap, hasJapanese } from "../utils/speakerMap";
@@ -109,11 +109,42 @@ function updateSelectedSpeaker(value: string) {
 function updateSelectedYear(value: AcceptedYear | "all") {
   emit("update:selectedYear", value);
 }
+
+const sortLabel = computed(() => {
+  if (sort.value === "appearances") return t.value.sort_appearances;
+  if (sort.value === "latest") return t.value.sort_latest;
+  if (sort.value === "name-desc") return t.value.sort_name_desc;
+  return t.value.sort_name_asc;
+});
+
+const filterStatus = computed(() => {
+  const result = t.value.filter_result(filtered.value.length, allRecords.value.length);
+  if (filtered.value.length === 0) return `${result} ${t.value.empty}`;
+  return result;
+});
+
+function speakerDisplayName(rec: SpeakerRecord) {
+  return lang.value === "en" && rec.nameEn ? rec.nameEn : rec.name;
+}
+
+function rowLabel(rec: SpeakerRecord) {
+  return t.value.directory_row_label(
+    speakerDisplayName(rec),
+    rec.talks.length,
+    openRows.value.has(rec.name),
+  );
+}
+
+function directoryPanelId(name: string) {
+  return `directory-panel-${encodeURIComponent(name)}`;
+}
+
+const directoryHeadingId = useId();
 </script>
 
 <template>
   <!-- ディレクトリビュー：スピーカーを人物単位でまとめ、アコーディオンで登壇履歴を表示するビュー -->
-  <main>
+  <main id="main" tabindex="-1">
     <section>
       <!-- スピーカー名・キーワードによるフィルターバー -->
       <SpeakerFilterBar
@@ -125,57 +156,82 @@ function updateSelectedYear(value: AcceptedYear | "all") {
       />
       <!-- 開催年度によるフィルターバー -->
       <YearFilterBar :counts :selected-year @update:selected-year="updateSelectedYear" />
-      <!-- Sort header -->
+      <!-- 一覧見出し（件数とソート状態を含む） -->
+      <h2
+        class="px-pad-x pt-4.5 pb-0 m-0 font-mono text-[12px] tracking-[0.06em] text-ink"
+        :id="directoryHeadingId"
+      >
+        {{ t.directory_heading(filtered.length, sortLabel) }}
+      </h2>
       <!-- ソートボタンヘッダー（登壇回数・名前順・最新年で並び替え） -->
-      <div class="flex items-center gap-2 px-pad-x pt-4.5 pb-2.5 border-b border-rule-soft font-mono overflow-x-auto">
-        <!-- 登壇回数の多い順でソートするボタン -->
-        <button
-          class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
-          type="button"
-          :class='sort === "appearances"
-            ? "bg-ink text-paper border-ink"
-            : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
-          @click="sortByAppearances"
+      <div class="flex items-center gap-2 px-pad-x pt-2 pb-2.5 border-b border-rule-soft font-mono overflow-x-auto">
+        <div class="flex items-center gap-2" role="group" :aria-label="t.sort_label">
+          <!-- 登壇回数の多い順でソートするボタン -->
+          <button
+            class="text-[12px] tracking-[0.06em] px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
+            type="button"
+            :aria-pressed='sort === "appearances" ? "true" : "false"'
+            :class='sort === "appearances"
+              ? "bg-ink text-paper border-ink"
+              : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
+            @click="sortByAppearances"
+          >
+            {{ t.sort_appearances }}
+            <span v-if='sort === "appearances"' class="sr-only">
+              （{{ t.selected }}）
+            </span>
+          </button>
+          <!-- 名前の昇順/降順でソートするボタン -->
+          <button
+            class="text-[12px] tracking-[0.06em] px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
+            type="button"
+            :aria-pressed='sort === "name-asc" || sort === "name-desc" ? "true" : "false"'
+            :class='sort === "name-asc" || sort === "name-desc"
+              ? "bg-ink text-paper border-ink"
+              : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
+            @click="toggleNameSort"
+          >
+            {{ sort === "name-desc" ? t.sort_name_desc : t.sort_name_asc }}
+            <span v-if='sort === "name-asc" || sort === "name-desc"' class="sr-only">
+              （{{ t.selected }}）
+            </span>
+          </button>
+          <!-- 最新登壇年の新しい順でソートするボタン -->
+          <button
+            class="text-[12px] tracking-[0.06em] px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
+            type="button"
+            :aria-pressed='sort === "latest" ? "true" : "false"'
+            :class='sort === "latest"
+              ? "bg-ink text-paper border-ink"
+              : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
+            @click="sortByLatest"
+          >
+            {{ t.sort_latest }}
+            <span v-if='sort === "latest"' class="sr-only">
+              （{{ t.selected }}）
+            </span>
+          </button>
+        </div>
+        <!-- フィルター結果のライブリージョン -->
+        <span
+          aria-atomic="true"
+          aria-live="polite"
+          class="ml-auto text-[12px] tracking-[0.06em] text-ink-2 whitespace-nowrap"
+          role="status"
         >
-          Appearances ↓
-        </button>
-        <!-- 名前の昇順/降順でソートするボタン -->
-        <button
-          class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
-          type="button"
-          :class='sort === "name-asc" || sort === "name-desc"
-            ? "bg-ink text-paper border-ink"
-            : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
-          @click="toggleNameSort"
-        >
-          Name {{ sort === "name-desc" ? "Z→A" : "A→Z" }}
-        </button>
-        <!-- 最新登壇年の新しい順でソートするボタン -->
-        <button
-          class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
-          type="button"
-          :class='sort === "latest"
-            ? "bg-ink text-paper border-ink"
-            : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
-          @click="sortByLatest"
-        >
-          Latest year ↓
-        </button>
-        <!-- フィルター済み件数 / 全体件数の表示 -->
-        <span class="ml-auto text-[12px] tracking-[0.06em] text-ink-2 whitespace-nowrap">
-          {{ String(filtered.length).padStart(3, "0") }} /
-          {{ String(allRecords.length).padStart(3, "0") }}
+          {{ filterStatus }}
         </span>
       </div>
-      <!-- フィルター結果が0件のときの空状態メッセージ -->
+      <!-- フィルター結果が0件のときの空状態メッセージ（ライブリージョンと二重読み上げしない） -->
       <div
         v-if="filtered.length === 0"
+        aria-hidden="true"
         class="px-pad-x py-20 text-center font-mono text-[13px] tracking-[0.05em] uppercase text-ink-2"
       >
         {{ t.empty }}
       </div>
       <!-- スピーカー一覧リスト -->
-      <ol class="list-none p-0 m-0">
+      <ol class="list-none p-0 m-0" :aria-labelledby="directoryHeadingId">
         <li
           v-for="(rec, i) in filtered"
           :key="rec.name"
@@ -186,7 +242,9 @@ function updateSelectedYear(value: AcceptedYear | "all") {
           <button
             class="w-full flex flex-wrap items-center gap-x-[12px] px-pad-x py-3.5 cursor-pointer text-left"
             type="button"
+            :aria-controls="directoryPanelId(rec.name)"
             :aria-expanded="openRows.has(rec.name)"
+            :aria-label="rowLabel(rec)"
             :class='openRows.has(rec.name) ? "bg-paper-2" : ""'
             @click="() => toggleRow(rec.name)"
           >
@@ -197,6 +255,7 @@ function updateSelectedYear(value: AcceptedYear | "all") {
               </span>
               <!-- スピーカー名（振り仮名・英語名対応） -->
               <span
+                aria-hidden="true"
                 class="font-display text-[clamp(15px,1.2vw,18px)] font-[500] tracking-[-0.005em] text-ink"
                 :lang='hasJapanese(rec.name) ? "ja" : "en"'
               >
@@ -209,18 +268,18 @@ function updateSelectedYear(value: AcceptedYear | "all") {
                 <template v-else>
                   {{ lang === "en" && rec.nameEn ? rec.nameEn : rec.name }}
                 </template>
-                <!-- 複数回登壇バッジ（登壇回数を ×N 形式で表示。formatter の改行空白を避けるため data-count で描画） -->
+                <!-- 複数回登壇バッジ（実 DOM テキストで描画） -->
                 <span
                   v-if="rec.talks.length > 1"
-                  class="font-mono bg-accent text-[12px] text-accent-ink ml-2 font-normal tracking-[0.02em] align-[2px] border border-accent px-1.25 py-[1px] after:content-[attr(data-count)]"
-                  :aria-label="t.appearance_count(rec.talks.length)"
-                  :data-count="`×${rec.talks.length}`"
-                ></span>
+                  class="font-mono bg-accent text-[12px] text-accent-ink ml-2 font-normal tracking-[0.02em] align-[2px] border border-accent px-1.25 py-[1px]"
+                >
+                  ×{{ rec.talks.length }}
+                </span>
               </span>
-              <!-- 登壇年度グリッド（各年のマスを塗りつぶして登壇済みかを可視化） -->
+              <!-- 登壇年度グリッド（名前は行ボタンの aria-label に集約） -->
               <span
+                aria-hidden="true"
                 class="inline-grid gap-[3px] grow-999 justify-end [grid-template-columns:repeat(6,28px)]"
-                :aria-label='t.years_appeared + ": " + rec.years.join(", ")'
               >
                 <span
                   v-for="y in YEARS"
@@ -251,6 +310,7 @@ function updateSelectedYear(value: AcceptedYear | "all") {
           <div
             v-if="openRows.has(rec.name)"
             class="bg-paper-2 border-t border-rule-softer pt-2 pb-[22px] px-pad-x"
+            :id="directoryPanelId(rec.name)"
           >
             <!-- スピーカープロフィールページへのリンク -->
             <!-- @vize:docs dynamic route uses encodeURIComponent for the local speaker name -->

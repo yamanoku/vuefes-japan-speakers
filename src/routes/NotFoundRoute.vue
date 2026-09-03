@@ -9,7 +9,11 @@ const { t } = useVfjsI18n();
 <template>
   <div>
     <AppHeader />
-    <main class="min-h-[60vh] px-pad-x py-[clamp(64px,10vw,140px)] border-b border-rule">
+    <main
+      id="main"
+      class="min-h-[60vh] px-pad-x py-[clamp(64px,10vw,140px)] border-b border-rule"
+      tabindex="-1"
+    >
       <p class="font-mono text-[12px] tracking-[0.12em] uppercase text-ink-3 mb-4.5">
         404
       </p>

@@ -74,7 +74,7 @@ function updateSelectedYear(value: AcceptedYear | "all") {
 </script>
 
 <template>
-  <main>
+  <main id="main" tabindex="-1">
     <section>
       <!-- スピーカー名・キーワードによるフィルターバー -->
       <SpeakerFilterBar
@@ -86,13 +86,33 @@ function updateSelectedYear(value: AcceptedYear | "all") {
       />
       <!-- 開催年度によるフィルターバー -->
       <YearFilterBar :counts :selected-year @update:selected-year="updateSelectedYear" />
+      <!-- フィルター結果のライブリージョン（件数変化と空状態を通知） -->
+      <p aria-atomic="true" aria-live="polite" class="sr-only" role="status">
+        {{ grouped.length === 0 ? t.empty : t.filter_result_talks(filtered.length) }}
+      </p>
       <!-- フィルター結果が0件のとき -->
       <div
         v-if="grouped.length === 0"
+        aria-hidden="true"
         class="px-pad-x py-20 text-center font-mono text-[13px] tracking-[0.05em] uppercase text-ink-2"
       >
         {{ t.empty }}
       </div>
+      <!-- 表示中の年度への目次 -->
+      <nav
+        v-if="grouped.length > 0"
+        class="flex flex-wrap gap-x-3 gap-y-1 px-pad-x py-3 border-b border-rule-soft font-mono text-[12px] tracking-[0.06em]"
+        :aria-label="t.year_toc"
+      >
+        <a
+          v-for="[year] in grouped"
+          :key="year"
+          class="text-ink-2 underline hover:text-ink hover:no-underline"
+          :href="`#year-${year}`"
+        >
+          {{ year }}
+        </a>
+      </nav>
       <!-- 年度グループリスト -->
       <ol class="list-none p-0 m-0" :aria-label="t.nav_all_label">
         <!-- 各年度グループ -->
@@ -101,22 +121,19 @@ function updateSelectedYear(value: AcceptedYear | "all") {
           :key="year"
           class="grid grid-cols-[minmax(200px,260px)_1fr] gap-[clamp(24px,4vw,64px)] border-b border-rule items-start px-pad-x py-[clamp(32px,5vw,72px)] max-[800px]:grid-cols-1 max-[800px]:gap-8"
         >
-          <!-- 年度ラベル（スクロール時に上部に固定） -->
+          <!-- 年度見出し（スクロール時に上部に固定） -->
           <div
             class="flex flex-col items-start sticky top-[72px] max-[800px]:static"
             :id="`year-${year}`"
           >
-            <!-- 年度テキスト（表示専用） -->
-            <span
-              aria-hidden="true"
-              class="font-display font-[500] text-[clamp(72px,8vw,120px)] leading-[0.85] tabular-nums text-ink"
-            >
-              {{ year }}
-            </span>
-            <!-- その年のトーク総数 -->
-            <span class="font-mono text-[14px] tracking-[0.08em] uppercase text-ink-2 mt-2.5">
-              {{ t.year_total_talks(arr.length) }}
-            </span>
+            <h2 class="flex flex-col items-start m-0">
+              <span class="font-display font-[500] text-[clamp(72px,8vw,120px)] leading-[0.85] tabular-nums text-ink">
+                {{ year }}
+              </span>
+              <span class="font-mono text-[14px] tracking-[0.08em] uppercase text-ink-2 mt-2.5">
+                {{ t.year_total_talks(arr.length) }}
+              </span>
+            </h2>
             <!-- 年度別ページへの矢印リンク -->
             <!-- @vize:docs dynamic route is generated from the local AcceptedYear list -->
             <!-- @vize:ignore-start -->
