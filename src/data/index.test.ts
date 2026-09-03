@@ -38,4 +38,12 @@ describe("speaker data accessors", () => {
     expect(panel?.title).toBe("JavaScriptエコシステムの境界線を問い直す");
     expect(panel?.name).toEqual(["Evan You", "古川 陽介", "Alistair Smith", "Leo Kettmeir"]);
   });
+
+  it("2026は公式スピーカーページの登壇者を含む", () => {
+    const speakers = getSpeakersByYear("2026");
+    const urls = speakers.map((speaker) => speaker.url);
+
+    expect(speakers.some((speaker) => speaker.name.includes("re-taro"))).toBe(true);
+    expect(urls).toContain("https://vuefes.jp/2026/speaker/re-taro");
+  });
 });

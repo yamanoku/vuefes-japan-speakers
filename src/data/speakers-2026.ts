@@ -51,6 +51,10 @@ export const speakers2026: SpeakerInfo[] = [
     url: "https://vuefes.jp/2026/speaker/yosuke-furukawa",
   },
   {
+    name: ["re-taro"],
+    url: "https://vuefes.jp/2026/speaker/re-taro",
+  },
+  {
     name: ["Naoki Haba"],
     title: "Vite+への貢献と、Team Memberになって見えてきた風景",
     url: "https://vuefes.jp/2026/speaker/naokihaba",
