@@ -28,7 +28,8 @@ describe("speaker data accessors", () => {
 
   it("2026の更新された発表タイトルを持つ", () => {
     const speakers = getSpeakersByYear("2026");
-    const byName = (name: string) => speakers.find((speaker) => speaker.name.length === 1 && speaker.name[0] === name);
+    const byName = (name: string) =>
+      speakers.find((speaker) => speaker.name.length === 1 && speaker.name[0] === name);
     const panel = speakers.find((speaker) => speaker.format === "panel");
 
     expect(byName("Eduardo San Martin Morote")?.title).toBe("Type-Safe URLs");
