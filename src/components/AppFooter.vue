@@ -21,14 +21,14 @@ const { t } = useVfjsI18n();
       <a
         class="text-inherit no-underline hover:underline hover:text-ink"
         href="https://github.com/yamanoku/vuefes-japan-speakers"
-        rel="noopener"
+        rel="noopener noreferrer"
         target="_blank"
       >
         GitHub
+        <span class="text-[10px] ml-[4px]">
+          ({{ t.external }})
+        </span>
       </a>
-      <span class="text-[10px] ml-[4px]">
-        ({{ t.external }})
-      </span>
     </div>
   </footer>
 </template>

@@ -11,6 +11,7 @@ export interface VfjsTranslations {
   filter_all_speakers: string;
   filter_search: string;
   filter_search_ph: string;
+  filter_search_hint: string;
   view_timeline: string;
   view_index: string;
   view_mode: string;
@@ -34,6 +35,8 @@ export interface VfjsTranslations {
   skip_links: string;
   skip_to_main: string;
   skip_to_footer: string;
+  stats_label: string;
+  year_speakers_link: (year: string) => string;
   year_toc: string;
   sort_label: string;
   sort_appearances: string;
@@ -62,6 +65,7 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     filter_all_speakers: "すべての発表者",
     filter_search: "キーワードで絞り込み",
     filter_search_ph: "発表タイトル・スピーカー名で検索",
+    filter_search_hint: "英語名、ふりがな、公式ページの表記でも検索できます。",
     view_timeline: "タイムライン",
     view_index: "スピーカー",
     view_mode: "表示切替",
@@ -85,6 +89,8 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     skip_links: "スキップリンク",
     skip_to_main: "本文へ",
     skip_to_footer: "フッターへ",
+    stats_label: "開催概要",
+    year_speakers_link: (year) => `${year} のスピーカー`,
     year_toc: "年度",
     sort_label: "並び替え",
     sort_appearances: "登壇回数の多い順",
@@ -112,6 +118,7 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     filter_all_speakers: "All speakers",
     filter_search: "Search",
     filter_search_ph: "Search talk titles or speaker names",
+    filter_search_hint: "English names, readings, and official page spellings are included.",
     view_timeline: "Timeline",
     view_index: "Speakers",
     view_mode: "View mode",
@@ -135,6 +142,8 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     skip_links: "Skip links",
     skip_to_main: "Skip to main content",
     skip_to_footer: "Skip to footer",
+    stats_label: "Overview",
+    year_speakers_link: (year) => `${year} speakers`,
     year_toc: "Years",
     sort_label: "Sort",
     sort_appearances: "Most appearances",

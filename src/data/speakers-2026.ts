@@ -109,6 +109,7 @@ export const speakers2026: SpeakerInfo[] = [
   },
   {
     name: ["やまのく"],
+    nameEn: ["yamanoku"],
     title: "Vue SFCから見直す正しいHTMLの守り方",
     url: "https://vuefes.jp/2026/speaker/yamanoku",
   },

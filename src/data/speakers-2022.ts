@@ -90,6 +90,7 @@ export const speakers2022: SpeakerInfo[] = [
   },
   {
     name: ["やまのく"],
+    nameEn: ["yamanoku"],
     title: "Vue.js でアクセシブルなコンポーネントをつくるために",
     url: "https://vuefes.jp/2022/sessions/yamanoku",
   },
@@ -126,7 +127,7 @@ export const speakers2022: SpeakerInfo[] = [
   },
   {
     name: ["miyaoka", "うしろのこ", "takanorip", "やまのく", "kazupon"],
-    nameEn: ["miyaoka", "ushironoko", "takanorip", "やまのく", "kazupon"],
+    nameEn: ["miyaoka", "ushironoko", "takanorip", "yamanoku", "kazupon"],
     title: "なるほどVueコンポーネント",
     url: "https://vuefes.jp/2022/#naruhodo-vue-component",
     format: "panel",

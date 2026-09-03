@@ -63,4 +63,33 @@ describe("DirectoryView", () => {
 
     expect(wrapper.get('[role="status"]').text()).toContain("該当するスピーカーが見つかりません。");
   });
+
+  it("英語名・ふりがな・URLハンドルでもスピーカーを絞り込める", () => {
+    const wrapper = mount(DirectoryView, {
+      props: { ...defaultProps, query: "Taro Yamada" },
+    });
+    expect(wrapper.text()).toContain("山田 太郎");
+
+    const ruby = mount(DirectoryView, {
+      props: { ...defaultProps, query: "やまだ" },
+    });
+    expect(ruby.text()).toContain("山田 太郎");
+
+    const handle = mount(DirectoryView, {
+      props: {
+        ...defaultProps,
+        allSpeakers: [
+          {
+            year: "2025",
+            name: ["やまのく"],
+            nameEn: ["yamanoku"],
+            title: "アクセシビリティ",
+            url: "https://vuefes.jp/2025/speaker/yamanoku",
+          },
+        ],
+        query: "yamanoku",
+      },
+    });
+    expect(handle.text()).toContain("やまのく");
+  });
 });

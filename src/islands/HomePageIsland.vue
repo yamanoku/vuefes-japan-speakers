@@ -17,13 +17,38 @@ const { t } = useVfjsI18n();
 
 const view = ref<"chronicle" | "index">("chronicle");
 
+function readViewFromUrl(): "chronicle" | "index" | null {
+  if (typeof window === "undefined") return null;
+  const param = new URLSearchParams(window.location.search).get("view");
+  if (param === "directory" || param === "index") return "index";
+  if (param === "chronicle") return "chronicle";
+  return null;
+}
+
+function writeViewToUrl(value: "chronicle" | "index") {
+  if (typeof window === "undefined") return;
+  const url = new URL(window.location.href);
+  if (value === "index") url.searchParams.set("view", "directory");
+  else url.searchParams.delete("view");
+  const next = `${url.pathname}${url.search}${url.hash}`;
+  const current = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+  if (current !== next) window.history.replaceState(window.history.state, "", next);
+}
+
 onMounted(() => {
+  const fromUrl = readViewFromUrl();
+  if (fromUrl) {
+    view.value = fromUrl;
+    return;
+  }
   const storedView = localStorage.getItem("vfjs:view") as "chronicle" | "index" | null;
   if (storedView === "chronicle" || storedView === "index") view.value = storedView;
 });
 
 watch(view, (value) => {
-  if (typeof window !== "undefined") localStorage.setItem("vfjs:view", value);
+  if (typeof window === "undefined") return;
+  localStorage.setItem("vfjs:view", value);
+  writeViewToUrl(value);
 });
 
 const selectedYear = ref<AcceptedYear | "all">("all");
@@ -102,59 +127,60 @@ function updateSelectedYear(value: AcceptedYear | "all") {
 <template>
   <div>
     <AppHeader />
-    <!-- タイトル・統計情報 -->
-    <AppMasthead :stats />
-    <!-- ビュー切り替えタブバー（Chronicle／Directory） -->
-    <div
-      class="flex gap-0 px-pad-x border-b border-rule bg-paper"
-      role="tablist"
-      :aria-label="t.view_mode"
-    >
-      <!-- 年度別クロニクルビュータブ -->
-      <button
-        ref="chronicleTabRef"
-        class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
-        role="tab"
-        type="button"
-        :id="tabChronicleId"
-        :aria-controls="panelChronicleId"
-        :aria-selected='view === "chronicle"'
-        :tabindex='view === "chronicle" ? 0 : -1'
-        :class='view === "chronicle"
-          ? "text-ink [box-shadow:inset_0_-4px_0_var(--accent)]"
-          : "text-ink-3 hover:text-ink"'
-        @click="showChronicle"
-        @keydown="onTabKeydown"
-      >
-        {{ t.view_timeline }}
-        <span class="font-mono text-[12px] tracking-[0.02em] ml-1" lang="en">
-          Chronicle
-        </span>
-      </button>
-      <!-- スピーカー名索引ディレクトリビュータブ -->
-      <button
-        ref="directoryTabRef"
-        class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
-        role="tab"
-        type="button"
-        :id="tabDirectoryId"
-        :aria-controls="panelDirectoryId"
-        :aria-selected='view === "index"'
-        :tabindex='view === "index" ? 0 : -1'
-        :class='view === "index"
-          ? "text-ink [box-shadow:inset_0_-4px_0_var(--accent)]"
-          : "text-ink-3 hover:text-ink"'
-        @click="showDirectory"
-        @keydown="onTabKeydown"
-      >
-        {{ t.view_index }}
-        <span class="font-mono text-[12px] tracking-[0.02em] ml-1" lang="en">
-          Directory
-        </span>
-      </button>
-    </div>
-    <!-- 選択中のビューに応じてコンポーネントを切り替え（main ランドマークは island が所有） -->
+    <!-- ページ見出しを含む本文（スキップリンク先） -->
     <main id="main" tabindex="-1">
+      <!-- タイトル・統計情報 -->
+      <AppMasthead :stats />
+      <!-- ビュー切り替えタブバー（Chronicle／Directory） -->
+      <div
+        class="flex gap-0 px-pad-x border-b border-rule bg-paper"
+        role="tablist"
+        :aria-label="t.view_mode"
+      >
+        <!-- 年度別クロニクルビュータブ -->
+        <button
+          ref="chronicleTabRef"
+          class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
+          role="tab"
+          type="button"
+          :id="tabChronicleId"
+          :aria-controls="panelChronicleId"
+          :aria-selected='view === "chronicle"'
+          :tabindex='view === "chronicle" ? 0 : -1'
+          :class='view === "chronicle"
+            ? "text-ink [box-shadow:inset_0_-4px_0_var(--accent)]"
+            : "text-ink-3 hover:text-ink"'
+          @click="showChronicle"
+          @keydown="onTabKeydown"
+        >
+          {{ t.view_timeline }}
+          <span class="font-mono text-[12px] tracking-[0.02em] ml-1" lang="en">
+            Chronicle
+          </span>
+        </button>
+        <!-- スピーカー名索引ディレクトリビュータブ -->
+        <button
+          ref="directoryTabRef"
+          class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
+          role="tab"
+          type="button"
+          :id="tabDirectoryId"
+          :aria-controls="panelDirectoryId"
+          :aria-selected='view === "index"'
+          :tabindex='view === "index" ? 0 : -1'
+          :class='view === "index"
+            ? "text-ink [box-shadow:inset_0_-4px_0_var(--accent)]"
+            : "text-ink-3 hover:text-ink"'
+          @click="showDirectory"
+          @keydown="onTabKeydown"
+        >
+          {{ t.view_index }}
+          <span class="font-mono text-[12px] tracking-[0.02em] ml-1" lang="en">
+            Directory
+          </span>
+        </button>
+      </div>
+      <!-- 選択中のビューに応じてコンポーネントを切り替え -->
       <!-- 年度別クロニクルビュー -->
       <div
         v-if='view === "chronicle"'

@@ -23,7 +23,10 @@ const { t } = useVfjsI18n();
         </h1>
       </div>
       <!-- アーカイブ統計情報（スピーカー数・トーク数・開催年数） -->
-      <aside class="basis-80 grow-1 grid items-center col-span-3 font-mono text-[20px] leading-[1.7] tracking-[0.06em] py-4 border-bs-1 border-be-1 border-rule-soft">
+      <aside
+        class="basis-80 grow-1 grid items-center col-span-3 font-mono text-[20px] leading-[1.7] tracking-[0.06em] py-4 border-bs-1 border-be-1 border-rule-soft"
+        :aria-label="t.stats_label"
+      >
         <!-- 総スピーカー数 -->
         <div>
           <b class="text-ink font-[500] not-italic">

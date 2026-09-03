@@ -16,4 +16,13 @@ describe("speaker data accessors", () => {
     expect(speakers.length).toBeGreaterThan(0);
     expect(speakers.every((speaker) => YEARS.includes(speaker.year))).toBe(true);
   });
+
+  it("やまのくの英語名を yamanoku として持つ", () => {
+    const speakers = getAllSpeakersWithYear().filter((speaker) =>
+      speaker.name.includes("やまのく"),
+    );
+
+    expect(speakers.length).toBeGreaterThan(0);
+    expect(speakers.every((speaker) => speaker.nameEn?.includes("yamanoku"))).toBe(true);
+  });
 });

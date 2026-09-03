@@ -27,4 +27,15 @@ describe("YearFilterBar", () => {
     expect(yearButton?.attributes("aria-pressed")).toBe("true");
     expect(yearButton?.text()).toContain("選択中");
   });
+
+  it("年度フィルタは group のみで region と二重ネストしない", () => {
+    const wrapper = mount(YearFilterBar, {
+      props: { selectedYear: "all", counts },
+    });
+
+    expect(wrapper.find('[role="region"]').exists()).toBe(false);
+    expect(wrapper.find('[role="group"]').attributes("aria-labelledby")).toBe(
+      wrapper.get("span").attributes("id"),
+    );
+  });
 });

@@ -12,7 +12,7 @@
   --ink: #1a1a17;
   --ink-2: #3a3a35;
   --ink-3: #6b6b64;
-  --accent: #007f62;
+  --accent: #00785c;
   --accent-ink: #ffffff;
   --pad-x: clamp(24px, 4vw, 72px);
 }
@@ -54,7 +54,7 @@
   --ink: #1a1a17;
   --ink-2: #3a3a35;
   --ink-3: #6b6b64;
-  --accent: #007f62;
+  --accent: #00785c;
   --accent-ink: #ffffff;
 }
 
@@ -143,6 +143,11 @@ html {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+::placeholder {
+  color: var(--ink-3);
+  opacity: 1;
 }
 
 a:focus-visible,

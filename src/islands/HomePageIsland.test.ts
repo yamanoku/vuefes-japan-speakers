@@ -7,6 +7,13 @@ import HomePageIsland from "./HomePageIsland.vue";
 describe("HomePageIsland", () => {
   afterEach(() => {
     localStorage.removeItem("vfjs:view");
+    const url = new URL(window.location.href);
+    url.searchParams.delete("view");
+    window.history.replaceState(
+      window.history.state,
+      "",
+      `${url.pathname}${url.search}${url.hash}`,
+    );
   });
 
   it("表示切替タブを APG Tabs として関連付ける", () => {
@@ -32,6 +39,8 @@ describe("HomePageIsland", () => {
     // タブパネルはスキップリンク先の main ランドマーク内に置く
     const main = wrapper.get("main#main");
     expect(main.find('[role="tabpanel"]').exists()).toBe(true);
+    expect(main.find("h1").text()).toContain("Vue Fes Japan Speakers");
+    expect(main.find("aside").attributes("aria-label")).toBe("開催概要");
 
     wrapper.unmount();
   });
@@ -58,5 +67,33 @@ describe("HomePageIsland", () => {
     );
 
     wrapper.unmount();
+  });
+
+  it("Directory 選択を URL に残し、view=directory から復元する", async () => {
+    const wrapper = mount(HomePageIsland, {
+      props: { allSpeakers: museaSpeakers },
+      attachTo: document.body,
+    });
+    await flushPromises();
+    await nextTick();
+
+    const tabs = wrapper.findAll('[role="tab"]');
+    await tabs[1]?.trigger("click");
+    await nextTick();
+
+    expect(new URL(window.location.href).searchParams.get("view")).toBe("directory");
+    expect(localStorage.getItem("vfjs:view")).toBe("index");
+    wrapper.unmount();
+
+    const restored = mount(HomePageIsland, {
+      props: { allSpeakers: museaSpeakers },
+      attachTo: document.body,
+    });
+    await flushPromises();
+    await nextTick();
+
+    const restoredTabs = restored.findAll('[role="tab"]');
+    expect(restoredTabs[1]?.attributes("aria-selected")).toBe("true");
+    restored.unmount();
   });
 });
