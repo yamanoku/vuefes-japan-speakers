@@ -13,11 +13,13 @@ export interface VfjsTranslations {
   filter_search_ph: string;
   view_timeline: string;
   view_index: string;
+  view_mode: string;
   language: string;
   color_scheme: string;
   color_scheme_light: string;
   color_scheme_dark: string;
   color_scheme_system: string;
+  skip_to_content: string;
   empty: string;
   tbd: string;
   external: string;
@@ -28,6 +30,16 @@ export interface VfjsTranslations {
   official_site: string;
   related_talks: string;
   all_speakers: string;
+  directory_heading: (count: number, sortLabel: string) => string;
+  sort_appearances: string;
+  sort_name_asc: string;
+  sort_name_desc: string;
+  sort_latest: string;
+  sort_group: string;
+  filter_result_status: (shown: number, total: number) => string;
+  row_expand: (name: string, count: number) => string;
+  row_collapse: (name: string, count: number) => string;
+  year_speakers_link: (year: string) => string;
   not_found_title: string;
   not_found_description: string;
   year_total_talks: (n: number) => string;
@@ -49,11 +61,13 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     filter_search_ph: "発表タイトル・スピーカー名で検索",
     view_timeline: "タイムライン",
     view_index: "スピーカー",
+    view_mode: "表示切替",
     language: "言語",
     color_scheme: "配色",
     color_scheme_light: "ライト",
     color_scheme_dark: "ダーク",
     color_scheme_system: "システム",
+    skip_to_content: "本文へ",
     empty: "該当するスピーカーが見つかりません。",
     tbd: "タイトル未定",
     external: "外部サイトへ移動",
@@ -64,6 +78,18 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     official_site: "公式サイト",
     related_talks: "発表一覧",
     all_speakers: "発表者一覧",
+    directory_heading: (count: number, sortLabel: string) =>
+      `スピーカー一覧（${count}名・${sortLabel}）`,
+    sort_appearances: "登壇回数の多い順",
+    sort_name_asc: "名前 A→Z",
+    sort_name_desc: "名前 Z→A",
+    sort_latest: "最新登壇年の新しい順",
+    sort_group: "並び替え",
+    filter_result_status: (shown: number, total: number) =>
+      total === 0 ? "該当するスピーカーが見つかりません。" : `${total}件中${shown}件を表示`,
+    row_expand: (name: string, count: number) => `${name}、${count}回登壇、詳細を開く`,
+    row_collapse: (name: string, count: number) => `${name}、${count}回登壇、詳細を閉じる`,
+    year_speakers_link: (year: string) => `${year}年のスピーカー一覧`,
     not_found_title: "ページが見つかりません",
     not_found_description: "指定されたページは存在しないか、移動した可能性があります。",
     year_total_talks: (n: number) => `全 ${n} 発表`,
@@ -83,11 +109,13 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     filter_search_ph: "Search talk titles or speaker names",
     view_timeline: "Timeline",
     view_index: "Speakers",
+    view_mode: "View mode",
     language: "Language",
     color_scheme: "Color scheme",
     color_scheme_light: "Light",
     color_scheme_dark: "Dark",
     color_scheme_system: "System",
+    skip_to_content: "Skip to content",
     empty: "No speakers match the current filters.",
     tbd: "TBD",
     external: "External Site",
@@ -98,6 +126,18 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     official_site: "Official site",
     related_talks: "Talks",
     all_speakers: "Speakers",
+    directory_heading: (count: number, sortLabel: string) => `Speakers (${count} · ${sortLabel})`,
+    sort_appearances: "Most appearances",
+    sort_name_asc: "Name A→Z",
+    sort_name_desc: "Name Z→A",
+    sort_latest: "Latest year",
+    sort_group: "Sort by",
+    filter_result_status: (shown: number, total: number) =>
+      total === 0 ? "No speakers match the current filters." : `Showing ${shown} of ${total}`,
+    row_expand: (name: string, count: number) => `${name}, ${count} appearances, expand details`,
+    row_collapse: (name: string, count: number) =>
+      `${name}, ${count} appearances, collapse details`,
+    year_speakers_link: (year: string) => `${year} speakers`,
     not_found_title: "Page Not Found",
     not_found_description: "The page you requested does not exist or may have moved.",
     year_total_talks: (n: number) => `${n} talks total`,

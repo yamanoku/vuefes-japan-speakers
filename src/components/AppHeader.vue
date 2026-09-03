@@ -20,6 +20,10 @@ function setEnglish() {
 </script>
 
 <template>
+  <!-- 本文へのスキップリンク -->
+  <a class="skip-link" href="#main">
+    {{ t.skip_to_content }}
+  </a>
   <!-- サイト全体のヘッダー（スクロール時にページ上部へ固定） -->
   <header class="border-b border-rule bg-paper sticky top-0 z-20 [backdrop-filter:saturate(1.1)]">
     <div class="flex flex-wrap justify-between items-center gap-2 py-[14px] px-pad-x">

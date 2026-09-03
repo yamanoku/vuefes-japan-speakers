@@ -26,7 +26,7 @@
     --rule-softer: rgba(232, 228, 220, 0.07);
     --ink: #e8e4dc;
     --ink-2: #b4b0a8;
-    --ink-3: #7a7a72;
+    --ink-3: #878785;
     --accent: #2ed9a8;
     --accent-ink: #0d2820;
   }
@@ -40,7 +40,7 @@
   --rule-softer: rgba(232, 228, 220, 0.07);
   --ink: #e8e4dc;
   --ink-2: #b4b0a8;
-  --ink-3: #7a7a72;
+  --ink-3: #878785;
   --accent: #2ed9a8;
   --accent-ink: #0d2820;
 }
@@ -91,6 +91,43 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   font-feature-settings: "ss01", "cv02", "cv11";
+}
+
+html {
+  scroll-padding-top: 72px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 8px 16px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 14px;
+  text-decoration: none;
+  transform: translateY(-100%);
+  transition: transform 0.15s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, useId } from "vue";
 import type { SpeakerWithYear, AcceptedYear } from "../../types";
 import { compareLexicalJa } from "../utils/stringCollate";
 import { buildSpeakerMap, hasJapanese } from "../utils/speakerMap";
@@ -23,6 +23,8 @@ const emit = defineEmits<{
 }>();
 
 const { t, lang } = useVfjsI18n();
+
+const directoryHeadingId = useId();
 
 const speakerMap = computed(() => buildSpeakerMap(allSpeakers));
 const allRecords = computed(() => Array.from(speakerMap.value.values()));
@@ -77,6 +79,37 @@ const filtered = computed<SpeakerRecord[]>(() => {
   return list;
 });
 
+const sortLabel = computed(() => {
+  if (sort.value === "appearances") return t.value.sort_appearances;
+  if (sort.value === "name-asc") return t.value.sort_name_asc;
+  if (sort.value === "name-desc") return t.value.sort_name_desc;
+  return t.value.sort_latest;
+});
+
+const directoryHeading = computed(() =>
+  t.value.directory_heading(filtered.value.length, sortLabel.value),
+);
+
+const filterStatus = computed(() =>
+  t.value.filter_result_status(filtered.value.length, allRecords.value.length),
+);
+
+function displayName(rec: SpeakerRecord) {
+  return lang.value === "en" && rec.nameEn ? rec.nameEn : rec.name;
+}
+
+function panelId(name: string) {
+  return `directory-panel-${encodeURIComponent(name)}`;
+}
+
+function rowLabel(rec: SpeakerRecord) {
+  const name = displayName(rec);
+  const count = rec.talks.length;
+  return openRows.value.has(rec.name)
+    ? t.value.row_collapse(name, count)
+    : t.value.row_expand(name, count);
+}
+
 const openRows = ref(new Set<string>());
 
 function toggleRow(name: string) {
@@ -113,223 +146,241 @@ function updateSelectedYear(value: AcceptedYear | "all") {
 
 <template>
   <!-- ディレクトリビュー：スピーカーを人物単位でまとめ、アコーディオンで登壇履歴を表示するビュー -->
-  <main>
-    <section>
-      <!-- スピーカー名・キーワードによるフィルターバー -->
-      <SpeakerFilterBar
-        :query
-        :selected-speaker
-        :speaker-options
-        @update:query="updateQuery"
-        @update:selected-speaker="updateSelectedSpeaker"
-      />
-      <!-- 開催年度によるフィルターバー -->
-      <YearFilterBar :counts :selected-year @update:selected-year="updateSelectedYear" />
-      <!-- Sort header -->
-      <!-- ソートボタンヘッダー（登壇回数・名前順・最新年で並び替え） -->
-      <div class="flex items-center gap-2 px-pad-x pt-4.5 pb-2.5 border-b border-rule-soft font-mono overflow-x-auto">
-        <!-- 登壇回数の多い順でソートするボタン -->
-        <button
-          class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
-          type="button"
-          :class='sort === "appearances"
-            ? "bg-ink text-paper border-ink"
-            : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
-          @click="sortByAppearances"
-        >
-          Appearances ↓
-        </button>
-        <!-- 名前の昇順/降順でソートするボタン -->
-        <button
-          class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
-          type="button"
-          :class='sort === "name-asc" || sort === "name-desc"
-            ? "bg-ink text-paper border-ink"
-            : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
-          @click="toggleNameSort"
-        >
-          Name {{ sort === "name-desc" ? "Z→A" : "A→Z" }}
-        </button>
-        <!-- 最新登壇年の新しい順でソートするボタン -->
-        <button
-          class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
-          type="button"
-          :class='sort === "latest"
-            ? "bg-ink text-paper border-ink"
-            : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
-          @click="sortByLatest"
-        >
-          Latest year ↓
-        </button>
-        <!-- フィルター済み件数 / 全体件数の表示 -->
-        <span class="ml-auto text-[12px] tracking-[0.06em] text-ink-2 whitespace-nowrap">
-          {{ String(filtered.length).padStart(3, "0") }} /
-          {{ String(allRecords.length).padStart(3, "0") }}
-        </span>
-      </div>
-      <!-- フィルター結果が0件のときの空状態メッセージ -->
-      <div
-        v-if="filtered.length === 0"
-        class="px-pad-x py-20 text-center font-mono text-[13px] tracking-[0.05em] uppercase text-ink-2"
+  <section>
+    <!-- スピーカー名・キーワードによるフィルターバー -->
+    <SpeakerFilterBar
+      :query
+      :selected-speaker
+      :speaker-options
+      @update:query="updateQuery"
+      @update:selected-speaker="updateSelectedSpeaker"
+    />
+    <!-- 開催年度によるフィルターバー -->
+    <YearFilterBar :counts :selected-year @update:selected-year="updateSelectedYear" />
+    <!-- フィルター結果の件数通知（スクリーンリーダー向け） -->
+    <div aria-atomic="true" aria-live="polite" class="sr-only" role="status">
+      {{ filterStatus }}
+    </div>
+    <!-- Sort header -->
+    <!-- ソートボタンヘッダー（登壇回数・名前順・最新年で並び替え） -->
+    <div
+      class="flex items-center gap-2 px-pad-x pt-4.5 pb-2.5 border-b border-rule-soft font-mono overflow-x-auto"
+      role="group"
+      :aria-label="t.sort_group"
+    >
+      <!-- 登壇回数の多い順でソートするボタン -->
+      <button
+        class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
+        type="button"
+        :aria-pressed='sort === "appearances" ? "true" : "false"'
+        :class='sort === "appearances"
+          ? "bg-ink text-paper border-ink"
+          : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
+        @click="sortByAppearances"
       >
-        {{ t.empty }}
-      </div>
-      <!-- スピーカー一覧リスト -->
-      <ol class="list-none p-0 m-0">
-        <li
-          v-for="(rec, i) in filtered"
-          :key="rec.name"
-          class="border-b border-rule-softer"
-          :data-open='openRows.has(rec.name) ? "true" : "false"'
+        {{ t.sort_appearances }}
+      </button>
+      <!-- 名前の昇順/降順でソートするボタン -->
+      <button
+        class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
+        type="button"
+        :aria-pressed='sort === "name-asc" || sort === "name-desc" ? "true" : "false"'
+        :class='sort === "name-asc" || sort === "name-desc"
+          ? "bg-ink text-paper border-ink"
+          : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
+        @click="toggleNameSort"
+      >
+        {{ sort === "name-desc" ? t.sort_name_desc : t.sort_name_asc }}
+      </button>
+      <!-- 最新登壇年の新しい順でソートするボタン -->
+      <button
+        class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
+        type="button"
+        :aria-pressed='sort === "latest" ? "true" : "false"'
+        :class='sort === "latest"
+          ? "bg-ink text-paper border-ink"
+          : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
+        @click="sortByLatest"
+      >
+        {{ t.sort_latest }}
+      </button>
+      <!-- フィルター済み件数 / 全体件数の表示 -->
+      <span
+        aria-hidden="true"
+        class="ml-auto text-[12px] tracking-[0.06em] text-ink-2 whitespace-nowrap"
+      >
+        {{ String(filtered.length).padStart(3, "0") }} /
+        {{ String(allRecords.length).padStart(3, "0") }}
+      </span>
+    </div>
+    <!-- フィルター結果が0件のときの空状態メッセージ -->
+    <div
+      v-if="filtered.length === 0"
+      class="px-pad-x py-20 text-center font-mono text-[13px] tracking-[0.05em] uppercase text-ink-2"
+    >
+      {{ t.empty }}
+    </div>
+    <!-- スピーカー一覧リスト -->
+    <h2 :id="directoryHeadingId" class="sr-only">
+      {{ directoryHeading }}
+    </h2>
+    <ol :aria-labelledby="directoryHeadingId" class="list-none p-0 m-0">
+      <li
+        v-for="(rec, i) in filtered"
+        :key="rec.name"
+        class="border-b border-rule-softer"
+        :data-open='openRows.has(rec.name) ? "true" : "false"'
+      >
+        <!-- スピーカー行の展開/折りたたみボタン -->
+        <button
+          class="w-full flex flex-wrap items-center gap-x-[12px] px-pad-x py-3.5 cursor-pointer text-left"
+          type="button"
+          :aria-controls="panelId(rec.name)"
+          :aria-expanded="openRows.has(rec.name)"
+          :aria-label="rowLabel(rec)"
+          :class='openRows.has(rec.name) ? "bg-paper-2" : ""'
+          @click="() => toggleRow(rec.name)"
         >
-          <!-- スピーカー行の展開/折りたたみボタン -->
-          <button
-            class="w-full flex flex-wrap items-center gap-x-[12px] px-pad-x py-3.5 cursor-pointer text-left"
-            type="button"
-            :aria-expanded="openRows.has(rec.name)"
-            :class='openRows.has(rec.name) ? "bg-paper-2" : ""'
-            @click="() => toggleRow(rec.name)"
+          <span
+            aria-hidden="true"
+            class="basis-0 grow-999 min-inline-[50%] flex flex-wrap gap-2 justify-start items-center"
           >
-            <span class="basis-0 grow-999 min-inline-[50%] flex flex-wrap gap-2 justify-start items-center">
-              <!-- 行番号（表示専用） -->
-              <span aria-hidden="true" class="font-mono text-[12px] text-ink-2 tabular-nums">
-                {{ String(i + 1).padStart(3, "0") }}
-              </span>
-              <!-- スピーカー名（振り仮名・英語名対応） -->
-              <span
-                class="font-display text-[clamp(15px,1.2vw,18px)] font-[500] tracking-[-0.005em] text-ink"
-                :lang='hasJapanese(rec.name) ? "ja" : "en"'
-              >
-                <ruby v-if='rec.nameRuby && lang === "ja"'>
-                  {{ rec.name }}
-                  <rt>
-                    {{ rec.nameRuby }}
-                  </rt>
-                </ruby>
-                <template v-else>
-                  {{ lang === "en" && rec.nameEn ? rec.nameEn : rec.name }}
-                </template>
-                <!-- 複数回登壇バッジ（登壇回数を ×N 形式で表示。formatter の改行空白を避けるため data-count で描画） -->
-                <span
-                  v-if="rec.talks.length > 1"
-                  class="font-mono bg-accent text-[12px] text-accent-ink ml-2 font-normal tracking-[0.02em] align-[2px] border border-accent px-1.25 py-[1px] after:content-[attr(data-count)]"
-                  :aria-label="t.appearance_count(rec.talks.length)"
-                  :data-count="`×${rec.talks.length}`"
-                ></span>
-              </span>
-              <!-- 登壇年度グリッド（各年のマスを塗りつぶして登壇済みかを可視化） -->
-              <span
-                class="inline-grid gap-[3px] grow-999 justify-end [grid-template-columns:repeat(6,28px)]"
-                :aria-label='t.years_appeared + ": " + rec.years.join(", ")'
-              >
-                <span
-                  v-for="y in YEARS"
-                  :key="y"
-                  class="w-7 h-[22px] flex items-center justify-center font-mono text-[12px] tracking-[0]"
-                  :class='[
-                    rec.years.includes(y) && selectedYear === y
-                      ? "bg-accent border border-accent text-accent-ink"
-                      : rec.years.includes(y)
-                        ? "bg-ink border border-ink text-paper"
-                        : "border border-ink text-ink",
-                  ]'
-                  :title="y"
-                >
-                  {{ y.slice(-2) }}
-                </span>
-              </span>
+            <!-- 行番号（表示専用） -->
+            <span class="font-mono text-[12px] text-ink-2 tabular-nums">
+              {{ String(i + 1).padStart(3, "0") }}
             </span>
-            <!-- 展開/折りたたみアイコン（+/−） -->
+            <!-- スピーカー名（振り仮名・英語名対応） -->
             <span
-              aria-hidden="true"
-              class="basis-6 grow-1 font-mono text-[16px] text-ink-3 text-center"
+              class="font-display text-[clamp(15px,1.2vw,18px)] font-[500] tracking-[-0.005em] text-ink"
+              :lang='hasJapanese(rec.name) ? "ja" : "en"'
             >
-              {{ openRows.has(rec.name) ? "−" : "+" }}
-            </span>
-          </button>
-          <!-- 展開時の詳細エリア（プロフィールリンクと登壇一覧） -->
-          <div
-            v-if="openRows.has(rec.name)"
-            class="bg-paper-2 border-t border-rule-softer pt-2 pb-[22px] px-pad-x"
-          >
-            <!-- スピーカープロフィールページへのリンク -->
-            <!-- @vize:docs dynamic route uses encodeURIComponent for the local speaker name -->
-            <!-- @vize:ignore-start -->
-            <a
-              class="font-mono text-[12px] tracking-[0.06em] text-ink underline hover:no-underline"
-              :href="`/speakers/${encodeURIComponent(rec.name)}`"
-            >
-              {{ t.speaker_profile }}: {{ lang === "en" && rec.nameEn ? rec.nameEn : rec.name }}
-            </a>
-            <!-- @vize:ignore-end -->
-            <!-- 登壇一覧リスト -->
-            <ol class="list-none p-0 m-0 mt-[14px]">
-              <!-- 各登壇情報（開催年・タイトル・共同登壇者） -->
-              <li
-                v-for="(talk, k) in rec.talks"
-                :key='`${talk.year}-${talk.title ?? talk.url}-${talk.coSpeakers.join("|")}`'
-                class="grid grid-cols-[30px_1fr] gap-4 items-baseline py-1.5 border-t border-rule-softer"
-                :class='k === 0 ? "border-t-0" : ""'
+              <ruby v-if='rec.nameRuby && lang === "ja"'>
+                {{ rec.name }}
+                <rt>
+                  {{ rec.nameRuby }}
+                </rt>
+              </ruby>
+              <template v-else>
+                {{ displayName(rec) }}
+              </template>
+              <!-- 複数回登壇バッジ -->
+              <span
+                v-if="rec.talks.length > 1"
+                class="font-mono bg-accent text-[12px] text-accent-ink ml-2 font-normal tracking-[0.02em] align-[2px] border border-accent px-1.25 py-[1px]"
               >
-                <!-- 開催年リンク（年度別ページへ） -->
-                <!-- @vize:docs dynamic route is generated from the local AcceptedYear list -->
+                ×{{ rec.talks.length }}
+              </span>
+            </span>
+            <!-- 登壇年度グリッド（各年のマスを塗りつぶして登壇済みかを可視化） -->
+            <span class="inline-grid gap-[3px] grow-999 justify-end [grid-template-columns:repeat(6,28px)]">
+              <span
+                v-for="y in YEARS"
+                :key="y"
+                class="w-7 h-[22px] flex items-center justify-center font-mono text-[12px] tracking-[0]"
+                :class='[
+                  rec.years.includes(y) && selectedYear === y
+                    ? "bg-accent border border-accent text-accent-ink"
+                    : rec.years.includes(y)
+                      ? "bg-ink border border-ink text-paper"
+                      : "border border-ink text-ink",
+                ]'
+                :title="y"
+              >
+                {{ y.slice(-2) }}
+              </span>
+            </span>
+          </span>
+          <!-- 展開/折りたたみアイコン（+/−） -->
+          <span
+            aria-hidden="true"
+            class="basis-6 grow-1 font-mono text-[16px] text-ink-3 text-center"
+          >
+            {{ openRows.has(rec.name) ? "−" : "+" }}
+          </span>
+        </button>
+        <!-- 展開時の詳細エリア（プロフィールリンクと登壇一覧） -->
+        <div
+          v-if="openRows.has(rec.name)"
+          :id="panelId(rec.name)"
+          class="bg-paper-2 border-t border-rule-softer pt-2 pb-[22px] px-pad-x"
+        >
+          <!-- スピーカープロフィールページへのリンク -->
+          <!-- @vize:docs dynamic route uses encodeURIComponent for the local speaker name -->
+          <!-- @vize:ignore-start -->
+          <a
+            class="font-mono text-[12px] tracking-[0.06em] text-ink underline hover:no-underline"
+            :href="`/speakers/${encodeURIComponent(rec.name)}`"
+          >
+            {{ t.speaker_profile }}: {{ lang === "en" && rec.nameEn ? rec.nameEn : rec.name }}
+          </a>
+          <!-- @vize:ignore-end -->
+          <!-- 登壇一覧リスト -->
+          <ol class="list-none p-0 m-0 mt-[14px]">
+            <!-- 各登壇情報（開催年・タイトル・共同登壇者） -->
+            <li
+              v-for="(talk, k) in rec.talks"
+              :key='`${talk.year}-${talk.title ?? talk.url}-${talk.coSpeakers.join("|")}`'
+              class="grid grid-cols-[30px_1fr] gap-4 items-baseline py-1.5 border-t border-rule-softer"
+              :class='k === 0 ? "border-t-0" : ""'
+            >
+              <!-- 開催年リンク（年度別ページへ） -->
+              <!-- @vize:docs dynamic route is generated from the local AcceptedYear list -->
+              <!-- @vize:ignore-start -->
+              <a
+                class="underline hover:no-underline font-mono text-[12px] text-ink tabular-nums"
+                :href="`/${talk.year}`"
+              >
+                {{ talk.year }}
+              </a>
+              <!-- @vize:ignore-end -->
+              <div class="flex flex-col gap-y-[8px]">
+                <!-- トークタイトル（外部リンク） -->
+                <!-- @vize:docs external URL comes from versioned Vue Fes speaker data -->
                 <!-- @vize:ignore-start -->
                 <a
-                  class="underline hover:no-underline font-mono text-[12px] text-ink tabular-nums"
-                  :href="`/${talk.year}`"
+                  class="text-[14px] text-ink pb-[1px] leading-[1.45] no-underline group"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  :href="talk.url"
                 >
-                  {{ talk.year }}
+                  <!-- パネルセッションのフォーマットバッジ -->
+                  <span
+                    v-if='talk.format === "panel"'
+                    class="relative top-[-1px] inline-flex items-center self-center align-middle font-mono text-[10px] uppercase tracking-[0.06em] border border-ink text-ink px-[5px] py-[1px] leading-[1.15] mr-2"
+                  >
+                    {{ t.session_format_panel }}
+                  </span>
+                  <span class="group-hover:underline">
+                    {{ talk.title || t.tbd }}
+                  </span>
+                  <span class="font-mono text-[10px] text-ink-2 ml-1">
+                    ({{ t.external }})
+                  </span>
                 </a>
                 <!-- @vize:ignore-end -->
-                <div class="flex flex-col gap-y-[8px]">
-                  <!-- トークタイトル（外部リンク） -->
-                  <!-- @vize:docs external URL comes from versioned Vue Fes speaker data -->
-                  <!-- @vize:ignore-start -->
-                  <a
-                    class="text-[14px] text-ink pb-[1px] leading-[1.45] no-underline group"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    :href="talk.url"
-                  >
-                    <!-- パネルセッションのフォーマットバッジ -->
-                    <span
-                      v-if='talk.format === "panel"'
-                      class="relative top-[-1px] inline-flex items-center self-center align-middle font-mono text-[10px] uppercase tracking-[0.06em] border border-ink text-ink px-[5px] py-[1px] leading-[1.15] mr-2"
+                <!-- 共同登壇者のリスト（各スピーカープロフィールへのリンク） -->
+                <span v-if="talk.coSpeakers.length > 0" class="text-[12px] font-mono text-ink-2">
+                  w/
+                  <span v-for="(cn, ci) in talk.coSpeakers" :key="cn" class="contents">
+                    <template v-if="ci > 0">
+                      ,
+                    </template>
+                    <!-- @vize:docs dynamic route uses encodeURIComponent for the local speaker name -->
+                    <!-- @vize:ignore-start -->
+                    <a
+                      class="text-ink border-b border-rule-soft pb-[1px] no-underline hover:border-ink"
+                      :href="`/speakers/${encodeURIComponent(cn)}`"
                     >
-                      {{ t.session_format_panel }}
-                    </span>
-                    <span class="group-hover:underline">
-                      {{ talk.title || t.tbd }}
-                    </span>
-                    <span class="font-mono text-[10px] text-ink-2 ml-1">
-                      ({{ t.external }})
-                    </span>
-                  </a>
-                  <!-- @vize:ignore-end -->
-                  <!-- 共同登壇者のリスト（各スピーカープロフィールへのリンク） -->
-                  <span v-if="talk.coSpeakers.length > 0" class="text-[12px] font-mono text-ink-2">
-                    w/
-                    <span v-for="(cn, ci) in talk.coSpeakers" :key="cn" class="contents">
-                      <template v-if="ci > 0">
-                        ,
-                      </template>
-                      <!-- @vize:docs dynamic route uses encodeURIComponent for the local speaker name -->
-                      <!-- @vize:ignore-start -->
-                      <a
-                        class="text-ink border-b border-rule-soft pb-[1px] no-underline hover:border-ink"
-                        :href="`/speakers/${encodeURIComponent(cn)}`"
-                      >
-                        {{ cn }}
-                      </a>
-                      <!-- @vize:ignore-end -->
-                    </span>
+                      {{ cn }}
+                    </a>
+                    <!-- @vize:ignore-end -->
                   </span>
-                </div>
-              </li>
-            </ol>
-          </div>
-        </li>
-      </ol>
-    </section>
-  </main>
+                </span>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </li>
+    </ol>
+  </section>
 </template>
