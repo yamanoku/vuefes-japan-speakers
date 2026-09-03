@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, watch } from "vue";
+import { computed, nextTick, onMounted, ref, useId, watch } from "vue";
 import type { AcceptedYear, SpeakerWithYear } from "../../types";
 import { YEARS } from "../../types";
 import AppFooter from "../components/AppFooter.vue";
@@ -46,17 +46,10 @@ const stats = computed(() => {
   };
 });
 
-const skipExtra = computed(() =>
-  view.value === "chronicle"
-    ? [
-        { href: "#year-list", label: t.value.skip_to_years },
-        { href: "#site-footer", label: t.value.skip_to_footer },
-      ]
-    : [
-        { href: "#directory-list", label: t.value.skip_to_directory },
-        { href: "#site-footer", label: t.value.skip_to_footer },
-      ],
-);
+const tabChronicleId = useId();
+const tabDirectoryId = useId();
+const panelChronicleId = useId();
+const panelDirectoryId = useId();
 
 function showChronicle() {
   view.value = "chronicle";
@@ -109,7 +102,17 @@ function updateSelectedYear(value: AcceptedYear | "all") {
 
 <template>
   <div>
-    <SkipLinks :extra="skipExtra" />
+    <SkipLinks>
+      <a v-if='view === "chronicle"' class="skip-link" href="#year-list">
+        {{ t.skip_to_years }}
+      </a>
+      <a v-else class="skip-link" href="#directory-list">
+        {{ t.skip_to_directory }}
+      </a>
+      <a class="skip-link" href="#site-footer">
+        {{ t.skip_to_footer }}
+      </a>
+    </SkipLinks>
     <AppHeader />
     <!-- タイトル・統計情報 -->
     <AppMasthead :stats />
@@ -118,22 +121,22 @@ function updateSelectedYear(value: AcceptedYear | "all") {
       class="flex gap-0 px-pad-x border-b border-rule bg-paper"
       role="tablist"
       :aria-label="t.view_mode"
-      @keydown="onTabKeydown"
     >
       <!-- 年度別クロニクルビュータブ -->
       <button
-        id="tab-chronicle"
         ref="tabChronicle"
-        aria-controls="panel-chronicle"
         class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
         role="tab"
         type="button"
+        :id="tabChronicleId"
+        :aria-controls="panelChronicleId"
         :aria-selected='view === "chronicle"'
         :tabindex='view === "chronicle" ? 0 : -1'
         :class='view === "chronicle"
           ? "text-ink [box-shadow:inset_0_-4px_0_var(--accent)]"
           : "text-ink-3 hover:text-ink"'
         @click="showChronicle"
+        @keydown="onTabKeydown"
       >
         {{ t.view_timeline }}
         <span class="font-mono text-[12px] tracking-[0.02em] ml-1" lang="en">
@@ -142,18 +145,19 @@ function updateSelectedYear(value: AcceptedYear | "all") {
       </button>
       <!-- スピーカー名索引ディレクトリビュータブ -->
       <button
-        id="tab-directory"
         ref="tabDirectory"
-        aria-controls="panel-directory"
         class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
         role="tab"
         type="button"
+        :id="tabDirectoryId"
+        :aria-controls="panelDirectoryId"
         :aria-selected='view === "index"'
         :tabindex='view === "index" ? 0 : -1'
         :class='view === "index"
           ? "text-ink [box-shadow:inset_0_-4px_0_var(--accent)]"
           : "text-ink-3 hover:text-ink"'
         @click="showDirectory"
+        @keydown="onTabKeydown"
       >
         {{ t.view_index }}
         <span class="font-mono text-[12px] tracking-[0.02em] ml-1" lang="en">
@@ -165,9 +169,9 @@ function updateSelectedYear(value: AcceptedYear | "all") {
       <!-- 年度別クロニクルビュー -->
       <ChronicleView
         v-if='view === "chronicle"'
-        id="panel-chronicle"
-        aria-labelledby="tab-chronicle"
         role="tabpanel"
+        :id="panelChronicleId"
+        :aria-labelledby="tabChronicleId"
         :all-speakers
         :query
         :selected-speaker
@@ -179,9 +183,9 @@ function updateSelectedYear(value: AcceptedYear | "all") {
       <!-- スピーカー索引ディレクトリビュー -->
       <DirectoryView
         v-else
-        id="panel-directory"
-        aria-labelledby="tab-directory"
         role="tabpanel"
+        :id="panelDirectoryId"
+        :aria-labelledby="tabDirectoryId"
         :all-speakers
         :query
         :selected-speaker

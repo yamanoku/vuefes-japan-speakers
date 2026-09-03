@@ -14,11 +14,12 @@ describe("DirectoryView", () => {
       },
     });
 
-    const heading = wrapper.get("#directory-heading");
-    expect(heading.element.tagName).toBe("H2");
+    const heading = wrapper.get("h2");
     expect(heading.text()).toContain("スピーカー一覧");
     expect(heading.text()).toContain("登壇回数の多い順");
-    expect(wrapper.get("#directory-list").attributes("aria-labelledby")).toBe("directory-heading");
+    expect(wrapper.get("#directory-list ol").attributes("aria-labelledby")).toBe(
+      heading.attributes("id"),
+    );
 
     const sortButtons = wrapper.findAll('[aria-label="並び替え"] button');
     expect(sortButtons[0]?.attributes("aria-pressed")).toBe("true");

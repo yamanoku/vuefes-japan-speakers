@@ -5,8 +5,8 @@ import SkipLinks from "./SkipLinks.vue";
 describe("SkipLinks", () => {
   it("本文へのスキップリンクを先頭に置く", () => {
     const wrapper = mount(SkipLinks, {
-      props: {
-        extra: [{ href: "#directory-list", label: "スピーカー一覧へ" }],
+      slots: {
+        default: '<a class="skip-link" href="#directory-list">スピーカー一覧へ</a>',
       },
     });
 

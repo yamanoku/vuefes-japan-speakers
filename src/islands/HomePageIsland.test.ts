@@ -16,21 +16,26 @@ describe("HomePageIsland", () => {
     const tablist = wrapper.get('[role="tablist"]');
     expect(tablist.attributes("aria-label")).toBe("表示切替");
 
-    const chronicleTab = wrapper.get("#tab-chronicle");
-    const directoryTab = wrapper.get("#tab-directory");
-    expect(chronicleTab.attributes("role")).toBe("tab");
-    expect(chronicleTab.attributes("aria-controls")).toBe("panel-chronicle");
+    const tabs = wrapper.findAll('[role="tab"]');
+    const chronicleTab = tabs[0]!;
+    const directoryTab = tabs[1]!;
     expect(chronicleTab.attributes("aria-selected")).toBe("true");
     expect(chronicleTab.attributes("tabindex")).toBe("0");
     expect(directoryTab.attributes("tabindex")).toBe("-1");
-    expect(wrapper.get("#panel-chronicle").attributes("role")).toBe("tabpanel");
+    expect(chronicleTab.attributes("aria-controls")).toBeTruthy();
+
+    const chroniclePanel = wrapper.get('[role="tabpanel"]');
+    expect(chroniclePanel.attributes("id")).toBe(chronicleTab.attributes("aria-controls"));
+    expect(chroniclePanel.attributes("aria-labelledby")).toBe(chronicleTab.attributes("id"));
 
     await chronicleTab.trigger("keydown", { key: "ArrowRight" });
     expect(directoryTab.attributes("aria-selected")).toBe("true");
     expect(directoryTab.attributes("tabindex")).toBe("0");
     expect(chronicleTab.attributes("tabindex")).toBe("-1");
-    expect(wrapper.get("#panel-directory").attributes("role")).toBe("tabpanel");
-    expect(wrapper.get("#panel-directory").attributes("aria-labelledby")).toBe("tab-directory");
+
+    const directoryPanel = wrapper.get('[role="tabpanel"]');
+    expect(directoryPanel.attributes("id")).toBe(directoryTab.attributes("aria-controls"));
+    expect(directoryPanel.attributes("aria-labelledby")).toBe(directoryTab.attributes("id"));
 
     wrapper.unmount();
   });
