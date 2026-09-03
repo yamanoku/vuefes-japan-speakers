@@ -105,12 +105,12 @@ export default defineApp({
       },
       {
         name: "theme-color",
-        content: "#f4f1eb",
+        content: "oklch(95.88% 0.0086 84.6)",
         media: "(prefers-color-scheme: light)",
       },
       {
         name: "theme-color",
-        content: "#1c1c19",
+        content: "oklch(22.53% 0.0057 106.8)",
         media: "(prefers-color-scheme: dark)",
       },
     ],

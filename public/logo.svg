@@ -8,19 +8,19 @@
   <desc id="desc">The Vue Fes V/O mark paired with the Vue Fes Japan Speakers wordmark.</desc>
   <style>
     .paper {
-      fill: #f4f1eb;
+      fill: oklch(95.88% 0.0086 84.6);
     }
 
     .accent {
-      fill: #007f62;
+      fill: oklch(53.04% 0.1054 169.6);
     }
 
     .ink {
-      fill: #1a1a17;
+      fill: oklch(21.66% 0.0057 106.9);
     }
 
     .subtle {
-      fill: #6b6b64;
+      fill: oklch(52.56% 0.0107 106.8);
     }
 
     .word {
