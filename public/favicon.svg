@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <style>
     .paper {
-      fill: #f4f1eb;
+      fill: oklch(95.88% 0.0086 84.6);
     }
 
     .accent {
-      fill: #007f62;
+      fill: oklch(53.04% 0.1054 169.6);
     }
 
   </style>
