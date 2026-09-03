@@ -146,11 +146,7 @@ function rowLabel(rec: SpeakerRecord, expanded: boolean) {
       <!-- Sort header -->
       <!-- ソートボタンヘッダー（登壇回数・名前順・最新年で並び替え） -->
       <div class="flex items-center gap-2 px-pad-x pt-4.5 pb-2.5 border-b border-rule-soft font-mono overflow-x-auto">
-        <div
-          class="flex items-center gap-2"
-          role="group"
-          :aria-label="t.sort_group"
-        >
+        <div class="flex items-center gap-2" role="group" :aria-label="t.sort_group">
           <!-- 登壇回数の多い順でソートするボタン -->
           <button
             class="text-[12px] tracking-[0.06em] uppercase px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
@@ -190,10 +186,10 @@ function rowLabel(rec: SpeakerRecord, expanded: boolean) {
         </div>
         <!-- フィルター済み件数 / 全体件数の表示（ライブリージョン） -->
         <span
+          aria-atomic="true"
+          aria-live="polite"
           class="ml-auto text-[12px] tracking-[0.06em] text-ink-2 whitespace-nowrap"
           role="status"
-          aria-live="polite"
-          aria-atomic="true"
         >
           {{ t.filter_result_status(filtered.length, allRecords.length) }}
         </span>
@@ -205,9 +201,9 @@ function rowLabel(rec: SpeakerRecord, expanded: boolean) {
       <!-- フィルター結果が0件のときの空状態メッセージ -->
       <div
         v-if="filtered.length === 0"
+        aria-live="polite"
         class="px-pad-x py-20 text-center font-mono text-[13px] tracking-[0.05em] uppercase text-ink-2"
         role="status"
-        aria-live="polite"
       >
         {{ t.empty }}
       </div>
@@ -251,16 +247,16 @@ function rowLabel(rec: SpeakerRecord, expanded: boolean) {
                 <!-- 複数回登壇バッジ -->
                 <span
                   v-if="rec.talks.length > 1"
-                  class="font-mono bg-accent text-[12px] text-accent-ink ml-2 font-normal tracking-[0.02em] align-[2px] border border-accent px-1.25 py-[1px]"
                   aria-hidden="true"
+                  class="font-mono bg-accent text-[12px] text-accent-ink ml-2 font-normal tracking-[0.02em] align-[2px] border border-accent px-1.25 py-[1px]"
                 >
                   ×{{ rec.talks.length }}
                 </span>
               </span>
               <!-- 登壇年度グリッド（各年のマスを塗りつぶして登壇済みかを可視化） -->
               <span
-                class="inline-grid gap-[3px] grow-999 justify-end [grid-template-columns:repeat(6,28px)]"
                 aria-hidden="true"
+                class="inline-grid gap-[3px] grow-999 justify-end [grid-template-columns:repeat(6,28px)]"
               >
                 <span
                   v-for="y in YEARS"

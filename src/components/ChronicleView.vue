@@ -89,20 +89,15 @@ function updateSelectedYear(value: AcceptedYear | "all") {
       <!-- 開催年度によるフィルターバー -->
       <YearFilterBar :counts :selected-year @update:selected-year="updateSelectedYear" />
       <!-- フィルター結果の件数通知（ライブリージョン） -->
-      <p
-        class="sr-only"
-        role="status"
-        aria-live="polite"
-        aria-atomic="true"
-      >
+      <p aria-atomic="true" aria-live="polite" class="sr-only" role="status">
         {{ t.chronicle_result_status(totalTalks, allSpeakers.length) }}
       </p>
       <!-- フィルター結果が0件のとき -->
       <div
         v-if="grouped.length === 0"
+        aria-live="polite"
         class="px-pad-x py-20 text-center font-mono text-[13px] tracking-[0.05em] uppercase text-ink-2"
         role="status"
-        aria-live="polite"
       >
         {{ t.empty }}
       </div>

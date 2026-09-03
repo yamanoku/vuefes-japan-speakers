@@ -93,16 +93,15 @@ function onDirectoryTabKeydown(event: KeyboardEvent) {
   onTabKeydown(event, "index");
 }
 
-const activeTabId = computed(() => (view.value === "chronicle" ? "tab-chronicle" : "tab-directory"));
+const activeTabId = computed(() =>
+  view.value === "chronicle" ? "tab-chronicle" : "tab-directory",
+);
 </script>
 
 <template>
   <div>
     <!-- スキップリンク（本文へジャンプ） -->
-    <a
-      class="skip-link"
-      href="#main"
-    >
+    <a class="skip-link" href="#main">
       {{ t.skip_to_content }}
     </a>
     <AppHeader />
@@ -119,10 +118,10 @@ const activeTabId = computed(() => (view.value === "chronicle" ? "tab-chronicle"
       <button
         id="tab-chronicle"
         ref="tabChronicle"
+        aria-controls="main"
         class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
         role="tab"
         type="button"
-        aria-controls="main"
         :aria-selected='view === "chronicle"'
         :tabindex='view === "chronicle" ? 0 : -1'
         :class='view === "chronicle"
@@ -140,10 +139,10 @@ const activeTabId = computed(() => (view.value === "chronicle" ? "tab-chronicle"
       <button
         id="tab-directory"
         ref="tabDirectory"
+        aria-controls="main"
         class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
         role="tab"
         type="button"
-        aria-controls="main"
         :aria-selected='view === "index"'
         :tabindex='view === "index" ? 0 : -1'
         :class='view === "index"
@@ -161,12 +160,7 @@ const activeTabId = computed(() => (view.value === "chronicle" ? "tab-chronicle"
     <!-- @vize:ignore-end -->
     <!-- 選択中のビューに応じてコンポーネントを切り替え -->
     <!-- @vize:ignore-start -->
-    <main
-      id="main"
-      role="tabpanel"
-      :aria-labelledby="activeTabId"
-      tabindex="0"
-    >
+    <main id="main" role="tabpanel" :aria-labelledby="activeTabId" tabindex="0">
       <!-- 年度別クロニクルビュー -->
       <ChronicleView
         v-if='view === "chronicle"'

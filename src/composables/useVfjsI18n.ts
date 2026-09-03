@@ -88,15 +88,11 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     sort_latest: "最新登壇年の新しい順",
     directory_heading: (count: number, sortLabel: string) =>
       `スピーカー一覧（${count}名・${sortLabel}）`,
-    filter_result_status: (shown: number, total: number) =>
-      `${total}件中${shown}件を表示`,
-    chronicle_result_status: (shown: number, total: number) =>
-      `${total}件中${shown}件の発表を表示`,
+    filter_result_status: (shown: number, total: number) => `${total}件中${shown}件を表示`,
+    chronicle_result_status: (shown: number, total: number) => `${total}件中${shown}件の発表を表示`,
     year_speakers_link: (year: string) => `${year}年のスピーカー一覧へ`,
-    row_expand: (name: string, count: number) =>
-      `${name}、${count}回登壇、詳細を開く`,
-    row_collapse: (name: string, count: number) =>
-      `${name}、${count}回登壇、詳細を閉じる`,
+    row_expand: (name: string, count: number) => `${name}、${count}回登壇、詳細を開く`,
+    row_collapse: (name: string, count: number) => `${name}、${count}回登壇、詳細を閉じる`,
     year_total_talks: (n: number) => `全 ${n} 発表`,
     appearance_count: (n: number) => `${n}回登壇`,
   },
@@ -138,12 +134,9 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     sort_name_asc: "Name A to Z",
     sort_name_desc: "Name Z to A",
     sort_latest: "Latest year first",
-    directory_heading: (count: number, sortLabel: string) =>
-      `Speakers (${count} · ${sortLabel})`,
-    filter_result_status: (shown: number, total: number) =>
-      `Showing ${shown} of ${total}`,
-    chronicle_result_status: (shown: number, total: number) =>
-      `Showing ${shown} of ${total} talks`,
+    directory_heading: (count: number, sortLabel: string) => `Speakers (${count} · ${sortLabel})`,
+    filter_result_status: (shown: number, total: number) => `Showing ${shown} of ${total}`,
+    chronicle_result_status: (shown: number, total: number) => `Showing ${shown} of ${total} talks`,
     year_speakers_link: (year: string) => `${year} speakers`,
     row_expand: (name: string, count: number) =>
       `${name}, ${count} appearance${count > 1 ? "s" : ""}, expand details`,
