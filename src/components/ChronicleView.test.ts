@@ -18,7 +18,8 @@ describe("ChronicleView", () => {
     expect(headings.map((heading) => heading.text())).toEqual(
       expect.arrayContaining(["2018全 1 発表", "2025全 2 発表"]),
     );
-    expect(wrapper.find("main#main").exists()).toBe(true);
+    // main ランドマークは island 側が所有するためビュー内には持たない
+    expect(wrapper.find("main").exists()).toBe(false);
     expect(wrapper.find('nav[aria-label="年度"]').exists()).toBe(true);
     expect(wrapper.find('a[href="#year-2018"]').exists()).toBe(true);
 

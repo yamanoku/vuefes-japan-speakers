@@ -153,37 +153,38 @@ function updateSelectedYear(value: AcceptedYear | "all") {
         </span>
       </button>
     </div>
-    <!-- 選択中のビューに応じてコンポーネントを切り替え -->
-    <!-- 年度別クロニクルビュー -->
-    <div
-      v-if='view === "chronicle"'
-      role="tabpanel"
-      tabindex="0"
-      :id="panelChronicleId"
-      :aria-labelledby="tabChronicleId"
-    >
-      <ChronicleView
-        :all-speakers
-        :query
-        :selected-speaker
-        :selected-year
-        @update:query="updateQuery"
-        @update:selected-speaker="updateSelectedSpeaker"
-        @update:selected-year="updateSelectedYear"
-      />
-    </div>
-    <!-- スピーカー索引ディレクトリビュー -->
-    <div v-else role="tabpanel" tabindex="0" :id="panelDirectoryId" :aria-labelledby="tabDirectoryId">
-      <DirectoryView
-        :all-speakers
-        :query
-        :selected-speaker
-        :selected-year
-        @update:query="updateQuery"
-        @update:selected-speaker="updateSelectedSpeaker"
-        @update:selected-year="updateSelectedYear"
-      />
-    </div>
+    <!-- 選択中のビューに応じてコンポーネントを切り替え（main ランドマークは island が所有） -->
+    <main id="main" tabindex="-1">
+      <!-- 年度別クロニクルビュー -->
+      <div
+        v-if='view === "chronicle"'
+        role="tabpanel"
+        :id="panelChronicleId"
+        :aria-labelledby="tabChronicleId"
+      >
+        <ChronicleView
+          :all-speakers
+          :query
+          :selected-speaker
+          :selected-year
+          @update:query="updateQuery"
+          @update:selected-speaker="updateSelectedSpeaker"
+          @update:selected-year="updateSelectedYear"
+        />
+      </div>
+      <!-- スピーカー索引ディレクトリビュー -->
+      <div v-else role="tabpanel" :id="panelDirectoryId" :aria-labelledby="tabDirectoryId">
+        <DirectoryView
+          :all-speakers
+          :query
+          :selected-speaker
+          :selected-year
+          @update:query="updateQuery"
+          @update:selected-speaker="updateSelectedSpeaker"
+          @update:selected-year="updateSelectedYear"
+        />
+      </div>
+    </main>
     <AppFooter />
   </div>
 </template>

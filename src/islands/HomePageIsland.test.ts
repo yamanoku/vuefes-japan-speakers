@@ -29,6 +29,10 @@ describe("HomePageIsland", () => {
     expect(tabs[0]?.attributes("aria-controls")).toBe(panel.attributes("id"));
     expect(panel.attributes("aria-labelledby")).toBe(tabs[0]?.attributes("id"));
 
+    // タブパネルはスキップリンク先の main ランドマーク内に置く
+    const main = wrapper.get("main#main");
+    expect(main.find('[role="tabpanel"]').exists()).toBe(true);
+
     wrapper.unmount();
   });
 
