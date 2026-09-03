@@ -2,6 +2,7 @@
 import type { SpeakerInfo } from "../../types";
 import AppFooter from "../components/AppFooter.vue";
 import AppHeader from "../components/AppHeader.vue";
+import SkipLinks from "../components/SkipLinks.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
 const { found, speakers, year } = defineProps<{
@@ -15,9 +16,10 @@ const { t, lang } = useVfjsI18n();
 
 <template>
   <div>
+    <SkipLinks />
     <AppHeader />
     <!-- 年度ページのメインコンテンツ -->
-    <main>
+    <main id="main">
       <template v-if="found">
         <!-- 年度ページのヘッダー（タイトル・トーク数・公式サイトリンク） -->
         <header class="border-b border-rule pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-pad-x">

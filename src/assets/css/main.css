@@ -26,7 +26,7 @@
     --rule-softer: rgba(232, 228, 220, 0.07);
     --ink: #e8e4dc;
     --ink-2: #b4b0a8;
-    --ink-3: #7a7a72;
+    --ink-3: #8a8a82;
     --accent: #2ed9a8;
     --accent-ink: #0d2820;
   }
@@ -40,7 +40,7 @@
   --rule-softer: rgba(232, 228, 220, 0.07);
   --ink: #e8e4dc;
   --ink-2: #b4b0a8;
-  --ink-3: #7a7a72;
+  --ink-3: #8a8a82;
   --accent: #2ed9a8;
   --accent-ink: #0d2820;
 }
@@ -79,6 +79,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-padding-top: 72px;
+}
+
 html,
 body {
   margin: 0;
@@ -112,4 +116,36 @@ input:focus-visible {
 }
 select {
   appearance: base-select;
+}
+
+.skip-nav {
+  position: absolute;
+  left: var(--pad-x);
+  top: 8px;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  transform: translateY(-160%);
+}
+
+.skip-nav:focus-within {
+  transform: none;
+}
+
+.skip-link {
+  display: inline-block;
+  padding: 8px 14px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.skip-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }

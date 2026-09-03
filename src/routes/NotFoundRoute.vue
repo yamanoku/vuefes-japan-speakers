@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppFooter from "../components/AppFooter.vue";
 import AppHeader from "../components/AppHeader.vue";
+import SkipLinks from "../components/SkipLinks.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
 const { t } = useVfjsI18n();
@@ -8,8 +9,9 @@ const { t } = useVfjsI18n();
 
 <template>
   <div>
+    <SkipLinks />
     <AppHeader />
-    <main class="min-h-[60vh] px-pad-x py-[clamp(64px,10vw,140px)] border-b border-rule">
+    <main id="main" class="min-h-[60vh] px-pad-x py-[clamp(64px,10vw,140px)] border-b border-rule">
       <p class="font-mono text-[12px] tracking-[0.12em] uppercase text-ink-3 mb-4.5">
         404
       </p>

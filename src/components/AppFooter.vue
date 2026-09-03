@@ -5,7 +5,10 @@ const { t } = useVfjsI18n();
 </script>
 
 <template>
-  <footer class="border-t border-rule flex flex-wrap gap-x-6 gap-y-2 items-baseline justify-between px-pad-x py-5 text-[12px] font-mono">
+  <footer
+    id="site-footer"
+    class="border-t border-rule flex flex-wrap gap-x-6 gap-y-2 items-baseline justify-between px-pad-x py-5 text-[12px] font-mono"
+  >
     <!-- トップページへ戻るリンク -->
     <div>
       <a class="text-inherit underline hover:no-underline hover:text-ink" href="/">

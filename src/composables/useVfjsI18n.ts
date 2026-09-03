@@ -32,6 +32,21 @@ export interface VfjsTranslations {
   not_found_description: string;
   year_total_talks: (n: number) => string;
   appearance_count: (n: number) => string;
+  skip_links: string;
+  skip_to_main: string;
+  skip_to_footer: string;
+  skip_to_years: string;
+  skip_to_directory: string;
+  view_mode: string;
+  selected: string;
+  sort_label: string;
+  sort_appearances: string;
+  sort_name_asc: string;
+  sort_name_desc: string;
+  sort_latest: string;
+  directory_heading: (count: number, sortLabel: string) => string;
+  result_count: (shown: number, total: number) => string;
+  directory_row_label: (name: string, count: number, expanded: boolean) => string;
 }
 
 const translations: Record<"ja" | "en", VfjsTranslations> = {
@@ -68,6 +83,23 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     not_found_description: "指定されたページは存在しないか、移動した可能性があります。",
     year_total_talks: (n: number) => `全 ${n} 発表`,
     appearance_count: (n: number) => `${n}回登壇`,
+    skip_links: "スキップリンク",
+    skip_to_main: "本文へ",
+    skip_to_footer: "フッターへ",
+    skip_to_years: "年度一覧へ",
+    skip_to_directory: "スピーカー一覧へ",
+    view_mode: "表示切替",
+    selected: "選択中",
+    sort_label: "並び替え",
+    sort_appearances: "登壇回数の多い順",
+    sort_name_asc: "名前順（A→Z）",
+    sort_name_desc: "名前順（Z→A）",
+    sort_latest: "最新登壇年の新しい順",
+    directory_heading: (count: number, sortLabel: string) =>
+      `スピーカー一覧（${count}名・${sortLabel}）`,
+    result_count: (shown: number, total: number) => `${total}件中${shown}件を表示`,
+    directory_row_label: (name: string, count: number, expanded: boolean) =>
+      `${name}、${count}回登壇、${expanded ? "詳細を閉じる" : "詳細を開く"}`,
   },
   en: {
     nav_all_label: "All speakers",
@@ -102,6 +134,22 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     not_found_description: "The page you requested does not exist or may have moved.",
     year_total_talks: (n: number) => `${n} talks total`,
     appearance_count: (n: number) => `${n} appearance${n > 1 ? "s" : ""}`,
+    skip_links: "Skip links",
+    skip_to_main: "Skip to content",
+    skip_to_footer: "Skip to footer",
+    skip_to_years: "Skip to years",
+    skip_to_directory: "Skip to speaker list",
+    view_mode: "View mode",
+    selected: "Selected",
+    sort_label: "Sort",
+    sort_appearances: "Most appearances",
+    sort_name_asc: "Name A to Z",
+    sort_name_desc: "Name Z to A",
+    sort_latest: "Latest year",
+    directory_heading: (count: number, sortLabel: string) => `Speakers (${count}, ${sortLabel})`,
+    result_count: (shown: number, total: number) => `Showing ${shown} of ${total}`,
+    directory_row_label: (name: string, count: number, expanded: boolean) =>
+      `${name}, ${count} appearance${count > 1 ? "s" : ""}, ${expanded ? "Collapse details" : "Expand details"}`,
   },
 };
 

@@ -3,6 +3,7 @@ import { computed } from "vue";
 import type { SpeakerWithYear } from "../../types";
 import AppFooter from "../components/AppFooter.vue";
 import AppHeader from "../components/AppHeader.vue";
+import SkipLinks from "../components/SkipLinks.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 import { compareLexicalJa } from "../utils/stringCollate";
 import { hasJapanese } from "../utils/speakerMap";
@@ -42,9 +43,10 @@ const record = computed(() => {
 
 <template>
   <div>
+    <SkipLinks />
     <AppHeader />
     <!-- スピーカーページのメインコンテンツ（該当スピーカーが存在する場合） -->
-    <template v-if="found">
+    <main v-if="found" id="main">
       <!-- スピーカーページのヘッダー（名前・登壇回数・登壇年度） -->
       <header class="border-b border-rule pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-pad-x">
         <!-- スピーカー名 -->
@@ -160,9 +162,9 @@ const record = computed(() => {
           </li>
         </ul>
       </section>
-    </template>
+    </main>
     <!-- スピーカーが存在しない場合 -->
-    <main v-else class="px-pad-x py-20 font-mono text-[14px] text-ink-2">
+    <main v-else id="main" class="px-pad-x py-20 font-mono text-[14px] text-ink-2">
       <h1 class="font-display text-[40px] text-ink m-0">
         Speaker Not Found
       </h1>

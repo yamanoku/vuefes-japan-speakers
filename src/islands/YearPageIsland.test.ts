@@ -22,5 +22,7 @@ describe("YearPageIsland", () => {
     expect(wrapper.html()).toContain("2024");
     expect(wrapper.html()).toContain("John Doe");
     expect(wrapper.html()).toContain("Vue.js Advanced");
+    expect(wrapper.get("#main").exists()).toBe(true);
+    expect(wrapper.get(".skip-link").attributes("href")).toBe("#main");
   });
 });

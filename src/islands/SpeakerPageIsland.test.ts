@@ -30,5 +30,7 @@ describe("SpeakerPageIsland", () => {
     expect(wrapper.html()).toContain("Vue.js Advanced");
     expect(wrapper.html()).toContain("2023");
     expect(wrapper.html()).toContain("2024");
+    expect(wrapper.get("#main").exists()).toBe(true);
+    expect(wrapper.get(".skip-link").attributes("href")).toBe("#main");
   });
 });
