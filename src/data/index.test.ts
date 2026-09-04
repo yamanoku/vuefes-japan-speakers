@@ -36,14 +36,29 @@ describe("speaker data accessors", () => {
     expect(byName("Charles Wang")?.title).toBe("Vite Task’s Cache Magic");
     expect(byName("中野 美咲")?.title).toBe("ブランドのためのWebGLアニメーション（仮）");
     expect(panel?.title).toBe("JavaScriptエコシステムの境界線を問い直す");
-    expect(panel?.name).toEqual(["Evan You", "古川 陽介", "Alistair Smith", "Leo Kettmeir"]);
+    expect(panel?.name).toEqual([
+      "Evan You",
+      "古川 陽介",
+      "Alistair Smith",
+      "Leo Kettmeir",
+      "re-taro",
+    ]);
   });
 
-  it("2026は公式スピーカーページの登壇者を含む", () => {
+  it("2026のパネルのみ登壇者は個別エントリを持たない", () => {
     const speakers = getSpeakersByYear("2026");
-    const urls = speakers.map((speaker) => speaker.url);
+    const panelOnly = ["古川 陽介", "Alistair Smith", "Leo Kettmeir", "re-taro"];
 
-    expect(speakers.some((speaker) => speaker.name.includes("re-taro"))).toBe(true);
-    expect(urls).toContain("https://vuefes.jp/2026/speaker/re-taro");
+    for (const name of panelOnly) {
+      const individual = speakers.find(
+        (speaker) => speaker.name.length === 1 && speaker.name[0] === name,
+      );
+      const inPanel = speakers.some(
+        (speaker) => speaker.format === "panel" && speaker.name.includes(name),
+      );
+
+      expect(individual).toBeUndefined();
+      expect(inPanel).toBe(true);
+    }
   });
 });

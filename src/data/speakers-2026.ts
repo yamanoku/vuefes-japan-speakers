@@ -31,28 +31,12 @@ export const speakers2026: SpeakerInfo[] = [
     url: "https://vuefes.jp/2026/speaker/mnmxmx",
   },
   {
-    name: ["Leo Kettmeir"],
-    url: "https://vuefes.jp/2026/speaker/crowlKats",
-  },
-  {
-    name: ["Alistair Smith"],
-    url: "https://vuefes.jp/2026/speaker/alii",
-  },
-  {
     name: ["Kongkeit Khunpanitchot (aka saltyaom)"],
     url: "https://vuefes.jp/2026/speaker/SaltyAom",
   },
   {
     name: ["Yusuke Wada"],
     url: "https://vuefes.jp/2026/speaker/yusukebe",
-  },
-  {
-    name: ["古川 陽介"],
-    url: "https://vuefes.jp/2026/speaker/yosuke-furukawa",
-  },
-  {
-    name: ["re-taro"],
-    url: "https://vuefes.jp/2026/speaker/re-taro",
   },
   {
     name: ["Naoki Haba"],
@@ -180,7 +164,7 @@ export const speakers2026: SpeakerInfo[] = [
     url: "https://vuefes.jp/2026/speaker/CrafterKina",
   },
   {
-    name: ["Evan You", "古川 陽介", "Alistair Smith", "Leo Kettmeir"],
+    name: ["Evan You", "古川 陽介", "Alistair Smith", "Leo Kettmeir", "re-taro"],
     title: "JavaScriptエコシステムの境界線を問い直す",
     url: "https://vuefes.jp/2026/event?session=panel-discussion#panel-discussion",
     format: "panel",
