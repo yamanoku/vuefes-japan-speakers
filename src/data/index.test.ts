@@ -61,4 +61,29 @@ describe("speaker data accessors", () => {
       expect(inPanel).toBe(true);
     }
   });
+
+  it("2026のスポンサーセッションを公式タイムテーブルに合わせて持つ", () => {
+    const speakers = getSpeakersByYear("2026");
+    const byName = (name: string) =>
+      speakers.find((speaker) => speaker.name.length === 1 && speaker.name[0] === name);
+
+    expect(byName("竹井啓")?.title).toBe(
+      "デザインを開発する ~ Vueで実現するデザインプロセス改善 ~",
+    );
+    expect(byName("山口 祐司")?.title).toBe(
+      "契約で守るコンパウンドプロダクトのデザインシステム",
+    );
+    expect(byName("篠田貴大")?.title).toBe(
+      "クラウドサインを止めずに Nuxt へ、次の10年のために先に決めたこと",
+    );
+    expect(byName("Matt Kane")?.title).toBe("Astro is the new WordPress");
+    expect(byName("矢光 隆太郎")?.title).toBe(
+      "コンポーネントのライフサイクルとグローバル状態の扱い方",
+    );
+    expect(byName("宮崎喬行")?.title).toBe("新卒のキャッチアップコストから決めたNuxt 3移行");
+    expect(byName("永渕 景祐")?.title).toBe("Slidevで踏み出すVueとLTの第一歩");
+    expect(byName("揚野将士")?.title).toBe(
+      "npmサプライチェーンが狙われた1年 ─ 金融システムで実践している防御策",
+    );
+  });
 });

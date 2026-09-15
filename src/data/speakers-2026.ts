@@ -169,4 +169,44 @@ export const speakers2026: SpeakerInfo[] = [
     url: "https://vuefes.jp/2026/event?session=panel-discussion#panel-discussion",
     format: "panel",
   },
+  {
+    name: ["竹井啓"],
+    title: "デザインを開発する ~ Vueで実現するデザインプロセス改善 ~",
+    url: "https://vuefes.jp/2026/speaker/keeeeeei200",
+  },
+  {
+    name: ["山口 祐司"],
+    title: "契約で守るコンパウンドプロダクトのデザインシステム",
+    url: "https://vuefes.jp/2026/speaker/yug1224",
+  },
+  {
+    name: ["篠田貴大"],
+    title: "クラウドサインを止めずに Nuxt へ、次の10年のために先に決めたこと",
+    url: "https://vuefes.jp/2026/speaker/tttttt_621_s",
+  },
+  {
+    name: ["Matt Kane"],
+    title: "Astro is the new WordPress",
+    url: "https://vuefes.jp/2026/speaker/ascorbic",
+  },
+  {
+    name: ["矢光 隆太郎"],
+    title: "コンポーネントのライフサイクルとグローバル状態の扱い方",
+    url: "https://vuefes.jp/2026/speaker/RyutaroYako",
+  },
+  {
+    name: ["宮崎喬行"],
+    title: "新卒のキャッチアップコストから決めたNuxt 3移行",
+    url: "https://vuefes.jp/2026/speaker/takayuki-miyazaki",
+  },
+  {
+    name: ["永渕 景祐"],
+    title: "Slidevで踏み出すVueとLTの第一歩",
+    url: "https://vuefes.jp/2026/speaker/fuchio-gt",
+  },
+  {
+    name: ["揚野将士"],
+    title: "npmサプライチェーンが狙われた1年 ─ 金融システムで実践している防御策",
+    url: "https://vuefes.jp/2026/speaker/masashi-ageno",
+  },
 ];
