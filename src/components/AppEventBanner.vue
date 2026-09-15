@@ -2,8 +2,6 @@
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
 const { t } = useVfjsI18n();
-
-const EVENT_URL = "https://vuefes.jp/2026/";
 </script>
 
 <template>
@@ -11,7 +9,7 @@ const EVENT_URL = "https://vuefes.jp/2026/";
   <aside class="border-b border-rule bg-paper-2" :aria-label="t.event_banner_2026_label">
     <a
       class="block text-center px-pad-x py-[10px] font-body text-[13px] tracking-[-0.005em] text-ink no-underline hover:text-accent transition-colors"
-      :href="EVENT_URL"
+      href="https://vuefes.jp/2026/"
       :aria-label="`${t.event_banner_2026} (${t.external})`"
       rel="noopener noreferrer"
       target="_blank"
