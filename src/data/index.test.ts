@@ -70,9 +70,7 @@ describe("speaker data accessors", () => {
     expect(byName("竹井啓")?.title).toBe(
       "デザインを開発する ~ Vueで実現するデザインプロセス改善 ~",
     );
-    expect(byName("山口 祐司")?.title).toBe(
-      "契約で守るコンパウンドプロダクトのデザインシステム",
-    );
+    expect(byName("山口 祐司")?.title).toBe("契約で守るコンパウンドプロダクトのデザインシステム");
     expect(byName("篠田貴大")?.title).toBe(
       "クラウドサインを止めずに Nuxt へ、次の10年のために先に決めたこと",
     );
