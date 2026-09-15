@@ -61,6 +61,7 @@ export const runTasks = {
   },
   check: {
     command: "vp run lint && vp run format:check && vp run typecheck",
+    cache: false,
   },
   format: {
     command: "vp fmt . --write && vize fmt --write $(find src -name '*.vue' ! -name '*.art.vue')",
@@ -70,5 +71,6 @@ export const runTasks = {
   },
   typecheck: {
     command: "vize check --tsconfig tsconfig.vize.json",
+    cache: false,
   },
 } satisfies RunTasks;
