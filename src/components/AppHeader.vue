@@ -90,5 +90,5 @@ function setEnglish() {
       </div>
     </div>
   </header>
-  <AppEventBanner />
+  <AppEventBanner event-date="2026-10-24" />
 </template>
