@@ -14,7 +14,7 @@ onMounted(() => {
   script.src = "https://ar-cdn.net/widget/v1.js";
   script.async = true;
   script.dataset.siteId = "1b610e8f-1ce4-4957-8bed-76fe0249b460";
-  script.dataset.variant = "native";
+  script.dataset.variant = "banner";
   container.append(script);
 });
 
