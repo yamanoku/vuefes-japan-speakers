@@ -113,6 +113,10 @@ export default defineApp({
         content: "oklch(22.53% 0.0057 106.8)",
         media: "(prefers-color-scheme: dark)",
       },
+      {
+        name: "adring-site-verification",
+        content: "adring_vrf_F7ievaZtRCmE1cdm6QOH0w8pFoACybNZ",
+      },
     ],
     stylesheets: import.meta.env.DEV ? ["/src/assets/css/main.css"] : [],
     scripts: [

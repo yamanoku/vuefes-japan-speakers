@@ -22,5 +22,6 @@ describe("YearPageIsland", () => {
     expect(wrapper.html()).toContain("2024");
     expect(wrapper.html()).toContain("John Doe");
     expect(wrapper.html()).toContain("Vue.js Advanced");
+    expect(wrapper.get("aside[aria-label='広告']").text()).toContain("広告");
   });
 });
