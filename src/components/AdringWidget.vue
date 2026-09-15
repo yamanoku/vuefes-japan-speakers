@@ -30,6 +30,6 @@ onUnmounted(() => container?.replaceChildren());
     <p class="font-mono text-[11px] tracking-[0.12em] text-ink-3 mb-4">
       {{ t.ad_label }}
     </p>
-    <div ref="containerRef" class="w-full max-w-[680px] min-h-[180px]"></div>
+    <div ref="containerRef" class="w-full"></div>
   </aside>
 </template>
