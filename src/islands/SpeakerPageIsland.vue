@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import type { SpeakerWithYear } from "../../types";
+import AdringWidget from "../components/AdringWidget.vue";
 import AppFooter from "../components/AppFooter.vue";
 import AppHeader from "../components/AppHeader.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
@@ -172,6 +173,7 @@ const record = computed(() => {
         </p>
       </div>
     </main>
+    <AdringWidget />
     <AppFooter />
   </div>
 </template>

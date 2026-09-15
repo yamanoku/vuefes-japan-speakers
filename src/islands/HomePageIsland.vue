@@ -2,6 +2,7 @@
 import { computed, nextTick, onMounted, ref, useId, watch } from "vue";
 import type { AcceptedYear, SpeakerWithYear } from "../../types";
 import { YEARS } from "../../types";
+import AdringWidget from "../components/AdringWidget.vue";
 import AppFooter from "../components/AppFooter.vue";
 import AppHeader from "../components/AppHeader.vue";
 import AppMasthead from "../components/AppMasthead.vue";
@@ -211,6 +212,7 @@ function updateSelectedYear(value: AcceptedYear | "all") {
         />
       </div>
     </main>
+    <AdringWidget />
     <AppFooter />
   </div>
 </template>

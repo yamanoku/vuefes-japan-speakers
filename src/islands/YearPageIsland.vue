@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { SpeakerInfo } from "../../types";
+import AdringWidget from "../components/AdringWidget.vue";
 import AppFooter from "../components/AppFooter.vue";
 import AppHeader from "../components/AppHeader.vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
@@ -149,6 +150,7 @@ const { t, lang } = useVfjsI18n();
         </p>
       </div>
     </main>
+    <AdringWidget />
     <!-- サイトフッター -->
     <AppFooter />
   </div>
