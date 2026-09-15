@@ -22,12 +22,37 @@ describe("DirectoryView", () => {
     );
 
     const sortButtons = wrapper.find('[role="group"][aria-label="並び替え"]').findAll("button");
+    expect(sortButtons).toHaveLength(2);
+    expect(sortButtons[0]?.text()).toContain("登壇回数の多い順");
+    expect(sortButtons[1]?.text()).toContain("名前順（A→Z）");
     expect(sortButtons[0]?.attributes("aria-pressed")).toBe("true");
     expect(sortButtons[1]?.attributes("aria-pressed")).toBe("false");
+    expect(wrapper.text()).not.toContain("最新年の新しい順");
+    expect(wrapper.text()).not.toContain("Latest year");
 
     const status = wrapper.get('[role="status"]');
     expect(status.attributes("aria-live")).toBe("polite");
     expect(status.text()).toMatch(/\d+件中\d+件を表示/);
+  });
+
+  it("並び替えは登壇回数と名前順のみで切り替えられる", async () => {
+    const wrapper = mount(DirectoryView, { props: defaultProps });
+    const sortGroup = wrapper.find('[role="group"][aria-label="並び替え"]');
+    const sortButtons = sortGroup.findAll("button");
+
+    await sortButtons[1]?.trigger("click");
+    expect(wrapper.get("h2").text()).toContain("名前順（A→Z）");
+    expect(sortButtons[0]?.attributes("aria-pressed")).toBe("false");
+    expect(sortButtons[1]?.attributes("aria-pressed")).toBe("true");
+
+    await sortButtons[1]?.trigger("click");
+    expect(wrapper.get("h2").text()).toContain("名前順（Z→A）");
+    expect(sortButtons[1]?.text()).toContain("名前順（Z→A）");
+
+    await sortButtons[0]?.trigger("click");
+    expect(wrapper.get("h2").text()).toContain("登壇回数の多い順");
+    expect(sortButtons[0]?.attributes("aria-pressed")).toBe("true");
+    expect(sortGroup.findAll("button")).toHaveLength(2);
   });
 
   it("行ボタンの名前を短くし年度グリッドを隠す", async () => {

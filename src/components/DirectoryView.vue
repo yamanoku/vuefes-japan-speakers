@@ -34,7 +34,7 @@ const speakerOptions = computed(() =>
   })),
 );
 
-const sort = ref<"name-asc" | "name-desc" | "appearances" | "latest">("appearances");
+const sort = ref<"name-asc" | "name-desc" | "appearances">("appearances");
 
 const counts = computed(() => {
   const c: Record<string, number> = { all: allRecords.value.length };
@@ -73,12 +73,6 @@ const filtered = computed<SpeakerRecord[]>(() => {
     list = [...list].sort((a, b) => compareLexicalJa(a.name, b.name));
   } else if (sort.value === "name-desc") {
     list = [...list].sort((a, b) => compareLexicalJa(b.name, a.name));
-  } else if (sort.value === "latest") {
-    list = [...list].sort(
-      (a, b) =>
-        compareLexicalJa(b.years[b.years.length - 1] || "", a.years[a.years.length - 1] || "") ||
-        compareLexicalJa(a.name, b.name),
-    );
   }
   return list;
 });
@@ -100,10 +94,6 @@ function sortByAppearances() {
   sort.value = "appearances";
 }
 
-function sortByLatest() {
-  sort.value = "latest";
-}
-
 function updateQuery(value: string) {
   emit("update:query", value);
 }
@@ -118,7 +108,6 @@ function updateSelectedYear(value: AcceptedYear | "all") {
 
 const sortLabel = computed(() => {
   if (sort.value === "appearances") return t.value.sort_appearances;
-  if (sort.value === "latest") return t.value.sort_latest;
   if (sort.value === "name-desc") return t.value.sort_name_desc;
   return t.value.sort_name_asc;
 });
@@ -168,7 +157,7 @@ const directoryHeadingId = useId();
     >
       {{ t.directory_heading(filtered.length, sortLabel) }}
     </h2>
-    <!-- ソートボタンヘッダー（登壇回数・名前順・最新年で並び替え） -->
+    <!-- ソートボタンヘッダー（登壇回数・名前順で並び替え） -->
     <div class="flex items-center gap-2 px-pad-x pt-2 pb-2.5 border-b border-rule-soft font-mono overflow-x-auto">
       <div class="flex items-center gap-2" role="group" :aria-label="t.sort_label">
         <!-- 登壇回数の多い順でソートするボタン -->
@@ -198,21 +187,6 @@ const directoryHeadingId = useId();
         >
           {{ sort === "name-desc" ? t.sort_name_desc : t.sort_name_asc }}
           <span v-if='sort === "name-asc" || sort === "name-desc"' class="sr-only">
-            （{{ t.selected }}）
-          </span>
-        </button>
-        <!-- 最新登壇年の新しい順でソートするボタン -->
-        <button
-          class="text-[12px] tracking-[0.06em] px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
-          type="button"
-          :aria-pressed='sort === "latest" ? "true" : "false"'
-          :class='sort === "latest"
-            ? "bg-ink text-paper border-ink"
-            : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
-          @click="sortByLatest"
-        >
-          {{ t.sort_latest }}
-          <span v-if='sort === "latest"' class="sr-only">
             （{{ t.selected }}）
           </span>
         </button>
