@@ -36,7 +36,9 @@ describe("AppHeader", () => {
     const html = await renderToString(createSSRApp(AppHeader));
 
     expect(html).toContain('href="https://vuefes.jp/2026/"');
-    expect(html).toContain("Vue Fes Japan 2026は10/24開催！");
+    expect(html).toContain(
+      "Vue Fes Japan 2026は大手町プレイス ホール＆カンファレンスで10/24開催！",
+    );
   });
 
   it("開催日翌日以降は誘導バナーを出さない", async () => {
@@ -46,7 +48,9 @@ describe("AppHeader", () => {
     const html = await renderToString(createSSRApp(AppHeader));
 
     expect(html).not.toContain('href="https://vuefes.jp/2026/"');
-    expect(html).not.toContain("Vue Fes Japan 2026は10/24開催！");
+    expect(html).not.toContain(
+      "Vue Fes Japan 2026は大手町プレイス ホール＆カンファレンスで10/24開催！",
+    );
   });
 
   it("保存済みの配色設定をマウント後に反映する", async () => {

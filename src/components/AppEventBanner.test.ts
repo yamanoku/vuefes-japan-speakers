@@ -17,7 +17,9 @@ describe("AppEventBanner", () => {
     expect(link.attributes("rel")).toBe("noopener noreferrer");
     expect(link.attributes("target")).toBe("_blank");
     expect(link.attributes("aria-label")).toContain("外部サイトへ移動");
-    expect(link.text()).toBe("Vue Fes Japan 2026は10/24開催！");
+    expect(link.text()).toBe(
+      "Vue Fes Japan 2026は大手町プレイス ホール＆カンファレンスで10/24開催！",
+    );
     expect(link.classes()).toContain("text-center");
     expect(link.classes()).toContain("block");
     expect(link.classes()).toContain("text-accent-ink");
