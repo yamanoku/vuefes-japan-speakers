@@ -6,9 +6,9 @@ const { t } = useVfjsI18n();
 
 <template>
   <!-- Vue Fes Japan 2026 公式サイトへの誘導バナー（ヘッダー直下・全幅） -->
-  <aside class="border-b border-rule bg-paper-2" :aria-label="t.event_banner_2026_label">
+  <aside class="border-b border-rule bg-accent" :aria-label="t.event_banner_2026_label">
     <a
-      class="block text-center px-pad-x py-[10px] font-body text-[13px] tracking-[-0.005em] text-ink no-underline hover:text-accent transition-colors"
+      class="block text-center px-pad-x py-[10px] font-body text-[13px] tracking-[-0.005em] text-accent-ink no-underline hover:underline transition-colors"
       href="https://vuefes.jp/2026/"
       :aria-label="`${t.event_banner_2026} (${t.external})`"
       rel="noopener noreferrer"

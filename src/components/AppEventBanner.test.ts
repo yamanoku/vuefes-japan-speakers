@@ -9,7 +9,7 @@ describe("AppEventBanner", () => {
     const aside = wrapper.get("aside");
     expect(aside.attributes("aria-label")).toBe("Vue Fes Japan 2026 のご案内");
     expect(aside.classes()).toContain("border-b");
-    expect(aside.classes()).toContain("bg-paper-2");
+    expect(aside.classes()).toContain("bg-accent");
 
     const link = aside.get('a[href="https://vuefes.jp/2026/"]');
     expect(link.attributes("rel")).toBe("noopener noreferrer");
@@ -18,6 +18,8 @@ describe("AppEventBanner", () => {
     expect(link.text()).toBe("Vue Fes Japan 2026は10/24開催！");
     expect(link.classes()).toContain("text-center");
     expect(link.classes()).toContain("block");
+    expect(link.classes()).toContain("text-accent-ink");
+    expect(link.classes()).toContain("hover:underline");
 
     wrapper.unmount();
   });
