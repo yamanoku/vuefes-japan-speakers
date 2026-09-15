@@ -22,7 +22,7 @@ onUnmounted(() => container?.replaceChildren());
 </script>
 
 <template>
-  <!-- Adring native 枠（最大 680×180）。未配信時は枠ごと非表示にする -->
+  <!-- Adring native 枠。未配信時は枠ごと非表示にする -->
   <aside
     class="border-t border-rule px-pad-x py-8 [&:not(:has([data-adring-widget]))]:hidden [&:has([data-adring-state=empty])]:hidden [&:has([data-adring-state=error])]:hidden"
     :aria-label="t.ad_label"
