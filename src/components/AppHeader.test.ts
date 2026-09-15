@@ -41,16 +41,14 @@ describe("AppHeader", () => {
     );
   });
 
-  it("開催日翌日以降は誘導バナーを出さない", async () => {
+  it("開催日翌日以降は誘導バナーを非表示にする", async () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-10-25T00:00:00+09:00"));
 
     const html = await renderToString(createSSRApp(AppHeader));
 
-    expect(html).not.toContain('href="https://vuefes.jp/2026/"');
-    expect(html).not.toContain(
-      "Vue Fes Japan 2026は大手町プレイス ホール＆カンファレンスで10/24開催！",
-    );
+    expect(html).toMatch(/<aside[^>]*style="display:none;"/);
+    expect(html).toContain('href="https://vuefes.jp/2026/"');
   });
 
   it("保存済みの配色設定をマウント後に反映する", async () => {
