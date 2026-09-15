@@ -36,6 +36,8 @@ export interface VfjsTranslations {
   skip_to_main: string;
   skip_to_footer: string;
   ad_label: string;
+  event_banner_2026: string;
+  event_banner_2026_label: string;
   stats_label: string;
   year_speakers_link: (year: string) => string;
   year_toc: string;
@@ -91,6 +93,8 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     skip_to_main: "本文へ",
     skip_to_footer: "フッターへ",
     ad_label: "広告",
+    event_banner_2026: "Vue Fes Japan 2026は10/24開催！",
+    event_banner_2026_label: "Vue Fes Japan 2026 のご案内",
     stats_label: "開催概要",
     year_speakers_link: (year) => `${year} のスピーカー`,
     year_toc: "年度",
@@ -145,6 +149,8 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     skip_to_main: "Skip to main content",
     skip_to_footer: "Skip to footer",
     ad_label: "Advertisement",
+    event_banner_2026: "Vue Fes Japan 2026 is on October 24!",
+    event_banner_2026_label: "Vue Fes Japan 2026 announcement",
     stats_label: "Overview",
     year_speakers_link: (year) => `${year} speakers`,
     year_toc: "Years",

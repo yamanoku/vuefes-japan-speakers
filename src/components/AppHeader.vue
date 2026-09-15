@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AppEventBanner from "./AppEventBanner.vue";
 import AppLogoMark from "./AppLogoMark.vue";
 import SkipLinks from "./SkipLinks.vue";
 import { useColorScheme } from "../composables/useColorScheme";
@@ -89,4 +90,5 @@ function setEnglish() {
       </div>
     </div>
   </header>
+  <AppEventBanner />
 </template>

@@ -28,6 +28,13 @@ describe("AppHeader", () => {
     expect(html).toContain("フッターへ");
   });
 
+  it("ヘッダー直下に Vue Fes Japan 2026 誘導バナーを置く", async () => {
+    const html = await renderToString(createSSRApp(AppHeader));
+
+    expect(html).toContain('href="https://vuefes.jp/2026/"');
+    expect(html).toContain("Vue Fes Japan 2026は10/24開催！");
+  });
+
   it("保存済みの配色設定をマウント後に反映する", async () => {
     localStorage.setItem(STORAGE_KEY, "light");
 
