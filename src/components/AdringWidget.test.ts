@@ -9,8 +9,9 @@ describe("AdringWidget", () => {
     const aside = wrapper.get("aside");
     expect(aside.attributes("aria-label")).toBe("広告");
     expect(aside.text()).toContain("広告");
-    expect(aside.get("div").attributes("class")).toContain("max-w-[680px]");
-    expect(aside.get("div").attributes("class")).toContain("min-h-[180px]");
+    expect(aside.get("div").attributes("class")).toContain("w-full");
+    expect(aside.get("div").attributes("class")).not.toContain("max-w-[680px]");
+    expect(aside.get("div").attributes("class")).not.toContain("min-h-[180px]");
     expect(wrapper.find("script").exists()).toBe(false);
 
     wrapper.unmount();

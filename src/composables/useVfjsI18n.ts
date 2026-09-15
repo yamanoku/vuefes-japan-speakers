@@ -45,7 +45,6 @@ export interface VfjsTranslations {
   sort_appearances: string;
   sort_name_asc: string;
   sort_name_desc: string;
-  sort_latest: string;
   selected: string;
   year_total_talks: (n: number) => string;
   appearance_count: (n: number) => string;
@@ -102,7 +101,6 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     sort_appearances: "登壇回数の多い順",
     sort_name_asc: "名前順（A→Z）",
     sort_name_desc: "名前順（Z→A）",
-    sort_latest: "最新年の新しい順",
     selected: "選択中",
     year_total_talks: (n: number) => `全 ${n} 発表`,
     appearance_count: (n: number) => `${n}回登壇`,
@@ -158,7 +156,6 @@ const translations: Record<"ja" | "en", VfjsTranslations> = {
     sort_appearances: "Most appearances",
     sort_name_asc: "Name A to Z",
     sort_name_desc: "Name Z to A",
-    sort_latest: "Latest year",
     selected: "selected",
     year_total_talks: (n: number) => `${n} talks total`,
     appearance_count: (n: number) => `${n} appearance${n > 1 ? "s" : ""}`,
