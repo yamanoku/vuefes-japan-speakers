@@ -24,8 +24,8 @@ catalogs:
       version: 0.28.2
   test:
     '@vue/test-utils':
-      specifier: 2.5.0
-      version: 2.5.0
+      specifier: 2.5.1
+      version: 2.5.1
     playwright:
       specifier: 1.63.0
       version: 1.63.0
@@ -103,7 +103,7 @@ importers:
         version: 0.391.0(@vizejs/vite-plugin@0.391.0(vite@8.0.16(@types/node@24.13.4)(esbuild@0.28.2)(jiti@2.7.0))(vue@3.5.42(typescript@7.0.2)))(axe-core@4.13.0)(playwright@1.63.0)(vite@8.0.16(@types/node@24.13.4)(esbuild@0.28.2)(jiti@2.7.0))
       '@vue/test-utils':
         specifier: catalog:test
-        version: 2.5.0(@vue/compiler-dom@3.6.0-beta.15)(@vue/server-renderer@3.5.42)(vue@3.5.42(typescript@7.0.2))
+        version: 2.5.1(@vue/compiler-dom@3.6.0-beta.15)(@vue/server-renderer@3.5.42)(vue@3.5.42(typescript@7.0.2))
       axe-core:
         specifier: catalog:musea
         version: 4.13.0
@@ -1753,8 +1753,8 @@ packages:
   '@vue/shared@3.6.0-beta.15':
     resolution: {integrity: sha512-wyjMjw2AmP6h9qNpVZAO77rgxd6+jcMu+2Wmg9729mmR+V5HPweBSKWggioSNR6NBazMMGY4ekb5U9DUp1KRFg==}
 
-  '@vue/test-utils@2.5.0':
-    resolution: {integrity: sha512-6Clu5EKR/r6cDPYrKsu+8wenciWJJ3rhS9OEGsfDlZeZIhlJeEPGIZQHxE4lHRJCzPSq3EWMsFxQUqCvrbHQuQ==}
+  '@vue/test-utils@2.5.1':
+    resolution: {integrity: sha512-V/4a99odJ7hapr0bRt35XxljGk8hefq31gSOnlKTcEq2fUeoj2qb+FcpJYfQu4qfYhW9Ug+O2+CZ3QmZ7gXDzA==}
     peerDependencies:
       '@vue/compiler-dom': 3.x
       '@vue/server-renderer': 3.x
@@ -3400,7 +3400,7 @@ snapshots:
 
   '@vue/shared@3.6.0-beta.15': {}
 
-  '@vue/test-utils@2.5.0(@vue/compiler-dom@3.6.0-beta.15)(@vue/server-renderer@3.5.42)(vue@3.5.42(typescript@7.0.2))':
+  '@vue/test-utils@2.5.1(@vue/compiler-dom@3.6.0-beta.15)(@vue/server-renderer@3.5.42)(vue@3.5.42(typescript@7.0.2))':
     dependencies:
       '@vue/compiler-dom': 3.6.0-beta.15
       js-beautify: 2.0.3
