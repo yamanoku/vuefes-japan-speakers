@@ -12,10 +12,6 @@ export const speakers2026: SpeakerInfo[] = [
     url: "https://vuefes.jp/2026/speaker/posva",
   },
   {
-    name: ["Pooya Parsa"],
-    url: "https://vuefes.jp/2026/speaker/pi0",
-  },
-  {
     name: ["Charles Wang"],
     title: "Vite Task’s Cache Magic",
     url: "https://vuefes.jp/2026/speaker/wan9chi",
@@ -29,14 +25,6 @@ export const speakers2026: SpeakerInfo[] = [
     name: ["中野 美咲"],
     title: "ブランドのためのWebGLアニメーション（仮）",
     url: "https://vuefes.jp/2026/speaker/mnmxmx",
-  },
-  {
-    name: ["Kongkeit Khunpanitchot (aka saltyaom)"],
-    url: "https://vuefes.jp/2026/speaker/SaltyAom",
-  },
-  {
-    name: ["Yusuke Wada"],
-    url: "https://vuefes.jp/2026/speaker/yusukebe",
   },
   {
     name: ["Naoki Haba"],
@@ -167,6 +155,13 @@ export const speakers2026: SpeakerInfo[] = [
     name: ["Evan You", "古川 陽介", "Alistair Smith", "Leo Kettmeir", "re-taro"],
     title: "JavaScriptエコシステムの境界線を問い直す",
     url: "https://vuefes.jp/2026/event?session=panel-discussion#panel-discussion",
+    format: "panel",
+  },
+  {
+    name: ["Pooya Parsa", "Yusuke Wada", "Kongkeit Khunpanitchot (aka saltyaom)"],
+    title:
+      "サーバーサイドフレームワークの未来を語る── Nitro / Hono / Elysia と辿る「過去・現在・未来」",
+    url: "https://vuefes.jp/2026/event?section=panel-discussion-2#panel-discussion-2",
     format: "panel",
   },
   {
