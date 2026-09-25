@@ -13,7 +13,7 @@ catalogs:
   test:
     "@vue/test-utils": 2.5.1
     playwright: 1.63.0
-    vitest: 5.0.1
+    vitest: 5.0.2
   typescript:
     "@types/node": 24.13.6
     typescript: 7.0.2
