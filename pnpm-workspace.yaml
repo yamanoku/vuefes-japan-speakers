@@ -34,8 +34,8 @@ catalogs:
     oxlint-plugin-vize: 0.391.0
     vize: 0.391.0
   vp:
-    vite: npm:@voidzero-dev/vite-plus-core@0.1.24
-    vite-plus: 0.1.24
+    vite: npm:@voidzero-dev/vite-plus-core@1.0.0
+    vite-plus: 1.0.0
     vitest: npm:@voidzero-dev/vite-plus-test@0.1.24
 
 peerDependencyRules:
