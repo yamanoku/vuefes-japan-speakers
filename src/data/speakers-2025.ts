@@ -171,12 +171,12 @@ export const speakers2025: SpeakerInfo[] = [
     url: "https://vuefes.jp/2025/sponsors/lycorp#yusuke-sano",
   },
   {
-    name: ["片山拓海"],
+    name: ["片山 拓海"],
     title: "プレイドのユニークな技術とインターンのリアル",
     url: "https://vuefes.jp/2025/sponsors/plaid#takumi-katayama",
   },
   {
-    name: ["齊藤広野"],
+    name: ["齊藤 広野"],
     title: "Vue.jsを8年間使ってきた会社が今考えていること",
     url: "https://vuefes.jp/2025/sponsors/studio#koya-saito",
   },
