@@ -252,7 +252,7 @@ const directoryHeadingId = useId();
                 v-if="rec.talks.length > 1"
                 class="font-mono bg-accent text-[12px] text-accent-ink ml-2 font-normal tracking-[0.02em] align-[2px] border border-accent px-1.25 py-[1px]"
               >
-                ×{{ rec.talks.length }}
+                <span>×{{ rec.talks.length }}</span>
               </span>
             </span>
             <!-- 登壇年度グリッド（名前は行ボタンの aria-label に集約） -->
