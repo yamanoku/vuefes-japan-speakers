@@ -42,7 +42,7 @@ export const speakers2026: SpeakerInfo[] = [
     url: "https://vuefes.jp/2026/speaker/alvarosabu",
   },
   {
-    name: ["永井優斗"],
+    name: ["永井 優斗"],
     nameRuby: ["ながい ゆうと"],
     nameEn: ["Yuto NAGAI"],
     title: "Vue.jsのGitHubから学ぶ意思決定",
@@ -66,7 +66,7 @@ export const speakers2026: SpeakerInfo[] = [
     url: "https://vuefes.jp/2026/speaker/ushironoko",
   },
   {
-    name: ["辻佳佑"],
+    name: ["辻 佳佑"],
     title: "決定的なフロントエンドアーキテクチャがいい",
     url: "https://vuefes.jp/2026/speaker/t0daaay",
   },
@@ -102,7 +102,7 @@ export const speakers2026: SpeakerInfo[] = [
     url: "https://vuefes.jp/2026/speaker/Hal-Spidernight",
   },
   {
-    name: ["福田繁之"],
+    name: ["福田 繁之"],
     title: "Vapor Modeでアクセシビリティは壊れないか検証した話",
     url: "https://vuefes.jp/2026/speaker/Shigeyuki-fukuda",
   },
@@ -165,7 +165,7 @@ export const speakers2026: SpeakerInfo[] = [
     format: "panel",
   },
   {
-    name: ["竹井啓"],
+    name: ["竹井 啓"],
     title: "デザインを開発する ~ Vueで実現するデザインプロセス改善 ~",
     url: "https://vuefes.jp/2026/speaker/keeeeeei200",
   },
@@ -175,7 +175,7 @@ export const speakers2026: SpeakerInfo[] = [
     url: "https://vuefes.jp/2026/speaker/yug1224",
   },
   {
-    name: ["篠田貴大"],
+    name: ["篠田 貴大"],
     title: "クラウドサインを止めずに Nuxt へ、次の10年のために先に決めたこと",
     url: "https://vuefes.jp/2026/speaker/tttttt_621_s",
   },
@@ -190,7 +190,7 @@ export const speakers2026: SpeakerInfo[] = [
     url: "https://vuefes.jp/2026/speaker/RyutaroYako",
   },
   {
-    name: ["宮崎喬行"],
+    name: ["宮崎 喬行"],
     title: "新卒のキャッチアップコストから決めたNuxt 3移行",
     url: "https://vuefes.jp/2026/speaker/takayuki-miyazaki",
   },
@@ -200,7 +200,7 @@ export const speakers2026: SpeakerInfo[] = [
     url: "https://vuefes.jp/2026/speaker/fuchio-gt",
   },
   {
-    name: ["揚野将士"],
+    name: ["揚野 将士"],
     title: "npmサプライチェーンが狙われた1年 ─ 金融システムで実践している防御策",
     url: "https://vuefes.jp/2026/speaker/masashi-ageno",
   },

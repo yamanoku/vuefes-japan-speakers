@@ -25,4 +25,32 @@ describe("speaker data accessors", () => {
     expect(speakers.length).toBeGreaterThan(0);
     expect(speakers.every((speaker) => speaker.nameEn?.includes("yamanoku"))).toBe(true);
   });
+
+  it("漢字の日本人名は名字と名前を半角スペースで区切る", () => {
+    const names = [...new Set(getAllSpeakersWithYear().flatMap((speaker) => speaker.name))];
+    const familyGiven = /^[\u4e00-\u9fff]+ [\u4e00-\u9fff]+$/;
+
+    for (const name of names) {
+      const kanjiOnly = name.replace(/[^\u4e00-\u9fff]/gu, "");
+      const hasNonKanji = /[^\u4e00-\u9fff\s]/u.test(name);
+      if (hasNonKanji) continue;
+      if (/\s/u.test(name) || kanjiOnly.length >= 3) {
+        expect(name, name).toMatch(familyGiven);
+      }
+    }
+
+    expect(names).toContain("ナイトウ コウスケ");
+  });
+
+  it("表記を揃えた登壇者は年をまたいで同一人物になる", () => {
+    const yearsOf = (name: string) =>
+      getAllSpeakersWithYear()
+        .filter((speaker) => speaker.name.includes(name))
+        .map((speaker) => speaker.year)
+        .sort();
+
+    expect(yearsOf("永井 優斗")).toEqual(["2024", "2025", "2026"]);
+    expect(yearsOf("辻 佳佑")).toEqual(["2024", "2026"]);
+    expect(yearsOf("篠田 貴大")).toEqual(["2023", "2026"]);
+  });
 });
