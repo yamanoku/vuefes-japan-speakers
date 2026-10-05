@@ -38,8 +38,12 @@ describe("speaker data accessors", () => {
         expect(name, name).toMatch(familyGiven);
       }
     }
+  });
 
-    expect(names).toContain("ナイトウ コウスケ");
+  it("ナイトウコウスケは公式表記のまま残す", () => {
+    const names = [...new Set(getAllSpeakersWithYear().flatMap((speaker) => speaker.name))];
+
+    expect(names).toContain("ナイトウコウスケ");
   });
 
   it("表記を揃えた登壇者は年をまたいで同一人物になる", () => {

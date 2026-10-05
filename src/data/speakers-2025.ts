@@ -54,7 +54,7 @@ export const speakers2025: SpeakerInfo[] = [
     url: "https://vuefes.jp/2025/speaker/toddeTV",
   },
   {
-    name: ["ナイトウ コウスケ"],
+    name: ["ナイトウコウスケ"],
     title: "最高の DX - Nuxt Typed Router と Pinia Colada で実現する次世代 Vue/Nuxt 開発",
     url: "https://vuefes.jp/2025/speaker/naitokosuke",
   },
