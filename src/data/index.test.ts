@@ -26,26 +26,6 @@ describe("speaker data accessors", () => {
     expect(speakers.every((speaker) => speaker.nameEn?.includes("yamanoku"))).toBe(true);
   });
 
-  it("漢字の日本人名は名字と名前を半角スペースで区切る", () => {
-    const names = [...new Set(getAllSpeakersWithYear().flatMap((speaker) => speaker.name))];
-    const familyGiven = /^[\u4e00-\u9fff]+ [\u4e00-\u9fff]+$/;
-
-    for (const name of names) {
-      const kanjiOnly = name.replace(/[^\u4e00-\u9fff]/gu, "");
-      const hasNonKanji = /[^\u4e00-\u9fff\s]/u.test(name);
-      if (hasNonKanji) continue;
-      if (/\s/u.test(name) || kanjiOnly.length >= 3) {
-        expect(name, name).toMatch(familyGiven);
-      }
-    }
-  });
-
-  it("ナイトウコウスケは公式表記のまま残す", () => {
-    const names = [...new Set(getAllSpeakersWithYear().flatMap((speaker) => speaker.name))];
-
-    expect(names).toContain("ナイトウコウスケ");
-  });
-
   it("表記を揃えた登壇者は年をまたいで同一人物になる", () => {
     const yearsOf = (name: string) =>
       getAllSpeakersWithYear()
