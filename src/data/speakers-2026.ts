@@ -158,12 +158,7 @@ export const speakers2026: SpeakerInfo[] = [
     format: "panel",
   },
   {
-    name: [
-      "Pooya Parsa",
-      "Yusuke Wada",
-      "Kongkeit Khunpanitchot (aka saltyaom)",
-      "Anthony Fu",
-    ],
+    name: ["Pooya Parsa", "Yusuke Wada", "Kongkeit Khunpanitchot (aka saltyaom)", "Anthony Fu"],
     title:
       "サーバーサイドフレームワークの未来を語る── Nitro / Hono / Elysia と辿る「過去・現在・未来」",
     url: "https://vuefes.jp/2026/event?section=panel-discussion-2#panel-discussion-2",
