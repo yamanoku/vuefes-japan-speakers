@@ -23,7 +23,7 @@ export const speakers2026: SpeakerInfo[] = [
   },
   {
     name: ["中野 美咲"],
-    title: "ブランドのためのWebGLアニメーション（仮）",
+    title: "WebGLで見る、有限な計算と滑らかな世界",
     url: "https://vuefes.jp/2026/speaker/mnmxmx",
   },
   {
