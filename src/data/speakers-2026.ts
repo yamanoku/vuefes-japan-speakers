@@ -60,12 +60,6 @@ export const speakers2026: SpeakerInfo[] = [
     url: "https://vuefes.jp/2026/speaker/hiranuma",
   },
   {
-    name: ["うしろのこ"],
-    nameEn: ["ushironoko"],
-    title: "型なし、テストなし、1万行のドメインロジックがあるVuexをPiniaへ移行する",
-    url: "https://vuefes.jp/2026/speaker/ushironoko",
-  },
-  {
     name: ["辻 佳佑"],
     title: "決定的なフロントエンドアーキテクチャがいい",
     url: "https://vuefes.jp/2026/speaker/t0daaay",
