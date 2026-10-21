@@ -41,6 +41,8 @@ const vueConfig = {
 } satisfies VueOptions;
 
 export default defineConfig({
+  // Leave SFC compilation to vuerend. Vize still reads vue for lint, format, and typecheck.
+  compiler: false,
   plugins: [
     tailwindcss(),
     ...museaGallery(),
