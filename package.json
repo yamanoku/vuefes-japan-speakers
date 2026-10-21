@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@types/node": "catalog:typescript",
+    "@vitest/browser-playwright": "catalog:vp",
     "@vizejs/vite-plugin": "catalog:vize",
     "@vizejs/vite-plugin-musea": "catalog:musea",
     "@vue/test-utils": "catalog:test",
