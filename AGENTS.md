@@ -110,7 +110,7 @@ vp config
 ## Vize / Lint / 型チェック
 
 - Vue SFC compiler は vuerend の標準 Vue plugin を使います。
-- Lint: `vp run lint` で Oxlint と Vize の Vue 診断をまとめて実行します。Oxlint 単体の設定は `config/vite/tooling.ts` の `lint`、Vize の preset は `vize.config.ts` を参照します。
+- Lint: `vp run lint` で Oxlint と Vize の Vue 診断をまとめて実行します。Oxlint 単体の設定は `config/vite/tooling.ts` の `lint`、Vize の preset は `vite.config.ts` の `vue.linter` を参照します。
 - Format: `vp run format` で oxfmt と Vize formatter を組み合わせて実行します。
 - 型チェック: `vize check --tsconfig tsconfig.vize.json` を `vp run typecheck` 経由で実行します。
 - Musea: `@vizejs/vite-plugin-musea` を Vite plugin として有効化し、`src/**/*.art.vue` を `/__musea__` に表示します。

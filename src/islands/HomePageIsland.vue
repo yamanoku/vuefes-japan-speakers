@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, useId, watch } from "vue";
+import { computed, nextTick, onMounted, ref, useId, useTemplateRef, watch } from "vue";
 import type { AcceptedYear, SpeakerWithYear } from "../../types";
 import { YEARS } from "../../types";
 import AdringWidget from "../components/AdringWidget.vue";
@@ -72,8 +72,8 @@ const stats = computed(() => {
 const tabOrder = ["chronicle", "index"] as const;
 type ViewMode = (typeof tabOrder)[number];
 
-const chronicleTabRef = ref<HTMLButtonElement | null>(null);
-const directoryTabRef = ref<HTMLButtonElement | null>(null);
+const chronicleTabRef = useTemplateRef<HTMLButtonElement>("chronicleTabRef");
+const directoryTabRef = useTemplateRef<HTMLButtonElement>("directoryTabRef");
 const tabChronicleId = useId();
 const tabDirectoryId = useId();
 const panelChronicleId = useId();
@@ -140,17 +140,17 @@ function updateSelectedYear(value: AcceptedYear | "all") {
       >
         <!-- 年度別クロニクルビュータブ -->
         <button
+          :id="tabChronicleId"
           ref="chronicleTabRef"
           class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
           role="tab"
           type="button"
-          :id="tabChronicleId"
           :aria-controls="panelChronicleId"
-          :aria-selected='view === "chronicle"'
-          :tabindex='view === "chronicle" ? 0 : -1'
-          :class='view === "chronicle"
-            ? "text-ink [box-shadow:inset_0_-4px_0_var(--accent)]"
-            : "text-ink-3 hover:text-ink"'
+          :aria-selected="view === 'chronicle'"
+          :tabindex="view === 'chronicle' ? 0 : -1"
+          :class="view === 'chronicle'
+            ? 'text-ink [box-shadow:inset_0_-4px_0_var(--accent)]'
+            : 'text-ink-3 hover:text-ink'"
           @click="showChronicle"
           @keydown="onTabKeydown"
         >
@@ -161,17 +161,17 @@ function updateSelectedYear(value: AcceptedYear | "all") {
         </button>
         <!-- スピーカー名索引ディレクトリビュータブ -->
         <button
+          :id="tabDirectoryId"
           ref="directoryTabRef"
           class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
           role="tab"
           type="button"
-          :id="tabDirectoryId"
           :aria-controls="panelDirectoryId"
-          :aria-selected='view === "index"'
-          :tabindex='view === "index" ? 0 : -1'
-          :class='view === "index"
-            ? "text-ink [box-shadow:inset_0_-4px_0_var(--accent)]"
-            : "text-ink-3 hover:text-ink"'
+          :aria-selected="view === 'index'"
+          :tabindex="view === 'index' ? 0 : -1"
+          :class="view === 'index'
+            ? 'text-ink [box-shadow:inset_0_-4px_0_var(--accent)]'
+            : 'text-ink-3 hover:text-ink'"
           @click="showDirectory"
           @keydown="onTabKeydown"
         >
@@ -184,9 +184,9 @@ function updateSelectedYear(value: AcceptedYear | "all") {
       <!-- 選択中のビューに応じてコンポーネントを切り替え -->
       <!-- 年度別クロニクルビュー -->
       <div
-        v-if='view === "chronicle"'
-        role="tabpanel"
+        v-if="view === 'chronicle'"
         :id="panelChronicleId"
+        role="tabpanel"
         :aria-labelledby="tabChronicleId"
       >
         <ChronicleView
@@ -200,7 +200,7 @@ function updateSelectedYear(value: AcceptedYear | "all") {
         />
       </div>
       <!-- スピーカー索引ディレクトリビュー -->
-      <div v-else role="tabpanel" :id="panelDirectoryId" :aria-labelledby="tabDirectoryId">
+      <div v-else :id="panelDirectoryId" role="tabpanel" :aria-labelledby="tabDirectoryId">
         <DirectoryView
           :all-speakers
           :query

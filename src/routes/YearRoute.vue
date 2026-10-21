@@ -2,15 +2,15 @@
 import type { SpeakerInfo } from "../../types";
 import { YearPageIsland } from "../island-definitions";
 
-defineOptions({
-  name: "YearRoute",
-});
-
 const { found, speakers, year } = defineProps<{
   found: boolean;
   speakers: SpeakerInfo[];
   year: string;
 }>();
+
+defineOptions({
+  name: "YearRoute",
+});
 </script>
 
 <template>

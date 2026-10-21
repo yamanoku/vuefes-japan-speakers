@@ -2,13 +2,13 @@
 import type { SpeakerWithYear } from "../../types";
 import { HomePageIsland } from "../island-definitions";
 
-defineOptions({
-  name: "HomeRoute",
-});
-
 const { allSpeakers } = defineProps<{
   allSpeakers: SpeakerWithYear[];
 }>();
+
+defineOptions({
+  name: "HomeRoute",
+});
 </script>
 
 <template>
