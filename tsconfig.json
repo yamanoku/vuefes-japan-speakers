@@ -20,7 +20,6 @@
     "types/**/*.ts",
     "config/**/*.ts",
     "env.d.ts",
-    "vize.config.ts",
     "vite.config.ts"
   ]
 }

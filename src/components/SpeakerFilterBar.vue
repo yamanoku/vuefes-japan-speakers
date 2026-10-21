@@ -45,9 +45,9 @@ function updateSelectedSpeaker(event: Event) {
       </label>
       <div class="min-w-0">
         <input
+          :id="searchId"
           class="bg-transparent border-0 border-b border-rule px-0 py-[8px] font-body text-[15px] text-ink outline-none focus:border-accent w-full"
           type="search"
-          :id="searchId"
           :aria-describedby="searchHintId"
           :placeholder="t.filter_search_ph"
           :value="query"
@@ -59,7 +59,9 @@ function updateSelectedSpeaker(event: Event) {
       </div>
     </form>
     <!-- スピーカー絞り込みフィールド -->
-    <div class="grow-1 basis-[calc((50% - 100%) * 999)] grid grid-cols-[auto_1fr] gap-[12px] items-center">
+    <div
+      class="grow-1 basis-[calc((50% - 100%) * 999)] grid grid-cols-[auto_1fr] gap-[12px] items-center"
+    >
       <label
         class="font-mono text-[12px] tracking-[0.1em] text-ink whitespace-nowrap"
         :for="speakerId"
@@ -67,8 +69,8 @@ function updateSelectedSpeaker(event: Event) {
         {{ t.filter_speaker }}
       </label>
       <select
-        class="bg-transparent border-0 border-b border-rule px-0 pr-6 py-2 font-body text-[15px] text-ink cursor-pointer outline-none w-full focus:border-accent"
         :id="speakerId"
+        class="bg-transparent border-0 border-b border-rule px-0 pr-6 py-2 font-body text-[15px] text-ink cursor-pointer outline-none w-full focus:border-accent"
         :value="selectedSpeaker"
         @change="updateSelectedSpeaker"
       >

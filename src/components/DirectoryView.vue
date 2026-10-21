@@ -152,26 +152,28 @@ const directoryHeadingId = useId();
     <YearFilterBar :counts :selected-year @update:selected-year="updateSelectedYear" />
     <!-- 一覧見出し（件数とソート状態を含む） -->
     <h2
-      class="px-pad-x pt-4.5 pb-0 m-0 font-mono text-[12px] tracking-[0.06em] text-ink"
       :id="directoryHeadingId"
+      class="px-pad-x pt-4.5 pb-0 m-0 font-mono text-[12px] tracking-[0.06em] text-ink"
     >
       {{ t.directory_heading(filtered.length, sortLabel) }}
     </h2>
     <!-- ソートボタンヘッダー（登壇回数・名前順で並び替え） -->
-    <div class="flex items-center gap-2 px-pad-x pt-2 pb-2.5 border-b border-rule-soft font-mono overflow-x-auto">
+    <div
+      class="flex items-center gap-2 px-pad-x pt-2 pb-2.5 border-b border-rule-soft font-mono overflow-x-auto"
+    >
       <div class="flex items-center gap-2" role="group" :aria-label="t.sort_label">
         <!-- 登壇回数の多い順でソートするボタン -->
         <button
           class="text-[12px] tracking-[0.06em] px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           type="button"
-          :aria-pressed='sort === "appearances" ? "true" : "false"'
-          :class='sort === "appearances"
-            ? "bg-ink text-paper border-ink"
-            : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
+          :aria-pressed="sort === 'appearances' ? 'true' : 'false'"
+          :class="sort === 'appearances'
+            ? 'bg-ink text-paper border-ink'
+            : 'border-rule text-ink-2 hover:text-ink hover:border-ink'"
           @click="sortByAppearances"
         >
           {{ t.sort_appearances }}
-          <span v-if='sort === "appearances"' class="sr-only">
+          <span v-if="sort === 'appearances'" class="sr-only">
             （{{ t.selected }}）
           </span>
         </button>
@@ -179,14 +181,14 @@ const directoryHeadingId = useId();
         <button
           class="text-[12px] tracking-[0.06em] px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           type="button"
-          :aria-pressed='sort === "name-asc" || sort === "name-desc" ? "true" : "false"'
-          :class='sort === "name-asc" || sort === "name-desc"
-            ? "bg-ink text-paper border-ink"
-            : "border-rule text-ink-2 hover:text-ink hover:border-ink"'
+          :aria-pressed="sort === 'name-asc' || sort === 'name-desc' ? 'true' : 'false'"
+          :class="sort === 'name-asc' || sort === 'name-desc'
+            ? 'bg-ink text-paper border-ink'
+            : 'border-rule text-ink-2 hover:text-ink hover:border-ink'"
           @click="toggleNameSort"
         >
           {{ sort === "name-desc" ? t.sort_name_desc : t.sort_name_asc }}
-          <span v-if='sort === "name-asc" || sort === "name-desc"' class="sr-only">
+          <span v-if="sort === 'name-asc' || sort === 'name-desc'" class="sr-only">
             （{{ t.selected }}）
           </span>
         </button>
@@ -215,7 +217,7 @@ const directoryHeadingId = useId();
         v-for="(rec, i) in filtered"
         :key="rec.name"
         class="border-b border-rule-softer"
-        :data-open='openRows.has(rec.name) ? "true" : "false"'
+        :data-open="openRows.has(rec.name) ? 'true' : 'false'"
       >
         <!-- スピーカー行の展開/折りたたみボタン -->
         <button
@@ -224,10 +226,12 @@ const directoryHeadingId = useId();
           :aria-controls="directoryPanelId(rec.name)"
           :aria-expanded="openRows.has(rec.name)"
           :aria-label="rowLabel(rec)"
-          :class='openRows.has(rec.name) ? "bg-paper-2" : ""'
+          :class="openRows.has(rec.name) ? 'bg-paper-2' : ''"
           @click="() => toggleRow(rec.name)"
         >
-          <span class="basis-0 grow-999 min-inline-[50%] flex flex-wrap gap-2 justify-start items-center">
+          <span
+            class="basis-0 grow-999 min-inline-[50%] flex flex-wrap gap-2 justify-start items-center"
+          >
             <!-- 行番号（表示専用） -->
             <span aria-hidden="true" class="font-mono text-[12px] text-ink-2 tabular-nums">
               {{ String(i + 1).padStart(3, "0") }}
@@ -236,9 +240,9 @@ const directoryHeadingId = useId();
             <span
               aria-hidden="true"
               class="font-display text-[clamp(15px,1.2vw,18px)] font-[500] tracking-[-0.005em] text-ink"
-              :lang='hasJapanese(rec.name) ? "ja" : "en"'
+              :lang="hasJapanese(rec.name) ? 'ja' : 'en'"
             >
-              <ruby v-if='rec.nameRuby && lang === "ja"'>
+              <ruby v-if="rec.nameRuby && lang === 'ja'">
                 {{ rec.name }}
                 <rt>
                   {{ rec.nameRuby }}
@@ -264,13 +268,13 @@ const directoryHeadingId = useId();
                 v-for="y in YEARS"
                 :key="y"
                 class="w-7 h-[22px] flex items-center justify-center font-mono text-[12px] tracking-[0]"
-                :class='[
+                :class="[
                   rec.years.includes(y) && selectedYear === y
-                    ? "bg-accent border border-accent text-accent-ink"
+                    ? 'bg-accent border border-accent text-accent-ink'
                     : rec.years.includes(y)
-                      ? "bg-ink border border-ink text-paper"
-                      : "border border-ink text-ink",
-                ]'
+                      ? 'bg-ink border border-ink text-paper'
+                      : 'border border-ink text-ink',
+                ]"
                 :title="y"
               >
                 {{ y.slice(-2) }}
@@ -288,8 +292,8 @@ const directoryHeadingId = useId();
         <!-- 展開時の詳細エリア（プロフィールリンクと登壇一覧） -->
         <div
           v-if="openRows.has(rec.name)"
-          class="bg-paper-2 border-t border-rule-softer pt-2 pb-[22px] px-pad-x"
           :id="directoryPanelId(rec.name)"
+          class="bg-paper-2 border-t border-rule-softer pt-2 pb-[22px] px-pad-x"
         >
           <!-- スピーカープロフィールページへのリンク -->
           <!-- @vize:docs dynamic route uses encodeURIComponent for the local speaker name -->
@@ -306,9 +310,9 @@ const directoryHeadingId = useId();
             <!-- 各登壇情報（開催年・タイトル・共同登壇者） -->
             <li
               v-for="(talk, k) in rec.talks"
-              :key='`${talk.year}-${talk.title ?? talk.url}-${talk.coSpeakers.join("|")}`'
+              :key="`${talk.year}-${talk.title ?? talk.url}-${talk.coSpeakers.join('|')}`"
               class="grid grid-cols-[30px_1fr] gap-4 items-baseline py-1.5 border-t border-rule-softer"
-              :class='k === 0 ? "border-t-0" : ""'
+              :class="k === 0 ? 'border-t-0' : ''"
             >
               <!-- 開催年リンク（年度別ページへ） -->
               <!-- @vize:docs dynamic route is generated from the local AcceptedYear list -->
@@ -332,7 +336,7 @@ const directoryHeadingId = useId();
                 >
                   <!-- パネルセッションのフォーマットバッジ -->
                   <span
-                    v-if='talk.format === "panel"'
+                    v-if="talk.format === 'panel'"
                     class="relative top-[-1px] inline-flex items-center self-center align-middle font-mono text-[10px] uppercase tracking-[0.06em] border border-ink text-ink px-[5px] py-[1px] leading-[1.15] mr-2"
                   >
                     {{ t.session_format_panel }}

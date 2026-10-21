@@ -21,11 +21,13 @@ const { t, lang } = useVfjsI18n();
     <main id="main" tabindex="-1">
       <template v-if="found">
         <!-- 年度ページのヘッダー（タイトル・トーク数・公式サイトリンク） -->
-        <header class="border-b border-rule pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-pad-x">
+        <header
+          class="border-b border-rule pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-pad-x"
+        >
           <!-- 年度タイトル（2022年はオンライン開催のサブ表記付き） -->
           <h1 class="font-display text-[clamp(28px,4.5vw,72px)] font-[500] leading-[1] mb-4">
             Vue Fes Japan
-            <span v-if='year === "2022"'>
+            <span v-if="year === '2022'">
               Online
             </span>
             <em class="not-italic text-accent">
@@ -67,7 +69,7 @@ const { t, lang } = useVfjsI18n();
             <!-- 各スピーカーの行 -->
             <li
               v-for="(speaker, index) in speakers"
-              :key='`${speaker.url}-${speaker.title ?? ""}-${speaker.name.join("|")}`'
+              :key="`${speaker.url}-${speaker.title ?? ''}-${speaker.name.join('|')}`"
               class="grid grid-cols-[40px_1fr] border-t border-rule-softer py-4.5"
             >
               <!-- 行番号（表示専用） -->
@@ -89,7 +91,7 @@ const { t, lang } = useVfjsI18n();
                       class="text-[18px] font-mono border-b border-rule-soft pb-[1px] no-underline transition-colors hover:border-accent hover:text-accent"
                       :href="`/speakers/${encodeURIComponent(name)}`"
                     >
-                      <ruby v-if='speaker.nameRuby?.[nameIndex] && lang === "ja"' lang="ja">
+                      <ruby v-if="speaker.nameRuby?.[nameIndex] && lang === 'ja'" lang="ja">
                         {{ name }}
                         <rt>
                           {{ speaker.nameRuby[nameIndex] }}
@@ -117,7 +119,7 @@ const { t, lang } = useVfjsI18n();
                   >
                     <!-- パネルセッションのフォーマットバッジ -->
                     <span
-                      v-if='speaker.format === "panel"'
+                      v-if="speaker.format === 'panel'"
                       class="relative top-[-1px] inline-flex items-center self-center align-middle font-mono text-[10px] uppercase tracking-[0.06em] border border-ink text-ink px-[5px] py-[1px] leading-[1.15] mr-2"
                     >
                       {{ t.session_format_panel }}

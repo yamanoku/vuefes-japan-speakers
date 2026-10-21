@@ -123,11 +123,13 @@ function updateSelectedYear(value: AcceptedYear | "all") {
       >
         <!-- 年度見出し（スクロール時に上部に固定） -->
         <div
-          class="flex flex-col items-start sticky top-[72px] max-[800px]:static"
           :id="`year-${year}`"
+          class="flex flex-col items-start sticky top-[72px] max-[800px]:static"
         >
           <h2 class="flex flex-col items-start m-0">
-            <span class="font-display font-[500] text-[clamp(72px,8vw,120px)] leading-[0.85] tabular-nums text-ink">
+            <span
+              class="font-display font-[500] text-[clamp(72px,8vw,120px)] leading-[0.85] tabular-nums text-ink"
+            >
               {{ year }}
             </span>
             <span class="font-mono text-[14px] tracking-[0.08em] uppercase text-ink-2 mt-2.5">
@@ -161,7 +163,9 @@ function updateSelectedYear(value: AcceptedYear | "all") {
             </div>
             <div class="flex flex-wrap gap-[clamp(16px,2vw,32px)] items-baseline">
               <!-- スピーカー名（複数名対応・振り仮名・英語名対応、プロフィールページへのリンク） -->
-              <div class="flex flex-wrap gap-x-2 gap-y-1 basis-50 grow-1 font-display font-[500] text-[clamp(17px,1.5vw,22px)] tracking-[-0.01em] leading-[1.25]">
+              <div
+                class="flex flex-wrap gap-x-2 gap-y-1 basis-50 grow-1 font-display font-[500] text-[clamp(17px,1.5vw,22px)] tracking-[-0.01em] leading-[1.25]"
+              >
                 <span v-for="(n, ni) in s.name" :key="n" class="contents">
                   <span v-if="ni > 0" aria-hidden="true" class="text-ink-2 font-normal">
                     ×
@@ -172,7 +176,7 @@ function updateSelectedYear(value: AcceptedYear | "all") {
                     class="text-ink border-b border-rule-soft pb-[1px] no-underline transition-colors hover:border-accent hover:text-accent"
                     :href="`/speakers/${encodeURIComponent(n)}`"
                   >
-                    <ruby v-if='s.nameRuby?.[ni] && lang === "ja"' lang="ja">
+                    <ruby v-if="s.nameRuby?.[ni] && lang === 'ja'" lang="ja">
                       {{ n }}
                       <rt>
                         {{ s.nameRuby[ni] }}
@@ -186,7 +190,9 @@ function updateSelectedYear(value: AcceptedYear | "all") {
                 </span>
               </div>
               <!-- トークタイトル（外部リンク、未決定の場合は TBD 表示） -->
-              <div class="basis-0 grow-999 min-inline-[60%] text-[clamp(14px,1.1vw,16px)] text-ink-2 leading-[1.5]">
+              <div
+                class="basis-0 grow-999 min-inline-[60%] text-[clamp(14px,1.1vw,16px)] text-ink-2 leading-[1.5]"
+              >
                 <!-- @vize:docs external URL comes from versioned Vue Fes speaker data -->
                 <!-- @vize:ignore-start -->
                 <a
@@ -198,7 +204,7 @@ function updateSelectedYear(value: AcceptedYear | "all") {
                 >
                   <!-- パネルセッションのフォーマットバッジ -->
                   <span
-                    v-if='s.format === "panel"'
+                    v-if="s.format === 'panel'"
                     class="relative top-[-1px] inline-flex items-center self-center align-middle font-mono text-[10px] uppercase tracking-[0.06em] border border-ink text-ink px-[5px] py-[1px] leading-[1.15] mr-2"
                   >
                     {{ t.session_format_panel }}

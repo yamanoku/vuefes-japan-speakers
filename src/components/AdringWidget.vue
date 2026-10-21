@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, useTemplateRef } from "vue";
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
 const { t } = useVfjsI18n();
-const containerRef = ref<HTMLDivElement | null>(null);
+const containerRef = useTemplateRef<HTMLDivElement>("containerRef");
 let container: HTMLDivElement | null = null;
 
 onMounted(() => {

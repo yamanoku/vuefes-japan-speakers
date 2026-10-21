@@ -48,13 +48,15 @@ const record = computed(() => {
     <main id="main" tabindex="-1">
       <template v-if="found">
         <!-- スピーカーページのヘッダー（名前・登壇回数・登壇年度） -->
-        <header class="border-b border-rule pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-pad-x">
+        <header
+          class="border-b border-rule pt-[clamp(32px,5vw,72px)] pb-[clamp(24px,4vw,48px)] px-pad-x"
+        >
           <!-- スピーカー名 -->
           <h1
             class="font-display text-[clamp(28px,4.5vw,72px)] font-bold leading-[1] mb-4"
-            :lang='hasJapanese(record.name) ? "ja" : "en"'
+            :lang="hasJapanese(record.name) ? 'ja' : 'en'"
           >
-            <ruby v-if='record.nameRuby && lang === "ja"'>
+            <ruby v-if="record.nameRuby && lang === 'ja'">
               {{ record.name }}
               <rt>
                 {{ record.nameRuby }}
@@ -94,7 +96,7 @@ const record = computed(() => {
           <ul class="list-none p-0 m-0">
             <li
               v-for="talk in record.talks"
-              :key='`${talk.year}-${talk.title ?? talk.url}-${talk.coSpeakers.join("|")}`'
+              :key="`${talk.year}-${talk.title ?? talk.url}-${talk.coSpeakers.join('|')}`"
               class="grid grid-cols-[40px_1fr] gap-x-4 border-t border-rule-softer py-4.5"
             >
               <!-- 開催年リンク（年度別ページへ） -->
@@ -118,7 +120,7 @@ const record = computed(() => {
                 >
                   <!-- パネルセッションのフォーマットバッジ -->
                   <span
-                    v-if='talk.format === "panel"'
+                    v-if="talk.format === 'panel'"
                     class="relative top-[-1px] inline-flex items-center self-center align-middle font-mono text-[10px] uppercase tracking-[0.06em] border border-ink text-ink px-[5px] py-[1px] leading-[1.15]"
                   >
                     {{ t.session_format_panel }}
@@ -126,7 +128,7 @@ const record = computed(() => {
                   <span>
                     <span
                       class="group-hover:underline"
-                      :lang='hasJapanese(talk.title || "") ? "ja" : "en"'
+                      :lang="hasJapanese(talk.title || '') ? 'ja' : 'en'"
                     >
                       {{ talk.title || t.tbd }}
                     </span>
