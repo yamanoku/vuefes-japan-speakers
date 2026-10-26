@@ -29,26 +29,17 @@ describe("AppHeader", () => {
     expect(html).toContain("フッターへ");
   });
 
-  it("ヘッダー直下に Vue Fes Japan 2026 誘導バナーを置く", async () => {
+  it("ヘッダー直下に Vue Fes Japan 2026 誘導バナーを DOM に残しつつ非表示にする", async () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-10-01T12:00:00+09:00"));
 
     const html = await renderToString(createSSRApp(AppHeader));
 
+    expect(html).toMatch(/<aside[^>]*style="display:none;"/);
     expect(html).toContain('href="https://vuefes.jp/2026/"');
     expect(html).toContain(
       "Vue Fes Japan 2026は大手町プレイス ホール＆カンファレンスで10/24開催！",
     );
-  });
-
-  it("開催日翌日以降は誘導バナーを非表示にする", async () => {
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date("2026-10-25T00:00:00+09:00"));
-
-    const html = await renderToString(createSSRApp(AppHeader));
-
-    expect(html).toMatch(/<aside[^>]*style="display:none;"/);
-    expect(html).toContain('href="https://vuefes.jp/2026/"');
   });
 
   it("保存済みの配色設定をマウント後に反映する", async () => {

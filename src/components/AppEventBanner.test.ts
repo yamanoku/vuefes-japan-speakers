@@ -3,13 +3,14 @@ import { mount } from "@vue/test-utils";
 import AppEventBanner from "./AppEventBanner.vue";
 
 describe("AppEventBanner", () => {
-  it("開催日前は公式サイトへの全幅リンクを flex で中央配置する", () => {
+  it("サイト表示オフでもマークアップは DOM に残す", () => {
     const wrapper = mount(AppEventBanner, {
       props: { eventDate: "2099-12-31" },
     });
 
     const aside = wrapper.get("aside");
     expect(aside.attributes("aria-label")).toBe("Vue Fes Japan 2026 のご案内");
+    expect(aside.element.style.display).toBe("none");
 
     const link = aside.get('a[href="https://vuefes.jp/2026/"]');
     expect(link.text()).toBe(

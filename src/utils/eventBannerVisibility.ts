@@ -1,6 +1,12 @@
 /** Vue Fes Japan は日本開催のため、日付判定は Asia/Tokyo 基準にする */
 export const EVENT_BANNER_TIME_ZONE = "Asia/Tokyo";
 
+/**
+ * 本番サイトでイベント案内バナーを出すか。
+ * false のとき `AppEventBanner` 等は残しつつ常に非表示にする。
+ */
+export const EVENT_BANNER_SITE_DISPLAY_ENABLED = false;
+
 const EVENT_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
 /**
@@ -20,11 +26,20 @@ export function formatCalendarDate(now: Date, timeZone: string = EVENT_BANNER_TI
  * 開催日（YYYY-MM-DD）当日までは表示し、その翌日以降は非表示にする。
  * 形式が不正な場合は非表示にする。
  */
+export type EventBannerVisibilityOptions = {
+  /** 省略時は {@link EVENT_BANNER_SITE_DISPLAY_ENABLED} */
+  siteDisplayEnabled?: boolean;
+  timeZone?: string;
+};
+
 export function isEventBannerVisible(
   eventDate: string,
   now: Date = new Date(),
-  timeZone: string = EVENT_BANNER_TIME_ZONE,
+  options: EventBannerVisibilityOptions = {},
 ): boolean {
+  const siteDisplayEnabled = options.siteDisplayEnabled ?? EVENT_BANNER_SITE_DISPLAY_ENABLED;
+  const timeZone = options.timeZone ?? EVENT_BANNER_TIME_ZONE;
+  if (!siteDisplayEnabled) return false;
   if (!EVENT_DATE_PATTERN.test(eventDate)) return false;
   const today = formatCalendarDate(now, timeZone);
   return today <= eventDate;
