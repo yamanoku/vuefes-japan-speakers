@@ -47,8 +47,8 @@ describe("AppHeader", () => {
 
     const html = await renderToString(createSSRApp(AppHeader));
 
-    expect(html).toMatch(/<aside[^>]*style="display:none;"/);
-    expect(html).toContain('href="https://vuefes.jp/2026/"');
+    expect(html).not.toContain("<aside");
+    expect(html).not.toContain('href="https://vuefes.jp/2026/"');
   });
 
   it("保存済みの配色設定をマウント後に反映する", async () => {

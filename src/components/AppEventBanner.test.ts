@@ -24,9 +24,7 @@ describe("AppEventBanner", () => {
       props: { eventDate: "2000-01-01" },
     });
 
-    const aside = wrapper.get("aside");
-    expect(aside.element.style.display).toBe("none");
-
+    expect(wrapper.find("aside").exists()).toBe(false);
     wrapper.unmount();
   });
 });
