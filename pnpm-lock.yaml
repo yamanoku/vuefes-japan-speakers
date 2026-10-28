@@ -172,8 +172,8 @@ catalogs:
       version: 4.3.3
   musea:
     '@vizejs/vite-plugin-musea':
-      specifier: 0.587.0
-      version: 0.587.0
+      specifier: 0.604.0
+      version: 0.604.0
     axe-core:
       specifier: 4.14.0
       version: 4.14.0
@@ -200,17 +200,17 @@ catalogs:
       version: 1.4.0
   vize:
     '@vizejs/vite-plugin':
-      specifier: 0.587.0
-      version: 0.587.0
+      specifier: 0.604.0
+      version: 0.604.0
     oxlint:
-      specifier: 1.89.0
-      version: 1.89.0
+      specifier: 1.90.0
+      version: 1.90.0
     oxlint-plugin-vize:
-      specifier: 0.587.0
-      version: 0.587.0
+      specifier: 0.604.0
+      version: 0.604.0
     vize:
-      specifier: 0.587.0
-      version: 0.587.0
+      specifier: 0.604.0
+      version: 0.604.0
   vp:
     '@vitest/browser-playwright':
       specifier: 5.0.5
@@ -249,7 +249,7 @@ importers:
         version: 3.5.44
       '@vuerend/core':
         specifier: catalog:vuerend
-        version: 1.0.0-rc.2(@vizejs/vite-plugin@0.587.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2)))(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2))
+        version: 1.0.0-rc.2(@vizejs/vite-plugin@0.604.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2)))(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2))
       tailwindcss:
         specifier: catalog:css
         version: 4.3.3
@@ -265,10 +265,10 @@ importers:
         version: 5.0.5(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(playwright@1.64.1)(vitest@5.0.5)
       '@vizejs/vite-plugin':
         specifier: catalog:vize
-        version: 0.587.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2))
+        version: 0.604.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2))
       '@vizejs/vite-plugin-musea':
         specifier: catalog:musea
-        version: 0.587.0(@vizejs/vite-plugin@0.587.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2)))(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(axe-core@4.14.0)(playwright@1.64.1)
+        version: 0.604.0(@vizejs/vite-plugin@0.604.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2)))(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(axe-core@4.14.0)(playwright@1.64.1)
       '@vue/test-utils':
         specifier: catalog:test
         version: 2.5.1(@vue/compiler-dom@3.6.0-beta.15)(@vue/server-renderer@3.5.44)(vue@3.5.44(typescript@7.0.2))
@@ -280,10 +280,10 @@ importers:
         version: 0.28.2
       oxlint:
         specifier: catalog:vize
-        version: 1.89.0(oxlint-tsgolint@7.0.2004)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))
+        version: 1.90.0(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))
       oxlint-plugin-vize:
         specifier: catalog:vize
-        version: 0.587.0
+        version: 0.604.0
       playwright:
         specifier: catalog:test
         version: 1.64.1
@@ -301,7 +301,7 @@ importers:
         version: 5.0.5(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/browser-preview@5.0.5)(@vitest/ui@5.0.5)(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))
       vize:
         specifier: catalog:vize
-        version: 0.587.0(vue@3.5.44(typescript@7.0.2))
+        version: 0.604.0(vue@3.5.44(typescript@7.0.2))
 
 packages:
 
@@ -1033,8 +1033,20 @@ packages:
     cpu: [arm]
     os: [android]
 
+  '@oxlint/binding-android-arm-eabi@1.90.0':
+    resolution: {integrity: sha512-sgfalb1HuxYjiAa4wESZ626z1FGusqNcXYHyB5oIOEprS2sbPg0UYEfo83uF1GNG70DIfZxHkXuE6KFrlSdn8Q==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm]
+    os: [android]
+
   '@oxlint/binding-android-arm64@1.89.0':
     resolution: {integrity: sha512-dYmyD1x7LaPlb79vZWUcpTShk8dI9z1I+IubtqrBxWNJaDhQdPHwcsvg7q5StTU4xWyd9AwPfLaTYFZY8NZgtQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [android]
+
+  '@oxlint/binding-android-arm64@1.90.0':
+    resolution: {integrity: sha512-RcKhz1ETMq+fazE9TKS2+5NIRGwigm/nW8egqF0LI+A8Yw2iW5r0E/C3XAPRiwIm/vcPiutIRIa6IQCIKhZsTQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [android]
@@ -1045,8 +1057,20 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
+  '@oxlint/binding-darwin-arm64@1.90.0':
+    resolution: {integrity: sha512-PSrxMvP6mx+p1karZcUxLdy9lpaP+JWQPti4al9FgTaPhxE+pT/BjhGExloVVSWgZgIfOlLOjVyyq8BXlodhLQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [darwin]
+
   '@oxlint/binding-darwin-x64@1.89.0':
     resolution: {integrity: sha512-eAjTkHSjAxrdCPJxO6y5sPQL5pYLKb2kvxZz9UU7tXnOZk9I/HLtkvx9S7GHY883k+AmL/eC7mqFt+w7WCwk0w==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [darwin]
+
+  '@oxlint/binding-darwin-x64@1.90.0':
+    resolution: {integrity: sha512-OLbU9qsrV2Q8QxT2OEzOPdO8zCCpyI8qB+hDI8yr6RsYELtkf0FAZhJdfjM/RnLHKzt44HWwAPnk92vBtKofvw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [darwin]
@@ -1057,8 +1081,20 @@ packages:
     cpu: [x64]
     os: [freebsd]
 
+  '@oxlint/binding-freebsd-x64@1.90.0':
+    resolution: {integrity: sha512-fBA4pWyVDARmNucQqpyFuPC49xYf1r+sX7dxPL5fNPQrSMLum39Sn56tZ9JPleWC7FzLPwSQ7plYYfirYBHF8A==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [freebsd]
+
   '@oxlint/binding-linux-arm-gnueabihf@1.89.0':
     resolution: {integrity: sha512-OTFEvi9W+JczaZD1Caj17SGCoW8H7TE+fvx0D7ATEWa1Lohn91UMxFQ6r145SiGy/yCxeIwptMys/RAM7gSVSQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm]
+    os: [linux]
+
+  '@oxlint/binding-linux-arm-gnueabihf@1.90.0':
+    resolution: {integrity: sha512-zhxH78eP2nR6/pGdhBc7MIfjhhcgATeu8fkmkFJbuzfk6Cj0FzBxyEhL85yDqrCybjx+G2YDzZGsxIO9kvO4Iw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm]
     os: [linux]
@@ -1069,8 +1105,21 @@ packages:
     cpu: [arm]
     os: [linux]
 
+  '@oxlint/binding-linux-arm-musleabihf@1.90.0':
+    resolution: {integrity: sha512-MvYmpHyJqUJjEvkZbJHdwfdL45cGn8EVBkYmoXFiaYFW9suoD3dbJl5mBdpy0DVgdjlyddmldbRtk3cCgETadQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm]
+    os: [linux]
+
   '@oxlint/binding-linux-arm64-gnu@1.89.0':
     resolution: {integrity: sha512-v9ENzHvwrQoYSWTtviH1pOYc7R9UovDxVofnck50cNmPihRRTcrg5X0UlRbLOZ7IVtxPOlh2hb7kDO+FpE8SfQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@oxlint/binding-linux-arm64-gnu@1.90.0':
+    resolution: {integrity: sha512-L13Sy+Kg0nZhwTsToniqjUFPA2TuM6962qCZ5Wp5KeB517Tw7ApdLTTtlb+bF86fcZZa2EtvCVvAJxk4Dya/MQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
@@ -1083,8 +1132,22 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@oxlint/binding-linux-arm64-musl@1.90.0':
+    resolution: {integrity: sha512-wFDdZWGpzIPFdJFjSLWnKB0TGzFriTKUIrl04iMqMyM9BBIJTuerfCHYa0WpDSjr5x3lcW/CHLyacSt886WpGg==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
   '@oxlint/binding-linux-ppc64-gnu@1.89.0':
     resolution: {integrity: sha512-Buonlp4hVS7RGNP5M7bPpGNQrenyzA2C64JcO/oz9C1c6dGOXJ7VEAnaiAMY7voou0JYyCJdvDVlFQc5DZX3DQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [ppc64]
+    os: [linux]
+    libc: [glibc]
+
+  '@oxlint/binding-linux-ppc64-gnu@1.90.0':
+    resolution: {integrity: sha512-FRywfn+MoKn8xpBSzgNwNVliSKRI2QXkxi/iF7o6FEQs8Bh8z2RpVTaFAcO3pchXjvB2eGNFIoLLQABIQ+u7VA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [ppc64]
     os: [linux]
@@ -1097,8 +1160,22 @@ packages:
     os: [linux]
     libc: [glibc]
 
+  '@oxlint/binding-linux-riscv64-gnu@1.90.0':
+    resolution: {integrity: sha512-IS2PaUgpc/qeLADTyhUNmdx3x4ijs9pjJdPKBYHaT+mAE7k3FsjnHPTjhpsak1b++h6CIPhv6WX9Z+y7Pw0voQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [riscv64]
+    os: [linux]
+    libc: [glibc]
+
   '@oxlint/binding-linux-riscv64-musl@1.89.0':
     resolution: {integrity: sha512-fRQQsKUGShdEL5Fl9o9uhj3grkZbeXKLv0icQ5tspUCNYSDy8wzzEcP1WC2bKdTQ0rSszbKlO3iiHORxV22DLg==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [riscv64]
+    os: [linux]
+    libc: [musl]
+
+  '@oxlint/binding-linux-riscv64-musl@1.90.0':
+    resolution: {integrity: sha512-s7JFKRkGS8O7i2ZVODfuO++NC7sH6HDqpMn8lYxw91w0SXJOxnAVjQ8utvmDwLMMT0jaSkuOKuUYJDGDtu4sHQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [riscv64]
     os: [linux]
@@ -1111,8 +1188,22 @@ packages:
     os: [linux]
     libc: [glibc]
 
+  '@oxlint/binding-linux-s390x-gnu@1.90.0':
+    resolution: {integrity: sha512-b0GxrOQr5VONCkd7KLSqmP6b6nqZuTpuS8QPQHzltmqdXP5bY0Jl0CZ0QmlCTrS3ExaLYbioFYOARzNbYvcApQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [s390x]
+    os: [linux]
+    libc: [glibc]
+
   '@oxlint/binding-linux-x64-gnu@1.89.0':
     resolution: {integrity: sha512-hqjwIj5KOYM8Wjef/p7IruNi1iByLhSzbMBk62y22P/E8q7Jj0Pp+DeUTKTRYyZYCDtU1wEGlnWOnttHbyNIww==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@oxlint/binding-linux-x64-gnu@1.90.0':
+    resolution: {integrity: sha512-iaJeShJtgUp8rZbt9YUdTAGOpmX5KogCLba17Jp1tWdJ3F4M3D2g2TKUyI1FMTHxKH9NNHuQcuC2kZRg6IV7yQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
@@ -1125,8 +1216,21 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@oxlint/binding-linux-x64-musl@1.90.0':
+    resolution: {integrity: sha512-/aZoXnL5WBLCXuzfHqvEFXcm4iwYmr/cYByHDTXzLFzJdE5DC7bm6phpWqHv6BeqpVgY9IpBAxGDv2WEkl5JCg==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
   '@oxlint/binding-openharmony-arm64@1.89.0':
     resolution: {integrity: sha512-MNxjEByz3N/7Q4qFQuPWvc14TpN9LoD3pECEDsJTZbP/wyB7U+hduUXEl7QAbbgVezFwsb9sWtNUO6XVBndOhg==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [openharmony]
+
+  '@oxlint/binding-openharmony-arm64@1.90.0':
+    resolution: {integrity: sha512-SMhk7ozwoxYDKfYqGZCQEfULOKDneF9uhaoIf2neoDLWvNtjY9yVeL7YHmE5L9WdKvMpWNwwZxhenxBu6AgfOg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [openharmony]
@@ -1137,14 +1241,32 @@ packages:
     cpu: [arm64]
     os: [win32]
 
+  '@oxlint/binding-win32-arm64-msvc@1.90.0':
+    resolution: {integrity: sha512-KBvR3A9fO7fCi2vCP8ifWvlia7tGEQV9NaYh+IGwa/7Groy48Mt/UaYqMK9/zOtAWl20BUCf6RPqzJ32fRw33Q==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [win32]
+
   '@oxlint/binding-win32-ia32-msvc@1.89.0':
     resolution: {integrity: sha512-saFy07cO94E664glwgLmKLI40HgTL1PY86y4T6+ud4niX4H0Kdqjcmqmjps7mQNdBytV5guGbXDdyQtRfeLbLA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [ia32]
     os: [win32]
 
+  '@oxlint/binding-win32-ia32-msvc@1.90.0':
+    resolution: {integrity: sha512-+x42rDHQGbTCuT3EzpWAzhP3NoVPE/cJsG4gnrakOSg0olV+GCdMpPU23Nvrl3zZMnXxFZdTtDv4D3SuaA5ZeQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [ia32]
+    os: [win32]
+
   '@oxlint/binding-win32-x64-msvc@1.89.0':
     resolution: {integrity: sha512-hLFJ/o0f/dTJh/EW0vmcbREYSQO9tYgfiAAlsOkiLFiJuRRWvYtFELUXN5o2ijpSo/tlO1n+YlWN58tZwPG18A==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [win32]
+
+  '@oxlint/binding-win32-x64-msvc@1.90.0':
+    resolution: {integrity: sha512-30JiaFEBUB9peEOcvVM8ggo88SoN/IdSr9DW505JdBji/R6dM66gKEiG65hw6qcaF2f4mO0cEJ+RwRZprmun9g==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [win32]
@@ -1460,64 +1582,64 @@ packages:
   '@vitest/utils@5.0.5':
     resolution: {integrity: sha512-/rBu7gzLDQI/SC79Tn98b5DwOgaHU/Gt4I9OVeP3YofzNaYtbImRCOJQmT1S6vOJg9gEIlWC+r3QxKkjuSa1nQ==}
 
-  '@vizejs/native-darwin-arm64@0.587.0':
-    resolution: {integrity: sha512-/lxpjS/MRTixXD0WnecHNMNDZrZ0YDyr5m5P7p1owblIgWftJEhB/PT39GhzdXiiSpT5pnEWIXDLobwJoe92aA==}
+  '@vizejs/native-darwin-arm64@0.604.0':
+    resolution: {integrity: sha512-4JUp1wbRtjid/2hAEHz/Nwt8B5UvZ+r7fv6Bx5ZUd/VJJWVLLy+Qt7B7hwtymyf4gqZXnqG/YmHpQVsZ6kGRNw==}
     engines: {node: '>=22'}
     cpu: [arm64]
     os: [darwin]
 
-  '@vizejs/native-darwin-x64@0.587.0':
-    resolution: {integrity: sha512-vpGk7yLV4FOJSSUOJmpvFkb7ti7Ptxs/0iXW533FMQRn/VdxoMGpwW9rHdU2gpiPn0Ozy7v7Xv6yYhNV8g5BHA==}
+  '@vizejs/native-darwin-x64@0.604.0':
+    resolution: {integrity: sha512-ViMR4H7tnjSGnCfSNt83k/EJTpLKaFeaHNLkUIlmUJ3AMrX6wOJ1IgtyjcQv7mY2o0lK0wQoeDRUKhsiWUgB9g==}
     engines: {node: '>=22'}
     cpu: [x64]
     os: [darwin]
 
-  '@vizejs/native-linux-arm64-gnu@0.587.0':
-    resolution: {integrity: sha512-7slKbZorjQWm/bfvPs2HItcg4q2ylSR0a3ReO40BufBLNvTz1zyChbgpcNooNNIhbHVG/bq2GGPa1p6bkKyBOA==}
+  '@vizejs/native-linux-arm64-gnu@0.604.0':
+    resolution: {integrity: sha512-itdH3x6+iDjPR+9af3j8vvIPLypamIl6vF6qDPa/hDeAaHvmayK0jprSEvbs5c/f6UNoIn6ALqcyzPKX1IW0/w==}
     engines: {node: '>=22'}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
 
-  '@vizejs/native-linux-arm64-musl@0.587.0':
-    resolution: {integrity: sha512-S9cAbAOF3aDDQFuuJ+bjDpv+8dJTpU/LX9UqzlZ44KVXkLAhN9Zf0UrtmHsVoXXNUrquXwMGdzNLGVeSmZZcLA==}
+  '@vizejs/native-linux-arm64-musl@0.604.0':
+    resolution: {integrity: sha512-RlfS++p6MAhopMsFsweCLtmtsGk6ddgxnpoSNMCpxYaEPXHu92aDym3vb40Smov3D8Bjs5KjbaM5izqZr4Rl+g==}
     engines: {node: '>=22'}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
 
-  '@vizejs/native-linux-x64-gnu@0.587.0':
-    resolution: {integrity: sha512-SYe3XCyn1lspZrRd2gWiFy3x2kEqiC05MyaLLe0IxVSfIEhPVtN7/vkIDuLJXhn9JQUOfESlmn9E3rlZwr5clw==}
+  '@vizejs/native-linux-x64-gnu@0.604.0':
+    resolution: {integrity: sha512-qu3V8wh3Web1wUBISzeyI561LKJOiQA6ONKaK4K8v8ni9futul5/acqT8kZyr33/PdfMVxEkdbsPsc1hinU2XQ==}
     engines: {node: '>=22'}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
 
-  '@vizejs/native-linux-x64-musl@0.587.0':
-    resolution: {integrity: sha512-A1kTYIb+ire8un4H1i0v3dHBXm6vpvJXuxTBsEh2IzOgn+kjaZlCHt0ltUEpWLJLVkdPxCRLHNC8GSMbyGx1Jg==}
+  '@vizejs/native-linux-x64-musl@0.604.0':
+    resolution: {integrity: sha512-5NfmaBsdKRUw7UlGTowXV1/nFHAQcaBWMsto8PBZ40m2KOwbqem1TDR72gNgUn78m/SKziwud5tObdOP8Ew/HA==}
     engines: {node: '>=22'}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@vizejs/native-win32-arm64-msvc@0.587.0':
-    resolution: {integrity: sha512-gBPDCg0bsJnD/11Xx+Rd0MdkRhBfrt9NVa67H/QoAl3/AZ07X1pUY3HDsF1koaq+rYPFnN8+wJUDSqqiOJKG8w==}
+  '@vizejs/native-win32-arm64-msvc@0.604.0':
+    resolution: {integrity: sha512-EYhB5YpKIwV8OaKonhtTaQaBYIVh6JebvQsTxbgaeFkAVBWTlVnAuCQokof5180kbiAXRhscHgzTTXtdkzEwkQ==}
     engines: {node: '>=22'}
     cpu: [arm64]
     os: [win32]
 
-  '@vizejs/native-win32-x64-msvc@0.587.0':
-    resolution: {integrity: sha512-2Q9/gJcFC596trD7yx+EG7YqBCpJswamwE5v9VfE4gJUOeyzZQ1vz72oPSK4wbdhHHC8Ab0M/lXHXCjWulrv7A==}
+  '@vizejs/native-win32-x64-msvc@0.604.0':
+    resolution: {integrity: sha512-bF0oRQezyqtTqzDBFs5kiFCMMphGXOR4bBTUnxDItIHSQ5sZ0J7ud1P250VhZ8BQ+xhF/TK1IzsKHL2fpRfV0Q==}
     engines: {node: '>=22'}
     cpu: [x64]
     os: [win32]
 
-  '@vizejs/native@0.587.0':
-    resolution: {integrity: sha512-1Mvhe5597+VFexqlMvpppcYGFZ6Kx7eGWFtpL3msEBcf1XUqhXnBudxC7s7CXNtDd+t3klxx9XNRNgzGPS5ZhA==}
+  '@vizejs/native@0.604.0':
+    resolution: {integrity: sha512-LYpeyCie9fPQ9ROPsI6ODOmAOLd/pUGh45G0sKZYdnx34i5vHn4YMB2Q6bLaZykmXbLTt/+3evQsXGpfZT51Fw==}
     engines: {node: '>=22'}
 
-  '@vizejs/unplugin@0.587.0':
-    resolution: {integrity: sha512-ja7PZhU0Ns2TtaSUUhwXANARWo/nd6Dmss21mDrXRzSMDShgI9BMmtLn9P5YqrYeR7RdijvWcAv0Z6OXvn/VMQ==}
+  '@vizejs/unplugin@0.604.0':
+    resolution: {integrity: sha512-zuNApfkgtCmURe8VsTHpp6z/1bNPdFkhiIP4ZhrIcQrALGkrFZaADMv4EsAnHZ1UeGVmJRSD1V0UzD5xUQuw8g==}
     engines: {node: '>=22'}
     peerDependencies:
       webpack: ^4.46.0 || ^5.0.0
@@ -1525,12 +1647,12 @@ packages:
       webpack:
         optional: true
 
-  '@vizejs/vite-plugin-musea@0.587.0':
-    resolution: {integrity: sha512-jH85fjO+wxo76iPn/14VEeoPoaSP1k0qFlrm6fFOK4zta/OU2zgbG7opnXJEuH3W82MpU3uWQXH6IvjKTkDijA==}
+  '@vizejs/vite-plugin-musea@0.604.0':
+    resolution: {integrity: sha512-ARCVMkXlIsyusA1AmnQbaiCDr7rf591wSYEVAnmtqRdQhQB+fzmSqh0u2u8/kms7aDg5/H34ocfgGg+JvQIHaw==}
     engines: {node: '>=22'}
     hasBin: true
     peerDependencies:
-      '@vizejs/vite-plugin': 0.587.0
+      '@vizejs/vite-plugin': 0.604.0
       axe-core: ^4.7.0
       playwright: ^1.40.0
       vite: ^7.3.0 || ^8.0.0
@@ -1540,8 +1662,8 @@ packages:
       playwright:
         optional: true
 
-  '@vizejs/vite-plugin@0.587.0':
-    resolution: {integrity: sha512-rnaMuRgT7FbrhKGGGVCW0hL0Ij+I9qk2OEr2YLxd4Rv9cFZeurG0FNDgsrhndYdlDsH0GDmuNi/hXJUsnc6g3A==}
+  '@vizejs/vite-plugin@0.604.0':
+    resolution: {integrity: sha512-t6YfLbbvqO4PYlhHbqdRil5tTNATqkgMvQf4mXwgh+Zc0gc4WQzXr+tTkMUvdQyyp0P/XSMPYoTrxqsN8ne1yA==}
     engines: {node: '>=22'}
     peerDependencies:
       vite: ^7.3.0 || ^8.0.0
@@ -2247,8 +2369,8 @@ packages:
       vite-plus:
         optional: true
 
-  oxlint-plugin-vize@0.587.0:
-    resolution: {integrity: sha512-MkvbGWrjeQFU7WGzTcWnUTyYTpFdA0uFVzyctYEIb54MV81Hs1K56M1jFCjUEUqMXtcVBBILH30wu85Q6fkvag==}
+  oxlint-plugin-vize@0.604.0:
+    resolution: {integrity: sha512-dLW4fG1bOCZ0mxTwdOdmri6orEY+AfPwv8QAIw8jETg2P66AyBpLdWVdWZxgcAb+GkTLXwjF3tqFgQ4rrheSSA==}
     engines: {node: ^22 || >= 24}
     hasBin: true
 
@@ -2262,6 +2384,19 @@ packages:
     hasBin: true
     peerDependencies:
       oxlint-tsgolint: '>=7.0.2003'
+      vite-plus: '*'
+    peerDependenciesMeta:
+      oxlint-tsgolint:
+        optional: true
+      vite-plus:
+        optional: true
+
+  oxlint@1.90.0:
+    resolution: {integrity: sha512-RkTN9EmgIUpLuhNoLhO3OliMGJlvb3Dk7XVjBZnfoMCHrVpuz5ESd97klfiyYeV7XfA2lNLnDCPMkUI+Qw5How==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    hasBin: true
+    peerDependencies:
+      oxlint-tsgolint: '>=7.0.2005'
       vite-plus: '*'
     peerDependenciesMeta:
       oxlint-tsgolint:
@@ -2488,8 +2623,8 @@ packages:
       jsdom:
         optional: true
 
-  vize@0.587.0:
-    resolution: {integrity: sha512-P5lhmGiLyT7kYZD7azVppP7aKCZGX6l1FpGnAX+6tbgprFMwku+xf3t5Fa3JwILNfBw9ygi0clfQzzZ8/8ttaA==}
+  vize@0.604.0:
+    resolution: {integrity: sha512-wS8bALRDzMtb4X7FG52QhAKLA1e5FAp7pThL8n+kYbF7tcPreSl/ThEj4N5Eay0t2gMOwXHacHLWJ2de1q6FiA==}
     engines: {node: '>=22'}
     hasBin: true
     peerDependencies:
@@ -3028,58 +3163,115 @@ snapshots:
   '@oxlint/binding-android-arm-eabi@1.89.0':
     optional: true
 
+  '@oxlint/binding-android-arm-eabi@1.90.0':
+    optional: true
+
   '@oxlint/binding-android-arm64@1.89.0':
+    optional: true
+
+  '@oxlint/binding-android-arm64@1.90.0':
     optional: true
 
   '@oxlint/binding-darwin-arm64@1.89.0':
     optional: true
 
+  '@oxlint/binding-darwin-arm64@1.90.0':
+    optional: true
+
   '@oxlint/binding-darwin-x64@1.89.0':
+    optional: true
+
+  '@oxlint/binding-darwin-x64@1.90.0':
     optional: true
 
   '@oxlint/binding-freebsd-x64@1.89.0':
     optional: true
 
+  '@oxlint/binding-freebsd-x64@1.90.0':
+    optional: true
+
   '@oxlint/binding-linux-arm-gnueabihf@1.89.0':
+    optional: true
+
+  '@oxlint/binding-linux-arm-gnueabihf@1.90.0':
     optional: true
 
   '@oxlint/binding-linux-arm-musleabihf@1.89.0':
     optional: true
 
+  '@oxlint/binding-linux-arm-musleabihf@1.90.0':
+    optional: true
+
   '@oxlint/binding-linux-arm64-gnu@1.89.0':
+    optional: true
+
+  '@oxlint/binding-linux-arm64-gnu@1.90.0':
     optional: true
 
   '@oxlint/binding-linux-arm64-musl@1.89.0':
     optional: true
 
+  '@oxlint/binding-linux-arm64-musl@1.90.0':
+    optional: true
+
   '@oxlint/binding-linux-ppc64-gnu@1.89.0':
+    optional: true
+
+  '@oxlint/binding-linux-ppc64-gnu@1.90.0':
     optional: true
 
   '@oxlint/binding-linux-riscv64-gnu@1.89.0':
     optional: true
 
+  '@oxlint/binding-linux-riscv64-gnu@1.90.0':
+    optional: true
+
   '@oxlint/binding-linux-riscv64-musl@1.89.0':
+    optional: true
+
+  '@oxlint/binding-linux-riscv64-musl@1.90.0':
     optional: true
 
   '@oxlint/binding-linux-s390x-gnu@1.89.0':
     optional: true
 
+  '@oxlint/binding-linux-s390x-gnu@1.90.0':
+    optional: true
+
   '@oxlint/binding-linux-x64-gnu@1.89.0':
+    optional: true
+
+  '@oxlint/binding-linux-x64-gnu@1.90.0':
     optional: true
 
   '@oxlint/binding-linux-x64-musl@1.89.0':
     optional: true
 
+  '@oxlint/binding-linux-x64-musl@1.90.0':
+    optional: true
+
   '@oxlint/binding-openharmony-arm64@1.89.0':
+    optional: true
+
+  '@oxlint/binding-openharmony-arm64@1.90.0':
     optional: true
 
   '@oxlint/binding-win32-arm64-msvc@1.89.0':
     optional: true
 
+  '@oxlint/binding-win32-arm64-msvc@1.90.0':
+    optional: true
+
   '@oxlint/binding-win32-ia32-msvc@1.89.0':
     optional: true
 
+  '@oxlint/binding-win32-ia32-msvc@1.90.0':
+    optional: true
+
   '@oxlint/binding-win32-x64-msvc@1.89.0':
+    optional: true
+
+  '@oxlint/binding-win32-x64-msvc@1.90.0':
     optional: true
 
   '@oxlint/plugins@1.78.0': {}
@@ -3347,44 +3539,44 @@ snapshots:
       convert-source-map: 2.0.0
       tinyrainbow: 3.2.0
 
-  '@vizejs/native-darwin-arm64@0.587.0':
+  '@vizejs/native-darwin-arm64@0.604.0':
     optional: true
 
-  '@vizejs/native-darwin-x64@0.587.0':
+  '@vizejs/native-darwin-x64@0.604.0':
     optional: true
 
-  '@vizejs/native-linux-arm64-gnu@0.587.0':
+  '@vizejs/native-linux-arm64-gnu@0.604.0':
     optional: true
 
-  '@vizejs/native-linux-arm64-musl@0.587.0':
+  '@vizejs/native-linux-arm64-musl@0.604.0':
     optional: true
 
-  '@vizejs/native-linux-x64-gnu@0.587.0':
+  '@vizejs/native-linux-x64-gnu@0.604.0':
     optional: true
 
-  '@vizejs/native-linux-x64-musl@0.587.0':
+  '@vizejs/native-linux-x64-musl@0.604.0':
     optional: true
 
-  '@vizejs/native-win32-arm64-msvc@0.587.0':
+  '@vizejs/native-win32-arm64-msvc@0.604.0':
     optional: true
 
-  '@vizejs/native-win32-x64-msvc@0.587.0':
+  '@vizejs/native-win32-x64-msvc@0.604.0':
     optional: true
 
-  '@vizejs/native@0.587.0':
+  '@vizejs/native@0.604.0':
     optionalDependencies:
-      '@vizejs/native-darwin-arm64': 0.587.0
-      '@vizejs/native-darwin-x64': 0.587.0
-      '@vizejs/native-linux-arm64-gnu': 0.587.0
-      '@vizejs/native-linux-arm64-musl': 0.587.0
-      '@vizejs/native-linux-x64-gnu': 0.587.0
-      '@vizejs/native-linux-x64-musl': 0.587.0
-      '@vizejs/native-win32-arm64-msvc': 0.587.0
-      '@vizejs/native-win32-x64-msvc': 0.587.0
+      '@vizejs/native-darwin-arm64': 0.604.0
+      '@vizejs/native-darwin-x64': 0.604.0
+      '@vizejs/native-linux-arm64-gnu': 0.604.0
+      '@vizejs/native-linux-arm64-musl': 0.604.0
+      '@vizejs/native-linux-x64-gnu': 0.604.0
+      '@vizejs/native-linux-x64-musl': 0.604.0
+      '@vizejs/native-win32-arm64-msvc': 0.604.0
+      '@vizejs/native-win32-x64-msvc': 0.604.0
 
-  '@vizejs/unplugin@0.587.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)':
+  '@vizejs/unplugin@0.604.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)':
     dependencies:
-      '@vizejs/native': 0.587.0
+      '@vizejs/native': 0.604.0
       oxc-transform: 0.144.0
       unplugin: 3.3.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)
     transitivePeerDependencies:
@@ -3397,10 +3589,10 @@ snapshots:
       - unloader
       - vite
 
-  '@vizejs/vite-plugin-musea@0.587.0(@vizejs/vite-plugin@0.587.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2)))(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(axe-core@4.14.0)(playwright@1.64.1)':
+  '@vizejs/vite-plugin-musea@0.604.0(@vizejs/vite-plugin@0.604.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2)))(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(axe-core@4.14.0)(playwright@1.64.1)':
     dependencies:
-      '@vizejs/native': 0.587.0
-      '@vizejs/vite-plugin': 0.587.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2))
+      '@vizejs/native': 0.604.0
+      '@vizejs/vite-plugin': 0.604.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2))
       pngjs: 7.0.0
       typescript: 6.0.3
       vite: '@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2)'
@@ -3408,16 +3600,16 @@ snapshots:
       axe-core: 4.14.0
       playwright: 1.64.1
 
-  '@vizejs/vite-plugin@0.587.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2))':
+  '@vizejs/vite-plugin@0.604.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2))':
     dependencies:
-      '@vizejs/native': 0.587.0
-      '@vizejs/unplugin': 0.587.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)
+      '@vizejs/native': 0.604.0
+      '@vizejs/unplugin': 0.604.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)
       jsonc-parser: 3.3.1
       oxc-parser: 0.144.0
       picomatch: 4.0.5
       tinyglobby: 0.2.17
       vite: '@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2)'
-      vize: 0.587.0(vue@3.5.44(typescript@7.0.2))
+      vize: 0.604.0(vue@3.5.44(typescript@7.0.2))
     optionalDependencies:
       vite-plus: 1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2)
     transitivePeerDependencies:
@@ -3628,7 +3820,7 @@ snapshots:
     optionalDependencies:
       '@vue/server-renderer': 3.5.44
 
-  '@vuerend/core@1.0.0-rc.2(@vizejs/vite-plugin@0.587.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2)))(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2))':
+  '@vuerend/core@1.0.0-rc.2(@vizejs/vite-plugin@0.604.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2)))(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2))':
     dependencies:
       '@vitejs/plugin-vue': 6.0.7(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2))
       '@vitejs/plugin-vue-jsx': 5.1.5(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2))
@@ -3637,7 +3829,7 @@ snapshots:
       vite: '@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2)'
       vue: 3.5.44(typescript@7.0.2)
     optionalDependencies:
-      '@vizejs/vite-plugin': 0.587.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2))
+      '@vizejs/vite-plugin': 0.604.0(@voidzero-dev/vite-plus-core@1.4.0(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(esbuild@0.28.2)(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2))(vue@3.5.44(typescript@7.0.2))
     transitivePeerDependencies:
       - supports-color
 
@@ -4041,18 +4233,18 @@ snapshots:
       '@oxfmt/binding-win32-x64-msvc': 0.74.0
       vite-plus: 1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2)
 
-  oxlint-plugin-vize@0.587.0:
+  oxlint-plugin-vize@0.604.0:
     dependencies:
       '@oxlint/plugins': 1.78.0
     optionalDependencies:
-      '@vizejs/native-darwin-arm64': 0.587.0
-      '@vizejs/native-darwin-x64': 0.587.0
-      '@vizejs/native-linux-arm64-gnu': 0.587.0
-      '@vizejs/native-linux-arm64-musl': 0.587.0
-      '@vizejs/native-linux-x64-gnu': 0.587.0
-      '@vizejs/native-linux-x64-musl': 0.587.0
-      '@vizejs/native-win32-arm64-msvc': 0.587.0
-      '@vizejs/native-win32-x64-msvc': 0.587.0
+      '@vizejs/native-darwin-arm64': 0.604.0
+      '@vizejs/native-darwin-x64': 0.604.0
+      '@vizejs/native-linux-arm64-gnu': 0.604.0
+      '@vizejs/native-linux-arm64-musl': 0.604.0
+      '@vizejs/native-linux-x64-gnu': 0.604.0
+      '@vizejs/native-linux-x64-musl': 0.604.0
+      '@vizejs/native-win32-arm64-msvc': 0.604.0
+      '@vizejs/native-win32-x64-msvc': 0.604.0
 
   oxlint-tsgolint@7.0.2004:
     optionalDependencies:
@@ -4085,6 +4277,29 @@ snapshots:
       '@oxlint/binding-win32-ia32-msvc': 1.89.0
       '@oxlint/binding-win32-x64-msvc': 1.89.0
       oxlint-tsgolint: 7.0.2004
+      vite-plus: 1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2)
+
+  oxlint@1.90.0(vite-plus@1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2)):
+    optionalDependencies:
+      '@oxlint/binding-android-arm-eabi': 1.90.0
+      '@oxlint/binding-android-arm64': 1.90.0
+      '@oxlint/binding-darwin-arm64': 1.90.0
+      '@oxlint/binding-darwin-x64': 1.90.0
+      '@oxlint/binding-freebsd-x64': 1.90.0
+      '@oxlint/binding-linux-arm-gnueabihf': 1.90.0
+      '@oxlint/binding-linux-arm-musleabihf': 1.90.0
+      '@oxlint/binding-linux-arm64-gnu': 1.90.0
+      '@oxlint/binding-linux-arm64-musl': 1.90.0
+      '@oxlint/binding-linux-ppc64-gnu': 1.90.0
+      '@oxlint/binding-linux-riscv64-gnu': 1.90.0
+      '@oxlint/binding-linux-riscv64-musl': 1.90.0
+      '@oxlint/binding-linux-s390x-gnu': 1.90.0
+      '@oxlint/binding-linux-x64-gnu': 1.90.0
+      '@oxlint/binding-linux-x64-musl': 1.90.0
+      '@oxlint/binding-openharmony-arm64': 1.90.0
+      '@oxlint/binding-win32-arm64-msvc': 1.90.0
+      '@oxlint/binding-win32-ia32-msvc': 1.90.0
+      '@oxlint/binding-win32-x64-msvc': 1.90.0
       vite-plus: 1.4.0(@types/node@24.19.2)(@vitest/browser-playwright@5.0.5)(@vitest/ui@5.0.5)(esbuild@0.28.2)(jiti@2.7.0)(playwright@1.64.1)(typescript@7.0.2)
 
   path-scurry@2.0.2:
@@ -4296,9 +4511,9 @@ snapshots:
     transitivePeerDependencies:
       - msw
 
-  vize@0.587.0(vue@3.5.44(typescript@7.0.2)):
+  vize@0.604.0(vue@3.5.44(typescript@7.0.2)):
     dependencies:
-      '@vizejs/native': 0.587.0
+      '@vizejs/native': 0.604.0
       oxc-transform: 0.144.0
     optionalDependencies:
       '@typescript/typescript-darwin-arm64': 7.0.2
