@@ -65,7 +65,10 @@ export default defineConfig({
     },
   },
   staged: {
-    "*": "vp run check",
+    // vize check rejects a commit when every staged path is outside the
+    // TypeScript project, which is what workflow-only changes hit.
+    "*.{ts,tsx,vue,js,mjs,cjs,mts,cts}": "vp run check",
+    "*.{yml,yaml,json,md,css}": "vp fmt --check",
   },
   test: {
     browser: {
