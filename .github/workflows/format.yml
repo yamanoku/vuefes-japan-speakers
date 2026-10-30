@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
       - name: Setup Vite+
-        uses: voidzero-dev/setup-vp@v1.15.0
+        uses: voidzero-dev/setup-vp@v1.22.0
         with:
           node-version: "24.22.2"
           cache: true
