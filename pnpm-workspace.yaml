@@ -9,7 +9,7 @@ allowBuilds:
 catalogs:
   css:
     "@tailwindcss/vite": 4.3.3
-    tailwindcss: 4.3.3
+    tailwindcss: 4.3.5
   test:
     "@vue/test-utils": 2.5.1
     playwright: 1.64.1
