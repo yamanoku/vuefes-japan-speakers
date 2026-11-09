@@ -20,8 +20,8 @@ catalogs:
   vite:
     vite: npm:@voidzero-dev/vite-plus-core@1.5.0
   vue:
-    "@vue/server-renderer": 3.5.44
-    vue: 3.5.44
+    "@vue/server-renderer": 3.5.45
+    vue: 3.5.45
   vuerend:
     "@vuerend/core": 1.0.0-rc.2
   musea:
