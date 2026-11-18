@@ -13,6 +13,7 @@
     "vue": "catalog:vue"
   },
   "devDependencies": {
+    "@mizchi/mutator": "catalog:test",
     "@types/node": "catalog:typescript",
     "@vitest/browser-playwright": "catalog:vp",
     "@vizejs/vite-plugin": "catalog:vize",
@@ -20,6 +21,7 @@
     "@vue/test-utils": "catalog:test",
     "axe-core": "catalog:musea",
     "esbuild": "catalog:musea",
+    "happy-dom": "catalog:test",
     "oxlint": "catalog:vize",
     "oxlint-plugin-vize": "catalog:vize",
     "playwright": "catalog:test",

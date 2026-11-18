@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vite-plus/test";
-import { YEARS } from "../../types";
+import { YEARS, type AcceptedYear } from "../../types";
 import { getAllSpeakersWithYear, getSpeakersByYear } from "./index";
 
 describe("speaker data accessors", () => {
@@ -8,6 +8,7 @@ describe("speaker data accessors", () => {
 
     expect(speakers.length).toBeGreaterThan(0);
     expect(speakers.every((speaker) => Array.isArray(speaker.name))).toBe(true);
+    expect(getSpeakersByYear("1999" as AcceptedYear)).toEqual([]);
   });
 
   it("全件データにyearを付与する", () => {

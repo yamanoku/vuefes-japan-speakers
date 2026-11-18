@@ -1,0 +1,26 @@
+{
+  "11ishw1smhq": {
+    "reason": "equivalent while document exists: typeof document === \"undefined\" is already false, which is what the mutant substitutes. The guard only changes behavior during SSR without a document.",
+    "where": "src/composables/useColorScheme.ts:9:7 typeof document === \"undefined\" -> false"
+  },
+  "16vgbm9g8a0": {
+    "reason": "equivalent: an empty query makes haystack.includes(\"\") true, which is the same result as the early return.",
+    "where": "src/utils/searchMatch.ts:29:7 !q -> false"
+  },
+  "1em0o38pzui": {
+    "reason": "equivalent: getAllSpeakersWithYear only walks YEARS, and speakersByYear satisfies that record, so the || [] fallback is never evaluated.",
+    "where": "src/data/index.ts:29:30 [] -> [\"Stryker was here!\"]"
+  },
+  "cps520rn2c": {
+    "reason": "equivalent: asList only receives strings, and filter(Boolean) drops empty strings that the following trim-length filter drops again.",
+    "where": "src/utils/searchMatch.ts:3:33 value.filter(Boolean) -> value"
+  },
+  "rbschls7tc": {
+    "reason": "equivalent in the browser and happy-dom: window is defined whenever the watch runs, so typeof window !== \"undefined\" is already true.",
+    "where": "src/composables/useColorScheme.ts:27:9 typeof window !== \"undefined\" -> true"
+  },
+  "x4m4au0at1": {
+    "reason": "equivalent: the catch block only returns undefined, and removing the return still falls off the function with undefined.",
+    "where": "src/utils/searchMatch.ts:14:11 { return undefined; } -> {}"
+  }
+}

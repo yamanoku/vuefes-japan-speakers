@@ -2,10 +2,12 @@ import { describe, expect, it } from "vite-plus/test";
 import { formatCalendarDate, isEventBannerVisible } from "./eventBannerVisibility";
 
 describe("formatCalendarDate", () => {
-  it("Asia/Tokyo の暦日を YYYY-MM-DD で返す", () => {
+  it("指定したタイムゾーンの暦日を YYYY-MM-DD で返す", () => {
     // UTC では 10/23 だが、JST では 10/24 00:00
     const justAfterJstMidnight = new Date("2026-10-23T15:00:00.000Z");
     expect(formatCalendarDate(justAfterJstMidnight)).toBe("2026-10-24");
+    expect(formatCalendarDate(justAfterJstMidnight, "UTC")).toBe("2026-10-23");
+    expect(formatCalendarDate(justAfterJstMidnight, "Asia/Tokyo")).toBe("2026-10-24");
   });
 });
 
@@ -28,7 +30,10 @@ describe("isEventBannerVisible", () => {
   });
 
   it("YYYY-MM-DD 以外の形式は非表示にする", () => {
-    expect(isEventBannerVisible("2026/10/24", new Date("2026-10-01T00:00:00+09:00"))).toBe(false);
-    expect(isEventBannerVisible("", new Date("2026-10-01T00:00:00+09:00"))).toBe(false);
+    const now = new Date("2026-10-01T00:00:00+09:00");
+    expect(isEventBannerVisible("2026/10/24", now)).toBe(false);
+    expect(isEventBannerVisible("", now)).toBe(false);
+    expect(isEventBannerVisible("x2026-10-24", now)).toBe(false);
+    expect(isEventBannerVisible("2026-10-24extra", now)).toBe(false);
   });
 });
