@@ -39,6 +39,7 @@ vp config
 | Type Check    | `vp run typecheck`                |
 | Test          | `vp test run`                     |
 | Test（watch） | `vp test watch`                   |
+| Mutation      | `npx mutator`                     |
 
 作業前後の検証は、変更内容に応じて `vp run lint`、`vp run format:check`、`vp run typecheck`、`vp test run` を組み合わせます。
 
@@ -130,6 +131,10 @@ vp test run
 ```
 
 ウォッチ実行は `vp test watch` を使います。
+
+### ミューテーションテスト
+
+`npx mutator` は `mutator.config.ts` の対象（`src/utils`、`src/composables`、`src/data/index.ts`）を変異させ、`vitest.mutator.config.ts` の happy-dom で既存テストを実行します。mutator が注入する setup は Node 専用で、Vitest Browser Mode では読めません。文言テーブルの `useVfjsI18n.ts` は対象外です。入力で区別できないミュータントは `mutator.accepted.json` に理由付きで残します。
 
 ### テスト方針
 

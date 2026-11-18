@@ -35,3 +35,4 @@ __oxlint_plugin_vize_temp__
 .dev.vars*
 !.dev.vars.example
 .vitest/
+.mutator/

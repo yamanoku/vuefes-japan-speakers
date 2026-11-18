@@ -58,9 +58,62 @@ describe("AppHeader", () => {
     await flushPromises();
     await nextTick();
 
-    // scheme が localStorage から復元され、DOM に反映されていることを確認
+    expect(wrapper.get("select").element.value).toBe("light");
     expect(document.documentElement.getAttribute("data-color-scheme")).toBe("light");
 
+    wrapper.unmount();
+  });
+
+  it("配色の変更を属性と localStorage に残し、システム設定では属性を外す", async () => {
+    localStorage.setItem(STORAGE_KEY, "light");
+    const established = mount(AppHeader, { attachTo: document.body });
+    await flushPromises();
+    established.unmount();
+
+    document.documentElement.setAttribute("data-color-scheme", "dark");
+    const unchanged = mount(AppHeader, { attachTo: document.body });
+    await flushPromises();
+    expect(document.documentElement.getAttribute("data-color-scheme")).toBe("light");
+    unchanged.unmount();
+
+    localStorage.setItem(STORAGE_KEY, "dark");
+    const restored = mount(AppHeader, { attachTo: document.body });
+    await flushPromises();
+    expect(restored.get("select").element.value).toBe("dark");
+    expect(document.documentElement.getAttribute("data-color-scheme")).toBe("dark");
+
+    await restored.get("select").setValue("system");
+    expect(localStorage.getItem(STORAGE_KEY)).toBe("system");
+    expect(document.documentElement.hasAttribute("data-color-scheme")).toBe(false);
+
+    await restored.get("select").setValue("light");
+    expect(localStorage.getItem(STORAGE_KEY)).toBe("light");
+    expect(document.documentElement.getAttribute("data-color-scheme")).toBe("light");
+    restored.unmount();
+  });
+
+  it("保存値が light / dark / system 以外ならシステム設定のままにする", async () => {
+    localStorage.setItem(STORAGE_KEY, "dark");
+    const prior = mount(AppHeader, { attachTo: document.body });
+    await flushPromises();
+    expect(document.documentElement.getAttribute("data-color-scheme")).toBe("dark");
+    prior.unmount();
+
+    localStorage.setItem(STORAGE_KEY, "system");
+    document.documentElement.setAttribute("data-color-scheme", "light");
+    const established = mount(AppHeader, { attachTo: document.body });
+    await flushPromises();
+    expect(established.get("select").element.value).toBe("system");
+    expect(document.documentElement.hasAttribute("data-color-scheme")).toBe(false);
+    established.unmount();
+
+    localStorage.setItem(STORAGE_KEY, "nope");
+    document.documentElement.setAttribute("data-color-scheme", "dark");
+    const wrapper = mount(AppHeader, { attachTo: document.body });
+    await flushPromises();
+
+    expect(wrapper.get("select").element.value).toBe("system");
+    expect(document.documentElement.hasAttribute("data-color-scheme")).toBe(false);
     wrapper.unmount();
   });
 });

@@ -11,7 +11,9 @@ catalogs:
     "@tailwindcss/vite": 4.3.5
     tailwindcss: 4.3.5
   test:
+    "@mizchi/mutator": 0.3.0
     "@vue/test-utils": 2.6.0
+    happy-dom: 21.0.4
     playwright: 1.65.1
     vitest: 5.1.0
   typescript:

@@ -1,6 +1,12 @@
 import { describe, it, expect } from "vite-plus/test";
-import { isValidYear } from "./years";
-import type { AcceptedYear } from "../../types";
+import { YEARS, type AcceptedYear } from "../../types";
+import { getAvailableYears, isValidYear } from "./years";
+
+describe("getAvailableYears", () => {
+  it("開催年の一覧を返す", () => {
+    expect([...getAvailableYears()]).toEqual([...YEARS]);
+  });
+});
 
 describe("isValidYear", () => {
   describe("有効な年", () => {
