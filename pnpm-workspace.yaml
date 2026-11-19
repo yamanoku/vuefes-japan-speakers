@@ -11,7 +11,9 @@ catalogs:
     "@tailwindcss/vite": 4.3.5
     tailwindcss: 4.3.5
   test:
-    "@mizchi/mutator": 0.3.0
+    "@mizchi/mutator": 0.4.0
+    "@mizchi/mutator-playwright": 0.4.0
+    "@playwright/test": 1.65.1
     "@vue/test-utils": 2.6.0
     happy-dom: 21.0.4
     playwright: 1.65.1
@@ -59,6 +61,7 @@ minimumReleaseAgeExclude:
   - oxlint
   - oxlint-plugin-vize
   - "@vuerend/*"
+  - "@mizchi/*"
 overrides:
   vite@*: catalog:vp
   vitest@*: catalog:vp

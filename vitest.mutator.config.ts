@@ -4,7 +4,8 @@ import { defineConfig } from "@vizejs/vite-plugin/vite-plus";
 import { vuerend } from "@vuerend/core/vite";
 import type { PluginOption } from "vite-plus";
 
-// mutator injects a Node setup file, which Vitest Browser Mode cannot load.
+// mutator 0.4.0 resolves this config through Vite+ and injects setup via vite-plus/test.
+// That setup still imports Node builtins, which Vitest Browser Mode cannot load.
 // Keep Vue compilation on vuerend, and run the existing tests in happy-dom.
 export default defineConfig({
   compiler: false,

@@ -26,20 +26,22 @@ vp config
 
 ## よく使うコマンド
 
-| 用途          | 推奨コマンド                      |
-| ------------- | --------------------------------- |
-| 開発サーバ    | `vp dev`                          |
-| Musea Gallery | `vp dev` 後に `/__musea__`        |
-| ビルド        | `vp build`                        |
-| 静的生成      | `vp build`                        |
-| プレビュー    | `vp preview --outDir dist/client` |
-| Lint          | `vp run lint`                     |
-| Format        | `vp run format`                   |
-| Format 確認   | `vp run format:check`             |
-| Type Check    | `vp run typecheck`                |
-| Test          | `vp test run`                     |
-| Test（watch） | `vp test watch`                   |
-| Mutation      | `npx mutator`                     |
+| 用途                           | 推奨コマンド                                             |
+| ------------------------------ | -------------------------------------------------------- |
+| 開発サーバ                     | `vp dev`                                                 |
+| Musea Gallery                  | `vp dev` 後に `/__musea__`                               |
+| ビルド                         | `vp build`                                               |
+| 静的生成                       | `vp build`                                               |
+| プレビュー                     | `vp preview --outDir dist/client`                        |
+| Lint                           | `vp run lint`                                            |
+| Format                         | `vp run format`                                          |
+| Format 確認                    | `vp run format:check`                                    |
+| Type Check                     | `vp run typecheck`                                       |
+| Test                           | `vp test run`                                            |
+| Test（watch）                  | `vp test watch`                                          |
+| Mutation                       | `npx mutator`                                            |
+| Mutation (E2E source coverage) | `npx mutator --config-file mutator.playwright.config.ts` |
+| E2E                            | `pnpm exec playwright test`                              |
 
 作業前後の検証は、変更内容に応じて `vp run lint`、`vp run format:check`、`vp run typecheck`、`vp test run` を組み合わせます。
 
@@ -134,7 +136,9 @@ vp test run
 
 ### ミューテーションテスト
 
-`npx mutator` は `mutator.config.ts` の対象（`src/utils`、`src/composables`、`src/data/index.ts`）を変異させ、`vitest.mutator.config.ts` の happy-dom で既存テストを実行します。mutator が注入する setup は Node 専用で、Vitest Browser Mode では読めません。文言テーブルの `useVfjsI18n.ts` は対象外です。入力で区別できないミュータントは `mutator.accepted.json` に理由付きで残します。
+`npx mutator` は `@mizchi/mutator` 0.4.0 です。ユニット実行は `mutator.config.ts` の対象（`src/utils`、`src/composables`、`src/data/index.ts`）を変異させ、Vite+ 経由の `vitest.mutator.config.ts`（happy-dom）で既存テストを実行します。注入 setup は `vite-plus/test` を使いますが Node の組み込みモジュールを読むため、Vitest Browser Mode では読めません。文言テーブルの `useVfjsI18n.ts` は対象外です。入力で区別できないミュータントは `mutator.accepted.json` に理由付きで残します。
+
+Playwright の E2E ソースカバレッジは別設定です。`vite.config.ts` の `mutatorVite()` は mutator が dev server を起動したときだけソースを計装します。`e2e/` は `@mizchi/mutator-playwright` の fixture を使い、`playwright.config.ts` が `vp dev` を起動します。`mutator.playwright.config.ts` は `runner: "playwright"` と `playwrightSourceCoverage: true` を明示します。変異ごとにブラウザテストが起動するため、ユニット実行より長くかかります。先に `pnpm exec playwright test` で E2E が通ることを確認してください。Vitest は `src/**/*.test.ts` だけを集め、`e2e/` は集めません。
 
 ### テスト方針
 

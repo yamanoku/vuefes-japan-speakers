@@ -4,6 +4,7 @@ import { defineConfig, type VueOptions } from "@vizejs/vite-plugin/vite-plus";
 import { vuerend } from "@vuerend/core/vite";
 import type { PluginOption } from "vite-plus";
 import { playwright } from "vite-plus/test/browser-playwright";
+import { mutatorVite } from "@mizchi/mutator-playwright/vite";
 import { cloudflarePages404, museaGallery, staticHtmlPreview } from "./config/vite/plugins";
 import { fmt, lint, runTasks } from "./config/vite/tooling";
 
@@ -50,6 +51,8 @@ export default defineConfig({
       app: "./src/app.ts",
       islands: "./src/islands.ts",
     }),
+    // No-ops unless mutator starts this dev server for Playwright mutation runs.
+    mutatorVite(),
     staticHtmlPreview(),
     cloudflarePages404(),
   ] as PluginOption[],
@@ -71,6 +74,7 @@ export default defineConfig({
     "*.{yml,yaml,json,md,css}": "vp fmt --check",
   },
   test: {
+    include: ["src/**/*.test.ts"],
     browser: {
       enabled: true,
       provider: playwright(),

@@ -14,6 +14,8 @@
   },
   "devDependencies": {
     "@mizchi/mutator": "catalog:test",
+    "@mizchi/mutator-playwright": "catalog:test",
+    "@playwright/test": "catalog:test",
     "@types/node": "catalog:typescript",
     "@vitest/browser-playwright": "catalog:vp",
     "@vizejs/vite-plugin": "catalog:vize",
