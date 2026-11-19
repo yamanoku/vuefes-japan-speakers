@@ -1,5 +1,6 @@
 {
   "extends": "./tsconfig.json",
+  "contentMappers": [{ "package": "vize", "extensions": [".vue"] }],
   "include": [
     "./env.d.ts",
     "./vite.config.ts",
