@@ -32,6 +32,12 @@
       "matchPackageNames": ["@vue/test-utils", "playwright"]
     },
     {
+      "description": "tsrs は全版が prerelease なので、版ごとの PR で結果を確認してから上げる",
+      "matchPackageNames": ["tsrs", "@tsrs/**"],
+      "ignoreUnstable": false,
+      "automerge": false
+    },
+    {
       "description": "Vize関連のパッケージは1つのPRにまとめる",
       "groupName": "Vize packages",
       "matchPackageNames": ["vize", "@vizejs/**", "oxlint", "oxlint-plugin-vize"]

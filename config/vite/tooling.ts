@@ -71,7 +71,8 @@ export const runTasks = {
     command: "vp fmt . --check && vize fmt --check $(find src -name '*.vue' ! -name '*.art.vue')",
   },
   typecheck: {
-    command: "vize check --tsconfig tsconfig.vize.json",
+    // Staged runs append matched paths. tsrs rejects -p together with filenames.
+    command: "bash -c 'tsrs --runExternalCode --noEmit -p tsconfig.vize.json'",
     cache: false,
   },
 } satisfies RunTasks;

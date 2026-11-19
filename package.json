@@ -27,6 +27,7 @@
     "oxlint": "catalog:vize",
     "oxlint-plugin-vize": "catalog:vize",
     "playwright": "catalog:test",
+    "tsrs": "catalog:typescript",
     "typescript": "catalog:typescript",
     "vite": "catalog:vite",
     "vite-plus": "catalog:vp",
