@@ -20,7 +20,7 @@ catalogs:
     vitest: 5.1.1
   typescript:
     "@types/node": 26.6.6
-    tsrs: 0.25.0-ts7.1.0-beta
+    tsrs: 7.1.0-beta.tsrs3
     typescript: 7.0.2
   vite:
     vite: npm:@voidzero-dev/vite-plus-core@1.5.0
