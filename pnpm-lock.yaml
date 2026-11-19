@@ -191,8 +191,8 @@ catalogs:
       version: 0.28.2
   test:
     '@mizchi/mutator':
-      specifier: 0.4.2
-      version: 0.4.2
+      specifier: 0.4.5
+      version: 0.4.5
     '@mizchi/mutator-playwright':
       specifier: 0.4.0
       version: 0.4.0
@@ -280,7 +280,7 @@ importers:
     devDependencies:
       '@mizchi/mutator':
         specifier: catalog:test
-        version: 0.4.2(@playwright/test@1.65.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(vitest@5.1.1)
+        version: 0.4.5(@playwright/test@1.65.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(vitest@5.1.1)
       '@mizchi/mutator-playwright':
         specifier: catalog:test
         version: 0.4.0(@playwright/test@1.65.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))
@@ -663,12 +663,12 @@ packages:
     resolution: {integrity: sha512-PFVJpnVE2vBGLFxkuMx4h6ixk7RU6huYQvvYDsk1tCMC+SYh9jFUk0ww5POwoTjmaZC2KIeScJ7/jaG8WOY5rw==}
     engines: {node: '>=24'}
 
-  '@mizchi/mutator-core@0.4.2':
-    resolution: {integrity: sha512-qyuye8sl2MmOdstmTP/dliATLNiDwiSCgfw8TnuLvK3CQTmQrkqYqT+TcsOdvkG8vdb8XbS0CgxWE0eB1yphLw==}
+  '@mizchi/mutator-core@0.4.5':
+    resolution: {integrity: sha512-8MlgH5BoYoS00f2L5UDg1KYLcAWrVzTog73tyAnUebcXX+GMExnVHa+Unj+eAyu2ErcpSugJJoJj3hV2SOw9CQ==}
     engines: {node: '>=24'}
 
-  '@mizchi/mutator-jest@0.4.2':
-    resolution: {integrity: sha512-62LtDO2CZdI+B/Thm8QUsnk4HN2nk938PI/cYN8akhxXiklZdvrjf2m2LJUlPZMdeGTMY3kxHPQp+BAW5fqULA==}
+  '@mizchi/mutator-jest@0.4.5':
+    resolution: {integrity: sha512-3FJP5rKlMUeIf6wBcXYrIOx6drjvE5xK9TtC2DNDzo84ta/SfcS00PDnNET20mw9cG854U2x1ASbfKjFOOpFJg==}
     engines: {node: '>=24'}
     peerDependencies:
       jest: '>=30.0.0'
@@ -688,8 +688,8 @@ packages:
       vite:
         optional: true
 
-  '@mizchi/mutator-playwright@0.4.2':
-    resolution: {integrity: sha512-yOyshhPCu1HYitMtdgzBbVJvJ4yWMYZ/v+I4dW8feQ4paCF0+3nUPkolDCTBxdjDmoaAmO7oq4VwxibQeKukpg==}
+  '@mizchi/mutator-playwright@0.4.5':
+    resolution: {integrity: sha512-F42f/q5q1y7ZnMvsnlAI4x7epfwWDSao5B04XD54LGf/Yr/3MDhz61LkS9AFo0tgfYqtPSm0TJlPz7mgjTVmqQ==}
     engines: {node: '>=24'}
     peerDependencies:
       '@playwright/test': '>=1.50.0'
@@ -700,12 +700,12 @@ packages:
       vite:
         optional: true
 
-  '@mizchi/mutator-typecheck@0.4.2':
-    resolution: {integrity: sha512-2PX0YmpUPC0sucB/5IlztdorgwXyioYjGQFtv4ouvY14BOzWYS7f0hWtJUpKJhj8Np7CNZXGaC84lmjd2dtIAQ==}
+  '@mizchi/mutator-typecheck@0.4.5':
+    resolution: {integrity: sha512-NK54ZPToYJ5RwA16gBN9IazeaYnvGgg0UQDcAZz38D6KpolnqlNd3pgrhIZRt3Kt8jAAxfjJWIpoFXF5qWM4jA==}
     engines: {node: '>=24'}
 
-  '@mizchi/mutator-vitest@0.4.2':
-    resolution: {integrity: sha512-w8Uyfcc4JPikvz9K9lO8yZyf+5lc+wRC6I3YgEN17k89OIKqUq00U9hHHJ7DahGlJbvlLxNN+nOdUBWlCQYJag==}
+  '@mizchi/mutator-vitest@0.4.5':
+    resolution: {integrity: sha512-BTlfyd6vThXv8rKyr8915kgr9ieF0+pt8NwD+SJi8BL61d3CdQSuRT+VuZMrw5hH4ltcRIXyAA+J6/Fgiuth9A==}
     engines: {node: '>=24'}
     peerDependencies:
       vitest: 5.1.1
@@ -713,8 +713,8 @@ packages:
       vitest:
         optional: true
 
-  '@mizchi/mutator@0.4.2':
-    resolution: {integrity: sha512-hLXlAxAMABYdYlEjgbQThnVAtAA+pqLXFUxz/V18goL+JIcLHTKC5zWqotmIF/Ph+Wu/nQmChKKZjh87IntXdQ==}
+  '@mizchi/mutator@0.4.5':
+    resolution: {integrity: sha512-m4I8SVOkqBYNf7BZesdOG5ov2WvmGNmDjSge5hlNFR/pPEA79GBAwBZoF69yUuIRcmew7iBsv6O4bz09RhXcEQ==}
     engines: {node: '>=24'}
     hasBin: true
 
@@ -2330,6 +2330,10 @@ packages:
     resolution: {integrity: sha512-XWAtwJ6OHO+tj0EKCs0Y2UamnyOxseZWltU4x2U2wh8g4AigdjwvtUjvLP2tqkA/avxHEtzxNaqGq/YGNwckKg==}
     engines: {node: '>=18'}
 
+  chokidar@6.0.0:
+    resolution: {integrity: sha512-Ec2Z7wpcKBiMpR7DxteoqS/sq5G5d2A4fpxzPv6+fD7xNNdrTghn7L11YwV5EN1B3i72Erc3XVT5FkWIDx90+A==}
+    engines: {node: '>= 22.22'}
+
   commander@14.0.3:
     resolution: {integrity: sha512-H+y0Jo/T1RZ9qPP4Eh1pkcQcLRglraJaSLoyOtHxu6AapkjWVCy2Sit1QQ4x3Dng8qDlSsZEet7g5Pq06MvTgw==}
     engines: {node: '>=20'}
@@ -2711,6 +2715,10 @@ packages:
 
   react-is@17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
+
+  readdirp@5.1.1:
+    resolution: {integrity: sha512-Kko+Y5XQ6fM+Ce3dq3m9YGxnacYZYl9cA1wZjaF3Vbry2L3i1qVg8+CAgNPsXRArPMUMCaOR7oa9Nqntc43JKA==}
+    engines: {node: '>= 20.19.0'}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -3252,14 +3260,14 @@ snapshots:
       magic-string: 1.4.5
       oxc-parser: 0.159.0
 
-  '@mizchi/mutator-core@0.4.2':
+  '@mizchi/mutator-core@0.4.5':
     dependencies:
       magic-string: 1.4.5
       oxc-parser: 0.159.0
 
-  '@mizchi/mutator-jest@0.4.2':
+  '@mizchi/mutator-jest@0.4.5':
     dependencies:
-      '@mizchi/mutator-core': 0.4.2
+      '@mizchi/mutator-core': 0.4.5
 
   '@mizchi/mutator-playwright@0.4.0(@playwright/test@1.65.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))':
     dependencies:
@@ -3269,31 +3277,32 @@ snapshots:
       '@playwright/test': 1.65.1
       vite: '@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2)'
 
-  '@mizchi/mutator-playwright@0.4.2(@playwright/test@1.65.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))':
+  '@mizchi/mutator-playwright@0.4.5(@playwright/test@1.65.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
-      '@mizchi/mutator-core': 0.4.2
+      '@mizchi/mutator-core': 0.4.5
     optionalDependencies:
       '@playwright/test': 1.65.1
       vite: '@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2)'
 
-  '@mizchi/mutator-typecheck@0.4.2':
+  '@mizchi/mutator-typecheck@0.4.5':
     dependencies:
-      '@mizchi/mutator-core': 0.4.2
+      '@mizchi/mutator-core': 0.4.5
 
-  '@mizchi/mutator-vitest@0.4.2(vitest@5.1.1)':
+  '@mizchi/mutator-vitest@0.4.5(vitest@5.1.1)':
     dependencies:
-      '@mizchi/mutator-core': 0.4.2
+      '@mizchi/mutator-core': 0.4.5
     optionalDependencies:
       vitest: 5.1.1(@types/node@26.6.6)(@vitest/browser-playwright@5.1.1)(@vitest/browser-preview@5.1.0)(@vitest/ui@5.1.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(happy-dom@21.0.4)
 
-  '@mizchi/mutator@0.4.2(@playwright/test@1.65.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(vitest@5.1.1)':
+  '@mizchi/mutator@0.4.5(@playwright/test@1.65.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(vitest@5.1.1)':
     dependencies:
-      '@mizchi/mutator-core': 0.4.2
-      '@mizchi/mutator-jest': 0.4.2
-      '@mizchi/mutator-playwright': 0.4.2(@playwright/test@1.65.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))
-      '@mizchi/mutator-typecheck': 0.4.2
-      '@mizchi/mutator-vitest': 0.4.2(vitest@5.1.1)
+      '@mizchi/mutator-core': 0.4.5
+      '@mizchi/mutator-jest': 0.4.5
+      '@mizchi/mutator-playwright': 0.4.5(@playwright/test@1.65.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))
+      '@mizchi/mutator-typecheck': 0.4.5
+      '@mizchi/mutator-vitest': 0.4.5(vitest@5.1.1)
+      chokidar: 6.0.0
     transitivePeerDependencies:
       - '@playwright/test'
       - jest
@@ -4388,6 +4397,10 @@ snapshots:
 
   chai@6.3.0: {}
 
+  chokidar@6.0.0:
+    dependencies:
+      readdirp: 5.1.1
+
   commander@14.0.3: {}
 
   config-chain@1.1.13:
@@ -4820,6 +4833,8 @@ snapshots:
   proto-list@1.2.4: {}
 
   react-is@17.0.2: {}
+
+  readdirp@5.1.1: {}
 
   semver@6.3.1: {}
 
