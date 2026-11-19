@@ -36,3 +36,6 @@ __oxlint_plugin_vize_temp__
 !.dev.vars.example
 .vitest/
 .mutator/
+.mutator-*.playwright.config.ts
+test-results/
+playwright-report/

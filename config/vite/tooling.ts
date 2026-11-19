@@ -8,6 +8,7 @@ type LintPlugins = NonNullable<OxlintConfig["plugins"]>;
 const ignorePatterns = [
   "**/.cache/**",
   "**/.data/**",
+  "**/.mutator-*.playwright.config.ts",
   "**/.nuxt/**",
   "**/.nitro/**",
   "**/.output/**",

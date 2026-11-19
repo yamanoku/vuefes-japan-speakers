@@ -8,7 +8,12 @@
     "./src/data/**/*.ts",
     "./musea/**/*.ts",
     "./types/**/*.ts",
-    "./config/**/*.ts"
+    "./config/**/*.ts",
+    "./vitest.mutator.config.ts",
+    "./mutator.config.ts",
+    "./mutator.playwright.config.ts",
+    "./playwright.config.ts",
+    "./e2e/**/*.ts"
   ],
   "exclude": [
     "./src/**/*.test.ts",

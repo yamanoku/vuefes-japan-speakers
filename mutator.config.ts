@@ -8,6 +8,8 @@ export default defineConfig({
     "src/composables/useVfjsI18n.ts",
   ],
   runner: "vitest",
-  // Browser Mode cannot load mutator's Node setup file.
+  // 0.4.0 injects its setup through vite-plus/test, but that file still uses Node
+  // builtins. Vitest Browser Mode cannot load it, so unit mutation stays on happy-dom.
+  // Browser source coverage is the Playwright config: mutator.playwright.config.ts.
   vitestConfig: "vitest.mutator.config.ts",
 });

@@ -20,6 +20,11 @@
     "types/**/*.ts",
     "config/**/*.ts",
     "env.d.ts",
-    "vite.config.ts"
+    "vite.config.ts",
+    "vitest.mutator.config.ts",
+    "mutator.config.ts",
+    "mutator.playwright.config.ts",
+    "playwright.config.ts",
+    "e2e/**/*.ts"
   ]
 }
