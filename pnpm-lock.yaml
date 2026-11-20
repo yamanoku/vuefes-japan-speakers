@@ -194,8 +194,8 @@ catalogs:
       specifier: 0.4.5
       version: 0.4.5
     '@mizchi/mutator-playwright':
-      specifier: 0.4.0
-      version: 0.4.0
+      specifier: 0.5.0
+      version: 0.5.0
     '@playwright/test':
       specifier: 1.65.1
       version: 1.65.1
@@ -283,7 +283,7 @@ importers:
         version: 0.4.5(@playwright/test@1.65.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))(vitest@5.1.1)
       '@mizchi/mutator-playwright':
         specifier: catalog:test
-        version: 0.4.0(@playwright/test@1.65.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))
+        version: 0.5.0(@playwright/test@1.65.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))
       '@playwright/test':
         specifier: catalog:test
         version: 1.65.1
@@ -659,12 +659,12 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@mizchi/mutator-core@0.4.0':
-    resolution: {integrity: sha512-PFVJpnVE2vBGLFxkuMx4h6ixk7RU6huYQvvYDsk1tCMC+SYh9jFUk0ww5POwoTjmaZC2KIeScJ7/jaG8WOY5rw==}
-    engines: {node: '>=24'}
-
   '@mizchi/mutator-core@0.4.5':
     resolution: {integrity: sha512-8MlgH5BoYoS00f2L5UDg1KYLcAWrVzTog73tyAnUebcXX+GMExnVHa+Unj+eAyu2ErcpSugJJoJj3hV2SOw9CQ==}
+    engines: {node: '>=24'}
+
+  '@mizchi/mutator-core@0.5.0':
+    resolution: {integrity: sha512-AJ9E8arNzTcIKgHyf16hlxw8k6zeoER6zXXQPcdNb3hU4qpbj6kXyUJ5uki0np30ZSYcU6jJZrw2FZS0WDkoAw==}
     engines: {node: '>=24'}
 
   '@mizchi/mutator-jest@0.4.5':
@@ -676,8 +676,8 @@ packages:
       jest:
         optional: true
 
-  '@mizchi/mutator-playwright@0.4.0':
-    resolution: {integrity: sha512-k3V05/Q4XbCb4OnEqaaiw4rpcAHDfVT3bRFNzPxersxGbTkOM9bSQhOFl6WIDLPbNERYn2gQTwSVenIAe1tLIw==}
+  '@mizchi/mutator-playwright@0.4.5':
+    resolution: {integrity: sha512-F42f/q5q1y7ZnMvsnlAI4x7epfwWDSao5B04XD54LGf/Yr/3MDhz61LkS9AFo0tgfYqtPSm0TJlPz7mgjTVmqQ==}
     engines: {node: '>=24'}
     peerDependencies:
       '@playwright/test': '>=1.50.0'
@@ -688,8 +688,8 @@ packages:
       vite:
         optional: true
 
-  '@mizchi/mutator-playwright@0.4.5':
-    resolution: {integrity: sha512-F42f/q5q1y7ZnMvsnlAI4x7epfwWDSao5B04XD54LGf/Yr/3MDhz61LkS9AFo0tgfYqtPSm0TJlPz7mgjTVmqQ==}
+  '@mizchi/mutator-playwright@0.5.0':
+    resolution: {integrity: sha512-QGhkqZWbBh+MmDtz4MYpKERetZ3ygPr6yWGs9y9eRMBpQTadc/dT6eJNb65SBIEQ3MNPTVYg3gur35UrdDZbyw==}
     engines: {node: '>=24'}
     peerDependencies:
       '@playwright/test': '>=1.50.0'
@@ -717,6 +717,16 @@ packages:
     resolution: {integrity: sha512-m4I8SVOkqBYNf7BZesdOG5ov2WvmGNmDjSge5hlNFR/pPEA79GBAwBZoF69yUuIRcmew7iBsv6O4bz09RhXcEQ==}
     engines: {node: '>=24'}
     hasBin: true
+
+  '@mizchi/test-impact@0.5.0':
+    resolution: {integrity: sha512-ytcxPQInME91utfyq+hGkQARbgSKWKZ0kxNd3t/TOFdRwKKxVijxMgk3Jm+Fmezc3a9QnePzmggv5JCFKMkrKA==}
+    engines: {node: '>=24'}
+    hasBin: true
+    peerDependencies:
+      '@playwright/test': '>=1.50.0'
+    peerDependenciesMeta:
+      '@playwright/test':
+        optional: true
 
   '@one-ini/wasm@0.2.1':
     resolution: {integrity: sha512-TUqERXGNTifZ9y2g3wPxQrw3HpHv/02DsW3D90T9x0hhonrL1ZqpSmNrU2XkoIq0fP1N6gZfVQzy2Fw1ZvGBNg==}
@@ -3252,32 +3262,35 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@mizchi/mutator-core@0.4.0':
-    dependencies:
-      magic-string: 1.4.5
-      oxc-parser: 0.159.0
-
   '@mizchi/mutator-core@0.4.5':
     dependencies:
       magic-string: 1.4.5
       oxc-parser: 0.159.0
 
+  '@mizchi/mutator-core@0.5.0(@playwright/test@1.65.1)':
+    dependencies:
+      '@mizchi/test-impact': 0.5.0(@playwright/test@1.65.1)
+      magic-string: 1.4.5
+      oxc-parser: 0.159.0
+    transitivePeerDependencies:
+      - '@playwright/test'
+
   '@mizchi/mutator-jest@0.4.5':
     dependencies:
       '@mizchi/mutator-core': 0.4.5
-
-  '@mizchi/mutator-playwright@0.4.0(@playwright/test@1.65.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))':
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.31
-      '@mizchi/mutator-core': 0.4.0
-    optionalDependencies:
-      '@playwright/test': 1.65.1
-      vite: '@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2)'
 
   '@mizchi/mutator-playwright@0.4.5(@playwright/test@1.65.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       '@mizchi/mutator-core': 0.4.5
+    optionalDependencies:
+      '@playwright/test': 1.65.1
+      vite: '@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2)'
+
+  '@mizchi/mutator-playwright@0.5.0(@playwright/test@1.65.1)(@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2))':
+    dependencies:
+      '@mizchi/mutator-core': 0.5.0(@playwright/test@1.65.1)
+      '@mizchi/test-impact': 0.5.0(@playwright/test@1.65.1)
     optionalDependencies:
       '@playwright/test': 1.65.1
       vite: '@voidzero-dev/vite-plus-core@1.5.0(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(typescript@7.0.2)'
@@ -3305,6 +3318,14 @@ snapshots:
       - jest
       - vite
       - vitest
+
+  '@mizchi/test-impact@0.5.0(@playwright/test@1.65.1)':
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.31
+      oxc-parser: 0.159.0
+      typescript: 6.0.3
+    optionalDependencies:
+      '@playwright/test': 1.65.1
 
   '@one-ini/wasm@0.2.1': {}
 
