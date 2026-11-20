@@ -50,7 +50,9 @@
         "@vitejs/**",
         "vite-plus",
         "@voidzero-dev/**",
-        "@tailwindcss/vite"
+        "@tailwindcss/vite",
+        "vitest",
+        "@vitest/**"
       ]
     }
   ]
