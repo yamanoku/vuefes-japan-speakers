@@ -2,7 +2,7 @@
 import { museaStats } from "../../musea/sample-data";
 import { museaDarkSurfaceStyle } from "../../musea/theme";
 
-defineArt("./AppMasthead.vue", {
+defineArtMeta({
   title: "AppMasthead",
   category: "Layout",
   status: "ready",

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { museaDarkSurfaceStyle } from "../../musea/theme";
 
-defineArt("./AppLogoMark.vue", {
+defineArtMeta({
   title: "AppLogoMark",
   category: "Components",
   status: "ready",

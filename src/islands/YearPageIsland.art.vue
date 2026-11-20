@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { museaYearSpeakers } from "../../musea/sample-data";
 
-defineArt("./YearPageIsland.vue", {
+defineArtMeta({
   title: "YearPageIsland",
   category: "Islands",
   status: "ready",

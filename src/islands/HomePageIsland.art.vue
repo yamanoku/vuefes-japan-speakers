@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { museaSpeakers } from "../../musea/sample-data";
 
-defineArt("./HomePageIsland.vue", {
+defineArtMeta({
   title: "HomePageIsland",
   category: "Islands",
   status: "ready",

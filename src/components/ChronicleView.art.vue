@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { museaSpeakers } from "../../musea/sample-data";
 
-defineArt("./ChronicleView.vue", {
+defineArtMeta({
   title: "ChronicleView",
   category: "Views",
   status: "ready",

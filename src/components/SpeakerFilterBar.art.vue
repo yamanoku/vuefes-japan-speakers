@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { museaSpeakerOptions } from "../../musea/sample-data";
 
-defineArt("./SpeakerFilterBar.vue", {
+defineArtMeta({
   title: "SpeakerFilterBar",
   category: "Filters",
   status: "ready",

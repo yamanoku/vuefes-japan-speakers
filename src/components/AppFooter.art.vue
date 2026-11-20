@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { museaDarkSurfaceStyle } from "../../musea/theme";
 
-defineArt("./AppFooter.vue", {
+defineArtMeta({
   title: "AppFooter",
   category: "Layout",
   status: "ready",

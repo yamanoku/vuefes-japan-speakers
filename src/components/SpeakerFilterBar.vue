@@ -52,7 +52,7 @@ function updateSelectedSpeaker(event: Event) {
           :placeholder="t.filter_search_ph"
           :value="query"
           @input="updateQuery"
-        />
+        >
         <p :id="searchHintId" class="sr-only">
           {{ t.filter_search_hint }}
         </p>
