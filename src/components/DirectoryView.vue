@@ -86,6 +86,11 @@ function toggleRow(name: string) {
   openRows.value = next;
 }
 
+function toggleRowFromClick(event: MouseEvent) {
+  const name = (event.currentTarget as HTMLElement).dataset.speaker;
+  if (name) toggleRow(name);
+}
+
 function toggleNameSort() {
   sort.value = sort.value === "name-asc" ? "name-desc" : "name-asc";
 }
@@ -164,8 +169,8 @@ const directoryHeadingId = useId();
       <div class="flex items-center gap-2" role="group" :aria-label="t.sort_label">
         <!-- 登壇回数の多い順でソートするボタン -->
         <button
-          class="text-[12px] tracking-[0.06em] px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           type="button"
+          class="text-[12px] tracking-[0.06em] px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           :aria-pressed="sort === 'appearances' ? 'true' : 'false'"
           :class="sort === 'appearances'
             ? 'bg-ink text-paper border-ink'
@@ -179,8 +184,8 @@ const directoryHeadingId = useId();
         </button>
         <!-- 名前の昇順/降順でソートするボタン -->
         <button
-          class="text-[12px] tracking-[0.06em] px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           type="button"
+          class="text-[12px] tracking-[0.06em] px-[10px] py-[5px] border cursor-pointer whitespace-nowrap"
           :aria-pressed="sort === 'name-asc' || sort === 'name-desc' ? 'true' : 'false'"
           :class="sort === 'name-asc' || sort === 'name-desc'
             ? 'bg-ink text-paper border-ink'
@@ -221,13 +226,14 @@ const directoryHeadingId = useId();
       >
         <!-- スピーカー行の展開/折りたたみボタン -->
         <button
-          class="w-full flex flex-wrap items-center gap-x-[12px] px-pad-x py-3.5 cursor-pointer text-left"
           type="button"
+          class="w-full flex flex-wrap items-center gap-x-[12px] px-pad-x py-3.5 cursor-pointer text-left"
           :aria-controls="directoryPanelId(rec.name)"
           :aria-expanded="openRows.has(rec.name)"
           :aria-label="rowLabel(rec)"
           :class="openRows.has(rec.name) ? 'bg-paper-2' : ''"
-          @click="() => toggleRow(rec.name)"
+          :data-speaker="rec.name"
+          @click="toggleRowFromClick"
         >
           <span
             class="basis-0 grow-999 min-inline-[50%] flex flex-wrap gap-2 justify-start items-center"

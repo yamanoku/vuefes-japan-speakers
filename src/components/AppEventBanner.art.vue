@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { museaDarkSurfaceStyle } from "../../musea/theme";
 
-defineArt("./AppEventBanner.vue", {
+defineArtMeta({
   title: "AppEventBanner",
   category: "Layout",
   status: "ready",

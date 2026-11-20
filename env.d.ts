@@ -12,4 +12,9 @@ type MuseaArtOptions = {
   tags?: string[];
 };
 
-declare function defineArt(source: string, options: MuseaArtOptions): void;
+type MuseaComponent =
+  | (abstract new (...args: never[]) => { $props: unknown })
+  | ((...args: never[]) => unknown);
+
+declare function defineArtMeta(options: MuseaArtOptions): void;
+declare function defineArt(component: MuseaComponent, options?: MuseaArtOptions): void;

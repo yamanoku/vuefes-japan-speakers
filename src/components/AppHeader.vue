@@ -68,8 +68,8 @@ function setEnglish() {
         >
           <!-- 日本語切り替えボタン -->
           <button
-            class="px-[10px] py-[5px] cursor-pointer"
             type="button"
+            class="px-[10px] py-[5px] cursor-pointer"
             :aria-pressed="lang === 'ja' ? 'true' : 'false'"
             :class="lang === 'ja' ? 'bg-ink text-paper' : 'text-ink-2'"
             @click="setJapanese"
@@ -78,8 +78,8 @@ function setEnglish() {
           </button>
           <!-- 英語切り替えボタン -->
           <button
-            class="px-[10px] py-[5px] cursor-pointer border-l border-rule"
             type="button"
+            class="px-[10px] py-[5px] cursor-pointer border-l border-rule"
             :aria-pressed="lang === 'en' ? 'true' : 'false'"
             :class="lang === 'en' ? 'bg-ink text-paper' : 'text-ink-2'"
             @click="setEnglish"

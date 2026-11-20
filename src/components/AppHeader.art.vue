@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { museaDarkSurfaceStyle } from "../../musea/theme";
 
-defineArt("./AppHeader.vue", {
+defineArtMeta({
   title: "AppHeader",
   category: "Layout",
   status: "ready",

@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { museaYearCounts } from "../../musea/sample-data";
 
-defineArt("./YearFilterBar.vue", {
+defineArtMeta({
   title: "YearFilterBar",
   category: "Filters",
   status: "ready",

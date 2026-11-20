@@ -2,6 +2,10 @@
 import { useVfjsI18n } from "../composables/useVfjsI18n";
 
 const { t } = useVfjsI18n();
+
+defineSlots<{
+  default(): unknown;
+}>();
 </script>
 
 <template>

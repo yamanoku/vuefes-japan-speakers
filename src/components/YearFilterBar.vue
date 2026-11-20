@@ -23,6 +23,13 @@ function selectAllYears() {
 function selectYear(year: AcceptedYear) {
   emit("update:selectedYear", year);
 }
+
+function selectYearFromClick(event: MouseEvent) {
+  const year = (event.currentTarget as HTMLElement).dataset.year;
+  if (year && (YEARS as readonly string[]).includes(year)) {
+    selectYear(year as AcceptedYear);
+  }
+}
 </script>
 
 <template>
@@ -36,8 +43,8 @@ function selectYear(year: AcceptedYear) {
       <div class="flex gap-1.5 flex-wrap" role="group" :aria-labelledby="yearFilterLabelId">
         <!-- 全年度選択ボタン（スピーカー総数を表示） -->
         <button
-          class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] font-mono text-[12px] tracking-[0.02em] border border-rule cursor-pointer transition-colors"
           type="button"
+          class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] font-mono text-[12px] tracking-[0.02em] border border-rule cursor-pointer transition-colors"
           :aria-pressed="selectedYear === 'all' ? 'true' : 'false'"
           :class="selectedYear === 'all'
             ? 'bg-ink text-paper border-ink'
@@ -54,14 +61,15 @@ function selectYear(year: AcceptedYear) {
         <button
           v-for="y in YEARS"
           :key="y"
-          class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] font-mono text-[12px] tracking-[0.02em] border border-rule cursor-pointer transition-colors"
           type="button"
+          class="inline-flex items-center justify-center min-w-[48px] px-[8px] py-[3px] font-mono text-[12px] tracking-[0.02em] border border-rule cursor-pointer transition-colors"
           :aria-pressed="selectedYear === y ? 'true' : 'false'"
           :class="selectedYear === y
             ? 'bg-ink text-paper border-ink'
             : 'text-ink-2 hover:border-ink hover:text-ink'"
           :data-active="selectedYear === y ? 'true' : 'false'"
-          @click="() => selectYear(y)"
+          :data-year="y"
+          @click="selectYearFromClick"
         >
           {{ y }} · {{ counts[y] }}
           <span v-if="selectedYear === y" class="sr-only">

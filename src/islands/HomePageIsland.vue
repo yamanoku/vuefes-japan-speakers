@@ -142,9 +142,9 @@ function updateSelectedYear(value: AcceptedYear | "all") {
         <button
           :id="tabChronicleId"
           ref="chronicleTabRef"
+          type="button"
           class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
           role="tab"
-          type="button"
           :aria-controls="panelChronicleId"
           :aria-selected="view === 'chronicle'"
           :tabindex="view === 'chronicle' ? 0 : -1"
@@ -163,9 +163,9 @@ function updateSelectedYear(value: AcceptedYear | "all") {
         <button
           :id="tabDirectoryId"
           ref="directoryTabRef"
+          type="button"
           class="px-[22px] py-4 font-body font-[500] text-[14px] tracking-[-0.005em] border-r border-rule-soft cursor-pointer"
           role="tab"
-          type="button"
           :aria-controls="panelDirectoryId"
           :aria-selected="view === 'index'"
           :tabindex="view === 'index' ? 0 : -1"
