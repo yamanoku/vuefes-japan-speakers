@@ -17,13 +17,13 @@ catalogs:
     "@vue/test-utils": 2.6.0
     happy-dom: 21.0.4
     playwright: 1.65.1
-    vitest: 5.1.1
+    vitest: 5.1.2
   typescript:
     "@types/node": 26.6.11
     tsrs: 7.1.0-beta.tsrs3
     typescript: 7.0.2
   vite:
-    vite: npm:@voidzero-dev/vite-plus-core@8.3.8000
+    vite: npm:@voidzero-dev/vite-plus-core@8.3.8001
   vue:
     "@vue/server-renderer": 3.5.46
     vue: 3.5.46
@@ -39,10 +39,10 @@ catalogs:
     oxlint-plugin-vize: 0.784.0
     vize: 0.784.0
   vp:
-    vite: npm:@voidzero-dev/vite-plus-core@8.3.8000
-    vite-plus: 1.7.0
-    vitest: 5.1.1
-    "@vitest/browser-playwright": 5.1.1
+    vite: npm:@voidzero-dev/vite-plus-core@8.3.8001
+    vite-plus: 1.8.0
+    vitest: 5.1.2
+    "@vitest/browser-playwright": 5.1.2
 
 peerDependencyRules:
   allowAny:
